@@ -10,22 +10,9 @@
 		436E86C72FA8915B0001E186 /* FietsUp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FietsUp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		436E87C92FA897D70001E186 /* Exceptions for "FietsUp_iOS" folder in "FietsUp_iOS" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"FietsUp-iOS-Info.plist",
-			);
-			target = 436E86C62FA8915B0001E186 /* FietsUp_iOS */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		436E86C92FA8915B0001E186 /* FietsUp_iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				436E87C92FA897D70001E186 /* Exceptions for "FietsUp_iOS" folder in "FietsUp_iOS" target */,
-			);
 			path = FietsUp_iOS;
 			sourceTree = "<group>";
 		};
@@ -111,6 +98,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 436E86BE2FA8915B0001E186;
 			minimizedProjectReferenceProxies = 1;
@@ -206,6 +194,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -264,6 +253,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
