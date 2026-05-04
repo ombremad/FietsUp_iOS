@@ -16,10 +16,12 @@ final class AuthService {
   func markAsAuthenticated(token: String) throws {
     try KeychainService.shared.saveToken(token)
     isAuthenticated = true
+    print("User logged in")
   }
   
   func logout() throws {
     try KeychainService.shared.deleteToken()
     isAuthenticated = false
+    print("User logged out")
   }
 }

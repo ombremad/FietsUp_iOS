@@ -12,8 +12,6 @@ final class NetworkService {
   private init() {}
   private let apiBaseURL = ConfigService.apiBaseURL
   
-    // MARK: - Private Helpers
-  
   private func buildRequest(
     endpoint: String,
     method: HTTPMethod,
@@ -55,13 +53,14 @@ final class NetworkService {
       case 200...299:
         return httpResponse
       case 401:
+        Task { @MainActor in
+          try? AuthService.shared.logout()
+        }
         throw NetworkError.unauthorized
       default:
         throw NetworkError.serverError(statusCode: httpResponse.statusCode)
     }
   }
-  
-    // MARK: - Generic Request Method
   
   func request<T: Decodable>(
     endpoint: String,
@@ -109,8 +108,6 @@ final class NetworkService {
     }
   }
   
-    // MARK: - Convenience Methods
-  
   func get<T: Decodable>(endpoint: String, requiresAuth: Bool = false) async throws -> T {
     try await request(endpoint: endpoint, method: .get, requiresAuth: requiresAuth)
   }
@@ -153,17 +150,17 @@ enum NetworkError: Error, LocalizedError {
   var errorDescription: String? {
     switch self {
       case .invalidURL:
-        return "URL invalide"
+        return String(localized: "network.error.invalidURL")
       case .invalidResponse:
-        return "Réponse invalide du serveur"
+        return String(localized: "network.error.invalidResponse")
       case .unauthorized:
-        return "Identifiants incorrects"
+        return String(localized: "network.error.unauthorized")
       case .serverError(let statusCode):
-        return "Erreur serveur: \(statusCode)"
+        return String(localized: "network.error.serverError \(statusCode)")
       case .decodingError:
-        return "Erreur de décodage"
+        return String(localized: "network.error.decodingError")
       case .noData:
-        return "Aucune donnée reçue"
+        return String(localized: "network.error.noData")
     }
   }
 }

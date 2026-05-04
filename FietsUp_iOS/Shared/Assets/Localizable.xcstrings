@@ -1,28 +1,137 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Authenticated!" : {
+
+    },
+    "Email" : {
+
+    },
+    "First name" : {
+
+    },
     "Hello, world!" : {
+
+    },
+    "Last name" : {
 
     },
     "Login" : {
 
     },
-    "validation.email.invalidFormat" : {
-      "extractionState" : "stale",
+    "Logout" : {
+
+    },
+    "network.error.decodingError" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Email address is invalid."
+            "value" : "Response body could not be decoded."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "L’adresse email est invalide."
+            "state" : "translated",
+            "value" : "La réponse du serveur n’a pas pu être décodée."
           }
         }
       }
+    },
+    "network.error.invalidResponse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server returned an invalid response."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le serveur a retourné une réponse invalide."
+          }
+        }
+      }
+    },
+    "network.error.invalidURL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL is malformed."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’URL est incorrectement formée."
+          }
+        }
+      }
+    },
+    "network.error.noData" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data received from server."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune donnée reçue de la part du serveur."
+          }
+        }
+      }
+    },
+    "network.error.serverError %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generic server error: %lld."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur serveur générique : %lld."
+          }
+        }
+      }
+    },
+    "network.error.unauthorized" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bad credentials or expired session."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identifiants erronés ou session expirée."
+          }
+        }
+      }
+    },
+    "Nickname" : {
+
+    },
+    "Password" : {
+
+    },
+    "Password confirmation" : {
+
+    },
+    "Signup" : {
+
+    },
+    "Toggle mode" : {
+
     },
     "validation.field.email" : {
       "localizations" : {
@@ -88,122 +197,42 @@
         }
       }
     },
-    "validation.password.multipleHeader" : {
+    "validation.field.password" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The password must contain at least:"
+            "value" : "Password"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le mot de passe doit contenir au moins :"
+            "value" : "Le mot de passe"
           }
         }
       }
     },
-    "validation.password.mustBeAtLeast8Characters" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8 characters"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8 caractères"
-          }
-        }
-      }
-    },
-    "validation.password.mustContainLowercase" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "a lowercase letter"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "une lettre minuscule"
-          }
-        }
-      }
-    },
-    "validation.password.mustContainNumber" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "a number"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "un chiffre"
-          }
-        }
-      }
-    },
-    "validation.password.mustContainSpecialCharacter" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "a special character"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "un caractère spécial"
-          }
-        }
-      }
-    },
-    "validation.password.mustContainUppercase" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "an uppercase letter"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "une lettre majuscule"
-          }
-        }
-      }
-    },
-    "validation.rule.empty" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "must not be empty."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ne doit pas être vide."
-          }
-        }
-      }
-    },
-    "validation.rule.isInvalid" : {
+    "validation.rule.confirmationMustBeIdentical" : {
 
     },
-    "validation.rule.notASCII" : {
+    "validation.rule.isInvalid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is invalid."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "est invalide."
+          }
+        }
+      }
+    },
+    "validation.rule.mustBeASCII" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -214,7 +243,111 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ne doit contenir que des caractères ASCII."
+            "value" : "doit contenir uniquement des caractères ASCII."
+          }
+        }
+      }
+    },
+    "validation.rule.mustContainLowercase" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "must contain at least one lowercase letter."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "doit contenir au moins une lettre minuscule."
+          }
+        }
+      }
+    },
+    "validation.rule.mustContainNumber" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "must contain at least one number."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "doit contenir au moins un chiffre."
+          }
+        }
+      }
+    },
+    "validation.rule.mustContainSpecialCharacter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "must contain at least one special character."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "doit contenir au moins un caractère spécial."
+          }
+        }
+      }
+    },
+    "validation.rule.mustContainUppercase" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "must contain at least one uppercase letter."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "doit contenir au moins une lettre majuscule."
+          }
+        }
+      }
+    },
+    "validation.rule.notLongEnough %lld" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "must not be empty."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "must be at least %lld characters long."
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "ne doit pas être vide."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "doit contenir au moins %lld caractères."
+                }
+              }
+            }
           }
         }
       }

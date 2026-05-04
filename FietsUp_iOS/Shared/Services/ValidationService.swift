@@ -8,31 +8,34 @@
 import Foundation
 
 enum ValidationService {
+  private static let emailRegex = #"""
+    ^(?!\.)((?!.*\.{2})[a-zA-Z0-9...]+)@(?!\.)([a-zA-Z0-9...]+)((\.([a-zA-Z...]){2,63})+)$
+    """#
+
   static func email(_ email: String) throws {
-    try validateNotEmpty(email, field: .email)
+    try validateLength(email, field: .email, min: 1)
     
-    let emailRegex = #"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"#
     guard email.range(of: emailRegex, options: .regularExpression) != nil else {
       throw ValidationError.fieldInvalidFormat(.email)
     }
   }
   
   static func firstName(_ firstName: String) throws {
-    try validateName(firstName, field: .firstName)
+    try validateLength(firstName, field: .firstName, min: 1, max: 50)
   }
   
   static func lastName(_ lastName: String) throws {
-    try validateName(lastName, field: .lastName)
+    try validateLength(lastName, field: .lastName, min: 1, max: 50)
   }
   
   static func nickname(_ nickname: String) throws {
-    try validateName(nickname, field: .nickname)
+    try validateLength(nickname, field: .nickname, min: 1, max: 50)
     
     guard nickname.allSatisfy(\.isASCII) else {
       throw ValidationError.fieldMustBeASCII(.nickname)
     }
   }
-  
+
   static func password(_ password: String) throws {
     var failures: [ValidationError] = []
     
@@ -57,16 +60,23 @@ enum ValidationService {
     }
   }
   
-  private static func validateNotEmpty(_ value: String, field: ValidationError.Field) throws {
-    guard !value.isEmpty else {
-      throw ValidationError.fieldEmpty(field)
+  static func passwordConfirmation(password: String, confirmation: String) throws {
+    guard password == confirmation else {
+      throw ValidationError.fieldConfirmationMustBeIdentical(.password)
     }
   }
   
-  private static func validateName(_ value: String, field: ValidationError.Field, maxLength: Int = 50) throws {
-    try validateNotEmpty(value, field: field)
-    guard value.count <= maxLength else {
-      throw ValidationError.fieldTooLong(field, max: maxLength)
+  private static func validateLength(
+    _ value: String,
+    field: ValidationError.Field,
+    min: Int? = nil,
+    max: Int? = nil
+  ) throws {
+    if let min, value.count < min {
+      throw ValidationError.fieldNotLongEnough(field, min: min)
+    }
+    if let max, value.count > max {
+      throw ValidationError.fieldTooLong(field, max: max)
     }
   }
 }
@@ -86,26 +96,22 @@ enum ValidationError: Error, LocalizedError {
     }
   }
   
-  case fieldEmpty(Field)
   case fieldTooLong(Field, max: Int)
   case fieldNotLongEnough(Field, min: Int)
-  case fieldMustBeASCII(Field)
   case fieldMustContainUppercase(Field)
   case fieldMustContainLowercase(Field)
   case fieldMustContainNumber(Field)
   case fieldMustContainSpecialCharacter(Field)
+  case fieldMustBeASCII(Field)
   case fieldInvalidFormat(Field)
+  case fieldConfirmationMustBeIdentical(Field)
   
   case multiple([ValidationError])
   
   var errorDescription: String? {
     switch self {
-      case .fieldEmpty(let field):
-        return "\(field.localized) \(String(localized: "validation.rule.empty"))"
       case .fieldTooLong(let field, let max):
         return "\(field.localized) \(String(localized: "validation.rule.tooLong \(max)"))"
-      case .fieldMustBeASCII(let field):
-        return "\(field.localized) \(String(localized: "validation.rule.mustBeASCII"))"
       case .fieldNotLongEnough(let field, let min):
         return "\(field.localized) \(String(localized: "validation.rule.notLongEnough \(min)"))"
       case .fieldMustContainUppercase(let field):
@@ -116,9 +122,13 @@ enum ValidationError: Error, LocalizedError {
         return "\(field.localized) \(String(localized: "validation.rule.mustContainNumber"))"
       case .fieldMustContainSpecialCharacter(let field):
         return "\(field.localized) \(String(localized: "validation.rule.mustContainSpecialCharacter"))"
+      case .fieldMustBeASCII(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.mustBeASCII"))"
       case .fieldInvalidFormat(let field):
         return "\(field.localized) \(String(localized: "validation.rule.isInvalid"))"
-        
+      case .fieldConfirmationMustBeIdentical(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.confirmationMustBeIdentical"))"
+
       case .multiple(let errors):
         let lines = errors.compactMap { $0.errorDescription }.map { "• \($0)" }
         return lines.joined(separator: "\n")

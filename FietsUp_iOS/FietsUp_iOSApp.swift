@@ -9,9 +9,21 @@ import SwiftUI
 
 @main
 struct FietsUp_iOSApp: App {
+  @State private var authService = AuthService.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          ZStack {
+            if authService.isAuthenticated {
+              DashboardView()
+                .transition(.opacity)
+            } else {
+              LoginView()
+                .transition(.opacity)
+            }
+            ErrorOverlay()
+          }
+          .animation(.default, value: authService.isAuthenticated)
         }
     }
 }

@@ -10,9 +10,22 @@
 		436E86C72FA8915B0001E186 /* FietsUp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FietsUp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4368466F2FA8D6CE0018CEEC /* Exceptions for "FietsUp_iOS" folder in "FietsUp_iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 436E86C62FA8915B0001E186 /* FietsUp_iOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		436E86C92FA8915B0001E186 /* FietsUp_iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4368466F2FA8D6CE0018CEEC /* Exceptions for "FietsUp_iOS" folder in "FietsUp_iOS" target */,
+			);
 			path = FietsUp_iOS;
 			sourceTree = "<group>";
 		};
@@ -135,8 +148,8 @@
 /* Begin XCBuildConfiguration section */
 		436E86D02FA8915D0001E186 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = 436E86C92FA8915B0001E186 /* FietsUp_iOS */;
-			baseConfigurationReferenceRelativePath = Shared/Config/Debug.xcconfig;
+			baseConfigurationReferenceAnchor = 436E87D42FA89B2E0001E186 /* Config */;
+			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -201,8 +214,8 @@
 		};
 		436E86D12FA8915D0001E186 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = 436E86C92FA8915B0001E186 /* FietsUp_iOS */;
-			baseConfigurationReferenceRelativePath = Shared/Config/Release.xcconfig;
+			baseConfigurationReferenceAnchor = 436E87D42FA89B2E0001E186 /* Config */;
+			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -260,6 +273,8 @@
 		};
 		436E86D32FA8915D0001E186 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 436E87D42FA89B2E0001E186 /* Config */;
+			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -268,7 +283,7 @@
 				DEVELOPMENT_TEAM = 3LU75T9498;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "FietsUp-iOS-Info.plist";
+				INFOPLIST_FILE = FietsUp_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -293,6 +308,8 @@
 		};
 		436E86D42FA8915D0001E186 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 436E87D42FA89B2E0001E186 /* Config */;
+			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,7 +318,7 @@
 				DEVELOPMENT_TEAM = 3LU75T9498;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "FietsUp-iOS-Info.plist";
+				INFOPLIST_FILE = FietsUp_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
