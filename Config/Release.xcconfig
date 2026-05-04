@@ -1,0 +1,11 @@
+//
+//  Release.xcconfig
+//  FietsUp_iOS
+//
+//  Created by Anne Ferret on 04/05/2026.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+API_BASE_URL = 'http://localhost:8080'
