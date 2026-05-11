@@ -48,10 +48,17 @@ struct ErrorOverlay: View {
   }
 }
 
+extension View {
+  func errorOverlay() -> some View {
+    frame(maxWidth: .infinity, maxHeight: .infinity)
+      .overlay(alignment: .bottom) { ErrorOverlay() }
+  }
+}
+
 #Preview {
   ZStack {
     Color.gray.ignoresSafeArea()
-    ErrorOverlay()
+      .errorOverlay()
       .task {
         ErrorService.shared.show(NSError(
           domain: "PreviewError",
@@ -59,12 +66,5 @@ struct ErrorOverlay: View {
           userInfo: [NSLocalizedDescriptionKey: "This is a preview error message."]
         ))
       }
-  }
-}
-
-extension View {
-  func errorOverlay() -> some View {
-    frame(maxWidth: .infinity, maxHeight: .infinity)
-      .overlay(alignment: .bottom) { ErrorOverlay() }
   }
 }

@@ -32,13 +32,9 @@ struct LoginView: View {
           .keyboardType(.emailAddress)
           .submitLabel(.next)
           .focused($focusedField, equals: .email)
-          .onSubmit {
-            switch vm.loginMode {
-              case .login:
-                focusedField = .password
-              case .signup:
-                focusedField = .firstName
-            }
+          .onSubmit { vm.loginMode == .login
+            ? (focusedField = .password)
+            : (focusedField = .firstName)
           }
         
         if vm.loginMode == .login {
@@ -81,15 +77,15 @@ struct LoginView: View {
       if vm.loginMode == .signup {
         AppFormSection {
           SecureField("loginForm.newPassword", text: $vm.loginForm.newPassword)
-            .textContentType(.newPassword)
+            .textContentType(.password)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
-            .submitLabel(.go)
+            .submitLabel(.next)
             .focused($focusedField, equals: .newPassword)
             .onSubmit { focusedField = .newPasswordConfirmation }
         
           SecureField("loginForm.newPasswordConfirmation", text: $vm.loginForm.newPasswordConfirmation)
-            .textContentType(.newPassword)
+            .textContentType(.password)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .submitLabel(.go)
