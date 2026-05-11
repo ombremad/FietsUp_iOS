@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ErrorOverlay: View {
   @State private var errorService = ErrorService.shared
   
@@ -44,8 +42,23 @@ struct ErrorOverlay: View {
     }
     .padding()
     .background(Color.Error.primary)
+    .cornerRadius(24)
     .padding(.horizontal)
     .padding(.bottom, 8)
     .shadow(radius: 8)
+  }
+}
+
+#Preview {
+  ZStack {
+    Color.gray.ignoresSafeArea()
+    ErrorOverlay()
+      .task {
+        ErrorService.shared.show(NSError(
+          domain: "PreviewError",
+          code: 1,
+          userInfo: [NSLocalizedDescriptionKey: "An error happened, as it sometimes does."]
+        ))
+      }
   }
 }

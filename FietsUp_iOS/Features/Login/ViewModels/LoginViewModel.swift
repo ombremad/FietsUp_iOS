@@ -19,11 +19,12 @@ final class LoginViewModel {
   
   struct LoginForm {
     var email: String = ""
+    var password: String = ""
     var firstName: String = ""
     var lastName: String = ""
     var nickname: String = ""
-    var password: String = ""
-    var passwordConfirmation: String = ""
+    var newPassword: String = ""
+    var newPasswordConfirmation: String = ""
   }
   
   func submit() async {
@@ -64,8 +65,8 @@ final class LoginViewModel {
       try ValidationService.firstName(loginForm.firstName)
       try ValidationService.lastName(loginForm.lastName)
       try ValidationService.nickname(loginForm.nickname)
-      try ValidationService.password(loginForm.password)
-      try ValidationService.passwordConfirmation(password: loginForm.password, confirmation: loginForm.passwordConfirmation)
+      try ValidationService.password(loginForm.newPassword)
+      try ValidationService.passwordConfirmation(password: loginForm.newPassword, confirmation: loginForm.newPasswordConfirmation)
       try await performSignupRequest()
     } catch {
       ErrorService.shared.show(error)

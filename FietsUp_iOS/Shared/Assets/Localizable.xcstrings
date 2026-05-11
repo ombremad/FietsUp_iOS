@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "app.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FietsUp"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "Authenticated!" : {
 
     },
@@ -87,6 +98,38 @@
         }
       }
     },
+    "loginForm.newPassword" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau mot de passe"
+          }
+        }
+      }
+    },
+    "loginForm.newPasswordConfirmation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password confirmation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Confirmation du mot de passe"
+          }
+        }
+      }
+    },
     "loginForm.nickname" : {
       "localizations" : {
         "en" : {
@@ -131,22 +174,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mot de passe"
-          }
-        }
-      }
-    },
-    "loginForm.passwordConfirmation" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Password confirmation"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmer le mot de passe"
           }
         }
       }

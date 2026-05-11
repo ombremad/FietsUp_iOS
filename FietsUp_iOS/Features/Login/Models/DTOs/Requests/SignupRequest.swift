@@ -16,7 +16,7 @@ struct SignupRequest: Encodable {
   
   init(from form: LoginViewModel.LoginForm) {
     self.email = form.email
-    self.password = form.password
+    self.password = form.newPassword
     self.firstName = form.firstName
     self.lastName = form.lastName
     self.nickname = form.nickname
