@@ -74,7 +74,7 @@ final class LoginViewModel {
   
   private func performLoginRequest() async throws {
     let body = LoginRequest(from: loginForm)
-    let response: LoginResponse = try await NetworkService.shared.post(
+    let response: AuthResponse = try await NetworkService.shared.post(
       endpoint: "/users/login",
       body: body
     )
@@ -83,7 +83,7 @@ final class LoginViewModel {
   
   private func performSignupRequest() async throws {
     let body = SignupRequest(from: loginForm)
-    let response: LoginResponse = try await NetworkService.shared.post(
+    let response: AuthResponse = try await NetworkService.shared.post(
       endpoint: "/users/signup",
       body: body
     )

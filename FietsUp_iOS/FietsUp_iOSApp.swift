@@ -24,6 +24,7 @@ struct FietsUp_iOSApp: App {
             ErrorOverlay()
           }
           .animation(.default, value: authService.isAuthenticated)
+          .font(.body)
         }
     }
 }
