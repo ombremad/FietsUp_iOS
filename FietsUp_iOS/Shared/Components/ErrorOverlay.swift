@@ -11,8 +11,7 @@ struct ErrorOverlay: View {
   @State private var errorService = ErrorService.shared
   
   var body: some View {
-    VStack {
-      Spacer()
+    Group {
       if let error = errorService.currentError {
         bannerContent(for: error)
           .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -57,8 +56,15 @@ struct ErrorOverlay: View {
         ErrorService.shared.show(NSError(
           domain: "PreviewError",
           code: 1,
-          userInfo: [NSLocalizedDescriptionKey: "An error happened, as it sometimes does."]
+          userInfo: [NSLocalizedDescriptionKey: "This is a preview error message."]
         ))
       }
+  }
+}
+
+extension View {
+  func errorOverlay() -> some View {
+    frame(maxWidth: .infinity, maxHeight: .infinity)
+      .overlay(alignment: .bottom) { ErrorOverlay() }
   }
 }

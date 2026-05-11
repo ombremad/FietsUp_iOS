@@ -10,18 +10,18 @@ import SwiftUI
 @main
 struct FietsUp_iOSApp: App {
   @State private var authService = AuthService.shared
+  @State private var mainVM = MainViewModel()
 
     var body: some Scene {
         WindowGroup {
           ZStack {
             if authService.isAuthenticated {
-              DashboardView()
+              TabContainer().environment(mainVM)
                 .transition(.opacity)
             } else {
               LoginView()
                 .transition(.opacity)
             }
-            ErrorOverlay()
           }
           .animation(.default, value: authService.isAuthenticated)
           .font(.body)

@@ -1,18 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "app.name" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FietsUp"
-          }
-        }
-      },
+    "Authenticated!" : {
+
+    },
+    "DangersView" : {
+
+    },
+    "FietsUp" : {
       "shouldTranslate" : false
     },
-    "Authenticated!" : {
+    "ForumView" : {
 
     },
     "Hello, world!" : {
@@ -124,7 +122,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Confirmation du mot de passe"
           }
         }
@@ -292,6 +290,9 @@
           }
         }
       }
+    },
+    "PlacesView" : {
+
     },
     "validation.field.email" : {
       "localizations" : {

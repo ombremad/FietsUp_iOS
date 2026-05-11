@@ -35,7 +35,7 @@ struct LoginView: View {
           .onSubmit {
             switch vm.loginMode {
               case .login:
-                focusedField = .newPassword
+                focusedField = .password
               case .signup:
                 focusedField = .firstName
             }
@@ -128,6 +128,7 @@ struct LoginView: View {
     .onAppear {
       focusedField = .email
     }
+    .errorOverlay()
   }
   
   private func submit() {

@@ -11,7 +11,7 @@ struct TitleLabel: View {
   var body: some View {
     HStack {
       Spacer()
-      Text("app.name")
+      Text("FietsUp")
         .font(.title)
         .foregroundStyle(Color.Surface.login)
         .padding(.horizontal, 28)

@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct DashboardView: View {
+  @Environment(MainViewModel.self) private var mainVM
+  @State private var dashboardVM: DashboardViewModel?
+  
   var body: some View {
-    VStack {
-      Text("Authenticated!")
-      Button("Logout") {
-        Task {
-          try AuthService.shared.logout()
+    NavigationStack {
+      VStack {
+        Text("Authenticated!")
+        Button("Logout") {
+          Task {
+            try AuthService.shared.logout()
+          }
         }
+      }
+    }
+    .task {
+      if dashboardVM == nil {
+        dashboardVM = DashboardViewModel(mainVM: mainVM)
       }
     }
   }
@@ -22,4 +32,5 @@ struct DashboardView: View {
 
 #Preview {
   DashboardView()
+    .environment(MainViewModel())
 }
