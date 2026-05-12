@@ -13,7 +13,7 @@ struct TitleLabel: View {
       Spacer()
       Text("FietsUp")
         .font(.title)
-        .foregroundStyle(Color.Surface.login)
+        .foregroundStyle(Color.Surface.Login.primary)
         .padding(.horizontal, 28)
         .padding(.vertical, 8)
         .background(Color.Surface.field)

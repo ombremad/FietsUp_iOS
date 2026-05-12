@@ -8,29 +8,39 @@
 import SwiftUI
 
 struct DashboardView: View {
-  @Environment(MainViewModel.self) private var mainVM
-  @State private var dashboardVM: DashboardViewModel?
-  
+  @State private var vm = DashboardViewModel()
+  private let auth = AuthService.shared
+
   var body: some View {
     NavigationStack {
-      VStack {
-        Text("Authenticated!")
-        Button("Logout") {
-          Task {
-            try AuthService.shared.logout()
+      ScrollView {
+        VStack(spacing: 24) {
+          if let user = auth.currentUser {
+            UserCardBig(user: user)
+          } else {
+            ProgressView()
+          }
+        }.padding()
+      }
+      .foregroundStyle(Color.Text.primary)
+      .background { Color.Surface.background.ignoresSafeArea() }
+      .navigationTitle("dashboard.hello")
+      .toolbar {
+        ToolbarItem(placement: .primaryAction) {
+          NavigationLink {
+            SettingsView()
+          } label: {
+            Label("settings", systemImage: "gear")
           }
         }
       }
     }
     .task {
-      if dashboardVM == nil {
-        dashboardVM = DashboardViewModel(mainVM: mainVM)
-      }
+      await auth.restoreSession()
     }
   }
 }
 
 #Preview {
   DashboardView()
-    .environment(MainViewModel())
 }

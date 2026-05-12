@@ -24,5 +24,6 @@ struct AppFormSection<Content: View>: View {
     }
     .listRowBackground(Color.Surface.field)
     .listRowSeparatorTint(Color.Surface.divider)
+    .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
   }
 }

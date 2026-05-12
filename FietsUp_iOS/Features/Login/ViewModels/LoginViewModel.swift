@@ -11,7 +11,7 @@ import Foundation
 final class LoginViewModel {
   var loginMode: LoginMode = .login
   var loginForm = LoginForm()
-  var isLoading = false
+  var isLoading: Bool = false
   
   enum LoginMode {
     case login, signup
@@ -29,17 +29,15 @@ final class LoginViewModel {
   
   func submit() async {
     switch loginMode {
-      case .login:  await login()
+      case .login: await login()
       case .signup: await signup()
     }
   }
   
   func toggleMode() {
     switch loginMode {
-      case .login:
-        loginMode = .signup
-      case .signup:
-        loginMode = .login
+      case .login: loginMode = .signup
+      case .signup: loginMode = .login
     }
   }
   
@@ -66,7 +64,10 @@ final class LoginViewModel {
       try ValidationService.lastName(loginForm.lastName)
       try ValidationService.nickname(loginForm.nickname)
       try ValidationService.password(loginForm.newPassword)
-      try ValidationService.passwordConfirmation(password: loginForm.newPassword, confirmation: loginForm.newPasswordConfirmation)
+      try ValidationService.passwordConfirmation(
+        password: loginForm.newPassword,
+        confirmation: loginForm.newPasswordConfirmation
+      )
       try await performSignupRequest()
     } catch {
       ErrorService.shared.show(error)
@@ -79,7 +80,7 @@ final class LoginViewModel {
       endpoint: "/users/login",
       body: body
     )
-    try AuthService.shared.markAsAuthenticated(token: response.token)
+    try AuthService.shared.authenticate(token: response.token, user: response.user)
   }
   
   private func performSignupRequest() async throws {
@@ -88,6 +89,6 @@ final class LoginViewModel {
       endpoint: "/users/signup",
       body: body
     )
-    try AuthService.shared.markAsAuthenticated(token: response.token)
+    try AuthService.shared.authenticate(token: response.token, user: response.user)
   }
 }

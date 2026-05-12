@@ -17,7 +17,7 @@ struct LoginView: View {
   
   var body: some View {
     ZStack {
-      Color.Surface.login
+      Color.Surface.Login.primary
         .ignoresSafeArea()
 
     Form {
@@ -25,7 +25,7 @@ struct LoginView: View {
       TitleLabel()
       
       AppFormSection {
-        TextField("loginForm.email", text: $vm.loginForm.email)
+        TextField("form.email", text: $vm.loginForm.email)
           .textContentType(.emailAddress)
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
@@ -38,7 +38,7 @@ struct LoginView: View {
           }
         
         if vm.loginMode == .login {
-          SecureField("loginForm.password", text: $vm.loginForm.password)
+          SecureField("form.password", text: $vm.loginForm.password)
             .textContentType(.password)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
@@ -50,21 +50,21 @@ struct LoginView: View {
       
       if vm.loginMode == .signup {
         AppFormSection {
-          TextField("loginForm.firstName", text: $vm.loginForm.firstName)
+          TextField("form.firstName", text: $vm.loginForm.firstName)
             .textContentType(.givenName)
             .autocorrectionDisabled()
             .submitLabel(.next)
             .focused($focusedField, equals: .firstName)
             .onSubmit { focusedField = .lastName }
           
-          TextField("loginForm.lastName", text: $vm.loginForm.lastName)
+          TextField("form.lastName", text: $vm.loginForm.lastName)
             .textContentType(.familyName)
             .autocorrectionDisabled()
             .submitLabel(.next)
             .focused($focusedField, equals: .lastName)
             .onSubmit { focusedField = .nickname }
           
-          TextField("loginForm.nickname", text: $vm.loginForm.nickname)
+          TextField("form.nickname", text: $vm.loginForm.nickname)
             .textContentType(.nickname)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
@@ -76,7 +76,7 @@ struct LoginView: View {
       
       if vm.loginMode == .signup {
         AppFormSection {
-          SecureField("loginForm.newPassword", text: $vm.loginForm.newPassword)
+          SecureField("form.newPassword", text: $vm.loginForm.newPassword)
             .textContentType(.password)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
@@ -84,7 +84,7 @@ struct LoginView: View {
             .focused($focusedField, equals: .newPassword)
             .onSubmit { focusedField = .newPasswordConfirmation }
         
-          SecureField("loginForm.newPasswordConfirmation", text: $vm.loginForm.newPasswordConfirmation)
+          SecureField("form.newPasswordConfirmation", text: $vm.loginForm.newPasswordConfirmation)
             .textContentType(.password)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()

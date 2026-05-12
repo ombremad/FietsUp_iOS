@@ -57,6 +57,8 @@ final class NetworkService {
           try? AuthService.shared.logout()
         }
         throw NetworkError.unauthorized
+      case 403:
+        throw NetworkError.forbidden
       default:
         throw NetworkError.serverError(statusCode: httpResponse.statusCode)
     }
@@ -77,6 +79,8 @@ final class NetworkService {
     
     let (data, response) = try await URLSession.shared.data(for: urlRequest)
     _ = try validateResponse(response)
+    
+    guard !data.isEmpty else { throw NetworkError.noData }
     
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -143,6 +147,7 @@ enum NetworkError: Error, LocalizedError {
   case invalidURL
   case invalidResponse
   case unauthorized
+  case forbidden
   case serverError(statusCode: Int)
   case decodingError
   case noData
@@ -155,6 +160,8 @@ enum NetworkError: Error, LocalizedError {
         return String(localized: "network.error.invalidResponse")
       case .unauthorized:
         return String(localized: "network.error.unauthorized")
+      case .forbidden:
+        return String(localized: "network.error.forbidden")
       case .serverError(let statusCode):
         return String(localized: "network.error.serverError \(statusCode)")
       case .decodingError:

@@ -12,10 +12,10 @@ enum AppTab: Int, Hashable, CaseIterable {
   
   var title: String {
     switch self {
-      case .dashboard: "tab.dashboard"
-      case .dangers: "tab.dangers"
-      case .places: "tab.places"
-      case .forum: "tab.forum"
+      case .dashboard: String(localized: "tab.dashboard")
+      case .dangers: String(localized: "tab.dangers")
+      case .places: String(localized: "tab.places")
+      case .forum: String(localized: "tab.forum")
     }
   }
   

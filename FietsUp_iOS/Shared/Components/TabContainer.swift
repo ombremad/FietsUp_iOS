@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TabContainer: View {
-  @Environment(MainViewModel.self) private var mainVM
-
+  @Environment(AppRouter.self) private var router
+  
   var body: some View {
-    @Bindable var mainVM = mainVM
+    @Bindable var router = router
 
-    TabView(selection: $mainVM.selectedTab) {
+    TabView(selection: $router.selectedTab) {
       ForEach(AppTab.allCases, id: \.self) { tab in
         Tab(
           tab.title,

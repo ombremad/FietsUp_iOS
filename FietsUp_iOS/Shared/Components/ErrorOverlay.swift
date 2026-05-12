@@ -25,22 +25,22 @@ struct ErrorOverlay: View {
   private func bannerContent(for error: any Error) -> some View {
     HStack(alignment: .top, spacing: 12) {
       Image(systemName: "exclamationmark.triangle.fill")
-        .foregroundStyle(Color.Text.Contrasted.primary)
+        .foregroundStyle(.white).opacity(0.9)
       
       Text(error.localizedDescription)
-        .font(.caption)
-        .foregroundStyle(Color.Text.Contrasted.primary)
+        .font(.callout)
+        .foregroundStyle(.white).opacity(0.9)
         .frame(maxWidth: .infinity, alignment: .leading)
       
       Button {
         errorService.dismiss()
       } label: {
         Image(systemName: "xmark")
-          .foregroundStyle(Color.Text.Contrasted.primary)
+          .foregroundStyle(.white).opacity(0.9)
       }
     }
     .padding()
-    .background(Color.Error.primary)
+    .background(Color.Surface.Error.primary)
     .cornerRadius(24)
     .padding(.horizontal)
     .padding(.bottom, 8)
