@@ -10,14 +10,12 @@ import SwiftUI
 @main
 struct FietsUp_iOSApp: App {
   @State private var authService = AuthService.shared
-  @State private var router = AppRouter()
 
     var body: some Scene {
         WindowGroup {
           ZStack {
             if authService.isAuthenticated {
               TabContainer()
-                .environment(router)
                 .transition(.opacity)
             } else {
               LoginView()

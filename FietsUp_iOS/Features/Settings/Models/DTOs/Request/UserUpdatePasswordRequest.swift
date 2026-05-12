@@ -5,8 +5,6 @@
 //  Created by Anne Ferret on 12/05/2026.
 //
 
-import Foundation
-
 struct UserUpdatePasswordRequest: Encodable {
   let oldPassword: String
   let newPassword: String

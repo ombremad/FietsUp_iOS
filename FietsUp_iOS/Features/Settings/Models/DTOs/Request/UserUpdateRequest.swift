@@ -5,8 +5,6 @@
 //  Created by Anne Ferret on 12/05/2026.
 //
 
-import Foundation
-
 struct UserUpdateRequest: Encodable {
   let firstName: String?
   let lastName: String?

@@ -9,14 +9,14 @@ import Foundation
 
 @Observable
 final class LoginViewModel {
-  var loginMode: LoginMode = .login
-  var loginForm = LoginForm()
   var isLoading: Bool = false
-  
+
+  var loginMode: LoginMode = .login
   enum LoginMode {
     case login, signup
   }
-  
+
+  var loginForm = LoginForm()
   struct LoginForm {
     var email: String = ""
     var password: String = ""

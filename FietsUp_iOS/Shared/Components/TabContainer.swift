@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct TabContainer: View {
-  @Environment(AppRouter.self) private var router
-  
   var body: some View {
-    @Bindable var router = router
-
+    @Bindable var router = AppRouter.shared
+    
     TabView(selection: $router.selectedTab) {
       ForEach(AppTab.allCases, id: \.self) { tab in
-        Tab(
-          tab.title,
-          systemImage: tab.icon,
-          value: tab
-        ) { tab.view }
+        Tab(tab.title, systemImage: tab.icon, value: tab) {
+          NavigationStack(path: router.path(for: tab)) {
+            tab.view
+              .errorOverlay()
+          }
+        }
       }
     }
   }

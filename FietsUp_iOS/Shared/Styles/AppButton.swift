@@ -13,7 +13,7 @@ struct AppButton: ButtonStyle {
     case primary, neutral, destructive
   }
   
-  func getBackgroundColor() -> Color {
+  private var backgroundColor: Color {
     switch role {
       case .primary: Color.Button.primary
       case .neutral: Color.Button.neutral
@@ -21,7 +21,7 @@ struct AppButton: ButtonStyle {
     }
   }
   
-  func getForegroundColor() -> Color {
+  private var foregroundColor: Color {
     switch role {
       case .primary: Color.Text.Contrasted.primary
       case .neutral: Color.Text.primary
@@ -34,10 +34,10 @@ struct AppButton: ButtonStyle {
       .multilineTextAlignment(.center)
       .lineLimit(1)
       .font(.caption)
-      .foregroundStyle(getForegroundColor())
+      .foregroundStyle(foregroundColor)
       .padding(.horizontal, 16)
       .padding(.vertical, 12)
-      .background(getBackgroundColor())
+      .background(backgroundColor)
       .contentShape(Capsule())
       .clipShape(Capsule())
   }

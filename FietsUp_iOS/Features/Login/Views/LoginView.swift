@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
   @State private var vm = LoginViewModel()
+  private let router = AppRouter.shared
+
   @FocusState private var focusedField: Field?
 
   private enum Field {
@@ -121,8 +123,9 @@ struct LoginView: View {
   }
     .animation(.default, value: vm.loginMode)
     .scrollDismissesKeyboard(.interactively)
-    .onAppear {
+    .task() {
       focusedField = .email
+      await router.reset()
     }
     .errorOverlay()
   }

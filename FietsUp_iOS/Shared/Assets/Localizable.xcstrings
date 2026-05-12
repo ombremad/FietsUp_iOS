@@ -1,11 +1,90 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "activity.distance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        }
+      }
+    },
+    "activity.endDate" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin"
+          }
+        }
+      }
+    },
+    "activity.inMeters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in meters"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "en mètres"
+          }
+        }
+      }
+    },
+    "activity.newActivity" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New activity"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle activité"
+          }
+        }
+      }
+    },
+    "activity.startDate" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Début"
+          }
+        }
+      }
+    },
     "BIKE placeholder" : {
       "shouldTranslate" : false
     },
     "changePassword.message" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -20,12 +99,6 @@
           }
         }
       }
-    },
-    "changePassword.message1" : {
-
-    },
-    "changePassword.message2" : {
-
     },
     "changePassword.update" : {
       "localizations" : {
@@ -59,6 +132,22 @@
         }
       }
     },
+    "common.confirm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmer"
+          }
+        }
+      }
+    },
     "DangersView" : {
       "shouldTranslate" : false
     },
@@ -74,6 +163,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bonjour"
+          }
+        }
+      }
+    },
+    "dashboard.myActivities" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My activities"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes activités"
           }
         }
       }
@@ -455,22 +560,6 @@
         }
       }
     },
-    "settings.confirm" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmer"
-          }
-        }
-      }
-    },
     "settings.logout" : {
       "localizations" : {
         "en" : {
@@ -631,6 +720,22 @@
         }
       }
     },
+    "validation.field.distance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La distance"
+          }
+        }
+      }
+    },
     "validation.field.email" : {
       "localizations" : {
         "en" : {
@@ -679,6 +784,22 @@
         }
       }
     },
+    "validation.field.length" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Length"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La durée"
+          }
+        }
+      }
+    },
     "validation.field.nickname" : {
       "localizations" : {
         "en" : {
@@ -707,6 +828,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le mot de passe"
+          }
+        }
+      }
+    },
+    "validation.rule.cannotBeZero" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cannot be zero."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ne peut être zéro."
           }
         }
       }
@@ -755,6 +892,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "doit contenir uniquement des caractères ASCII."
+          }
+        }
+      }
+    },
+    "validation.rule.mustBeReasonable" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "must be reasonable."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "doit être raisonnable."
           }
         }
       }
@@ -859,6 +1012,22 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "validation.rule.startMustBeBeforeEnd" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start must be before end."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le début doit être avant la fin."
           }
         }
       }

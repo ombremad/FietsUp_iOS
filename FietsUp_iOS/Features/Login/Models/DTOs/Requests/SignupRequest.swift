@@ -5,8 +5,6 @@
 //  Created by Anne Ferret on 04/05/2026.
 //
 
-import Foundation
-
 struct SignupRequest: Encodable {
   let email: String
   let password: String

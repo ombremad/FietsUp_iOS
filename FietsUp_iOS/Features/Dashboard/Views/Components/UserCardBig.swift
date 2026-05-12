@@ -25,13 +25,8 @@ struct UserCardBig: View {
           }
         }
         Spacer()
-        ZStack {
-          // TODO: replace with actual bike
-          Rectangle()
-            .foregroundStyle(.black)
-          Text("BIKE placeholder")
-            .foregroundStyle(.white)
-        }.frame(width: 100, height: 60)
+        BikeAvatar()
+          .frame(width: 100, height: 60)
       }
       
       Rectangle()

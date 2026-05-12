@@ -36,30 +36,17 @@ struct SettingsView: View {
         }
         .foregroundStyle(Color.Text.secondary)
         
-        Button("settings.changePassword") { vm.isPasswordChangeAlertPresented.toggle() }
-        .frame(maxWidth: .infinity)
-
+        Button("settings.changePassword") { vm.isPasswordChangeAlertPresented.toggle()
+        }.frame(maxWidth: .infinity)
         
         Button("settings.logout", role: .destructive) {
           vm.isLogoutAlertPresented.toggle()
-        }
-        .frame(maxWidth: .infinity)
+        }.frame(maxWidth: .infinity)
         
       }
     }
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("settings")
-    .toolbar {
-      ToolbarItem(placement: .confirmationAction) {
-        Button("settings.confirm", systemImage: "checkmark", role: .confirm) {
-          Task {
-            await vm.submit()
-            dismiss()
-          }
-        }
-        .disabled(vm.isLoading)
-      }
-    }
     .toolbarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
     .scrollDismissesKeyboard(.interactively)
@@ -67,10 +54,21 @@ struct SettingsView: View {
       vm.load()
     }
     
+    .toolbar {
+      ToolbarItem(placement: .confirmationAction) {
+        Button("common.confirm", systemImage: "checkmark", role: .confirm) {
+          Task {
+            await vm.submit()
+            dismiss()
+          }
+        }.disabled(vm.isLoading)
+      }
+    }
+    
     .alert("settings.logout", isPresented: $vm.isLogoutAlertPresented) {
       Button("logoutAlert.logout", role: .destructive) {
         Task { try auth.logout() }
-      }
+      }.disabled(vm.isLoading)
       Button("common.cancel", role: .cancel) {}
     } message: {
       Text("logoutAlert.message")
@@ -82,7 +80,7 @@ struct SettingsView: View {
       SecureField("form.newPasswordConfirmation", text: $vm.changePasswordForm.newPasswordConfirmation)
       Button("changePassword.update", role: .destructive) {
         Task { await vm.changePassword() }
-      }
+      }.disabled(vm.isLoading)
       Button("common.cancel", role: .cancel) {}
     } message: {
       Text("changePassword.message")

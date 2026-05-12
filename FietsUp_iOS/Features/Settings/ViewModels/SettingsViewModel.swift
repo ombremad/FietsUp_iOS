@@ -10,26 +10,25 @@ import Foundation
 @Observable
 final class SettingsViewModel {
   private let auth = AuthService.shared
-  
-  var settingsForm = SettingsForm()
-  var changePasswordForm = ChangePasswordForm()
-  
   var isLoading: Bool = false
+  
   var isLogoutAlertPresented: Bool = false
   var isPasswordChangeAlertPresented: Bool = false
   
+  var settingsForm = SettingsForm()
   struct SettingsForm {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
   }
-  
+
+  var changePasswordForm = ChangePasswordForm()
   struct ChangePasswordForm {
     var oldPassword: String = ""
     var newPassword: String = ""
     var newPasswordConfirmation: String = ""
   }
-  
+    
   func load() {
     if let user = auth.currentUser {
       settingsForm.firstName = user.firstName
@@ -91,7 +90,7 @@ final class SettingsViewModel {
   
   private func performUpdateUserPassword() async throws {
     let body = UserUpdatePasswordRequest(from: changePasswordForm)
-    let response: UserResponse = try await NetworkService.shared.patch(
+    let _: UserResponse = try await NetworkService.shared.patch(
       endpoint: "/users/me/password",
       body: body,
       requiresAuth: true
