@@ -10,6 +10,7 @@ import Foundation
 @Observable
 final class ActivityViewModel {
   var isLoading: Bool = false
+  private let auth = AuthService.shared
   
   var newActivityForm = NewActivityForm()
   struct NewActivityForm {
@@ -28,6 +29,8 @@ final class ActivityViewModel {
     )
     try ValidationService.distance(newActivityForm.distance)
     try await performNewActivityRequest()
+    
+    auth.currentUser?.totalElapsedDistance += newActivityForm.distance
   }
   
   private func performNewActivityRequest() async throws {

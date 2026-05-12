@@ -5,6 +5,9 @@
 //  Created by Anne Ferret on 12/05/2026.
 //
 
+import Foundation
+
+@Observable
 final class User {
   var firstName: String
   var lastName: String
