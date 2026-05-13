@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct UserCardBig: View {
-  @State var user: User
+  let user: User
+  
+  init(_ user: User) {
+    self.user = user
+  }
   
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
@@ -39,7 +43,7 @@ struct UserCardBig: View {
           Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
           Text((Double(user.totalElapsedDistance) / 1000).formatted(.number.precision(.fractionLength(0...2))))
             .bold()
-          Text("user.card.kmunit")
+          Text("common.unit.km")
         }
         Spacer()
         HStack(spacing: 3) {
@@ -72,7 +76,7 @@ struct UserCardBig: View {
 }
 
 #Preview {
-  UserCardBig(user: User(with: .init(
+  UserCardBig(User(with: .init(
     firstName: "Jeanne",
     lastName: "Dubois",
     nickname: "Velocipede_2000",

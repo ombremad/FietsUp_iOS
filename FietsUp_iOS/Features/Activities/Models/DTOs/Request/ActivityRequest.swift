@@ -12,7 +12,7 @@ struct ActivityRequest: Encodable {
   let endDate: Date
   let distance: Int
   
-  init (from form: ActivityViewModel.NewActivityForm) {
+  init (from form: NewActivityViewModel.NewActivityForm) {
     self.startDate = form.startDate
     self.endDate = form.endDate
     self.distance = form.distance

@@ -16,7 +16,7 @@ struct DashboardView: View {
     ScrollView {
       VStack(spacing: 42) {
         if let user = auth.currentUser {
-          UserCardBig(user: user)
+          UserCardBig(user)
         } else {
           ProgressView()
         }
@@ -28,12 +28,12 @@ struct DashboardView: View {
           
           HStack(spacing: 24) {
             DashboardButton(
-              label: "dashboard.activities.preview",
+              label: String(localized: "dashboard.activities.overview"),
               iconName: "chart.bar.xaxis.ascending.badge.clock",
               role: .neutral
-            ) {}
+            ) { router.push(DashboardDestination.activities) }
             DashboardButton(
-              label: "dashboard.activities.add",
+              label: String(localized: "dashboard.activities.add"),
               iconName: "plus.circle",
               role: .primary
             ) { vm.isNewActivitySheetPresented.toggle() }
@@ -50,6 +50,7 @@ struct DashboardView: View {
     .navigationDestination(for: DashboardDestination.self) { destination in
       switch destination {
         case .settings: SettingsView()
+        case .activities: ActivitiesView()
       }
     }
     

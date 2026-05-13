@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ActivityResponse: Decodable {
+struct ActivityResponse: Decodable, Identifiable {
+  let id: UUID
   let startDate: Date
   let endDate: Date
   let length: Int

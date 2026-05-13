@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewActivitySheet: View {
-  @State private var vm = ActivityViewModel()
+  @State private var vm = NewActivityViewModel()
   @Environment(\.dismiss) private var dismiss
   
   var body: some View {

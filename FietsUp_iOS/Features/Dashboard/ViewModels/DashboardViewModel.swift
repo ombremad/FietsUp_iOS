@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum DashboardDestination: Hashable {
-  case settings
+  case settings, activities
 }
 
 @Observable

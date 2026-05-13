@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class ActivityViewModel {
+final class NewActivityViewModel {
   var isLoading: Bool = false
   private let auth = AuthService.shared
   
@@ -29,17 +29,23 @@ final class ActivityViewModel {
     )
     try ValidationService.distance(newActivityForm.distance)
     try await performNewActivityRequest()
-    
-    auth.currentUser?.totalElapsedDistance += newActivityForm.distance
   }
   
   private func performNewActivityRequest() async throws {
-    let body = ActivityRequest(from: newActivityForm)
-    let response: ActivityResponse = try await NetworkService.shared.post(
-      endpoint: "/activities",
-      body: body,
-      requiresAuth: true
-    )
-    print(response)
+    do {
+      let body = ActivityRequest(from: newActivityForm)
+      let response: ActivityResponse = try await NetworkService.shared.post(
+        endpoint: "/activities",
+        body: body,
+        requiresAuth: true
+      )
+      try updateLocalUserElapsedDistance(distance: response.distance)
+    } catch {
+      ErrorService.shared.show(error)
+    }
+  }
+  
+  private func updateLocalUserElapsedDistance(distance: Int) throws {
+    auth.currentUser?.totalElapsedDistance += distance
   }
 }

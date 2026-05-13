@@ -50,17 +50,16 @@ final class NetworkService {
     }
     
     switch httpResponse.statusCode {
-      case 200...299:
-        return httpResponse
+      case 200...299: return httpResponse
+      case 400: throw NetworkError.badRequest
       case 401:
-        Task { @MainActor in
-          try? AuthService.shared.logout()
-        }
+        try AuthService.shared.logout()
         throw NetworkError.unauthorized
-      case 403:
-        throw NetworkError.forbidden
-      default:
-        throw NetworkError.serverError(statusCode: httpResponse.statusCode)
+      case 403: throw NetworkError.forbidden
+      case 404: throw NetworkError.notFound
+      case 409: throw NetworkError.conflict
+      case 500...599: throw NetworkError.serverIssues
+      default: throw NetworkError.serverError(statusCode: httpResponse.statusCode)
     }
   }
   
@@ -146,8 +145,12 @@ enum HTTPMethod: String {
 enum NetworkError: Error, LocalizedError {
   case invalidURL
   case invalidResponse
+  case badRequest
   case unauthorized
   case forbidden
+  case notFound
+  case conflict
+  case serverIssues
   case serverError(statusCode: Int)
   case decodingError
   case noData
@@ -158,10 +161,18 @@ enum NetworkError: Error, LocalizedError {
         return String(localized: "network.error.invalidURL")
       case .invalidResponse:
         return String(localized: "network.error.invalidResponse")
+      case .badRequest:
+        return String(localized: "network.error.badRequest")
       case .unauthorized:
         return String(localized: "network.error.unauthorized")
       case .forbidden:
         return String(localized: "network.error.forbidden")
+      case .notFound:
+        return String(localized: "network.error.notFound")
+      case .conflict:
+        return String(localized: "network.error.conflict")
+      case .serverIssues:
+        return String(localized: "network.error.serverIssues")
       case .serverError(let statusCode):
         return String(localized: "network.error.serverError \(statusCode)")
       case .decodingError:

@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "activities.empty.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You haven’t registered any activity yet. Go cycle for a bit and come back!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous n’avez pas encore enregistré d’activité. Allez pédaler un peu et revenez plus tard !"
+          }
+        }
+      }
+    },
+    "activities.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No activity"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune activité"
+          }
+        }
+      }
+    },
+    "activities.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activities overview"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu des activités"
+          }
+        }
+      }
+    },
     "activity.distance" : {
       "localizations" : {
         "en" : {
@@ -148,8 +196,56 @@
         }
       }
     },
+    "common.unit.km" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km"
+          }
+        }
+      }
+    },
     "DangersView" : {
       "shouldTranslate" : false
+    },
+    "dashboard.activities.add" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter"
+          }
+        }
+      }
+    },
+    "dashboard.activities.overview" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu"
+          }
+        }
+      }
     },
     "dashboard.hello" : {
       "localizations" : {
@@ -413,6 +509,38 @@
         }
       }
     },
+    "network.error.badRequest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bad request"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requête invalide"
+          }
+        }
+      }
+    },
+    "network.error.conflict" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conflict: you’re probably trying to use an email or a nickname already in use."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conflit : vous essayez probablement d’utiliser un email ou un pseudonyme déjà réservé."
+          }
+        }
+      }
+    },
     "network.error.decodingError" : {
       "localizations" : {
         "en" : {
@@ -493,6 +621,22 @@
         }
       }
     },
+    "network.error.notFound" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server not found"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveur introuvable"
+          }
+        }
+      }
+    },
     "network.error.serverError %lld" : {
       "localizations" : {
         "en" : {
@@ -505,6 +649,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur serveur générique : %lld."
+          }
+        }
+      }
+    },
+    "network.error.serverIssues" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Our server is currently having issues. It’s not your fault; please try again later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notre serveur a des soucis en ce moment. Ce n’est pas de votre faute ; réessayez plus tard."
           }
         }
       }
@@ -684,22 +844,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "jours"
-          }
-        }
-      }
-    },
-    "user.card.kmunit" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "km"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "km"
           }
         }
       }
