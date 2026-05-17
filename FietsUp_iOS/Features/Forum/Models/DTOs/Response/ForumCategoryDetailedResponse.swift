@@ -8,5 +8,5 @@
 struct ForumCategoryDetailedResponse: Decodable {
   let name: String
   let details: String
-  let posts: [ForumPostResponse]
+  let posts: [ForumPostShortResponse]
 }

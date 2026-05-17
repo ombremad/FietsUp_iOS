@@ -841,6 +841,9 @@
     "PlacesView" : {
       "shouldTranslate" : false
     },
+    "post.answerAction" : {
+
+    },
     "settings" : {
       "localizations" : {
         "en" : {

@@ -1,26 +1,24 @@
 //
-//  ForumCategoryView.swift
+//  ForumPostView.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 15/05/2026.
+//  Created by Anne Ferret on 17/05/2026.
 //
 
 import SwiftUI
 
-struct ForumCategoryView: View {
-  @State private var vm = ForumCategoryViewModel()
+struct ForumPostView: View {
+  @State private var vm = ForumPostViewModel()
   let id: UUID
-  
+
   var body: some View {
     ScrollView {
       VStack(spacing: 24) {
         if vm.isLoading {
           ProgressView()
         } else {
-          if let category = vm.category {
-            ForEach(category.posts) { post in
-              ForumCard(post)
-            }
+          if let post = vm.post {
+            ForumPostComponent(post)
           }
         }
       }
@@ -29,7 +27,7 @@ struct ForumCategoryView: View {
       
     }
     .background { Color.Surface.background.ignoresSafeArea() }
-    .navigationTitle(vm.category?.name ?? String(localized: "common.loading"))
+    .navigationTitle(vm.post?.title ?? String(localized: "common.loading"))
     .toolbarTitleDisplayMode(.inline)
     
     .task {
@@ -40,6 +38,6 @@ struct ForumCategoryView: View {
 
 #Preview {
   NavigationStack {
-    ForumCategoryView(id: UUID(uuidString: "353F16AB-6899-4E2E-9EE2-BB4E913F6922") ?? UUID())
+    ForumPostView(id: UUID(uuidString: "41F4ED05-39FA-43C0-9ABE-473C086105F0") ?? UUID())
   }
 }

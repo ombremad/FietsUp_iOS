@@ -85,7 +85,7 @@ struct ForumCard: View {
       
       HStack(spacing: 4) {
         Image(systemName: "bubble.right")
-        if item is ForumPostResponse {
+        if item is ForumPostShortResponse {
           Text(AttributedString(localized: "forum.discussionsActive **\(item.totalReplies)**"))
         }
         if item is ForumCategoryResponse {
@@ -102,7 +102,7 @@ struct ForumCard: View {
 #Preview {
   VStack(spacing: 12) {
     ForumCard(
-      ForumPostResponse(
+      ForumPostShortResponse(
         id: UUID(),
         user: UserShortResponse(
           id: UUID(),

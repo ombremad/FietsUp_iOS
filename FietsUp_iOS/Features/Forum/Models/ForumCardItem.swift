@@ -22,7 +22,7 @@ extension ForumCategoryResponse: ForumCardItem {
   var author: UserShortResponse? { nil }
 }
 
-extension ForumPostResponse: ForumCardItem {
+extension ForumPostShortResponse: ForumCardItem {
   var totalReplies: Int { totalComments }
   var author: UserShortResponse? { user }
 }
