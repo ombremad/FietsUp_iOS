@@ -38,7 +38,7 @@ struct ActivityRow: View {
     ActivityRow(
       ActivityResponse (
         id: UUID(),
-        startDate: Date(timeIntervalSinceNow: 12000),
+        startDate: Date(timeIntervalSinceNow: -12000),
         endDate: Date.now,
         length: 12000,
         distance: 14829

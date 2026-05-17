@@ -17,6 +17,7 @@ struct TabContainer: View {
           NavigationStack(path: router.path(for: tab)) {
             tab.view
               .errorOverlay()
+            // TODO: display error on subviews
           }
         }
       }
