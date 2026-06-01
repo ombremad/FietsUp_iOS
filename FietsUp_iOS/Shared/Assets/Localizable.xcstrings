@@ -212,6 +212,22 @@
         }
       }
     },
+    "common.unit.days" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jours"
+          }
+        }
+      }
+    },
     "common.unit.km" : {
       "localizations" : {
         "en" : {
@@ -842,7 +858,20 @@
       "shouldTranslate" : false
     },
     "post.answerAction" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondre"
+          }
+        }
+      }
     },
     "settings" : {
       "localizations" : {
@@ -1016,6 +1045,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "streak"
+          }
+        }
+      }
+    },
+    "user.sheet.registeredFor" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registered for"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscrit·e depuis"
+          }
+        }
+      }
+    },
+    "user.sheet.totalElapsedDistance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total elapsed distance"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance totale parcourue"
           }
         }
       }

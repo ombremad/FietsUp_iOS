@@ -13,6 +13,8 @@ struct UserPublicCard: View {
   let size: UserPublicCardSize
   enum UserPublicCardSize { case big, small }
   
+  @State var isUserSheetPresented: Bool = false
+  
   var body: some View {
     HStack {
       avatarSection
@@ -39,6 +41,13 @@ struct UserPublicCard: View {
     .background(Color.Surface.primary)
     .frame(maxWidth: .infinity)
     .clipShape(RoundedRectangle(cornerRadius: 18))
+    .onTapGesture {
+      isUserSheetPresented.toggle()
+    }
+    
+    .sheet(isPresented: $isUserSheetPresented) {
+      UserPublicSheet(user)
+    }
   }
   
   private var avatarSection: some View {
@@ -52,6 +61,7 @@ struct UserPublicCard: View {
   private var authorSection: some View {
     HStack {
       Text(user.nickname).bold()
+        .lineLimit(1)
       streakPill
     }
   }
@@ -83,7 +93,10 @@ struct UserPublicCard: View {
       user: UserPublicResponse(
         id: UUID(),
         nickname: "Veliste_du_31",
-        streak: 3
+        streak: 3,
+        daysSinceSignup: 128,
+        totalElapsedDistance: 1_200_000,
+        bio: "Courte biographie de présentation, décrivant mes goûts, centres d'intérêts etc.",
       ),
       date: Date.now,
       size: .big
@@ -91,8 +104,11 @@ struct UserPublicCard: View {
     UserPublicCard(
       user: UserPublicResponse(
         id: UUID(),
-        nickname: "ombremad",
-        streak: 12
+        nickname: "Veliste_du_31",
+        streak: 3,
+        daysSinceSignup: 128,
+        totalElapsedDistance: 1_200_000,
+        bio: nil,
       ),
       date: Date.now,
       size: .small

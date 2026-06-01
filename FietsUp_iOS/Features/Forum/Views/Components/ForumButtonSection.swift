@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ForumButtonSection: View {
-  @State var likeCount: Int
-  @State var isLiked: Bool
-  @State var isFaved: Bool
-  
+  let likeCount: Int
+  let isLiked: Bool
+  let isFaved: Bool
+  let onLike: () -> Void
+  let onFav: () -> Void
+  let onReport: () -> Void
+  let onAnswer: () -> Void
+
   var body: some View {
     HStack(spacing: 12) {
       likeButton
@@ -20,7 +24,6 @@ struct ForumButtonSection: View {
       Spacer()
       answerButton
     }
-    .buttonStyle(AppForumButton())
   }
   
   private var likeButton: some View {
@@ -44,6 +47,7 @@ struct ForumButtonSection: View {
     Button {} label: {
       Image(systemName: "exclamationmark.triangle")
     }
+    .buttonStyle(AppForumButton())
   }
   
   private var answerButton: some View {
@@ -53,6 +57,7 @@ struct ForumButtonSection: View {
         Text("post.answerAction")
       }
     }
+    .buttonStyle(AppForumButton())
   }
 }
 
@@ -60,6 +65,10 @@ struct ForumButtonSection: View {
   ForumButtonSection(
     likeCount: 32,
     isLiked: true,
-    isFaved: false
+    isFaved: false,
+    onLike: { },
+    onFav:  { },
+    onReport: { },
+    onAnswer: { }
   ).padding()
 }

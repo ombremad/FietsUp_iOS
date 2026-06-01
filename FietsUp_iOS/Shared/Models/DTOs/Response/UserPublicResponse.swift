@@ -11,5 +11,8 @@ struct UserPublicResponse: Decodable {
   let id: UUID
   let nickname: String
   let streak: Int
+  let daysSinceSignup: Int
+  let totalElapsedDistance: Int
+  let bio: String?
   // TODO: add cycle info
 }

@@ -19,5 +19,5 @@ extension Font {
   static var caption: Font { .custom(bold, size: 14, relativeTo: .caption) }
   static var caption2: Font { .custom(regular, size: 13, relativeTo: .caption2) }
   static var data: Font { .custom(bold, size: 36, relativeTo: .largeTitle) }
-  static var data2: Font { .custom(bold, size: 26, relativeTo: .title) }
+  static var data2: Font { .custom(regular, size: 26, relativeTo: .title) }
 }

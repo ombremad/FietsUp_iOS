@@ -41,7 +41,7 @@ struct UserCardBig: View {
         
         HStack(spacing: 3) {
           Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
-          Text((Double(user.totalElapsedDistance) / 1000).formatted(.number.precision(.fractionLength(0...2))))
+          Text(metersToFormattedKilometers(user.totalElapsedDistance))
             .bold()
           Text("common.unit.km")
         }

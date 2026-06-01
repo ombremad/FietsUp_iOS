@@ -18,7 +18,13 @@ struct ForumPostView: View {
           ProgressView()
         } else {
           if let post = vm.post {
-            ForumPostComponent(post)
+            ForumPostComponent(
+              post: post,
+              onLike: {},
+              onFav: {},
+              onReport: {},
+              onAnswer: {}
+            )
           }
         }
       }

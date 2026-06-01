@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ForumPostComponent: View {
   let post: ForumPostResponse
-  init(_ post: ForumPostResponse) { self.post = post }
-  
+  let onLike: () -> Void
+  let onFav: () -> Void
+  let onReport: () -> Void
+  let onAnswer: () -> Void
+
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
       authorSection
@@ -18,7 +21,11 @@ struct ForumPostComponent: View {
       ForumButtonSection(
         likeCount: post.likeCount,
         isLiked: post.likedByUser,
-        isFaved: post.favedByUser
+        isFaved: post.favedByUser,
+        onLike: onLike,
+        onFav: onFav,
+        onReport: onReport,
+        onAnswer: onAnswer
       )
     }
     .font(.body)
@@ -45,7 +52,7 @@ struct ForumPostComponent: View {
 
 #Preview {
   ForumPostComponent(
-    ForumPostResponse(
+    post: ForumPostResponse(
       id: UUID(),
       title: "Qui pour aller se balader les dimanches à Toulouse ?",
       content: """
@@ -58,14 +65,21 @@ Alors ? On s’organise les Toulousain·es sur·es ??
       user: UserPublicResponse(
         id: UUID(),
         nickname: "Veliste_du_31",
-        streak: 3
+        streak: 3,
+        daysSinceSignup: 128,
+        totalElapsedDistance: 1_200_000,
+        bio: nil,
       ),
       creationDate: Date.now,
       likeCount: 18,
       likedByUser: true,
       favedByUser: false,
       comments: []
-    )
+    ),
+    onLike: {},
+    onFav: {},
+    onReport: {},
+    onAnswer: {}
   )
   .padding()
 }
