@@ -12,7 +12,7 @@ final class ForumPostViewModel {
   var isLoading: Bool = false
   var isLiking: Bool = false
   var isFaving: Bool = false
-  
+    
   var id: UUID?
   var post: ForumPostResponse?
   

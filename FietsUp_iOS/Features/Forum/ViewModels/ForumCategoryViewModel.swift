@@ -11,6 +11,8 @@ import Foundation
 final class ForumCategoryViewModel {
   var isLoading: Bool = false
   
+  var isNewPostSheetPresented: Bool = false
+  
   var id: UUID?
   var category: ForumCategoryDetailedResponse?
   

@@ -35,6 +35,14 @@ enum ValidationService {
       throw ValidationError.fieldMustBeASCII(.nickname)
     }
   }
+  
+  static func title(_ title: String) throws {
+    try validateLength(title, field: .title, min: 1, max: 100)
+  }
+  
+  static func content(_ content: String) throws {
+    try validateLength(content, field: .content, min: 1, max: 20000)
+  }
 
   static func password(_ password: String) throws {
     var failures: [ValidationError] = []
@@ -83,7 +91,7 @@ enum ValidationService {
       throw ValidationError.fieldMustBeReasonable(.distance)
     }
   }
-  
+    
   static func passwordConfirmation(password: String, confirmation: String) throws {
     guard password == confirmation else {
       throw ValidationError.fieldConfirmationMustBeIdentical(.password)
@@ -107,7 +115,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, length, distance
+    case password, email, firstName, lastName, nickname, title, content, length, distance
     
     var localized: String {
       switch self {
@@ -116,6 +124,8 @@ enum ValidationError: Error, LocalizedError {
         case .firstName: return String(localized: "validation.field.firstName")
         case .lastName: return String(localized: "validation.field.lastName")
         case .nickname: return String(localized: "validation.field.nickname")
+        case .title: return String(localized: "validation.field.title")
+        case .content: return String(localized: "validation.field.content")
         case .length: return String(localized: "validation.field.length")
         case .distance: return String(localized: "validation.field.distance")
       }

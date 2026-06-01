@@ -34,5 +34,11 @@ struct AppForumButton: ButtonStyle {
       .background(backgroundColor)
       .contentShape(Capsule())
       .clipShape(Capsule())
+      .shadow(color: isActive ? .black.opacity(0.25) : .clear,
+              radius: isActive ? 6 : 0,
+              y: 2)
+      .scaleEffect(isActive ? 1.04 : 1.0)
+      .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isActive)
+
   }
 }

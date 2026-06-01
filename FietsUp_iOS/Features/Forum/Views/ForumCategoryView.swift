@@ -37,6 +37,23 @@ struct ForumCategoryView: View {
     .navigationTitle(vm.category?.name ?? String(localized: "common.loading"))
     .toolbarTitleDisplayMode(.inline)
     
+    .sheet(isPresented: $vm.isNewPostSheetPresented) {
+      NavigationStack {
+        NewPostSheet(categoryId: id, categoryName: vm.category?.name ?? "")
+          .presentationDetents([.medium, .large])
+      }
+    }
+    
+    .toolbar {
+      ToolbarItem(placement: .confirmationAction) {
+        Button {
+          vm.isNewPostSheetPresented.toggle()
+        } label: {
+          Label("forum.action.newPost", systemImage: "plus")
+        }
+      }
+    }
+    
     .task {
       await vm.load(id: id)
     }

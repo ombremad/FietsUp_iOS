@@ -442,6 +442,9 @@
         }
       }
     },
+    "forum.action.newPost" : {
+
+    },
     "forum.answers **%lld**" : {
       "localizations" : {
         "en" : {
@@ -873,6 +876,18 @@
         }
       }
     },
+    "post.content" : {
+
+    },
+    "post.inCategory" : {
+
+    },
+    "post.newPost" : {
+
+    },
+    "post.title" : {
+
+    },
     "settings" : {
       "localizations" : {
         "en" : {
@@ -1081,6 +1096,9 @@
         }
       }
     },
+    "validation.field.content" : {
+
+    },
     "validation.field.distance" : {
       "localizations" : {
         "en" : {
@@ -1192,6 +1210,9 @@
           }
         }
       }
+    },
+    "validation.field.title" : {
+
     },
     "validation.rule.cannotBeZero" : {
       "localizations" : {

@@ -20,6 +20,7 @@ struct ForumView: View {
         
         if vm.isLoading  {
           ProgressView()
+            .frame(maxWidth: .infinity)
         } else {
           ForEach(vm.categories) { category in
             ForumCard(category)
