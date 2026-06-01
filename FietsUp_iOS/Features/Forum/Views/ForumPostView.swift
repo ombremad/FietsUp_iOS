@@ -20,10 +20,11 @@ struct ForumPostView: View {
           if let post = vm.post {
             ForumPostComponent(
               post: post,
-              onLike: {},
-              onFav: {},
+              onLike: { Task { await vm.like() } },
+              onFav: { Task { await vm.fav() } },
               onReport: {},
-              onAnswer: {}
+              onAnswer: {},
+              isLiking: vm.isLiking
             )
           }
         }

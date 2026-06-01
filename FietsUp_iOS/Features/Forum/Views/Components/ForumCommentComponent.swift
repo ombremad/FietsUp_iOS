@@ -13,6 +13,7 @@ struct ForumCommentComponent: View {
   let onFav: () -> Void
   let onReport: () -> Void
   let onAnswer: () -> Void
+  let isLiking: Bool
 
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
@@ -26,6 +27,7 @@ struct ForumCommentComponent: View {
         onFav: onFav,
         onReport: onReport,
         onAnswer: onAnswer,
+        isLiking: isLiking,
       )
     }
   }
@@ -64,7 +66,8 @@ struct ForumCommentComponent: View {
     onLike: {},
     onFav: {},
     onReport: {},
-    onAnswer: {}
+    onAnswer: {},
+    isLiking: false
   )
   .padding()
 }

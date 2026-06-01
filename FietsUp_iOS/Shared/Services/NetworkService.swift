@@ -115,7 +115,7 @@ final class NetworkService {
     try await request(endpoint: endpoint, method: .get, requiresAuth: requiresAuth)
   }
   
-  func post<T: Decodable>(endpoint: String, body: Encodable, requiresAuth: Bool = false) async throws -> T {
+  func post<T: Decodable>(endpoint: String, body: (any Encodable)? = nil, requiresAuth: Bool = false) async throws -> T {
     try await request(endpoint: endpoint, method: .post, body: body, requiresAuth: requiresAuth)
   }
   

@@ -15,6 +15,7 @@ struct ForumButtonSection: View {
   let onFav: () -> Void
   let onReport: () -> Void
   let onAnswer: () -> Void
+  let isLiking: Bool
 
   var body: some View {
     HStack(spacing: 12) {
@@ -27,31 +28,32 @@ struct ForumButtonSection: View {
   }
   
   private var likeButton: some View {
-    Button {} label: {
+    Button { onLike() } label: {
       HStack {
         Image(systemName: "hand.thumbsup")
         Text(likeCount.description)
       }
     }
     .buttonStyle(AppForumButton(isActive: isLiked))
+    .disabled(isLiking)
   }
   
   private var favButton: some View {
-    Button {} label: {
+    Button { onFav() } label: {
       Image(systemName: "star")
     }
     .buttonStyle(AppForumButton(isActive: isFaved))
   }
   
   private var reportButton: some View {
-    Button {} label: {
+    Button { onReport() } label: {
       Image(systemName: "exclamationmark.triangle")
     }
     .buttonStyle(AppForumButton())
   }
   
   private var answerButton: some View {
-    Button {} label: {
+    Button { onAnswer() } label: {
       HStack {
         Image(systemName: "arrowshape.turn.up.backward")
         Text("post.answerAction")
@@ -69,6 +71,7 @@ struct ForumButtonSection: View {
     onLike: { },
     onFav:  { },
     onReport: { },
-    onAnswer: { }
+    onAnswer: { },
+    isLiking: false
   ).padding()
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ForumCategoryView: View {
   @State private var vm = ForumCategoryViewModel()
+  private let router = AppRouter.shared
+
   let id: UUID
   
   var body: some View {
@@ -20,6 +22,9 @@ struct ForumCategoryView: View {
           if let category = vm.category {
             ForEach(category.posts) { post in
               ForumCard(post)
+                .onTapGesture {
+                  router.push(ForumDestination.post(id: post.id))
+                }
             }
           }
         }

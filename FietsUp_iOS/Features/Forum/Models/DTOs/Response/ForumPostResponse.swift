@@ -17,5 +17,4 @@ struct ForumPostResponse: Decodable {
   let likedByUser: Bool
   let favedByUser: Bool
   let comments: [ForumCommentResponse]
-
 }

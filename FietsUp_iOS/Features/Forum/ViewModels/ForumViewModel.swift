@@ -9,6 +9,7 @@ import Foundation
 
 enum ForumDestination: Hashable {
   case category(id: UUID)
+  case post(id: UUID)
 }
 
 @Observable

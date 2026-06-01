@@ -42,6 +42,7 @@ struct ForumView: View {
     .navigationDestination(for: ForumDestination.self) { destination in
       switch destination {
         case .category(let id): ForumCategoryView(id: id)
+        case .post(let id): ForumPostView(id: id)
       }
     }
     

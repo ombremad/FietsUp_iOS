@@ -13,6 +13,7 @@ struct ForumPostComponent: View {
   let onFav: () -> Void
   let onReport: () -> Void
   let onAnswer: () -> Void
+  let isLiking: Bool
 
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
@@ -25,7 +26,8 @@ struct ForumPostComponent: View {
         onLike: onLike,
         onFav: onFav,
         onReport: onReport,
-        onAnswer: onAnswer
+        onAnswer: onAnswer,
+        isLiking: isLiking,
       )
     }
     .font(.body)
@@ -79,7 +81,8 @@ Alors ? On s’organise les Toulousain·es sur·es ??
     onLike: {},
     onFav: {},
     onReport: {},
-    onAnswer: {}
+    onAnswer: {},
+    isLiking: false
   )
   .padding()
 }
