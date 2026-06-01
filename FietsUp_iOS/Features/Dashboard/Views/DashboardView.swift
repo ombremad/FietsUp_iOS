@@ -54,8 +54,8 @@ struct DashboardView: View {
       }
     }
     
-    .sheet(isPresented: $vm.isNewActivitySheetPresented) {
-      NavigationStack { NewActivitySheet().errorOverlay() }
+    .appSheet(isPresented: $vm.isNewActivitySheetPresented) {
+      NavigationStack { NewActivitySheet() }
         .presentationDetents([.medium])
     }
       

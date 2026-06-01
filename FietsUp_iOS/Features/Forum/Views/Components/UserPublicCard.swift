@@ -45,7 +45,7 @@ struct UserPublicCard: View {
       isUserSheetPresented.toggle()
     }
     
-    .sheet(isPresented: $isUserSheetPresented) {
+    .appSheet(isPresented: $isUserSheetPresented) {
       UserPublicSheet(user)
     }
   }

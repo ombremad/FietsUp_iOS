@@ -75,6 +75,7 @@ final class ForumPostViewModel {
     do {
       try await performFav()
     } catch {
+      post = current
       ErrorService.shared.show(error)
     }
   }

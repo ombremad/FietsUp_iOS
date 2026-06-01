@@ -127,7 +127,6 @@ struct LoginView: View {
       focusedField = .email
       await router.reset()
     }
-    .errorOverlay()
   }
   
   private func submit() {

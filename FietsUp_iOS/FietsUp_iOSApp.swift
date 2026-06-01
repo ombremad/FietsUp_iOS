@@ -22,6 +22,9 @@ struct FietsUp_iOSApp: App {
                 .transition(.opacity)
             }
           }
+          .overlay(alignment: .bottom) {
+            ErrorOverlay()
+          }
           .animation(.default, value: authService.isAuthenticated)
           .font(.body)
         }

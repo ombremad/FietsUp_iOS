@@ -37,7 +37,7 @@ struct ForumCategoryView: View {
     .navigationTitle(vm.category?.name ?? String(localized: "common.loading"))
     .toolbarTitleDisplayMode(.inline)
     
-    .sheet(isPresented: $vm.isNewPostSheetPresented) {
+    .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack {
         NewPostSheet(categoryId: id, categoryName: vm.category?.name ?? "")
           .presentationDetents([.medium, .large])

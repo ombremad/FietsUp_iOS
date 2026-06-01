@@ -48,17 +48,9 @@ struct ErrorOverlay: View {
   }
 }
 
-extension View {
-  func errorOverlay() -> some View {
-    frame(maxWidth: .infinity, maxHeight: .infinity)
-      .overlay(alignment: .bottom) { ErrorOverlay() }
-  }
-}
-
 #Preview {
   ZStack {
     Color.gray.ignoresSafeArea()
-      .errorOverlay()
       .task {
         ErrorService.shared.show(NSError(
           domain: "PreviewError",

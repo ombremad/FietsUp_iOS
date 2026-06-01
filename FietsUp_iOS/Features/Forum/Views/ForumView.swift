@@ -14,13 +14,15 @@ struct ForumView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 24) {
-        Text("forum.categories")
-          .font(.title2)
-          .foregroundStyle(Color.Text.secondary)
+        HStack {
+          Text("forum.categories")
+            .font(.title2)
+            .foregroundStyle(Color.Text.secondary)
+          Spacer()
+        }
         
         if vm.isLoading  {
           ProgressView()
-            .frame(maxWidth: .infinity)
         } else {
           ForEach(vm.categories) { category in
             ForumCard(category)

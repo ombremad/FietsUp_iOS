@@ -38,6 +38,5 @@ enum AppTab: Int, Hashable, CaseIterable {
         case .forum:     ForumView()
       }
     }
-    .errorOverlay()
   }
 }

@@ -43,6 +43,8 @@ struct UserCardBig: View {
           Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
           Text(metersToFormattedKilometers(user.totalElapsedDistance))
             .bold()
+            .contentTransition(.numericText())
+            .animation(.interactiveSpring(), value: user.totalElapsedDistance)
           Text("common.unit.km")
         }
         Spacer()

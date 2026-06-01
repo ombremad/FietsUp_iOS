@@ -25,6 +25,7 @@ final class NetworkService {
     var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.timeoutInterval = 6
     
     if requiresAuth {
       if let token = try KeychainService.shared.getToken() {
@@ -76,7 +77,14 @@ final class NetworkService {
       requiresAuth: requiresAuth
     )
     
-    let (data, response) = try await URLSession.shared.data(for: urlRequest)
+    let (data, response): (Data, URLResponse)
+    
+    do {
+      (data, response) = try await URLSession.shared.data(for: urlRequest)
+    } catch let error as URLError where error.code == .timedOut {
+      throw NetworkError.timeout
+    }
+    
     _ = try validateResponse(response)
     
     guard !data.isEmpty else { throw NetworkError.noData }
@@ -154,6 +162,7 @@ enum NetworkError: Error, LocalizedError {
   case serverError(statusCode: Int)
   case decodingError
   case noData
+  case timeout
   
   var errorDescription: String? {
     switch self {
@@ -179,6 +188,8 @@ enum NetworkError: Error, LocalizedError {
         return String(localized: "network.error.decodingError")
       case .noData:
         return String(localized: "network.error.noData")
+      case .timeout:
+        return String(localized: "network.error.timeout")
     }
   }
 }
