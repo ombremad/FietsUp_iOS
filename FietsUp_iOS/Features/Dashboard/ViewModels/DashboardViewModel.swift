@@ -7,15 +7,12 @@
 
 import SwiftUI
 
-enum DashboardDestination: Hashable {
-  case settings, activities
-}
-
 @Observable
 final class DashboardViewModel {
   var isLoading: Bool = false
-  
+
   var isNewActivitySheetPresented: Bool = false
+  var isStreakSheetPresented: Bool = false
   
   func load() async {
     isLoading = true

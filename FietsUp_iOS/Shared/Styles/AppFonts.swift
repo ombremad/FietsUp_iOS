@@ -20,4 +20,5 @@ extension Font {
   static var caption2: Font { .custom(regular, size: 13, relativeTo: .caption2) }
   static var data: Font { .custom(bold, size: 36, relativeTo: .largeTitle) }
   static var data2: Font { .custom(regular, size: 26, relativeTo: .title) }
+  static var bigStreak: Font { .custom(bold, size: 64, relativeTo: .largeTitle) }
 }

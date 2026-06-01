@@ -13,4 +13,5 @@ struct ActivityResponse: Decodable, Identifiable {
   let endDate: Date
   let length: Int
   let distance: Int
+  let streakUpdated: Bool?
 }

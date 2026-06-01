@@ -24,7 +24,8 @@ struct ForumPostView: View {
               onFav: { Task { await vm.fav() } },
               onReport: {},
               onAnswer: {},
-              isLiking: vm.isLiking
+              isLiking: vm.isLiking,
+              isFaving: vm.isFaving,
             )
           }
         }
@@ -45,6 +46,6 @@ struct ForumPostView: View {
 
 #Preview {
   NavigationStack {
-    ForumPostView(id: UUID(uuidString: "41F4ED05-39FA-43C0-9ABE-473C086105F0") ?? UUID())
+    ForumPostView(id: UUID())
   }
 }

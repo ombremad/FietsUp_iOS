@@ -16,6 +16,7 @@ struct ForumButtonSection: View {
   let onReport: () -> Void
   let onAnswer: () -> Void
   let isLiking: Bool
+  let isFaving: Bool
 
   var body: some View {
     HStack(spacing: 12) {
@@ -43,6 +44,7 @@ struct ForumButtonSection: View {
       Image(systemName: "star")
     }
     .buttonStyle(AppForumButton(isActive: isFaved))
+    .disabled(isFaving)
   }
   
   private var reportButton: some View {
@@ -72,6 +74,7 @@ struct ForumButtonSection: View {
     onFav:  { },
     onReport: { },
     onAnswer: { },
-    isLiking: false
+    isLiking: false,
+    isFaving: false
   ).padding()
 }

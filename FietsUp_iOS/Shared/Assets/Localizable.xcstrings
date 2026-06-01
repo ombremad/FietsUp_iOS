@@ -212,6 +212,22 @@
         }
       }
     },
+    "common.ok" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
     "common.unit.days" : {
       "localizations" : {
         "en" : {
@@ -443,7 +459,20 @@
       }
     },
     "forum.action.newPost" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau post"
+          }
+        }
+      }
     },
     "forum.answers **%lld**" : {
       "localizations" : {
@@ -842,7 +871,20 @@
       }
     },
     "network.error.timeout" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeout when trying to reach the server."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps écoulé lors de la tentative de joindre le serveur."
+          }
+        }
+      }
     },
     "network.error.unauthorized" : {
       "localizations" : {
@@ -880,16 +922,68 @@
       }
     },
     "post.content" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenu"
+          }
+        }
+      }
     },
     "post.inCategory" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans la catégorie"
+          }
+        }
+      }
     },
     "post.newPost" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau post"
+          }
+        }
+      }
     },
     "post.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titre"
+          }
+        }
+      }
     },
     "settings" : {
       "localizations" : {
@@ -951,6 +1045,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mon compte"
+          }
+        }
+      }
+    },
+    "streakSheet.streakImproved.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your gift for staying active. Keep going!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta récompense pour être restée actif·ve. Continue comme ça !"
+          }
+        }
+      }
+    },
+    "streakSheet.streakImproved.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak improved!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak amélioré !"
           }
         }
       }
@@ -1100,7 +1226,20 @@
       }
     },
     "validation.field.content" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le contenu"
+          }
+        }
+      }
     },
     "validation.field.distance" : {
       "localizations" : {
@@ -1215,7 +1354,20 @@
       }
     },
     "validation.field.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le titre"
+          }
+        }
+      }
     },
     "validation.rule.cannotBeZero" : {
       "localizations" : {

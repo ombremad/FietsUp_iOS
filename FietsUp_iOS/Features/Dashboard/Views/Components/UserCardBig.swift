@@ -60,6 +60,8 @@ struct UserCardBig: View {
           Image(systemName: "bolt.fill")
           Text(user.streak.description)
             .bold()
+            .contentTransition(.numericText())
+            .animation(.interactiveSpring(), value: user.streak)
         }
         .padding(.horizontal, 6)
         .foregroundStyle(Color.Text.Contrasted.primary)

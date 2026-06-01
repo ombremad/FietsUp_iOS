@@ -41,7 +41,8 @@ struct ActivityRow: View {
         startDate: Date(timeIntervalSinceNow: -12000),
         endDate: Date.now,
         length: 12000,
-        distance: 14829
+        distance: 14829,
+        streakUpdated: false
       )
     )
   }

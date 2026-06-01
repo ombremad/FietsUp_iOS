@@ -39,13 +39,14 @@ final class NewActivityViewModel {
         body: body,
         requiresAuth: true
       )
-      try updateLocalUserElapsedDistance(distance: response.distance)
+      try updateLocalUser(distance: response.distance, streakUpdated: response.streakUpdated)
     } catch {
       ErrorService.shared.show(error)
     }
   }
   
-  private func updateLocalUserElapsedDistance(distance: Int) throws {
+  private func updateLocalUser(distance: Int, streakUpdated: Bool? = nil) throws {
     auth.currentUser?.totalElapsedDistance += distance
+    if streakUpdated == true { auth.currentUser?.streak += 1 }
   }
 }

@@ -13,6 +13,11 @@ struct AppButton: ButtonStyle {
     case primary, neutral, destructive
   }
   
+  var width: ButtonWidth = .standard
+  enum ButtonWidth {
+    case standard, full
+  }
+  
   private var backgroundColor: Color {
     switch role {
       case .primary: Color.Button.primary
@@ -30,13 +35,23 @@ struct AppButton: ButtonStyle {
   }
 
   func makeBody(configuration: Configuration) -> some View {
-    configuration.label
+    Group {
+      if width == .full {
+        HStack {
+          Spacer()
+          configuration.label
+          Spacer()
+        }
+      } else {
+        configuration.label
+      }
+    }
       .multilineTextAlignment(.center)
       .lineLimit(1)
       .font(.caption)
       .foregroundStyle(foregroundColor)
-      .padding(.horizontal, 16)
-      .padding(.vertical, 12)
+      .padding(.horizontal, width == .full ? 0 : 16)
+      .padding(.vertical, width == .full ? 18 : 12)
       .background(backgroundColor)
       .contentShape(Capsule())
       .clipShape(Capsule())
@@ -54,6 +69,9 @@ struct AppButton: ButtonStyle {
         .buttonStyle(AppButton(role: .neutral))
       Button("Test"){}
         .buttonStyle(AppButton(role: .destructive))
+      Button("Test"){}
+        .buttonStyle(AppButton(width: .full))
     }
+    .padding()
   }
 }

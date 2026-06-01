@@ -6,13 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		43A221AA2FCDBB20005255C6 /* AGENTS.md in Sources */ = {isa = PBXBuildFile; fileRef = 43A221A92FCDBB1D005255C6 /* AGENTS.md */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		436E86C72FA8915B0001E186 /* FietsUp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FietsUp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		43A221A92FCDBB1D005255C6 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGENTS.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -67,7 +62,6 @@
 		436E86BE2FA8915B0001E186 = {
 			isa = PBXGroup;
 			children = (
-				43A221A92FCDBB1D005255C6 /* AGENTS.md */,
 				436E86C92FA8915B0001E186 /* FietsUp_iOS */,
 				436E86C82FA8915B0001E186 /* Products */,
 				436E87D42FA89B2E0001E186 /* Config */,
@@ -158,7 +152,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43A221AA2FCDBB20005255C6 /* AGENTS.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

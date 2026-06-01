@@ -58,6 +58,9 @@ struct DashboardView: View {
       NavigationStack { NewActivitySheet() }
         .presentationDetents([.medium])
     }
+    .appSheet(isPresented: $vm.isStreakSheetPresented) {
+      StreakUpdateSheet(auth.currentUser?.streak ?? 0)
+    }
       
     .toolbar {
       ToolbarItem(placement: .primaryAction) {
@@ -71,6 +74,10 @@ struct DashboardView: View {
     
     .task {
       await auth.restoreSession()
+    }
+    .onChange(of: auth.currentUser?.streak) { oldValue, newValue in
+      guard let old = oldValue, let new = newValue else { return }
+      vm.isStreakSheetPresented.toggle()
     }
   }
 }

@@ -16,21 +16,22 @@ struct NewPostSheet: View {
 
   var body: some View {
     Form {
-      Section {
+      AppFormSection {
         VStack(alignment: .leading) {
           Text("post.inCategory")
             .font(.caption2)
           Text(categoryName)
         }
+        .listRowBackground(Color.clear)
       }
-      .listRowBackground(Color.clear)
-
+      
       AppFormSection {
         TextField("post.title", text: $vm.newPostForm.title)
         TextField("post.content", text: $vm.newPostForm.content, axis: .vertical)
-          .lineLimit(10)
+          .lineLimit(12)
       }
     }
+    .listSectionSpacing(4)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("post.newPost")
@@ -53,7 +54,6 @@ struct NewPostSheet: View {
         Button("common.cancel", systemImage: "xmark", role: .cancel) { dismiss() }
       }
     }
-
     
     .task {
       vm.load(categoryId: categoryId)
