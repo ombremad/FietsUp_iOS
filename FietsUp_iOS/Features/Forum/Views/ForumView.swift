@@ -25,7 +25,7 @@ struct ForumView: View {
           ProgressView()
         } else {
           ForEach(vm.categories) { category in
-            ForumCard(category)
+            ContentCard(category)
               .onTapGesture {
                 router.push(ForumDestination.category(id: category.id))
               }

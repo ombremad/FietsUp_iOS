@@ -5,7 +5,7 @@
 //  Created by Anne Ferret on 01/06/2026.
 //
 
-import SwiftUI
+import Foundation
 
 struct ForumPostRequest: Encodable {
   let title: String

@@ -12,7 +12,8 @@ final class ForumPostViewModel {
   var isLoading: Bool = false
   var isLiking: Bool = false
   var isFaving: Bool = false
-    
+  var isNewCommentSheetPresented: Bool = false
+  
   var id: UUID?
   var post: ForumPostResponse?
   
@@ -55,8 +56,8 @@ final class ForumPostViewModel {
   }
   
   func fav() async {
-    isLiking = true
-    defer { isLiking = false }
+    isFaving = true
+    defer { isFaving = false }
     
     guard let current = post else { return }
     
@@ -78,6 +79,10 @@ final class ForumPostViewModel {
       post = current
       ErrorService.shared.show(error)
     }
+  }
+  
+  func toggleAnswer() {
+    self.isNewCommentSheetPresented.toggle()
   }
   
   private func performFetchPost() async throws {

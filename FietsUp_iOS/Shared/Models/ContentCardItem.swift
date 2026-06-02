@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ForumCardItem {
+protocol ContentCardItem {
   var title: String { get }
   var content: String { get }
   var lastActivityDate: Date? { get }
@@ -15,14 +15,14 @@ protocol ForumCardItem {
   var author: UserShortResponse? { get }
 }
 
-extension ForumCategoryResponse: ForumCardItem {
+extension ForumCategoryResponse: ContentCardItem {
   var title: String { name }
   var content: String { details }
   var totalReplies: Int { totalPosts }
   var author: UserShortResponse? { nil }
 }
 
-extension ForumPostShortResponse: ForumCardItem {
+extension ForumPostShortResponse: ContentCardItem {
   var totalReplies: Int { totalComments }
   var author: UserShortResponse? { user }
 }

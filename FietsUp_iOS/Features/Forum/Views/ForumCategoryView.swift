@@ -21,7 +21,7 @@ struct ForumCategoryView: View {
         } else {
           if let category = vm.category {
             ForEach(category.posts) { post in
-              ForumCard(post)
+              ContentCard(post)
                 .onTapGesture {
                   router.push(ForumDestination.post(id: post.id))
                 }

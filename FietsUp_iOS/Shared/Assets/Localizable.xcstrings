@@ -164,6 +164,15 @@
         }
       }
     },
+    "comment.content" : {
+
+    },
+    "comment.inThread" : {
+
+    },
+    "comment.newComment" : {
+
+    },
     "common.cancel" : {
       "localizations" : {
         "en" : {

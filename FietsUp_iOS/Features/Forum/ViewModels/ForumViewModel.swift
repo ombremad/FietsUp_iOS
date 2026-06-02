@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum ForumDestination: Hashable {
-  case category(id: UUID)
-  case post(id: UUID)
-}
-
 @Observable
 final class ForumViewModel {
   var isLoading: Bool = false

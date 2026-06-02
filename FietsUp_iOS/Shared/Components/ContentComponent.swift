@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ForumPostComponent: View {
-  let post: ForumPostResponse
+struct ContentComponent: View {
+  let content: ForumPostResponse
   let onLike: () -> Void
   let onFav: () -> Void
   let onReport: () -> Void
@@ -21,9 +21,9 @@ struct ForumPostComponent: View {
       authorSection
       postSection
       ForumButtonSection(
-        likeCount: post.likeCount,
-        isLiked: post.likedByUser,
-        isFaved: post.favedByUser,
+        likeCount: content.likeCount,
+        isLiked: content.likedByUser,
+        isFaved: content.favedByUser,
         onLike: onLike,
         onFav: onFav,
         onReport: onReport,
@@ -38,25 +38,25 @@ struct ForumPostComponent: View {
   
   private var authorSection: some View {
     UserPublicCard(
-      user: post.user,
-      date: post.creationDate,
+      user: content.user,
+      date: content.creationDate,
       size: .big
     )
   }
   
   private var postSection: some View {
     VStack(alignment: .leading, spacing: 24) {
-      Text(post.title)
+      Text(content.title)
         .font(.title2)
         .multilineTextAlignment(.leading)
-      Text(post.content)
+      Text(content.content)
     }
   }  
 }
 
 #Preview {
-  ForumPostComponent(
-    post: ForumPostResponse(
+  ContentComponent(
+    content: ForumPostResponse(
       id: UUID(),
       title: "Qui pour aller se balader les dimanches à Toulouse ?",
       content: """

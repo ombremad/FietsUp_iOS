@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ForumCard: View {
-  let item: ForumCardItem
-  init(_ item: ForumCardItem) { self.item = item }
+struct ContentCard: View {
+  let item: ContentCardItem
+  init(_ item: ContentCardItem) { self.item = item }
   
   var body: some View {
     VStack(spacing: 12) {
@@ -86,10 +86,10 @@ struct ForumCard: View {
       HStack(spacing: 4) {
         Image(systemName: "bubble.right")
         if item is ForumPostShortResponse {
-          Text(AttributedString(localized: "forum.discussionsActive **\(item.totalReplies)**"))
+          Text(AttributedString(localized: "forum.answers **\(item.totalReplies)**"))
         }
         if item is ForumCategoryResponse {
-          Text(AttributedString(localized: "forum.answers **\(item.totalReplies)**"))
+          Text(AttributedString(localized: "forum.discussionsActive **\(item.totalReplies)**"))
         }
       }
     }
@@ -101,7 +101,7 @@ struct ForumCard: View {
 
 #Preview {
   VStack(spacing: 12) {
-    ForumCard(
+    ContentCard(
       ForumPostShortResponse(
         id: UUID(),
         user: UserShortResponse(
@@ -110,13 +110,12 @@ struct ForumCard: View {
           streak: 6
         ),
         title: "Vélo cargo : oui ou non ?",
-        // content: "Faut-il craquer ?",
         content: "Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci",
         totalComments: 3,
         lastActivityDate: Date(timeIntervalSinceNow: -10000),
       )
     )
-    ForumCard(
+    ContentCard(
       ForumCategoryResponse(
         id: UUID(),
         name: "Catégorie",

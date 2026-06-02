@@ -10,7 +10,6 @@ import Foundation
 @Observable
 final class ForumCategoryViewModel {
   var isLoading: Bool = false
-  
   var isNewPostSheetPresented: Bool = false
   
   var id: UUID?

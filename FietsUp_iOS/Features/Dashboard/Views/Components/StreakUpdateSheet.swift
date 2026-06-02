@@ -29,7 +29,7 @@ struct StreakUpdateSheet: View {
           Text(streak.description)
             .font(.bigStreak)
             .contentTransition(.numericText())
-            .animation(.spring.delay(0.3), value: streak)
+            .animation(.spring.delay(0.5), value: streak)
         }
         
         VStack(spacing: 8) {
