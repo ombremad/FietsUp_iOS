@@ -269,6 +269,9 @@
         }
       }
     },
+    "danger.signaledAgo **%@**" : {
+
+    },
     "DangersView" : {
       "shouldTranslate" : false
     },
@@ -910,6 +913,12 @@
           }
         }
       }
+    },
+    "place.awayMeters **%lld**" : {
+
+    },
+    "place.lastUpdate **%@**" : {
+
     },
     "PlacesView" : {
       "shouldTranslate" : false

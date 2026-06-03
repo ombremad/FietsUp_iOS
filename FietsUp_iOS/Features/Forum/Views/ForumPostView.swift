@@ -19,26 +19,21 @@ struct ForumPostView: View {
         } else {
           if let post = vm.post {
             ContentComponent(
-              content: post,
-              onLike: { Task { await vm.like() } },
-              onFav: { Task { await vm.fav() } },
-              onReport: {},
-              onAnswer: vm.toggleAnswer,
-              isLiking: vm.isLiking,
-              isFaving: vm.isFaving,
+              size: .big,
+              title: post.title,
+              content: post.content,
+              date: post.creationDate,
+              user: post.user
             )
             ForEach(post.comments) { comment in
               Rectangle()
                 .foregroundStyle(Color.Surface.divider)
                 .frame(height: 1)
-              ForumCommentComponent(
-                comment: comment,
-                onLike: {},
-                onFav: {},
-                onReport: {},
-                onAnswer: vm.toggleAnswer,
-                isLiking: vm.isLiking,
-                isFaving: vm.isFaving
+              ContentComponent(
+                size: .small,
+                content: comment.content,
+                date: comment.creationDate,
+                user: comment.user
               )
             }
           }

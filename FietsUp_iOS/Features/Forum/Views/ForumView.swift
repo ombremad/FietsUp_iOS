@@ -25,7 +25,13 @@ struct ForumView: View {
           ProgressView()
         } else {
           ForEach(vm.categories) { category in
-            ContentCard(category)
+            ContentCard(
+              contentType: .forumCategory,
+              title: category.name,
+              content: category.details,
+              footerData: category.totalPosts,
+              date: category.lastActivityDate
+            )
               .onTapGesture {
                 router.push(ForumDestination.category(id: category.id))
               }

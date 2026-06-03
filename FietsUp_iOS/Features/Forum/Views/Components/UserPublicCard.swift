@@ -10,8 +10,7 @@ import SwiftUI
 struct UserPublicCard: View {
   let user: UserPublicResponse
   let date: Date
-  let size: UserPublicCardSize
-  enum UserPublicCardSize { case big, small }
+  let size: ComponentSize
   
   @State var isUserSheetPresented: Bool = false
   

@@ -8,29 +8,24 @@
 import SwiftUI
 
 struct ContentComponent: View {
-  let content: ForumPostResponse
-  let onLike: () -> Void
-  let onFav: () -> Void
-  let onReport: () -> Void
-  let onAnswer: () -> Void
-  let isLiking: Bool
-  let isFaving: Bool
+  let size: ComponentSize
+  let title: String?
+  let content: String
+  let date: Date
+  let user: UserPublicResponse
+  
+  init(size: ComponentSize, title: String? = nil, content: String, date: Date, user: UserPublicResponse) {
+    self.title = title
+    self.content = content
+    self.date = date
+    self.size = size
+    self.user = user
+  }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
       authorSection
-      postSection
-      ForumButtonSection(
-        likeCount: content.likeCount,
-        isLiked: content.likedByUser,
-        isFaved: content.favedByUser,
-        onLike: onLike,
-        onFav: onFav,
-        onReport: onReport,
-        onAnswer: onAnswer,
-        isLiking: isLiking,
-        isFaving: isFaving,
-      )
+      contentSection
     }
     .font(.body)
     .foregroundStyle(Color.Text.primary)
@@ -38,54 +33,44 @@ struct ContentComponent: View {
   
   private var authorSection: some View {
     UserPublicCard(
-      user: content.user,
-      date: content.creationDate,
-      size: .big
+      user: user,
+      date: date,
+      size: size
     )
   }
   
-  private var postSection: some View {
+  private var contentSection: some View {
     VStack(alignment: .leading, spacing: 24) {
-      Text(content.title)
-        .font(.title2)
-        .multilineTextAlignment(.leading)
-      Text(content.content)
+      if let title {
+        Text(title)
+          .font(.title2)
+          .multilineTextAlignment(.leading)
+      }
+      Text(content)
     }
   }  
 }
 
 #Preview {
   ContentComponent(
-    content: ForumPostResponse(
-      id: UUID(),
-      title: "Qui pour aller se balader les dimanches à Toulouse ?",
-      content: """
+    size: .big,
+    title: "Qui pour aller se balader les dimanches à Toulouse ?",
+    content: """
 Coucou tout le monde ! Je débute en ville, et j’aimerais trouver des partenaires de vélo avec qui aller faire des promenades faciles les prochaines semaines, au moins le temps de m’habituer.
 
 Évidemment, le but sera d’apprendre, chacun·e à son rythme ! Et pourquoi pas d’accueillir encore plus de débutants quand je me sentirai un peu plus à l’aise moi-même ;-) 
 
 Alors ? On s’organise les Toulousain·es sur·es ??
 """,
-      user: UserPublicResponse(
-        id: UUID(),
-        nickname: "Veliste_du_31",
-        streak: 3,
-        daysSinceSignup: 128,
-        totalElapsedDistance: 1_200_000,
-        bio: nil,
-      ),
-      creationDate: Date.now,
-      likeCount: 18,
-      likedByUser: true,
-      favedByUser: false,
-      comments: []
+    date: Date.now,
+    user: UserPublicResponse(
+      id: UUID(),
+      nickname: "Veliste_du_31",
+      streak: 3,
+      daysSinceSignup: 128,
+      totalElapsedDistance: 1_200_000,
+      bio: nil,
     ),
-    onLike: {},
-    onFav: {},
-    onReport: {},
-    onAnswer: {},
-    isLiking: false,
-    isFaving: false,
   )
   .padding()
 }

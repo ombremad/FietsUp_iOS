@@ -21,7 +21,15 @@ struct ForumCategoryView: View {
         } else {
           if let category = vm.category {
             ForEach(category.posts) { post in
-              ContentCard(post)
+              ContentCard(
+                contentType: .forumPost,
+                flairIcon: "person.fill",
+                flairText: post.user.nickname,
+                title: post.title,
+                content: post.content,
+                footerData: post.totalComments,
+                date: post.lastActivityDate,
+              )
                 .onTapGesture {
                   router.push(ForumDestination.post(id: post.id))
                 }

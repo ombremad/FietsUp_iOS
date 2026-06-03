@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct ContentCard: View {
-  let item: ContentCardItem
-  init(_ item: ContentCardItem) { self.item = item }
+  let contentType: ContentType
+  enum ContentType {
+    case forumPost, forumCategory, place, dangerPost
+  }
+  
+  let flairIcon: String?
+  let flairText: String?
+  let title: String?
+  let content: String
+  let footerData: Int
+  let date: Date?
+  
+  init(contentType: ContentType, flairIcon: String? = nil, flairText: String? = nil, title: String? = nil, content: String, footerData: Int, date: Date? = nil) {
+    self.contentType = contentType
+    self.flairIcon = flairIcon
+    self.flairText = flairText
+    self.title = title
+    self.content = content
+    self.footerData = footerData
+    self.date = date
+  }
   
   var body: some View {
     VStack(spacing: 12) {
@@ -29,7 +48,7 @@ struct ContentCard: View {
   private var topSection: some View {
     HStack(spacing: 12) {
       VStack(alignment: .leading, spacing: 12) {
-        authorRow
+        flairRow
         titleAndContent
       }
       
@@ -41,11 +60,11 @@ struct ContentCard: View {
   }
   
   @ViewBuilder
-  private var authorRow: some View {
-    if let user = item.author {
+  private var flairRow: some View {
+    if let flairIcon, let flairText {
       HStack(spacing: 4) {
-        Image(systemName: "person")
-        Text(user.nickname)
+        Image(systemName: flairIcon)
+        Text(flairText)
       }
       .font(.caption2)
       .foregroundStyle(Color.Text.secondary)
@@ -55,14 +74,16 @@ struct ContentCard: View {
   
   private var titleAndContent: some View {
     VStack(alignment: .leading, spacing: 6) {
-      Text(item.title)
-        .font(.title3)
-        .lineLimit(2)
+      if let title {
+        Text(title)
+          .font(.title3)
+          .lineLimit(2)
+      }
       
-      Text(item.content)
+      Text(content)
         .foregroundStyle(Color.Text.secondary)
         .multilineTextAlignment(.leading)
-        .lineLimit(item is ForumCategoryResponse ? 2 : 3)
+        .lineLimit(3)
     }
   }
   
@@ -74,22 +95,33 @@ struct ContentCard: View {
   
   private var footer: some View {
     HStack {
-      if let lastActivityDate = item.lastActivityDate {
+      if let date {
         HStack(spacing: 4) {
           Image(systemName: "calendar")
-          Text(AttributedString(localized: "forum.lastActive **\(formattedElapsedTime(lastActivityDate))**"))
+          switch contentType {
+            case .forumPost, .forumCategory:
+              Text(AttributedString(localized: "forum.lastActive **\(formattedElapsedTime(date))**"))
+            case .place:
+              Text(AttributedString(localized: "place.lastUpdate **\(formattedElapsedTime(date))**"))
+            case .dangerPost:
+              Text(AttributedString(localized: "danger.signaledAgo **\(formattedElapsedTime(date))**"))
           }
+        }
       }
       
       Spacer()
       
       HStack(spacing: 4) {
-        Image(systemName: "bubble.right")
-        if item is ForumPostShortResponse {
-          Text(AttributedString(localized: "forum.answers **\(item.totalReplies)**"))
-        }
-        if item is ForumCategoryResponse {
-          Text(AttributedString(localized: "forum.discussionsActive **\(item.totalReplies)**"))
+        switch contentType {
+          case .forumPost:
+            Image(systemName: "bubble.right")
+            Text(AttributedString(localized: "forum.answers **\(footerData)**"))
+          case .forumCategory:
+            Image(systemName: "bubble.right")
+            Text(AttributedString(localized: "forum.discussionsActive **\(footerData)**"))
+          case .place, .dangerPost:
+            Image(systemName: "signpost.right")
+            Text(AttributedString(localized: "place.awayMeters **\(footerData)**"))
         }
       }
     }
@@ -100,30 +132,51 @@ struct ContentCard: View {
 }
 
 #Preview {
-  VStack(spacing: 12) {
-    ContentCard(
-      ForumPostShortResponse(
-        id: UUID(),
-        user: UserShortResponse(
-          id: UUID(),
-          nickname: "jean_pierre",
-          streak: 6
-        ),
+  ScrollView {
+    VStack(spacing: 16) {
+      ContentCard(
+        contentType: .forumCategory,
+        title: "Le coin des débutant·es",
+        content: """
+Présentation, premiers trajets, appréhensions, bonnes habitudes, conseils...
+""",
+        footerData: 6,
+        date: Date(timeIntervalSinceNow: -10000)
+      )
+      ContentCard(
+        contentType: .forumPost,
+        flairIcon: "person.fill",
+        flairText: "Veliste_du_31",
         title: "Vélo cargo : oui ou non ?",
-        content: "Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci",
-        totalComments: 3,
-        lastActivityDate: Date(timeIntervalSinceNow: -10000),
+        content: """
+Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci
+""",
+        footerData: 3,
+        date: Date(timeIntervalSinceNow: -10000)
       )
-    )
-    ContentCard(
-      ForumCategoryResponse(
-        id: UUID(),
-        name: "Catégorie",
-        details: "Le coin de machin truc",
-        totalPosts: 2,
-        lastActivityDate: Date(timeIntervalSinceNow: -10000),
+      ContentCard(
+        contentType: .place,
+        flairIcon: "screwdriver",
+        flairText: "Point self-service",
+        title: "Borne de gonflage",
+        content: "En plein air, accessible 24h/24",
+        footerData: 300,
+        date: Date(timeIntervalSinceNow: -10000)
       )
-    )
+      ContentCard(
+        contentType: .dangerPost,
+        flairIcon: "car.top.radiowaves.rear.left.car.top.front",
+        flairText: "Véhicule gênant",
+        title: "Voiture garée sur la piste cyclable",
+        content: """
+Quartier Minimes, très dangereux !
+Le chauffeur au téléphone s’est arrêté portière ouverte sans même regarder. Il y est toujours garé à l’heure où j’écris ce signalement. Attention, il a également tendance à être agressif, prenez soin de vous.
+À l’angle de la pharmacie et de l’entrée du métro.
+""",
+        footerData: 500,
+        date: Date(timeIntervalSinceNow: -10000)
+      )
+    }
+    .padding()
   }
-  .padding()
 }
