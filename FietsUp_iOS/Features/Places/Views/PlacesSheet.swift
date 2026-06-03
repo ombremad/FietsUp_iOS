@@ -14,8 +14,7 @@ struct PlacesSheet: View {
     ScrollView {
       VStack(spacing: 24) {
         headerSection
-        testSection
-        // placesList
+        placesList
       }
       .padding(.vertical, 24)
       .padding(.horizontal)
@@ -34,33 +33,35 @@ struct PlacesSheet: View {
       Spacer()
     }
   }
-  
-  @ViewBuilder
-  private var testSection: some View {
-    if let latitude = vm.latitude, let longitude = vm.longitude {
-      HStack {
-        Text("Latitude:")
-        Spacer()
-        Text(latitude.description)
-      }
-      HStack {
-        Text("Longitude:")
-        Spacer()
-        Text(longitude.description)
-      }
-    }
-  }
-  
+    
   private var placesList: some View {
     VStack(spacing: 16) {
-      Text("ici")
-      Text("là")
+      if vm.placesNearby.isEmpty {
+        Text("empty")
+      } else {
+        ForEach(vm.placesNearby) { place in
+          ContentCard(
+            contentType: .place,
+            flairs: place.categories.map {
+              CardFlair(
+                name: $0.name,
+                iconName: $0.iconName
+              )
+            },
+            title: place.name,
+            content: place.otherDetails,
+            footerData: distanceBetweenTwoPoints(
+              lat1: vm.latitude ?? 0,
+              lon1: vm.longitude ?? 0,
+              lat2: place.latitude,
+              lon2: place.longitude
+            )
+          )
+          .onTapGesture {
+            vm.displayPlace(place)
+          }
+        }
+      }
     }
-  }
-}
-
-#Preview {
-  NavigationStack {
-    PlacesSheet()
   }
 }

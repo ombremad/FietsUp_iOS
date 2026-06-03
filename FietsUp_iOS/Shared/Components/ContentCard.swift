@@ -13,17 +13,22 @@ struct ContentCard: View {
     case forumPost, forumCategory, place, dangerPost
   }
   
-  let flairIcon: String?
-  let flairText: String?
+  let flairs: [CardFlair]
   let title: String?
-  let content: String
+  let content: String?
   let footerData: Int
   let date: Date?
   
-  init(contentType: ContentType, flairIcon: String? = nil, flairText: String? = nil, title: String? = nil, content: String, footerData: Int, date: Date? = nil) {
+  init(
+    contentType: ContentType,
+    flairs: [CardFlair] = [],
+    title: String? = nil,
+    content: String? = nil,
+    footerData: Int,
+    date: Date? = nil
+  ) {
     self.contentType = contentType
-    self.flairIcon = flairIcon
-    self.flairText = flairText
+    self.flairs = flairs
     self.title = title
     self.content = content
     self.footerData = footerData
@@ -61,17 +66,22 @@ struct ContentCard: View {
   
   @ViewBuilder
   private var flairRow: some View {
-    if let flairIcon, let flairText {
-      HStack(spacing: 4) {
-        Image(systemName: flairIcon)
-        Text(flairText)
+    if !flairs.isEmpty {
+      VStack(alignment: .leading, spacing: 2) {
+        ForEach(flairs, id: \.self) { flair in
+          HStack(spacing: 4) {
+            Image(systemName: flair.iconName)
+            Text(flair.name)
+          }
+        }
+        .font(.caption2)
+        .foregroundStyle(Color.Text.secondary)
+        .lineLimit(1)
       }
-      .font(.caption2)
-      .foregroundStyle(Color.Text.secondary)
-      .lineLimit(1)
     }
   }
   
+  @ViewBuilder
   private var titleAndContent: some View {
     VStack(alignment: .leading, spacing: 6) {
       if let title {
@@ -80,10 +90,12 @@ struct ContentCard: View {
           .lineLimit(2)
       }
       
-      Text(content)
-        .foregroundStyle(Color.Text.secondary)
-        .multilineTextAlignment(.leading)
-        .lineLimit(3)
+      if let content {
+        Text(content)
+          .foregroundStyle(Color.Text.secondary)
+          .multilineTextAlignment(.leading)
+          .lineLimit(3)
+      }
     }
   }
   
@@ -145,8 +157,7 @@ Présentation, premiers trajets, appréhensions, bonnes habitudes, conseils...
       )
       ContentCard(
         contentType: .forumPost,
-        flairIcon: "person.fill",
-        flairText: "Veliste_du_31",
+        flairs: [CardFlair(name: "Veliste_du_31", iconName: "person.fill")],
         title: "Vélo cargo : oui ou non ?",
         content: """
 Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci
@@ -156,8 +167,10 @@ Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assi
       )
       ContentCard(
         contentType: .place,
-        flairIcon: "screwdriver",
-        flairText: "Point self-service",
+        flairs: [
+          CardFlair(name: "Point self-service", iconName: "screwdriver"),
+          CardFlair(name:" Borne libre service", iconName: "point.topright.arrow.triangle.backward.to.point.bottomleft.scurvepath.fill")
+        ],
         title: "Borne de gonflage",
         content: "En plein air, accessible 24h/24",
         footerData: 300,
@@ -165,8 +178,7 @@ Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assi
       )
       ContentCard(
         contentType: .dangerPost,
-        flairIcon: "car.top.radiowaves.rear.left.car.top.front",
-        flairText: "Véhicule gênant",
+        flairs: [CardFlair(name: "Véhicule gênant", iconName: "car.top.radiowaves.rear.left.car.top.front")],
         title: "Voiture garée sur la piste cyclable",
         content: """
 Quartier Minimes, très dangereux !

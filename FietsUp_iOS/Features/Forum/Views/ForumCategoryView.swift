@@ -23,8 +23,7 @@ struct ForumCategoryView: View {
             ForEach(category.posts) { post in
               ContentCard(
                 contentType: .forumPost,
-                flairIcon: "person.fill",
-                flairText: post.user.nickname,
+                flairs: [CardFlair(name: post.user.nickname, iconName: "person.fill")],
                 title: post.title,
                 content: post.content,
                 footerData: post.totalComments,

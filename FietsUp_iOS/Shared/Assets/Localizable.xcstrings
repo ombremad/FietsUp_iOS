@@ -345,6 +345,12 @@
         }
       }
     },
+    "empty" : {
+      "shouldTranslate" : false
+    },
+    "error" : {
+
+    },
     "FietsUp" : {
       "shouldTranslate" : false
     },
@@ -632,15 +638,6 @@
         }
       }
     },
-    "ici" : {
-
-    },
-    "là" : {
-
-    },
-    "Latitude:" : {
-
-    },
     "loginForm.alreadyHaveAnAccount" : {
       "localizations" : {
         "en" : {
@@ -736,9 +733,6 @@
           }
         }
       }
-    },
-    "Longitude:" : {
-
     },
     "network.error.badRequest" : {
       "localizations" : {
@@ -933,6 +927,41 @@
       }
     },
     "place.awayMeters **%lld**" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldm away"
+          }
+        }
+      }
+    },
+    "place.distanceInMeters %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldm away"
+          }
+        }
+      }
+    },
+    "place.label.address" : {
+
+    },
+    "place.label.details" : {
+
+    },
+    "place.label.email" : {
+
+    },
+    "place.label.lastUpdated" : {
+
+    },
+    "place.label.phone" : {
+
+    },
+    "place.label.website" : {
 
     },
     "place.lastUpdate **%@**" : {

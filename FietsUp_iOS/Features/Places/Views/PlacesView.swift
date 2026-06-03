@@ -20,13 +20,18 @@ struct PlacesView: View {
       .navigationTitle("places.title")
       .navigationBarTitleDisplayMode(.inline)
     
+      .appSheet(isPresented: $vm.isSinglePlaceSheetPresented) {
+        SinglePlaceSheet().environment(vm)
+      }
       .appSheet(isPresented: $vm.isPlacesSheetPresented) {
-        PlacesSheet()
-          .environment(vm)
+        PlacesSheet().environment(vm)
       }
     
       .task {
         await vm.load()
+      }
+      .task(id: vm.hasLocation) {
+        await vm.performFetchPlaces()
       }
   }
 }
