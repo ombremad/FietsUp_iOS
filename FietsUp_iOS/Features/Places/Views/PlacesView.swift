@@ -8,12 +8,26 @@
 import SwiftUI
 
 struct PlacesView: View {
+  @State private var vm = PlacesViewModel()
+  
   var body: some View {
-    NavigationStack {
-      VStack {
-        Text("PlacesView")
-      }
+    VStack {
+      Text("PlacesView")
     }
+      .foregroundStyle(Color.Text.primary)
+      .background { Color.Surface.background.ignoresSafeArea() }
+      .scrollContentBackground(.hidden)
+      .navigationTitle("places.title")
+      .navigationBarTitleDisplayMode(.inline)
+    
+      .appSheet(isPresented: $vm.isPlacesSheetPresented) {
+        PlacesSheet()
+          .environment(vm)
+      }
+    
+      .task {
+        await vm.load()
+      }
   }
 }
 

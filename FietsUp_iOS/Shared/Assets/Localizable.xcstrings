@@ -173,6 +173,12 @@
     "comment.newComment" : {
 
     },
+    "comments.empty.description" : {
+
+    },
+    "comments.empty.title" : {
+
+    },
     "common.cancel" : {
       "localizations" : {
         "en" : {
@@ -626,6 +632,15 @@
         }
       }
     },
+    "ici" : {
+
+    },
+    "là" : {
+
+    },
+    "Latitude:" : {
+
+    },
     "loginForm.alreadyHaveAnAccount" : {
       "localizations" : {
         "en" : {
@@ -721,6 +736,9 @@
           }
         }
       }
+    },
+    "Longitude:" : {
+
     },
     "network.error.badRequest" : {
       "localizations" : {
@@ -920,8 +938,14 @@
     "place.lastUpdate **%@**" : {
 
     },
+    "places.nearby" : {
+
+    },
+    "places.title" : {
+
+    },
     "PlacesView" : {
-      "shouldTranslate" : false
+
     },
     "post.answerAction" : {
       "localizations" : {

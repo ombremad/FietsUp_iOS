@@ -25,16 +25,27 @@ struct ForumPostView: View {
               date: post.creationDate,
               user: post.user
             )
-            ForEach(post.comments) { comment in
+            if post.comments.isEmpty {
               Rectangle()
                 .foregroundStyle(Color.Surface.divider)
                 .frame(height: 1)
-              ContentComponent(
-                size: .small,
-                content: comment.content,
-                date: comment.creationDate,
-                user: comment.user
+              ContentUnavailableView(
+                "comments.empty.title",
+                systemImage: "bubble.left.and.text.bubble.right",
+                description: Text("comments.empty.description")
               )
+            } else {
+              ForEach(post.comments) { comment in
+                Rectangle()
+                  .foregroundStyle(Color.Surface.divider)
+                  .frame(height: 1)
+                ContentComponent(
+                  size: .small,
+                  content: comment.content,
+                  date: comment.creationDate,
+                  user: comment.user
+                )
+              }
             }
           }
         }
