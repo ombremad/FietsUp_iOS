@@ -20,16 +20,15 @@ struct PlacesView: View {
       .toolbar(vm.hasActiveSheet ? .hidden : .visible, for: .tabBar)
     
       .toolbar {
-        if !vm.hasActiveSheet {
+          ToolbarItem(placement: .primaryAction) {
+            Button("places.showMe", systemImage: "mappin") {
+              vm.centerOnUser()
+            }
+          }
           ToolbarItem(placement: .primaryAction) {
             Button("places.showPlaces", systemImage: "map") {
               vm.showPlacesSheet()
             }
-            .opacity(vm.hasActiveSheet ? 0 : 1)
-            .scaleEffect(vm.hasActiveSheet ? 0.7 : 1)
-            .allowsHitTesting(!vm.hasActiveSheet)
-            .animation(.easeInOut(duration: 0.4), value: vm.hasActiveSheet)
-          }
         }
       }
     

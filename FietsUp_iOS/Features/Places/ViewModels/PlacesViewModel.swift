@@ -27,11 +27,10 @@ final class PlacesViewModel {
   var longitude: Double? { locationService.longitude }
   var locationStatus: CLAuthorizationStatus { locationService.authorizationStatus }
   var cameraPosition: MapCameraPosition = .automatic
-  private var hasCenteredMap = false
   
   // fixed values for maps settings
-  private let zoomedDelta = 0.01
-  private let dezoomedDelta = 0.02
+  private let zoomedDelta: Double = 0.01
+  private let dezoomedDelta: Double = 0.02
   private let sheetOffsetFactor: Double = 0.35
 
   // places related values
@@ -44,11 +43,17 @@ final class PlacesViewModel {
   func load() async {
     locationService.requestLocation()
     if categories.isEmpty { await performFetchCategories() }
-    centerMapOnUser()
+    centerOnUser()
     
     Task {
       try? await Task.sleep(for: .seconds(0.5))
       isPlacesSheetPresented = true
+    }
+  }
+  
+  func centerOnUser() {
+    if let latitude, let longitude {
+      centerMapOn(latitude: latitude, longitude: longitude, delta: dezoomedDelta)
     }
   }
   
@@ -81,22 +86,8 @@ final class PlacesViewModel {
   
   func displayPlace(_ place: PlaceResponse) {
     selectedPlace = place
-    cameraPosition = offsetCameraPosition(
-      latitude: place.latitude,
-      longitude: place.longitude,
-      span: MKCoordinateSpan(latitudeDelta: zoomedDelta, longitudeDelta: zoomedDelta)
-    )
+    centerMapOn(latitude: place.latitude, longitude: place.longitude, delta: zoomedDelta)
     showSinglePlaceSheet()
-  }
-  
-  func centerMapOnUser() {
-    guard !hasCenteredMap, let lat = latitude, let lon = longitude else { return }
-    cameraPosition = offsetCameraPosition(
-      latitude: lat,
-      longitude: lon,
-      span: MKCoordinateSpan(latitudeDelta: dezoomedDelta, longitudeDelta: dezoomedDelta)
-    )
-    hasCenteredMap = true
   }
   
   func showSinglePlaceSheet() {
@@ -113,18 +104,19 @@ final class PlacesViewModel {
     isSinglePlaceSheetPresented = false
     isPlacesSheetPresented = false
   }
-    
-  private func offsetCameraPosition(
-    latitude: Double,
-    longitude: Double,
-    span: MKCoordinateSpan
-  ) -> MapCameraPosition {
-    .region(MKCoordinateRegion(
-      center: CLLocationCoordinate2D(
-        latitude: latitude - span.latitudeDelta * sheetOffsetFactor,
-        longitude: longitude
-      ),
-      span: span
-    ))
+  
+  private func centerMapOn(latitude: Double, longitude: Double, delta: Double) {
+    cameraPosition = MapCameraPosition.region(
+      MKCoordinateRegion(
+        center: CLLocationCoordinate2D(
+          latitude: latitude - delta * sheetOffsetFactor,
+          longitude: longitude,
+        ),
+        span: MKCoordinateSpan(
+          latitudeDelta: delta,
+          longitudeDelta: delta
+        )
+      )
+    )
   }
 }

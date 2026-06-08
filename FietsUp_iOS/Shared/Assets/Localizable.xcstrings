@@ -1148,6 +1148,9 @@
         }
       }
     },
+    "places.showMe" : {
+
+    },
     "places.showPlaces" : {
       "localizations" : {
         "en" : {
