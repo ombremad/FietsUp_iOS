@@ -217,13 +217,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No comments yet"
+            "value" : "No one has answered this post yet. Be the first to comment now!"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pas de réponse"
+            "value" : "Personne n’a encore répondu à ce post. Soyez le premier à commenter maintenant !"
           }
         }
       }
@@ -233,13 +233,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one has answered this post yet. Be the first to comment now!"
+            "value" : "No comments yet"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personne n’a encore répondu à ce post. Soyez le premier à commenter maintenant !"
+            "value" : "Aucune réponse"
           }
         }
       }
