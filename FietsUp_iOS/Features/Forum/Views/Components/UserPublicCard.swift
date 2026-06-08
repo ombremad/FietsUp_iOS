@@ -89,26 +89,12 @@ struct UserPublicCard: View {
 #Preview {
   VStack(spacing: 12) {
     UserPublicCard(
-      user: UserPublicResponse(
-        id: UUID(),
-        nickname: "Veliste_du_31",
-        streak: 3,
-        daysSinceSignup: 128,
-        totalElapsedDistance: 1_200_000,
-        bio: "Courte biographie de présentation, décrivant mes goûts, centres d'intérêts etc.",
-      ),
+      user: UserPublicResponse.placeholder,
       date: Date.now,
       size: .big
     )
     UserPublicCard(
-      user: UserPublicResponse(
-        id: UUID(),
-        nickname: "Veliste_du_31",
-        streak: 3,
-        daysSinceSignup: 128,
-        totalElapsedDistance: 1_200_000,
-        bio: nil,
-      ),
+      user: UserPublicResponse.placeholder,
       date: Date.now,
       size: .small
     )

@@ -18,7 +18,8 @@ struct DashboardView: View {
         if let user = auth.currentUser {
           UserCardBig(user)
         } else {
-          ProgressView()
+          UserCardBig(.placeholder)
+            .redacted(reason: .placeholder)
         }
         
         VStack(alignment: .leading, spacing: 24) {
@@ -76,7 +77,7 @@ struct DashboardView: View {
       await auth.restoreSession()
     }
     .onChange(of: auth.currentUser?.streak) { oldValue, newValue in
-      guard let old = oldValue, let new = newValue else { return }
+      guard let _ = oldValue, let _ = newValue else { return }
       vm.isStreakSheetPresented.toggle()
     }
   }

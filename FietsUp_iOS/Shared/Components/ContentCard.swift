@@ -157,7 +157,7 @@ Présentation, premiers trajets, appréhensions, bonnes habitudes, conseils...
       )
       ContentCard(
         contentType: .forumPost,
-        flairs: [CardFlair(name: "Veliste_du_31", iconName: "person.fill")],
+        flairs: [CardFlair(name: PlaceholderData.nickname, iconName: "person.fill")],
         title: "Vélo cargo : oui ou non ?",
         content: """
 Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci

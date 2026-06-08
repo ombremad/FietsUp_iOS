@@ -63,14 +63,7 @@ Coucou tout le monde ! Je débute en ville, et j’aimerais trouver des partenai
 Alors ? On s’organise les Toulousain·es sur·es ??
 """,
     date: Date.now,
-    user: UserPublicResponse(
-      id: UUID(),
-      nickname: "Veliste_du_31",
-      streak: 3,
-      daysSinceSignup: 128,
-      totalElapsedDistance: 1_200_000,
-      bio: nil,
-    ),
+    user: UserPublicResponse.placeholder,
   )
   .padding()
 }

@@ -80,15 +80,6 @@ struct UserCardBig: View {
 }
 
 #Preview {
-  UserCardBig(User(with: .init(
-    firstName: "Jeanne",
-    lastName: "Dubois",
-    nickname: "Velocipede_2000",
-    email: "velocipede2000@example.com",
-    bio: "Je fais du vélo au milieu des voitures, et c'est ma grande joie",
-    streak: 3,
-    daysSinceSignup: 128,
-    totalElapsedDistance: 1200000
-  )))
+  UserCardBig(.placeholder)
   .padding()
 }
