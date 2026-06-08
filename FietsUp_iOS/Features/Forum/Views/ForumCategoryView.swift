@@ -17,7 +17,11 @@ struct ForumCategoryView: View {
     ScrollView {
       VStack(spacing: 24) {
         if vm.isLoading {
-          ProgressView()
+          ForEach(0..<5, id: \.self) { _ in
+            ContentCard.forumPostPlaceholder
+              .redacted(reason: .placeholder)
+              .shimmering()
+          }
         } else {
           if let category = vm.category {
             ForEach(category.posts) { post in

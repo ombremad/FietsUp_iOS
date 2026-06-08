@@ -172,6 +172,13 @@ extension ContentComponent {
     date: Placeholder.Dates.recent,
     user: UserPublicResponse.placeholder,
   )
+  static let smallPlaceholder = ContentComponent(
+    size: .small,
+    title: Placeholder.ForumPost.title,
+    content: Placeholder.ForumPost.content,
+    date: Placeholder.Dates.recent,
+    user: UserPublicResponse.placeholder,
+  )
 }
 
 extension UserPublicCard {

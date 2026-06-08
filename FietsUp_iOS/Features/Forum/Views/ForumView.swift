@@ -22,7 +22,11 @@ struct ForumView: View {
         }
         
         if vm.isLoading  {
-          ProgressView()
+          ForEach(0..<5, id: \.self) { _ in
+            ContentCard.forumCategoryPlaceholder
+          }
+          .redacted(reason: .placeholder)
+          .shimmering()
         } else {
           ForEach(vm.categories) { category in
             ContentCard(
@@ -32,9 +36,9 @@ struct ForumView: View {
               footerData: category.totalPosts,
               date: category.lastActivityDate
             )
-              .onTapGesture {
-                router.push(ForumDestination.category(id: category.id))
-              }
+            .onTapGesture {
+              router.push(ForumDestination.category(id: category.id))
+            }
           }
         }
       }

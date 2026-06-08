@@ -20,6 +20,7 @@ struct DashboardView: View {
         } else {
           UserCardBig(.placeholder)
             .redacted(reason: .placeholder)
+            .shimmering()
         }
         
         VStack(alignment: .leading, spacing: 24) {
