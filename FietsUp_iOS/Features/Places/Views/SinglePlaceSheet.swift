@@ -75,7 +75,7 @@ struct SinglePlaceSheet: View {
           }
           HStack {
             Image(systemName: "signpost.right")
-            Text("place.distanceInMeters \(distance)")
+            Text("place.distanceInMeters **\(distance)**")
           }
           .padding(.horizontal, 12)
           .padding(.vertical, 6)

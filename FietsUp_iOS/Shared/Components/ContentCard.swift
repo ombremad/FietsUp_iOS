@@ -133,7 +133,7 @@ struct ContentCard: View {
             Text(AttributedString(localized: "forum.discussionsActive **\(footerData)**"))
           case .place, .dangerPost:
             Image(systemName: "signpost.right")
-            Text(AttributedString(localized: "place.awayMeters **\(footerData)**"))
+            Text(AttributedString(localized: "place.distanceInMeters **\(footerData)**"))
         }
       }
     }
