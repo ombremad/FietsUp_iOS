@@ -15,6 +15,9 @@ final class PlacesViewModel {
   var isLoading: Bool = false
   var isPlacesSheetPresented = false
   var isSinglePlaceSheetPresented = false
+  var hasActiveSheet: Bool {
+    isSinglePlaceSheetPresented || isPlacesSheetPresented
+  }
   
   private let locationService = LocationService.shared
   var hasLocation: Bool { latitude != nil && longitude != nil }

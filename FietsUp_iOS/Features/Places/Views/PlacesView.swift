@@ -17,20 +17,18 @@ struct PlacesView: View {
       .foregroundStyle(Color.Text.primary)
       .background { Color.Surface.background.ignoresSafeArea() }
       .scrollContentBackground(.hidden)
+      .toolbar(vm.hasActiveSheet ? .hidden : .visible, for: .tabBar)
     
       .toolbar {
-        if (vm.isSinglePlaceSheetPresented == false && vm.isPlacesSheetPresented == false) {
+        if !vm.hasActiveSheet {
           ToolbarItem(placement: .primaryAction) {
-            let isVisible = !vm.isSinglePlaceSheetPresented && !vm.isPlacesSheetPresented
-
             Button("places.showPlaces", systemImage: "map") {
               vm.showPlacesSheet()
             }
-            .opacity(isVisible ? 1 : 0)
-            .scaleEffect(isVisible ? 1 : 0.7)
-            .allowsHitTesting(isVisible)
-            .animation(.easeInOut(duration: 0.4), value: isVisible)
-
+            .opacity(vm.hasActiveSheet ? 0 : 1)
+            .scaleEffect(vm.hasActiveSheet ? 0.7 : 1)
+            .allowsHitTesting(!vm.hasActiveSheet)
+            .animation(.easeInOut(duration: 0.4), value: vm.hasActiveSheet)
           }
         }
       }
