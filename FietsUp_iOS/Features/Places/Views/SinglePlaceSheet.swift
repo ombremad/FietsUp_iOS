@@ -10,6 +10,7 @@ import SwiftUI
 struct SinglePlaceSheet: View {
   @Environment(PlacesViewModel.self) var vm
   @Environment(\.openURL) private var openURL
+  @State private var selectedDetent: PresentationDetent = .medium
       
   var body: some View {
     List {
@@ -23,19 +24,27 @@ struct SinglePlaceSheet: View {
     .listStyle(.inset)
     .labeledContentStyle(DetailRowStyle())
     .foregroundStyle(Color.Text.primary)
-    .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
     
-    .presentationDetents([.medium, .large])
+    .presentationDetents([.fraction(0.10), .medium, .large], selection: $selectedDetent)
     .presentationDragIndicator(.visible)
+    .interactiveDismissDisabled()
+    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.10)))
+    .presentationBackground {
+      if selectedDetent == .large {
+        Color.Surface.background
+      } else {
+        Color.clear
+      }
+    }
     
     .navigationTitle(vm.selectedPlace?.name ?? "common.loading")
     .navigationBarTitleDisplayMode(.inline)
     
     .toolbar {
       ToolbarItem(placement: .cancellationAction) {
-        Button("common.cancel", systemImage: "xmark", role: .cancel) {
-          vm.isSinglePlaceSheetPresented = false
+        Button("common.cancel", systemImage: "chevron.backward", role: .cancel) {
+          vm.showPlacesSheet()
         }
       }
     }

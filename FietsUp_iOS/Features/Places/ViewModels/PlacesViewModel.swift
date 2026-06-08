@@ -5,8 +5,10 @@
 //  Created by Anne Ferret on 03/06/2026.
 //
 
+import SwiftUI
 import Foundation
 import CoreLocation
+import MapKit
 
 @Observable
 final class PlacesViewModel {
@@ -19,6 +21,8 @@ final class PlacesViewModel {
   var latitude: Double? { locationService.latitude }
   var longitude: Double? { locationService.longitude }
   var locationStatus: CLAuthorizationStatus { locationService.authorizationStatus }
+  var cameraPosition: MapCameraPosition = .automatic
+  private var hasCenteredMap = false
   
   var categories: [PlaceCategoryResponse] = []
   var placesNearby: [PlaceResponse] = []
@@ -27,6 +31,7 @@ final class PlacesViewModel {
   func load() async {
     locationService.requestLocation()
     if categories.isEmpty { await performFetchCategories() }
+    centerMapOnUser()
     
     Task {
       try? await Task.sleep(for: .seconds(0.5))
@@ -63,6 +68,42 @@ final class PlacesViewModel {
   
   func displayPlace(_ place: PlaceResponse) {
     selectedPlace = place
+    
+    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let sheetOffset = span.latitudeDelta * 0.35
+    
+    cameraPosition = .region(MKCoordinateRegion(
+      center: CLLocationCoordinate2D(
+        latitude: place.latitude - sheetOffset,
+        longitude: place.longitude
+      ),
+      span: span
+    ))
+
+    showSinglePlaceSheet()
+  }
+  
+  func centerMapOnUser() {
+    guard !hasCenteredMap, let lat = latitude, let lon = longitude else { return }
+    cameraPosition = .region(MKCoordinateRegion(
+      center: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+      span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+    ))
+    hasCenteredMap = true
+  }
+  
+  func showSinglePlaceSheet() {
+    isPlacesSheetPresented = false
     isSinglePlaceSheetPresented = true
+  }
+  
+  func showPlacesSheet() {
+    isSinglePlaceSheetPresented = false
+    isPlacesSheetPresented = true
+  }
+  
+  func closeAllSheets() {
+    isSinglePlaceSheetPresented = false
+    isPlacesSheetPresented = false
   }
 }

@@ -967,13 +967,10 @@
     "place.lastUpdate **%@**" : {
 
     },
-    "places.nearby" : {
+    "places.placesNearby" : {
 
     },
-    "places.title" : {
-
-    },
-    "PlacesView" : {
+    "places.showPlaces" : {
 
     },
     "post.answerAction" : {

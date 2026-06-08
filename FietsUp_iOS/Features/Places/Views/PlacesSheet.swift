@@ -9,31 +9,43 @@ import SwiftUI
 
 struct PlacesSheet: View {
   @Environment(PlacesViewModel.self) var vm
-  
+  @State private var selectedDetent: PresentationDetent = .medium
+
   var body: some View {
     ScrollView {
       VStack(spacing: 24) {
-        headerSection
         placesList
       }
       .padding(.vertical, 24)
       .padding(.horizontal)
     }
     .foregroundStyle(Color.Text.primary)
-    .background { Color.Surface.background.ignoresSafeArea() }
-    .presentationDetents([.medium, .large])
+    
+    .presentationDetents([.fraction(0.10), .medium, .large], selection: $selectedDetent)
     .presentationDragIndicator(.visible)
+    .interactiveDismissDisabled()
+    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.10)))
+    .presentationBackground {
+      if selectedDetent == .large {
+        Color.Surface.background
+      } else {
+        Color.clear
+      }
+    }
+    
+    .navigationTitle("places.placesNearby")
+    .navigationBarTitleDisplayMode(.inline)
+    
+    .toolbar {
+      ToolbarItem(placement: .cancellationAction) {
+        Button("common.cancel", systemImage: "xmark", role: .cancel) {
+          vm.closeAllSheets()
+        }
+      }
+    }
+
   }
   
-  private var headerSection: some View {
-    HStack {
-      Text("places.nearby")
-        .font(.title2)
-        .foregroundStyle(Color.Text.secondary)
-      Spacer()
-    }
-  }
-    
   private var placesList: some View {
     VStack(spacing: 16) {
       if vm.placesNearby.isEmpty {
