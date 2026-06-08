@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 @Observable
 final class LocationService: NSObject, CLLocationManagerDelegate {
@@ -14,6 +15,8 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   
   var latitude: Double?
   var longitude: Double?
+  var locationName: String?
+
   var authorizationStatus: CLAuthorizationStatus = .notDetermined
   
   private let locationManager = CLLocationManager()
@@ -36,11 +39,26 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    latitude = locations.last?.coordinate.latitude
-    longitude = locations.last?.coordinate.longitude
+    guard let location = locations.last else { return }
+    latitude = location.coordinate.latitude
+    longitude = location.coordinate.longitude
+    reverseGeocode(location)
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     ErrorService.shared.show(error)
+  }
+  
+  private func reverseGeocode(_ location: CLLocation) {
+    Task {
+      do {
+        guard let request = MKReverseGeocodingRequest(location: location) else { return }
+        let mapItems = try await request.mapItems
+        guard let mapItem = mapItems.first else { return }
+        locationName = mapItem.address?.shortAddress
+      } catch {
+        print("Reverse geocoding failed: \(error.localizedDescription)")
+      }
+    }
   }
 }

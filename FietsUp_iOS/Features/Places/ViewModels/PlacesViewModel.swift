@@ -72,7 +72,6 @@ final class PlacesViewModel {
   func performFetchPlaces() async {
     if let latitude, let longitude {
       do {
-        print("Latitude: \(latitude), Longitude: \(longitude)")
         let response: [PlaceResponse] = try await NetworkService.shared.get(
           endpoint: "/places/near/?latitude=\(latitude)&longitude=\(longitude)",
           requiresAuth: true

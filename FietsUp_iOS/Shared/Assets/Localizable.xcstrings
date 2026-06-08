@@ -345,19 +345,22 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "signaled **%@%** ago"
+            "value" : "**%@** ago"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "signalé il y a **%@**"
+            "value" : "il y a **%@**"
           }
         }
       }
     },
-    "DangersView" : {
-      "shouldTranslate" : false
+    "dangers.dangersNearby" : {
+
+    },
+    "dangers.title" : {
+
     },
     "dashboard.activities.add" : {
       "localizations" : {
