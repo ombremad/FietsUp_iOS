@@ -63,6 +63,9 @@ struct NewPostSheet: View {
 
 #Preview {
   NavigationStack {
-    NewPostSheet(categoryId: UUID(), categoryName: "Le coin des débutant·es")
+    NewPostSheet(
+      categoryId: UUID(),
+      categoryName: Placeholder.ForumCategory.name
+    )
   }
 }

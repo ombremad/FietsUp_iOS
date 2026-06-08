@@ -66,7 +66,7 @@ struct ForumButtonSection: View {
 
 #Preview {
   ForumButtonSection(
-    likeCount: 32,
+    likeCount: Placeholder.Numbers.like,
     isLiked: true,
     isFaved: false,
     onLike: { },

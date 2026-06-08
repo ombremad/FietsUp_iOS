@@ -69,6 +69,6 @@ struct ForumCategoryView: View {
 
 #Preview {
   NavigationStack {
-    ForumCategoryView(id: UUID(uuidString: "353F16AB-6899-4E2E-9EE2-BB4E913F6922") ?? UUID())
+    ForumCategoryView(id: UUID())
   }
 }

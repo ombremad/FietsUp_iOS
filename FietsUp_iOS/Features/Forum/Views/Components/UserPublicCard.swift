@@ -88,16 +88,8 @@ struct UserPublicCard: View {
 
 #Preview {
   VStack(spacing: 12) {
-    UserPublicCard(
-      user: UserPublicResponse.placeholder,
-      date: Date.now,
-      size: .big
-    )
-    UserPublicCard(
-      user: UserPublicResponse.placeholder,
-      date: Date.now,
-      size: .small
-    )
+    UserPublicCard.bigPlaceholder
+    UserPublicCard.smallPlaceholder
   }
   .padding()
 }

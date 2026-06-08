@@ -146,48 +146,10 @@ struct ContentCard: View {
 #Preview {
   ScrollView {
     VStack(spacing: 16) {
-      ContentCard(
-        contentType: .forumCategory,
-        title: "Le coin des débutant·es",
-        content: """
-Présentation, premiers trajets, appréhensions, bonnes habitudes, conseils...
-""",
-        footerData: 6,
-        date: Date(timeIntervalSinceNow: -10000)
-      )
-      ContentCard(
-        contentType: .forumPost,
-        flairs: [CardFlair(name: PlaceholderData.nickname, iconName: "person.fill")],
-        title: "Vélo cargo : oui ou non ?",
-        content: """
-Faut-il craquer ? Même à des sommes indécentes (plus de 3000 euros !!?). Assistance électrique ou non ? Vos avis ! C'est très important merci
-""",
-        footerData: 3,
-        date: Date(timeIntervalSinceNow: -10000)
-      )
-      ContentCard(
-        contentType: .place,
-        flairs: [
-          CardFlair(name: "Point self-service", iconName: "screwdriver"),
-          CardFlair(name:" Borne libre service", iconName: "point.topright.arrow.triangle.backward.to.point.bottomleft.scurvepath.fill")
-        ],
-        title: "Borne de gonflage",
-        content: "En plein air, accessible 24h/24",
-        footerData: 300,
-        date: Date(timeIntervalSinceNow: -10000)
-      )
-      ContentCard(
-        contentType: .dangerPost,
-        flairs: [CardFlair(name: "Véhicule gênant", iconName: "car.top.radiowaves.rear.left.car.top.front")],
-        title: "Voiture garée sur la piste cyclable",
-        content: """
-Quartier Minimes, très dangereux !
-Le chauffeur au téléphone s’est arrêté portière ouverte sans même regarder. Il y est toujours garé à l’heure où j’écris ce signalement. Attention, il a également tendance à être agressif, prenez soin de vous.
-À l’angle de la pharmacie et de l’entrée du métro.
-""",
-        footerData: 500,
-        date: Date(timeIntervalSinceNow: -10000)
-      )
+      ContentCard.forumCategoryPlaceholder
+      ContentCard.forumPostPlaceholder
+      ContentCard.placePlaceholder
+      ContentCard.dangerPostPlaceholder
     }
     .padding()
   }

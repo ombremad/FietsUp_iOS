@@ -62,6 +62,9 @@ struct NewCommentSheet: View {
 
 #Preview {
   NavigationStack {
-    NewCommentSheet(postId: UUID(), postName: "Qui pour se balader à Toulouse ?")
+    NewCommentSheet(
+      postId: UUID(),
+      postName: Placeholder.ForumPost.title
+    )
   }
 }
