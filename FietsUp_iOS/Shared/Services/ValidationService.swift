@@ -83,6 +83,24 @@ enum ValidationService {
     }
   }
   
+  static func location(latitude: Double?, longitude: Double?) throws {
+    guard let latitude, let longitude else {
+      throw ValidationError.locationFailed
+    }
+    if latitude > 90 || latitude < -90 {
+      throw ValidationError.fieldInvalidFormat(.latitude)
+    }
+    if longitude > 180 || latitude < -180 {
+      throw ValidationError.fieldInvalidFormat(.longitude)
+    }
+  }
+  
+  static func categoryId(_ categoryId: UUID?) throws {
+    guard categoryId != nil else {
+      throw ValidationError.fieldCannotBeEmpty(.dangerCategory)
+    }
+  }
+
   static func distance(_ distance: Int) throws {
     if distance <= 0 {
       throw ValidationError.fieldCannotBeZero(.distance)
@@ -91,7 +109,7 @@ enum ValidationService {
       throw ValidationError.fieldMustBeReasonable(.distance)
     }
   }
-    
+      
   static func passwordConfirmation(password: String, confirmation: String) throws {
     guard password == confirmation else {
       throw ValidationError.fieldConfirmationMustBeIdentical(.password)
@@ -115,7 +133,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, title, content, length, distance
+    case password, email, firstName, lastName, nickname, title, content, length, distance, latitude, longitude, dangerCategory
     
     var localized: String {
       switch self {
@@ -128,11 +146,15 @@ enum ValidationError: Error, LocalizedError {
         case .content: return String(localized: "validation.field.content")
         case .length: return String(localized: "validation.field.length")
         case .distance: return String(localized: "validation.field.distance")
+        case .latitude: return String(localized: "validation.field.latitude")
+        case .longitude: return String(localized: "validation.field.longitude")
+        case .dangerCategory: return String(localized: "validation.field.dangerCategory")
       }
     }
   }
   
   case fieldCannotBeZero(Field)
+  case fieldCannotBeEmpty(Field)
   case fieldTooLong(Field, max: Int)
   case fieldNotLongEnough(Field, min: Int)
   case fieldMustContainUppercase(Field)
@@ -144,6 +166,7 @@ enum ValidationError: Error, LocalizedError {
   case fieldConfirmationMustBeIdentical(Field)
   case fieldMustBeReasonable(Field)
   case startMustBeBeforeEnd
+  case locationFailed
   
   case multiple([ValidationError])
   
@@ -151,6 +174,8 @@ enum ValidationError: Error, LocalizedError {
     switch self {
       case .fieldCannotBeZero(let field):
         return "\(field.localized) \(String(localized: "validation.rule.cannotBeZero"))"
+      case .fieldCannotBeEmpty(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.cannotBeEmpty"))"
       case .fieldTooLong(let field, let max):
         return "\(field.localized) \(String(localized: "validation.rule.tooLong \(max)"))"
       case .fieldNotLongEnough(let field, let min):
@@ -173,6 +198,8 @@ enum ValidationError: Error, LocalizedError {
         return "\(field.localized) \(String(localized: "validation.rule.mustBeReasonable"))"
       case .startMustBeBeforeEnd:
         return String(localized: "validation.rule.startMustBeBeforeEnd")
+      case .locationFailed:
+        return String(localized: "validation.rule.locationFailed")
 
       case .multiple(let errors):
         let lines = errors.compactMap { $0.errorDescription }.map { "• \($0)" }

@@ -22,18 +22,33 @@ struct DangersView: View {
         }
         
         if vm.isLoading  {
-          ProgressView()
+          ForEach(0..<5, id: \.self) { _ in
+            ContentCard.dangerPostPlaceholder
+          }
+          .redacted(reason: .placeholder)
+          .shimmering()
+        } else if vm.dangerPosts.isEmpty {
+          ContentUnavailableView(
+            "dangers.empty.title",
+            systemImage: "bubble.left.and.exclamationmark.bubble.right",
+            description: Text("dangers.empty.description")
+          )
         } else {
           ForEach(vm.dangerPosts) { danger in
             ContentCard(
               contentType: .dangerPost,
               title: danger.title,
               content: danger.content,
-              footerData: danger.totalComments,
+              footerData: distanceBetweenTwoPoints(
+                lat1: vm.latitude ?? 0,
+                lon1: vm.longitude ?? 0,
+                lat2: danger.latitude,
+                lon2: danger.longitude
+              ),
               date: danger.creationDate
             )
             .onTapGesture {
-              // TODO: this
+              // TODO: danger post details
             }
           }
         }
@@ -48,6 +63,22 @@ struct DangersView: View {
     .navigationTitle("dangers.title")
     .navigationBarTitleDisplayMode(.large)
     
+    .toolbar {
+      ToolbarItem(placement: .confirmationAction) {
+        Button {
+          vm.isNewDangerPostSheetPresented.toggle()
+        } label: {
+          Label("dangers.action.newPost", systemImage: "plus")
+        }
+      }
+    }
+    
+    .appSheet(isPresented: $vm.isNewDangerPostSheetPresented) {
+      NavigationStack {
+        NewDangerPostSheet()
+      }
+    }
+
     .task {
       await vm.load()
     }

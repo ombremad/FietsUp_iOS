@@ -340,6 +340,54 @@
         }
       }
     },
+    "danger.category" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégorie"
+          }
+        }
+      }
+    },
+    "danger.content" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenu"
+          }
+        }
+      }
+    },
+    "danger.selectCategory" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir une catégorie"
+          }
+        }
+      }
+    },
     "danger.signaledAgo **%@**" : {
       "localizations" : {
         "en" : {
@@ -356,11 +404,133 @@
         }
       }
     },
+    "danger.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger"
+          }
+        }
+      }
+    },
+    "dangers.action.newPost" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau post"
+          }
+        }
+      }
+    },
+    "dangers.around %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "around: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vers: %@"
+          }
+        }
+      }
+    },
     "dangers.dangersNearby" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dangers nearby"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dangers à proximité"
+          }
+        }
+      }
+    },
+    "dangers.empty.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No one has reported any danger lately around you. Maybe you want to submit one yourself?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun danger n'a été signalé à proximité récemment. Voulez-vous en soumettre un ?"
+          }
+        }
+      }
+    },
+    "dangers.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No danger nearby"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de danger"
+          }
+        }
+      }
+    },
+    "dangers.postWillBeGeolocated" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This danger will be tagged with your current location:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce danger sera géolocalisé à votre emplacement actuel :"
+          }
+        }
+      }
     },
     "dangers.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dangers"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dangers"
+          }
+        }
+      }
     },
     "dashboard.activities.add" : {
       "localizations" : {
@@ -1152,7 +1322,20 @@
       }
     },
     "places.showMe" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show my location"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montrer mon emplacement"
+          }
+        }
+      }
     },
     "places.showPlaces" : {
       "localizations" : {
@@ -1506,6 +1689,22 @@
         }
       }
     },
+    "validation.field.dangerCategory" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La catégorie de danger"
+          }
+        }
+      }
+    },
     "validation.field.distance" : {
       "localizations" : {
         "en" : {
@@ -1570,6 +1769,22 @@
         }
       }
     },
+    "validation.field.latitude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latitude"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La latitude"
+          }
+        }
+      }
+    },
     "validation.field.length" : {
       "localizations" : {
         "en" : {
@@ -1582,6 +1797,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La durée"
+          }
+        }
+      }
+    },
+    "validation.field.longitude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longitude"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La longitude"
           }
         }
       }
@@ -1634,6 +1865,22 @@
         }
       }
     },
+    "validation.rule.cannotBeEmpty" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cannot be empty."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ne peut être vide."
+          }
+        }
+      }
+    },
     "validation.rule.cannotBeZero" : {
       "localizations" : {
         "en" : {
@@ -1678,6 +1925,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "est invalide."
+          }
+        }
+      }
+    },
+    "validation.rule.locationFailed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User location has failed."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La géolocalisation de l’utilisateur a échoué."
           }
         }
       }

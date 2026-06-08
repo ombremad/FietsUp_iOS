@@ -19,7 +19,8 @@ final class DangersViewModel {
   var latitude: Double? { locationService.latitude }
   var longitude: Double? { locationService.longitude }
   var locationStatus: CLAuthorizationStatus { locationService.authorizationStatus }
-  var approximateLocationName: String? { locationService.locationName }
+  
+  var isNewDangerPostSheetPresented = false
 
   func load() async {
     isLoading = true

@@ -19,9 +19,9 @@ struct ForumCategoryView: View {
         if vm.isLoading {
           ForEach(0..<5, id: \.self) { _ in
             ContentCard.forumPostPlaceholder
-              .redacted(reason: .placeholder)
-              .shimmering()
           }
+          .redacted(reason: .placeholder)
+          .shimmering()
         } else {
           if let category = vm.category {
             ForEach(category.posts) { post in

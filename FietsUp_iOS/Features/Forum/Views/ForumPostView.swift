@@ -15,7 +15,7 @@ struct ForumPostView: View {
     ScrollView {
       VStack(spacing: 42) {
         if vm.isLoading {
-          VStack {
+          Group {
             ContentComponent.bigPlaceholder
             ForEach(0..<5, id: \.self) { _ in
               ContentComponent.smallPlaceholder
