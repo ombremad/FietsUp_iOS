@@ -46,7 +46,8 @@ struct ContentComponent: View {
           .font(.title2)
           .multilineTextAlignment(.leading)
       }
-      Text(content)
+      
+      splitParagraphs(content)
     }
   }  
 }

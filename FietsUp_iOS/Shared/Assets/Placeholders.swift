@@ -23,9 +23,7 @@ enum Placeholder {
     static let title = "Qui pour aller se balader les dimanches à Toulouse ?"
     static let content = """
 Coucou tout le monde ! Je débute en ville, et j’aimerais trouver des partenaires de vélo avec qui aller faire des promenades faciles les prochaines semaines, au moins le temps de m’habituer.
-
 Évidemment, le but sera d’apprendre, chacun·e à son rythme ! Et pourquoi pas d’accueillir encore plus de débutants quand je me sentirai un peu plus à l’aise moi-même ;-) 
-
 Alors ? On s’organise les Toulousain·es sur·es ??
 """
   }
