@@ -88,20 +88,20 @@ final class PlacesViewModel {
     centerMapOn(latitude: place.latitude, longitude: place.longitude, delta: zoomedDelta)
     showSinglePlaceSheet()
   }
-  
+    
   func showSinglePlaceSheet() {
     isPlacesSheetPresented = false
-    isSinglePlaceSheetPresented = true
+    Task { isSinglePlaceSheetPresented = true }
   }
   
   func showPlacesSheet() {
     isSinglePlaceSheetPresented = false
-    isPlacesSheetPresented = true
+    Task { isPlacesSheetPresented = true }
   }
   
   func closeAllSheets() {
     isSinglePlaceSheetPresented = false
-    isPlacesSheetPresented = false
+    Task { isPlacesSheetPresented = false }
   }
   
   private func centerMapOn(latitude: Double, longitude: Double, delta: Double) {

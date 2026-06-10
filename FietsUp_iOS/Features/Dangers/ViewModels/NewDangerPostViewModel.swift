@@ -34,12 +34,10 @@ final class NewDangerPostViewModel {
     
     locationService.requestLocation()
     
-    if availableCategories.isEmpty {
-      do {
-        try await performFetchCategories()
-      } catch {
-        ErrorService.shared.show(error)
-      }
+    do {
+      try await performFetchCategories()
+    } catch {
+      ErrorService.shared.show(error)
     }
   }
   
@@ -63,17 +61,12 @@ final class NewDangerPostViewModel {
   }
   
   private func performNewDangerPostRequest() async throws {
-    if let categoryId = newDangerPostForm.categoryId {
-      do {
-        let body = DangerPostRequest(from: newDangerPostForm, latitude: latitude!, longitude: longitude!)
-        let _: DangerPostResponse = try await NetworkService.shared.post(
-          endpoint: "/dangers/posts/category/\(categoryId)",
-          body: body,
-          requiresAuth: true
-        )
-      } catch {
-        ErrorService.shared.show(error)
-      }
-    }
+    guard let categoryId = newDangerPostForm.categoryId else { return }
+    let body = DangerPostRequest(from: newDangerPostForm, latitude: latitude!, longitude: longitude!)
+    let _: DangerPostResponse = try await NetworkService.shared.post(
+      endpoint: "/dangers/posts/category/\(categoryId)",
+      body: body,
+      requiresAuth: true
+    )
   }
 }

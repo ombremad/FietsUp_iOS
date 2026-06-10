@@ -40,7 +40,7 @@ struct ContentComponent: View {
   }
   
   private var contentSection: some View {
-    VStack(alignment: .leading, spacing: 24) {
+    VStack(alignment: .leading, spacing: 16) {
       if let title {
         Text(title)
           .font(.title2)

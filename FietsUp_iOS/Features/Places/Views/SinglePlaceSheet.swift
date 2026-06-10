@@ -17,8 +17,6 @@ struct SinglePlaceSheet: View {
       if vm.selectedPlace != nil {
         tagsSection
         infoSection
-      } else {
-        Text("error")
       }
     }
     .listStyle(.inset)
@@ -42,7 +40,12 @@ struct SinglePlaceSheet: View {
     .navigationBarTitleDisplayMode(.inline)
     
     .toolbar {
-      ToolbarItem(placement: .cancellationAction) {
+      ToolbarItem(placement: .primaryAction) {
+        Button("common.cancel", systemImage: "xmark", role: .cancel) {
+          vm.closeAllSheets()
+        }
+      }
+      ToolbarItem(placement: .navigation) {
         Button("common.cancel", systemImage: "chevron.backward", role: .cancel) {
           vm.showPlacesSheet()
         }

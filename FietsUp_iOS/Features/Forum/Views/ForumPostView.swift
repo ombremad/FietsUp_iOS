@@ -65,11 +65,15 @@ struct ForumPostView: View {
         
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack {
-        NewCommentSheet(postId: id, postName: vm.post?.title ?? "")
-          .presentationDetents([.medium, .large])
+        NewCommentSheet(onSuccess: {
+          Task { await vm.load(id: id) }
+        }, postId: id, postName: vm.post?.title ?? "")
       }
     }
 
+    .refreshable {
+      await vm.load(id: id)
+    }
     .task {
       await vm.load(id: id)
     }

@@ -37,6 +37,10 @@ struct DangersView: View {
           ForEach(vm.dangerPosts) { danger in
             ContentCard(
               contentType: .dangerPost,
+              flairs: [CardFlair(
+                name: danger.dangerCategory.name,
+                iconName: danger.dangerCategory.iconName
+              )],
               title: danger.title,
               content: danger.content,
               footerData: distanceBetweenTwoPoints(
@@ -48,7 +52,7 @@ struct DangersView: View {
               date: danger.creationDate
             )
             .onTapGesture {
-              // TODO: danger post details
+              router.push(DangersDestination.post(id: danger.id))
             }
           }
         }
@@ -75,10 +79,21 @@ struct DangersView: View {
     
     .appSheet(isPresented: $vm.isNewDangerPostSheetPresented) {
       NavigationStack {
-        NewDangerPostSheet()
+        NewDangerPostSheet(onSuccess: {
+          Task { await vm.load() }
+        })
+      }
+    }
+    
+    .navigationDestination(for: DangersDestination.self) { destination in
+      switch destination {
+        case .post(let id): DangerPostView(id: id)
       }
     }
 
+    .refreshable {
+      await vm.load()
+    }
     .task {
       await vm.load()
     }

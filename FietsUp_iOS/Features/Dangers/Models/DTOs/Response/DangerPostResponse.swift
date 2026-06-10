@@ -16,5 +16,5 @@ struct DangerPostResponse: Decodable, Identifiable {
   let user: UserPublicResponse
   let creationDate: Date?
   let dangerCategory: DangerCategoryResponse
-  let totalComments: Int
+  let totalComments: Int?
 }

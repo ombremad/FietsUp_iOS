@@ -11,6 +11,8 @@ struct NewCommentSheet: View {
   @State private var vm = NewCommentViewModel()
   @Environment(\.dismiss) private var dismiss
   
+  var onSuccess: (() -> Void)? = nil
+  
   let postId: UUID
   let postName: String
   
@@ -35,6 +37,7 @@ struct NewCommentSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("comment.newComment")
     .navigationBarTitleDisplayMode(.inline)
+    .presentationDetents([.medium, .large])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
@@ -42,6 +45,7 @@ struct NewCommentSheet: View {
           Task {
             do {
               try await vm.submit()
+              onSuccess?()
               dismiss()
             } catch {
               ErrorService.shared.show(error)

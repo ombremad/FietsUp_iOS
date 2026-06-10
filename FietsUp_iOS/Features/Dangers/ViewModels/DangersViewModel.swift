@@ -42,7 +42,6 @@ final class DangersViewModel {
           endpoint: "/dangers/posts/near/?latitude=\(latitude)&longitude=\(longitude)",
           requiresAuth: true
         )
-        print(response.debugDescription)
         dangerPosts = response
       } catch {
         ErrorService.shared.show(error)

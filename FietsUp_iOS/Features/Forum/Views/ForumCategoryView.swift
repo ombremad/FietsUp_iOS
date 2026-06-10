@@ -50,8 +50,9 @@ struct ForumCategoryView: View {
     
     .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack {
-        NewPostSheet(categoryId: id, categoryName: vm.category?.name ?? "")
-          .presentationDetents([.medium, .large])
+        NewPostSheet(onSuccess: {
+          Task { await vm.load(id: id) }
+        }, categoryId: id, categoryName: vm.category?.name ?? "")
       }
     }
     
@@ -65,6 +66,9 @@ struct ForumCategoryView: View {
       }
     }
     
+    .refreshable {
+      await vm.load(id: id)
+    }
     .task {
       await vm.load(id: id)
     }

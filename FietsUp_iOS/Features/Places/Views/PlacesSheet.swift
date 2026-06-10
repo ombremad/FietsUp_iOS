@@ -37,19 +37,22 @@ struct PlacesSheet: View {
     .navigationBarTitleDisplayMode(.inline)
     
     .toolbar {
-      ToolbarItem(placement: .cancellationAction) {
+      ToolbarItem(placement: .primaryAction) {
         Button("common.cancel", systemImage: "xmark", role: .cancel) {
           vm.closeAllSheets()
         }
       }
     }
-
   }
   
   private var placesList: some View {
     VStack(spacing: 16) {
       if vm.placesNearby.isEmpty {
-        Text("empty")
+        ForEach(0..<3, id: \.self) { _ in
+          ContentCard.placePlaceholder
+            .redacted(reason: .placeholder)
+            .shimmering()
+        }
       } else {
         ForEach(vm.placesNearby) { place in
           ContentCard(

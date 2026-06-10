@@ -11,6 +11,8 @@ struct NewDangerPostSheet: View {
   @State private var vm = NewDangerPostViewModel()
   @Environment(\.dismiss) private var dismiss
   
+  var onSuccess: (() -> Void)? = nil
+  
   var body: some View {
     Form {
       AppFormSection {
@@ -24,28 +26,38 @@ struct NewDangerPostSheet: View {
       
       AppFormSection {
         Picker("danger.category", selection: $vm.newDangerPostForm.categoryId) {
-          Text("danger.selectCategory")
+          Text("danger.selectCategory").tag(UUID?.none)
           ForEach(vm.availableCategories) { category in
-            Label(category.name, systemImage: category.iconName).tag(category.id)
+            Label(category.name, systemImage: category.iconName)
+              .tag(category.id as UUID?)
           }
         }
+      }
+      
+      AppFormSection {
         TextField("danger.title", text: $vm.newDangerPostForm.title)
         TextField("danger.content", text: $vm.newDangerPostForm.content, axis: .vertical)
           .lineLimit(12)
       }
     }
-    .listSectionSpacing(4)
+    .listSectionSpacing(16)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("post.newPost")
     .navigationBarTitleDisplayMode(.inline)
+    .presentationDetents([.medium, .large])
 
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "arrow.up", role: .confirm) {
           Task {
-            try await vm.submit()
-            dismiss()
+            do {
+              try await vm.submit()
+              onSuccess?()
+              dismiss()
+            } catch {
+              ErrorService.shared.show(error)
+            }
           }
         }.disabled(vm.isLoading)
       }

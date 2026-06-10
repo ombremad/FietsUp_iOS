@@ -59,6 +59,9 @@ struct ForumView: View {
       }
     }
     
+    .refreshable {
+      await vm.load()
+    }
     .task {
       await vm.load()
     }

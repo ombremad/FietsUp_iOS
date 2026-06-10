@@ -596,12 +596,6 @@
         }
       }
     },
-    "empty" : {
-      "shouldTranslate" : false
-    },
-    "error" : {
-      "shouldTranslate" : false
-    },
     "FietsUp" : {
       "shouldTranslate" : false
     },

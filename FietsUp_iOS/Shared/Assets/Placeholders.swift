@@ -69,6 +69,11 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
     static let like = 42
     static let count = 12
   }
+  
+  enum Location {
+    static let latitude = 43.6045
+    static let longitude = 1.4444
+  }
 }
 
 extension UserResponse {
@@ -192,5 +197,27 @@ extension UserPublicCard {
     user: UserPublicResponse.placeholder,
     date: Placeholder.Dates.recent,
     size: .small
+  )
+}
+
+extension DangerCategoryResponse {
+  static let placeholder = DangerCategoryResponse(
+    id: UUID(),
+    name: Placeholder.DangerCategory.name,
+    iconName: Placeholder.DangerCategory.iconName
+  )
+}
+
+extension DangerPostResponse {
+  static let placeholder = DangerPostResponse(
+    id: UUID(),
+    title: Placeholder.DangerPost.title,
+    content: Placeholder.DangerPost.content,
+    latitude: Placeholder.Location.latitude,
+    longitude: Placeholder.Location.longitude,
+    user: UserPublicResponse.placeholder,
+    creationDate: Placeholder.Dates.recent,
+    dangerCategory: DangerCategoryResponse.placeholder,
+    totalComments: Placeholder.Numbers.count
   )
 }
