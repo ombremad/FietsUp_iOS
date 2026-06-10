@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ForumButtonSection: View {
+struct ButtonBar: View {
   let likeCount: Int
   let isLiked: Bool
   let isFaved: Bool
@@ -65,7 +65,7 @@ struct ForumButtonSection: View {
 }
 
 #Preview {
-  ForumButtonSection(
+  ButtonBar(
     likeCount: Placeholder.Numbers.like,
     isLiked: true,
     isFaved: false,

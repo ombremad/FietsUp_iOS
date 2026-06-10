@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct DangerPostRequest: Encodable {
   let title: String
   let content: String

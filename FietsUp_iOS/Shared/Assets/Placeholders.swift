@@ -218,6 +218,23 @@ extension DangerPostResponse {
     user: UserPublicResponse.placeholder,
     creationDate: Placeholder.Dates.recent,
     dangerCategory: DangerCategoryResponse.placeholder,
-    totalComments: Placeholder.Numbers.count
+    totalComments: Placeholder.Numbers.count,
+    likeCount: Placeholder.Numbers.like,
+    likedByUser: true,
+    favedByUser: false,
+    comments: []
+  )
+}
+
+extension ButtonBar {
+  static let placeholder = ButtonBar(
+    likeCount: Placeholder.Numbers.like,
+    isLiked: false,
+    isFaved: false,
+    onLike: {},
+    onFav: {},
+    onReport: {},
+    onAnswer: {},
+    isLoading: true
   )
 }

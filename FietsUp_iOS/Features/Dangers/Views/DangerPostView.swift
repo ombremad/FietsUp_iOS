@@ -17,13 +17,24 @@ struct DangerPostView: View {
       VStack(spacing: 42) {
         mapSnippet
         dangerDetails.padding(.horizontal)
+        dangerComments.padding(.horizontal)
       }
+      .padding(.bottom, 42)
       .frame(maxWidth: .infinity)
 
     }
+    .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle(vm.post?.title ?? "common.loading")
     .navigationBarTitleDisplayMode(.inline)
+    
+    .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
+      NavigationStack {
+        NewDangerCommentSheet(onSuccess: {
+          Task { await vm.load(id: id) }
+        }, postId: id, postName: vm.post?.title ?? "")
+      }
+    }
     
     .refreshable {
       await vm.load(id: id)
@@ -56,19 +67,85 @@ struct DangerPostView: View {
   
   @ViewBuilder
   private var dangerDetails: some View {
-    if vm.isLoading {
-      ContentComponent.bigPlaceholder
+    VStack(spacing: 24) {
+      if vm.isLoading {
+        Group {
+          ContentComponent.bigPlaceholder
+          ButtonBar.placeholder
+        }
         .redacted(reason: .placeholder)
         .shimmering()
-    } else {
-      if let post = vm.post {
-        ContentComponent(
-          size: .big,
-          title: post.title,
-          content: post.content,
-          date: post.creationDate!,
-          user: post.user
-        )
+      } else {
+        if let post = vm.post {
+          ContentComponent(
+            size: .big,
+            title: post.title,
+            content: post.content,
+            date: post.creationDate,
+            user: post.user
+          )
+          ButtonBar(
+            likeCount: post.likeCount,
+            isLiked: post.likedByUser,
+            isFaved: post.favedByUser,
+            onLike: { Task { await vm.feedback(feedback: .like, content: .post, id: post.id) } },
+            onFav: { Task { await vm.feedback(feedback: .fav, content: .post, id: post.id) } },
+            onReport: {}, // TODO: this
+            onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+            isLoading: vm.isFeedbackLoading
+          )
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var dangerComments: some View {
+    VStack(spacing: 24) {
+      if vm.isLoading {
+        Group {
+          ForEach(0..<5, id: \.self) { _ in
+            ContentComponent.smallPlaceholder
+            ButtonBar.placeholder
+          }
+        }
+        .redacted(reason: .placeholder)
+        .shimmering()
+      } else {
+        if let post = vm.post {
+          if post.comments.isEmpty {
+            Rectangle()
+              .foregroundStyle(Color.Surface.divider)
+              .frame(height: 1)
+            ContentUnavailableView(
+              "comments.empty.title",
+              systemImage: "bubble.left.and.text.bubble.right",
+              description: Text("comments.empty.description")
+            )
+          } else {
+            ForEach(post.comments) { comment in
+              Rectangle()
+                .foregroundStyle(Color.Surface.divider)
+                .frame(height: 1)
+              ContentComponent(
+                size: .small,
+                content: comment.content,
+                date: comment.creationDate,
+                user: comment.user
+              )
+              ButtonBar(
+                likeCount: comment.likeCount,
+                isLiked: comment.likedByUser,
+                isFaved: comment.favedByUser,
+                onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) }},
+                onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) }},
+                onReport: {}, // TODO: this
+                onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+                isLoading: vm.isFeedbackLoading
+              )
+            }
+          }
+        }
       }
     }
   }

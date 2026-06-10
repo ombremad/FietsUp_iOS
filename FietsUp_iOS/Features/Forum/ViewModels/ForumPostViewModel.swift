@@ -10,8 +10,6 @@ import Foundation
 @Observable
 final class ForumPostViewModel {
   var isLoading: Bool = false
-  var isLiking: Bool = false
-  var isFaving: Bool = false
   var isNewCommentSheetPresented: Bool = false
   
   var id: UUID?
@@ -29,10 +27,9 @@ final class ForumPostViewModel {
     }
   }
   
+  // TODO: replace with new feedback logic from dangers section
+  
   func like() async {
-    isLiking = true
-    defer { isLiking = false }
-    
     guard let current = post else { return }
     
     post = ForumPostResponse(
@@ -56,9 +53,6 @@ final class ForumPostViewModel {
   }
   
   func fav() async {
-    isFaving = true
-    defer { isFaving = false }
-    
     guard let current = post else { return }
     
     post = ForumPostResponse(

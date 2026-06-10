@@ -1,19 +1,19 @@
 //
-//  NewCommentViewModel.swift
+//  NewDangerCommentViewModel.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 02/06/2026.
+//  Created by Anne Ferret on 10/06/2026.
 //
 
 import Foundation
 
 @Observable
-final class NewCommentViewModel {
+final class NewDangerCommentViewModel {
   var isLoading: Bool = false
   var postId: UUID?
   
-  var newCommentForm = NewCommentForm()
-  struct NewCommentForm {
+  var newDangerCommentForm = NewDangerCommentForm()
+  struct NewDangerCommentForm {
     var content: String = ""
   }
   
@@ -25,15 +25,15 @@ final class NewCommentViewModel {
     isLoading = true
     defer { isLoading = false }
     
-    try ValidationService.content(newCommentForm.content)
+    try ValidationService.content(newDangerCommentForm.content)
     try await performNewCommentRequest()
   }
   
   private func performNewCommentRequest() async throws {
     if let postId {
-      let body = ForumCommentRequest(from: newCommentForm)
-      let _: ForumCommentResponse = try await NetworkService.shared.post(
-        endpoint: "/forum/comments/post/\(postId)",
+      let body = DangerCommentRequest(from: newDangerCommentForm)
+      let _: ForumPostResponse = try await NetworkService.shared.post(
+        endpoint: "/dangers/comments/post/\(postId)",
         body: body,
         requiresAuth: true
       )

@@ -11,7 +11,7 @@ import CoreLocation
 @Observable
 final class DangersViewModel {
   var isLoading: Bool = false
-  var dangerPosts: [DangerPostResponse] = []
+  var dangerPosts: [DangerPostShortResponse] = []
   
   // location related values
   private let locationService = LocationService.shared
@@ -38,7 +38,7 @@ final class DangersViewModel {
   private func performFetchDangerPosts() async throws {
     if let latitude, let longitude {
       do {
-        let response: [DangerPostResponse] = try await NetworkService.shared.get(
+        let response: [DangerPostShortResponse] = try await NetworkService.shared.get(
           endpoint: "/dangers/posts/near/?latitude=\(latitude)&longitude=\(longitude)",
           requiresAuth: true
         )

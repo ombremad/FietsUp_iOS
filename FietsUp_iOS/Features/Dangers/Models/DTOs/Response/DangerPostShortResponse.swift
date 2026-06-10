@@ -1,13 +1,13 @@
 //
-//  DangerPostResponse.swift
+//  DangerPostShortResponse.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 08/06/2026.
+//  Created by Anne Ferret on 10/06/2026.
 //
 
 import Foundation
 
-struct DangerPostResponse: Decodable, Identifiable {
+struct DangerPostShortResponse: Decodable, Identifiable {
   let id: UUID
   let title: String
   let content: String
@@ -17,8 +17,4 @@ struct DangerPostResponse: Decodable, Identifiable {
   let creationDate: Date
   let dangerCategory: DangerCategoryResponse
   let totalComments: Int?
-  let likeCount: Int
-  let likedByUser: Bool
-  let favedByUser: Bool
-  let comments: [DangerCommentResponse]
 }
