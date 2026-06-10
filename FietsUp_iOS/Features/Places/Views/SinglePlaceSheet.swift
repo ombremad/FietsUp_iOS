@@ -109,7 +109,7 @@ struct SinglePlaceSheet: View {
       
       Section {
         if let fullAddress {
-          if let url = URL(string: "https://maps.apple.com/?q=\(fullAddress)") {
+          if let url = URL(string: "https://maps.apple.com/?q=\(place.latitude),\(place.longitude)") {
             Button { openURL(url) } label: {
               LabeledContent("place.label.address", value: fullAddress)
             }

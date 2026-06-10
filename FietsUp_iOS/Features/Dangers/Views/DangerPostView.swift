@@ -10,6 +10,8 @@ import MapKit
 
 struct DangerPostView: View {
   @State private var vm = DangerPostViewModel()
+  @Environment(\.openURL) private var openURL
+
   let id: UUID
   
   var body: some View {
@@ -51,20 +53,37 @@ struct DangerPostView: View {
   @ViewBuilder
   private var mapSnippet: some View {
     if vm.isLoading {
-      ProgressView().frame(height: 220)
+      ProgressView().frame(height: 235)
     } else {
       if let post = vm.post {
-        Map(initialPosition: .region(MKCoordinateRegion(
-          center: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
-          span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        ))) {
-          Marker(post.title, coordinate: CLLocationCoordinate2D(
-            latitude: post.latitude,
-            longitude: post.longitude
-          ))
+        VStack(spacing: 0) {
+          Map(initialPosition: .region(MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+          ))) {
+            Marker(post.title, coordinate: CLLocationCoordinate2D(
+              latitude: post.latitude,
+              longitude: post.longitude
+            ))
+            UserAnnotation()
+          }
+          .allowsHitTesting(false)
+          
+          Spacer()
+          
+          Text("common.map.around \(vm.approximateLocation ?? "")")
+            .font(.caption2)
+            .foregroundStyle(Color.Text.secondary)
+            .lineLimit(1)
+            .padding(.horizontal)
         }
-        .frame(height: 220)
-        .disabled(true)
+        .frame(height: 235)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          if let url = URL(string: "https://maps.apple.com/?q=\(post.latitude),\(post.longitude)") {
+            openURL(url)
+          }
+        }
       }
     }
   }

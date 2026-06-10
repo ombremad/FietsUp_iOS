@@ -19,7 +19,7 @@ struct NewDangerPostSheet: View {
         VStack(alignment: .leading) {
           Text("dangers.postWillBeGeolocated")
             .font(.caption2).bold()
-          Text("dangers.around \(vm.approximateLocationName ?? "location.unknownLocation")")
+          Text("common.map.around \(vm.approximateLocationName ?? "location.unknownLocation")")
         }
         .listRowBackground(Color.clear)
       }

@@ -52,10 +52,10 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   private func reverseGeocode(_ location: CLLocation) {
     Task {
       do {
-        guard let request = MKReverseGeocodingRequest(location: location) else { return }
-        let mapItems = try await request.mapItems
-        guard let mapItem = mapItems.first else { return }
-        locationName = mapItem.address?.shortAddress
+        locationName = try await ReverseGeocoder.resolve(
+          latitude: location.coordinate.latitude,
+          longitude: location.coordinate.longitude
+        )
       } catch {
         print("Reverse geocoding failed: \(error.localizedDescription)")
       }

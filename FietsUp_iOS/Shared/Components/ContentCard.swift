@@ -53,7 +53,7 @@ struct ContentCard: View {
   private var topSection: some View {
     HStack(spacing: 12) {
       VStack(alignment: .leading, spacing: 12) {
-        flairRow
+        flairRows
         titleAndContent
       }
       
@@ -65,12 +65,13 @@ struct ContentCard: View {
   }
   
   @ViewBuilder
-  private var flairRow: some View {
+  private var flairRows: some View {
     if !flairs.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
         ForEach(flairs, id: \.self) { flair in
           HStack(spacing: 4) {
             Image(systemName: flair.iconName)
+              .frame(width: 20)
             Text(flair.name)
           }
         }

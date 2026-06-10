@@ -15,8 +15,9 @@ final class DangerPostViewModel {
   
   var id: UUID?
   var post: DangerPostResponse?
+  var approximateLocation: String?
   
-  var reportTarget: ReportTarget? = nil
+  var reportTarget: ReportTarget?
     
   func load(id: UUID) async {
     isLoading = true
@@ -25,6 +26,9 @@ final class DangerPostViewModel {
     do {
       self.id = id
       try await performFetchPost(id: id)
+      if let post {
+        approximateLocation = try await ReverseGeocoder.resolve(latitude: post.latitude, longitude: post.longitude)
+      }
     } catch {
       ErrorService.shared.show(error)
     }

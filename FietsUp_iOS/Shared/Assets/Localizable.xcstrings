@@ -292,6 +292,22 @@
         }
       }
     },
+    "common.map.around %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "around %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vers %@"
+          }
+        }
+      }
+    },
     "common.ok" : {
       "localizations" : {
         "en" : {
@@ -432,22 +448,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nouveau post"
-          }
-        }
-      }
-    },
-    "dangers.around %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "around: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "vers: %@"
           }
         }
       }
