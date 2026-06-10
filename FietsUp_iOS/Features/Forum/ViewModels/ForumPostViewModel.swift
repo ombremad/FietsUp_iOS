@@ -10,10 +10,13 @@ import Foundation
 @Observable
 final class ForumPostViewModel {
   var isLoading: Bool = false
+  var isFeedbackLoading: Bool = false
   var isNewCommentSheetPresented: Bool = false
   
   var id: UUID?
   var post: ForumPostResponse?
+  
+  var reportTarget: ReportTarget? = nil
   
   func load(id: UUID) async {
     isLoading = true
@@ -21,91 +24,41 @@ final class ForumPostViewModel {
     
     do {
       self.id = id
-      try await performFetchPost()
+      try await performFetchPost(id: id)
     } catch {
       ErrorService.shared.show(error)
     }
   }
   
-  // TODO: replace with new feedback logic from dangers section
-  
-  func like() async {
-    guard let current = post else { return }
-    
-    post = ForumPostResponse(
-      id: current.id,
-      title: current.title,
-      content: current.content,
-      user: current.user,
-      creationDate: current.creationDate,
-      likeCount: current.likedByUser ? current.likeCount - 1 : current.likeCount + 1,
-      likedByUser: !current.likedByUser,
-      favedByUser: current.favedByUser,
-      comments: current.comments
-    )
+  func feedback(feedback: FeedbackType, content: FeedbackContentType, id: UUID) async {
+    isFeedbackLoading = true
+    defer { isFeedbackLoading = false }
     
     do {
-      try await performLike()
+      try await performContentFeedback(feedback: feedback, content: content, id: id)
     } catch {
-      post = current
       ErrorService.shared.show(error)
     }
   }
   
-  func fav() async {
-    guard let current = post else { return }
-    
-    post = ForumPostResponse(
-      id: current.id,
-      title: current.title,
-      content: current.content,
-      user: current.user,
-      creationDate: current.creationDate,
-      likeCount: current.likeCount,
-      likedByUser: current.likedByUser,
-      favedByUser: !current.favedByUser,
-      comments: current.comments
+  func report(contentType: ReportContentType, content: String, id: UUID) {
+    reportTarget = ReportTarget(id: id, contentType: contentType, content: content)
+  }
+        
+  private func performFetchPost(id: UUID) async throws {
+    let response: ForumPostResponse = try await NetworkService.shared.get(
+      endpoint: "/forum/posts/\(id)",
+      requiresAuth: true
     )
-
-    do {
-      try await performFav()
-    } catch {
-      post = current
-      ErrorService.shared.show(error)
-    }
+    post = response
   }
   
-  func toggleAnswer() {
-    self.isNewCommentSheetPresented.toggle()
-  }
-  
-  private func performFetchPost() async throws {
-    if let id = id {
-      let response: ForumPostResponse = try await NetworkService.shared.get(
-        endpoint: "/forum/posts/\(id)",
-        requiresAuth: true
-      )
-      post = response
-    }
-  }
-  
-  private func performLike() async throws {
-    if let id = id {
-      let response: ForumPostResponse = try await NetworkService.shared.post(
-        endpoint: "/forum/posts/\(id)/like",
-        requiresAuth: true
-      )
-      post = response
-    }
-  }
-  
-  private func performFav() async throws {
-    if let id = id {
-      let response: ForumPostResponse = try await NetworkService.shared.post(
-        endpoint: "/forum/posts/\(id)/fav",
-        requiresAuth: true
-      )
-      post = response
-    }
+  private func performContentFeedback(feedback: FeedbackType, content: FeedbackContentType, id: UUID) async throws {
+    let endpoint: String = "/forum/\(content.rawValue)/\(id)/\(feedback.rawValue)"
+    let response: ForumPostResponse = try await NetworkService.shared.post(
+      endpoint: endpoint,
+      requiresAuth: true
+    )
+    post = response
   }
 }

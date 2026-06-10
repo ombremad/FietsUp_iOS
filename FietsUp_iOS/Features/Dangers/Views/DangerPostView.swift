@@ -25,8 +25,6 @@ struct DangerPostView: View {
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
-    .navigationTitle(vm.post?.title ?? "common.loading")
-    .navigationBarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack {
@@ -96,7 +94,7 @@ struct DangerPostView: View {
             isFaved: post.favedByUser,
             onLike: { Task { await vm.feedback(feedback: .like, content: .post, id: post.id) } },
             onFav: { Task { await vm.feedback(feedback: .fav, content: .post, id: post.id) } },
-            onReport: { vm.report(.dangersPost, content: post.content, id: post.id) },
+            onReport: { vm.report(contentType: .dangersPost, content: post.content, id: post.id) },
             onAnswer: { vm.isNewCommentSheetPresented.toggle() },
             isLoading: vm.isFeedbackLoading
           )
@@ -111,6 +109,7 @@ struct DangerPostView: View {
       if vm.isLoading {
         Group {
           ForEach(0..<5, id: \.self) { _ in
+            Divider()
             ContentComponent.smallPlaceholder
             ButtonBar.placeholder
           }
@@ -120,9 +119,7 @@ struct DangerPostView: View {
       } else {
         if let post = vm.post {
           if post.comments.isEmpty {
-            Rectangle()
-              .foregroundStyle(Color.Surface.divider)
-              .frame(height: 1)
+            Divider()
             ContentUnavailableView(
               "comments.empty.title",
               systemImage: "bubble.left.and.text.bubble.right",
@@ -130,9 +127,7 @@ struct DangerPostView: View {
             )
           } else {
             ForEach(post.comments) { comment in
-              Rectangle()
-                .foregroundStyle(Color.Surface.divider)
-                .frame(height: 1)
+              Divider()
               ContentComponent(
                 size: .small,
                 content: comment.content,
@@ -145,7 +140,7 @@ struct DangerPostView: View {
                 isFaved: comment.favedByUser,
                 onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) }},
                 onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) }},
-                onReport: { vm.report(.dangersComment, content: comment.content, id: comment.id) },
+                onReport: { vm.report(contentType: .dangersComment, content: comment.content, id: comment.id) },
                 onAnswer: { vm.isNewCommentSheetPresented.toggle() },
                 isLoading: vm.isFeedbackLoading
               )

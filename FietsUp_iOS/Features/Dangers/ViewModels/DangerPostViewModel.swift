@@ -16,22 +16,8 @@ final class DangerPostViewModel {
   var id: UUID?
   var post: DangerPostResponse?
   
-  struct ReportTarget: Identifiable {
-    let id: UUID
-    let contentType: ReportContentType
-    let content: String
-  }
   var reportTarget: ReportTarget? = nil
-  
-  enum FeedbackType: String { case
-    like = "like",
-    fav = "fav"
-  }
-  enum FeedbackContentType: String { case
-    post = "posts",
-    comment = "comments"
-  }
-  
+    
   func load(id: UUID) async {
     isLoading = true
     defer { isLoading = false }
@@ -55,7 +41,7 @@ final class DangerPostViewModel {
     }
   }
   
-  func report(_ contentType: ReportContentType, content: String, id: UUID) {
+  func report(contentType: ReportContentType, content: String, id: UUID) {
     reportTarget = ReportTarget(id: id, contentType: contentType, content: content)
   }
     
