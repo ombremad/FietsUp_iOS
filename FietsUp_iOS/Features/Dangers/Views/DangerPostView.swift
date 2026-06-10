@@ -25,6 +25,7 @@ struct DangerPostView: View {
       .frame(maxWidth: .infinity)
 
     }
+    .ignoresSafeArea(.container, edges: .top)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     
@@ -52,14 +53,24 @@ struct DangerPostView: View {
   
   @ViewBuilder
   private var mapSnippet: some View {
+    let height: CGFloat = 370
+    let delta: Double = 0.001
+    let offsetFactor: Double = -0.1
+
     if vm.isLoading {
-      ProgressView().frame(height: 235)
+      ProgressView().frame(height: height)
     } else {
       if let post = vm.post {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
           Map(initialPosition: .region(MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
-            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+            center: CLLocationCoordinate2D(
+              latitude: post.latitude - delta * offsetFactor,
+              longitude: post.longitude
+            ),
+            span: MKCoordinateSpan(
+              latitudeDelta: delta,
+              longitudeDelta: delta
+            )
           ))) {
             Marker(post.title, coordinate: CLLocationCoordinate2D(
               latitude: post.latitude,
@@ -69,15 +80,13 @@ struct DangerPostView: View {
           }
           .allowsHitTesting(false)
           
-          Spacer()
-          
           Text("common.map.around \(vm.approximateLocation ?? "")")
             .font(.caption2)
             .foregroundStyle(Color.Text.secondary)
             .lineLimit(1)
             .padding(.horizontal)
         }
-        .frame(height: 235)
+        .frame(height: height)
         .contentShape(Rectangle())
         .onTapGesture {
           if let url = URL(string: "https://maps.apple.com/?q=\(post.latitude),\(post.longitude)") {
@@ -157,8 +166,8 @@ struct DangerPostView: View {
                 likeCount: comment.likeCount,
                 isLiked: comment.likedByUser,
                 isFaved: comment.favedByUser,
-                onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) }},
-                onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) }},
+                onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) } },
+                onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) } },
                 onReport: { vm.report(contentType: .dangersComment, content: comment.content, id: comment.id) },
                 onAnswer: { vm.isNewCommentSheetPresented.toggle() },
                 isLoading: vm.isFeedbackLoading

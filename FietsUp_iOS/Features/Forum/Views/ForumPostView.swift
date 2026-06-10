@@ -43,6 +43,7 @@ struct ForumPostView: View {
       await vm.load(id: id)
     }
     .task {
+      guard vm.post == nil else { return }
       await vm.load(id: id)
     }
   }

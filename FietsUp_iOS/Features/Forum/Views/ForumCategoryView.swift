@@ -70,6 +70,7 @@ struct ForumCategoryView: View {
       await vm.load(id: id)
     }
     .task {
+      guard vm.category == nil else { return }
       await vm.load(id: id)
     }
   }

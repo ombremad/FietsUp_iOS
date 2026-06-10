@@ -63,6 +63,7 @@ struct ForumView: View {
       await vm.load()
     }
     .task {
+      guard vm.categories.isEmpty else { return }
       await vm.load()
     }
   }

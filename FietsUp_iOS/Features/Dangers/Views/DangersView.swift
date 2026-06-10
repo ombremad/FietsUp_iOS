@@ -95,6 +95,7 @@ struct DangersView: View {
       await vm.load()
     }
     .task {
+      guard vm.dangerPosts.isEmpty else { return }
       await vm.load()
     }
   }
