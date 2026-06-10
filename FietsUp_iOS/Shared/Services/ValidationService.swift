@@ -97,7 +97,7 @@ enum ValidationService {
   
   static func categoryId(_ categoryId: UUID?) throws {
     guard categoryId != nil else {
-      throw ValidationError.fieldCannotBeEmpty(.dangerCategory)
+      throw ValidationError.fieldCannotBeEmpty(.category)
     }
   }
 
@@ -133,7 +133,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, title, content, length, distance, latitude, longitude, dangerCategory
+    case password, email, firstName, lastName, nickname, title, content, length, distance, latitude, longitude, category
     
     var localized: String {
       switch self {
@@ -148,7 +148,7 @@ enum ValidationError: Error, LocalizedError {
         case .distance: return String(localized: "validation.field.distance")
         case .latitude: return String(localized: "validation.field.latitude")
         case .longitude: return String(localized: "validation.field.longitude")
-        case .dangerCategory: return String(localized: "validation.field.dangerCategory")
+        case .category: return String(localized: "validation.field.category")
       }
     }
   }

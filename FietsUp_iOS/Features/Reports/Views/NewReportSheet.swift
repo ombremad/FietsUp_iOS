@@ -1,51 +1,60 @@
 //
-//  NewDangerPostSheet.swift
+//  NewReportSheet.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 08/06/2026.
+//  Created by Anne Ferret on 10/06/2026.
 //
 
 import SwiftUI
 
-struct NewDangerPostSheet: View {
-  @State private var vm = NewDangerPostViewModel()
+struct NewReportSheet: View {
+  @State private var vm = NewReportViewModel()
   @Environment(\.dismiss) private var dismiss
   
-  var onSuccess: (() -> Void)? = nil
+  let id: UUID
+  let contentType: ReportContentType
+  let content: String
   
   var body: some View {
     Form {
       AppFormSection {
         VStack(alignment: .leading) {
-          Text("dangers.postWillBeGeolocated")
+          Text("report.youWillReportTheFollowingContent")
             .font(.caption2).bold()
-          Text("dangers.around \(vm.approximateLocationName ?? "location.unknownLocation")")
+          Text(content)
         }
         .listRowBackground(Color.clear)
       }
       
       AppFormSection {
-        Picker("danger.category", selection: $vm.newDangerPostForm.categoryId) {
-          Text("danger.selectCategory").tag(UUID?.none)
+        Picker("report.category", selection: $vm.newReportForm.categoryId) {
+          Text("report.selectCategory").tag(UUID?.none)
           ForEach(vm.availableCategories) { category in
-            Label(category.name, systemImage: category.iconName)
-              .tag(category.id)
+            Text(category.name).tag(category.id)
           }
         }
       }
       
       AppFormSection {
-        TextField("danger.title", text: $vm.newDangerPostForm.title)
-        TextField("danger.content", text: $vm.newDangerPostForm.content, axis: .vertical)
-          .lineLimit(12)
+        Toggle("report.addContent", isOn: $vm.newReportForm.hasDetails)
+        if vm.newReportForm.hasDetails {
+          TextField("report.content", text: $vm.newReportForm.details, axis: .vertical)
+            .lineLimit(12)
+        }
       }
     }
     .listSectionSpacing(16)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
-    .navigationTitle("post.newPost")
+    .navigationTitle("report.newReport")
     .navigationBarTitleDisplayMode(.inline)
     .presentationDetents([.medium, .large])
+    
+    .alert("report.success.title", isPresented: $vm.isSuccessAlertPresented) {
+      Button("common.ok") { dismiss() }
+    } message: {
+      Text("report.success.message")
+    }
 
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
@@ -53,8 +62,7 @@ struct NewDangerPostSheet: View {
           Task {
             do {
               try await vm.submit()
-              onSuccess?()
-              dismiss()
+              vm.isSuccessAlertPresented.toggle()
             } catch {
               ErrorService.shared.show(error)
             }
@@ -67,13 +75,7 @@ struct NewDangerPostSheet: View {
     }
     
     .task {
-      await vm.load()
+      await vm.load(id: id, contentType: contentType)
     }
-  }
-}
-
-#Preview {
-  NavigationStack {
-    NewDangerPostSheet()
   }
 }

@@ -1427,6 +1427,30 @@
         }
       }
     },
+    "report.addContent" : {
+
+    },
+    "report.category" : {
+
+    },
+    "report.content" : {
+
+    },
+    "report.newReport" : {
+
+    },
+    "report.selectCategory" : {
+
+    },
+    "report.success.message" : {
+
+    },
+    "report.success.title" : {
+
+    },
+    "report.youWillReportTheFollowingContent" : {
+
+    },
     "settings" : {
       "localizations" : {
         "en" : {
@@ -1667,6 +1691,9 @@
         }
       }
     },
+    "validation.field.category" : {
+
+    },
     "validation.field.content" : {
       "localizations" : {
         "en" : {
@@ -1684,6 +1711,7 @@
       }
     },
     "validation.field.dangerCategory" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

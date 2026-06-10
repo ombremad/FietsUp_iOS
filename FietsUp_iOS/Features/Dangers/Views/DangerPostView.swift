@@ -36,6 +36,12 @@ struct DangerPostView: View {
       }
     }
     
+    .appSheet(item: $vm.reportTarget) { target in
+      NavigationStack {
+        NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
+      }
+    }
+    
     .refreshable {
       await vm.load(id: id)
     }
@@ -90,7 +96,7 @@ struct DangerPostView: View {
             isFaved: post.favedByUser,
             onLike: { Task { await vm.feedback(feedback: .like, content: .post, id: post.id) } },
             onFav: { Task { await vm.feedback(feedback: .fav, content: .post, id: post.id) } },
-            onReport: {}, // TODO: this
+            onReport: { vm.report(.dangersPost, content: post.content, id: post.id) },
             onAnswer: { vm.isNewCommentSheetPresented.toggle() },
             isLoading: vm.isFeedbackLoading
           )
@@ -139,7 +145,7 @@ struct DangerPostView: View {
                 isFaved: comment.favedByUser,
                 onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) }},
                 onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) }},
-                onReport: {}, // TODO: this
+                onReport: { vm.report(.dangersComment, content: comment.content, id: comment.id) },
                 onAnswer: { vm.isNewCommentSheetPresented.toggle() },
                 isLoading: vm.isFeedbackLoading
               )

@@ -37,4 +37,13 @@ extension View {
       }
     }
   }
+  
+  func appSheet<Item: Identifiable, Content: View>(
+    item: Binding<Item?>,
+    @ViewBuilder content: @escaping (Item) -> Content
+  ) -> some View {
+    self.sheet(item: item) { value in
+      SheetContainer { content(value) }
+    }
+  }
 }

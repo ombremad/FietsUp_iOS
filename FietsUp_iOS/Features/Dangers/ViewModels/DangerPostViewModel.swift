@@ -16,8 +16,21 @@ final class DangerPostViewModel {
   var id: UUID?
   var post: DangerPostResponse?
   
-  enum FeedbackType: String { case like = "like", fav = "fav" }
-  enum FeedbackContentType: String { case post = "posts", comment = "comments" }
+  struct ReportTarget: Identifiable {
+    let id: UUID
+    let contentType: ReportContentType
+    let content: String
+  }
+  var reportTarget: ReportTarget? = nil
+  
+  enum FeedbackType: String { case
+    like = "like",
+    fav = "fav"
+  }
+  enum FeedbackContentType: String { case
+    post = "posts",
+    comment = "comments"
+  }
   
   func load(id: UUID) async {
     isLoading = true
@@ -42,6 +55,10 @@ final class DangerPostViewModel {
     }
   }
   
+  func report(_ contentType: ReportContentType, content: String, id: UUID) {
+    reportTarget = ReportTarget(id: id, contentType: contentType, content: content)
+  }
+    
   private func performFetchPost(id: UUID) async throws {
     let response: DangerPostResponse = try await NetworkService.shared.get(
       endpoint: "/dangers/posts/\(id)",
