@@ -14,6 +14,11 @@ final class AuthService {
   private(set) var isAuthenticated: Bool
   private(set) var currentUser: User?
   
+  var lastKnownStreak: Int {
+    get { UserDefaults.standard.integer(forKey: "lastKnownStreak") }
+    set { UserDefaults.standard.set(newValue, forKey: "lastKnownStreak") }
+  }
+  
   private init() {
     self.isAuthenticated = KeychainService.shared.hasToken()
     self.currentUser = nil

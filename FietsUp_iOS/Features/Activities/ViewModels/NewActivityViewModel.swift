@@ -46,7 +46,12 @@ final class NewActivityViewModel {
   }
   
   private func updateLocalUser(distance: Int, streakUpdated: Bool? = nil) throws {
-    auth.currentUser?.totalElapsedDistance += distance
-    if streakUpdated == true { auth.currentUser?.streak += 1 }
+    guard let current = auth.currentUser else { return }
+    current.totalElapsedDistance += distance
+    if streakUpdated == true {
+      let newStreak = current.streak + 1
+      current.streak = newStreak
+      auth.lastKnownStreak = newStreak
+    }
   }
 }

@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct StreakUpdateSheet: View {
-  @State var streak: Int
-  init(_ streak: Int) {
-    self.streak = streak - 1
-  }
-
+  private let auth = AuthService.shared
   @Environment(\.dismiss) private var dismiss
+
+  @State var streak: Int
+  @State var isImproved: Bool
+  
+  init(streak: Int, lastKnownStreak: Int) {
+    self.isImproved = streak > 0
+    self.streak = (streak == 0) ? lastKnownStreak : (streak - 1)
+  }
   
   var body: some View {
     VStack {
@@ -32,10 +36,18 @@ struct StreakUpdateSheet: View {
             .animation(.spring.delay(0.5), value: streak)
         }
         
-        VStack(spacing: 8) {
-          Text("streakSheet.streakImproved.title")
-            .font(.title2)
-          Text("streakSheet.streakImproved.description")
+        if isImproved {
+          VStack(spacing: 8) {
+            Text("streakSheet.streakImproved.title")
+              .font(.title2)
+            Text("streakSheet.streakImproved.description")
+          }
+        } else {
+          VStack(spacing: 8) {
+            Text("streakSheet.streakReset.title")
+              .font(.title2)
+            Text("streakSheet.streakReset.description")
+          }
         }
         
         Spacer()
@@ -50,7 +62,11 @@ struct StreakUpdateSheet: View {
       .frame(maxWidth: .infinity)
       
       .onAppear {
-        streak += 1
+        if isImproved {
+          streak += 1
+        } else {
+          streak = 0
+        }
       }
     }
     
@@ -62,5 +78,5 @@ struct StreakUpdateSheet: View {
 }
 
 #Preview {
-  StreakUpdateSheet(3)
+  StreakUpdateSheet(streak: 0, lastKnownStreak: 2)
 }

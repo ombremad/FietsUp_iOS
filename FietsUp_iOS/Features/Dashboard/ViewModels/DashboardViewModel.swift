@@ -9,17 +9,20 @@ import SwiftUI
 
 @Observable
 final class DashboardViewModel {
+  private let auth = AuthService.shared
+  
   var isLoading: Bool = false
-
   var isNewActivitySheetPresented: Bool = false
   var isStreakSheetPresented: Bool = false
+  
+  var lastKnownStreakForSheet: Int = 0
   
   func load() async {
     isLoading = true
     defer { isLoading = false }
     
-    // TODO: dashboard data fetching
-    // await fetchDashboard()
+    await auth.restoreSession()
+    checkAndUpdateStreak()
   }
   
   private func fetchDashboard() async {
@@ -31,5 +34,15 @@ final class DashboardViewModel {
     } catch {
       ErrorService.shared.show(error)
     }
+  }
+  
+  private func checkAndUpdateStreak() {
+    guard let current = auth.currentUser else { return }
+    let lastKnownStreak = auth.lastKnownStreak
+    if current.streak == 0 && lastKnownStreak > 0 {
+      self.lastKnownStreakForSheet = lastKnownStreak
+      isStreakSheetPresented = true
+    }
+    auth.lastKnownStreak = current.streak
   }
 }

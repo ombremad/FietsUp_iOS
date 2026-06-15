@@ -1651,6 +1651,38 @@
         }
       }
     },
+    "streakSheet.streakReset.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You haven’t practiced last week. Try your best and do at least one quick bike ride this week!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous n’avez pas fait d’exercice la semaine dernière. Faites de votre mieux et essayez de faire au moins une balade à vélo cette semaine !"
+          }
+        }
+      }
+    },
+    "streakSheet.streakReset.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak reset"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak remis à zéro"
+          }
+        }
+      }
+    },
     "tab.dangers" : {
       "localizations" : {
         "en" : {

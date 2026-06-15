@@ -61,7 +61,7 @@ struct DashboardView: View {
         .presentationDetents([.medium])
     }
     .appSheet(isPresented: $vm.isStreakSheetPresented) {
-      StreakUpdateSheet(auth.currentUser?.streak ?? 0)
+      StreakUpdateSheet(streak: auth.currentUser?.streak ?? 0, lastKnownStreak: vm.lastKnownStreakForSheet)
     }
       
     .toolbar {
@@ -75,7 +75,7 @@ struct DashboardView: View {
     }
     
     .task {
-      await auth.restoreSession()
+      await vm.load()
     }
     .onChange(of: auth.currentUser?.streak) { oldValue, newValue in
       guard let _ = oldValue, let _ = newValue else { return }
