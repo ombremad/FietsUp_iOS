@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct FietsUp_iOSApp: App {
   @State private var authService = AuthService.shared
+  @State private var theme = ThemeService.shared
 
     var body: some Scene {
         WindowGroup {
@@ -27,6 +28,7 @@ struct FietsUp_iOSApp: App {
           }
           .animation(.default, value: authService.isAuthenticated)
           .font(.body)
+          .preferredColorScheme(theme.colorScheme)
         }
     }
 }

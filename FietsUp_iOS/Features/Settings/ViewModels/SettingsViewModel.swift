@@ -20,6 +20,7 @@ final class SettingsViewModel {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
+    var theme: ThemeSetting = .auto
   }
 
   var changePasswordForm = ChangePasswordForm()
@@ -35,6 +36,7 @@ final class SettingsViewModel {
       settingsForm.lastName = user.lastName
       settingsForm.email = user.email
     }
+    settingsForm.theme = ThemeService.shared.setting
   }
   
   func submit() async {
@@ -59,6 +61,7 @@ final class SettingsViewModel {
         }
       }
     }
+    ThemeService.shared.setting = settingsForm.theme
   }
   
   private func performUpdateUser(_ user: User) async throws {

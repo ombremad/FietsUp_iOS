@@ -44,6 +44,17 @@ struct SettingsView: View {
         }.frame(maxWidth: .infinity)
         
       }
+      
+      AppFormSection("settings.settings") {
+        Group {
+          Picker("settings.theme", selection: $vm.settingsForm.theme) {
+            ForEach(ThemeSetting.allCases, id: \.self) { option in
+              Text(option.label).tag(option)
+            }
+          }
+        }
+        .foregroundStyle(Color.Text.secondary)
+      }
     }
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("settings")
