@@ -27,9 +27,7 @@ struct ForumPostView: View {
         
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack {
-        NewCommentSheet(onSuccess: {
-          Task { await vm.load(id: id) }
-        }, postId: id, postName: vm.post?.title ?? "")
+        NewCommentSheet(postId: id, postName: vm.post?.title ?? "")
       }
     }
     
@@ -39,9 +37,7 @@ struct ForumPostView: View {
       }
     }
 
-    .refreshable {
-      await vm.load(id: id)
-    }
+    .refreshable { await vm.load(id: id) }
     .task {
       guard vm.post == nil else { return }
       await vm.load(id: id)

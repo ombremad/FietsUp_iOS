@@ -68,5 +68,6 @@ final class NewDangerPostViewModel {
       body: body,
       requiresAuth: true
     )
+    EventService.post(DangersRefresh.refreshDangersView)
   }
 }

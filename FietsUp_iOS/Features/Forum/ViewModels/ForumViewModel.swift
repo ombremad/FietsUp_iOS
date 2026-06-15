@@ -13,6 +13,16 @@ final class ForumViewModel {
   
   var categories: [ForumCategoryResponse] = []
   
+  private var observationTask: Task<Void, Never>?
+  init() {
+    observationTask = Task { @MainActor [weak self] in
+      for await _ in EventService.stream(for: ForumRefresh.refreshForumView) {
+        await self?.load()
+      }
+    }
+  }
+  deinit { observationTask?.cancel() }
+  
   func load() async {
     isLoading = true
     defer { isLoading = false }
@@ -30,5 +40,5 @@ final class ForumViewModel {
       requiresAuth: true
     )
     categories = response
-  }
+  }  
 }

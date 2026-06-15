@@ -11,9 +11,19 @@ import Foundation
 final class ForumCategoryViewModel {
   var isLoading: Bool = false
   var isNewPostSheetPresented: Bool = false
-  
+
   var id: UUID?
   var category: ForumCategoryDetailedResponse?
+  
+  private var observationTask: Task<Void, Never>?
+  init() {
+    observationTask = Task { @MainActor [weak self] in
+      for await _ in EventService.stream(for: ForumRefresh.refreshCategoryView) {
+        if let id = self?.id { await self?.load(id: id) }
+      }
+    }
+  }
+  deinit { observationTask?.cancel() }
   
   func load(id: UUID) async {
     isLoading = true

@@ -37,6 +37,8 @@ final class NewDangerCommentViewModel {
         body: body,
         requiresAuth: true
       )
+      EventService.post(DangersRefresh.refreshPostView)
+      EventService.post(DangersRefresh.refreshDangersView)
     }
   }
 }

@@ -50,9 +50,7 @@ struct ForumCategoryView: View {
     
     .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack {
-        NewPostSheet(onSuccess: {
-          Task { await vm.load(id: id) }
-        }, categoryId: id, categoryName: vm.category?.name ?? "")
+        NewPostSheet(categoryId: id, categoryName: vm.category?.name ?? "")
       }
     }
     
@@ -66,9 +64,7 @@ struct ForumCategoryView: View {
       }
     }
     
-    .refreshable {
-      await vm.load(id: id)
-    }
+    .refreshable { await vm.load(id: id) }
     .task {
       guard vm.category == nil else { return }
       await vm.load(id: id)

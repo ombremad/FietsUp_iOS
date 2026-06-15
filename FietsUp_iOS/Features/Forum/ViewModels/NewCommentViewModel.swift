@@ -37,6 +37,9 @@ final class NewCommentViewModel {
         body: body,
         requiresAuth: true
       )
+      EventService.post(ForumRefresh.refreshPostView)
+      EventService.post(ForumRefresh.refreshCategoryView)
+      EventService.post(ForumRefresh.refreshForumView)
     }
   }
 }

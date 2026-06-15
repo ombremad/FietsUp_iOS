@@ -18,6 +18,16 @@ final class DangerPostViewModel {
   var approximateLocation: String?
   
   var reportTarget: ReportTarget?
+  
+  private var observationTask: Task<Void, Never>?
+  init() {
+    observationTask = Task { @MainActor [weak self] in
+      for await _ in EventService.stream(for: DangersRefresh.refreshPostView) {
+        if let id = self?.id { await self?.load(id: id) }
+      }
+    }
+  }
+  deinit { observationTask?.cancel() }
     
   func load(id: UUID) async {
     isLoading = true

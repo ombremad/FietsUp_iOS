@@ -11,8 +11,6 @@ struct NewDangerCommentSheet: View {
   @State private var vm = NewDangerCommentViewModel()
   @Environment(\.dismiss) private var dismiss
   
-  var onSuccess: (() -> Void)? = nil
-  
   let postId: UUID
   let postName: String
   
@@ -45,7 +43,6 @@ struct NewDangerCommentSheet: View {
           Task {
             do {
               try await vm.submit()
-              onSuccess?()
               dismiss()
             } catch {
               ErrorService.shared.show(error)

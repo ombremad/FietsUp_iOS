@@ -79,9 +79,7 @@ struct DangersView: View {
     
     .appSheet(isPresented: $vm.isNewDangerPostSheetPresented) {
       NavigationStack {
-        NewDangerPostSheet(onSuccess: {
-          Task { await vm.load() }
-        })
+        NewDangerPostSheet()
       }
     }
     

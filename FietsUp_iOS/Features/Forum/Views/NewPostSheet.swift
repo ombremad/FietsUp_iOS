@@ -10,8 +10,6 @@ import SwiftUI
 struct NewPostSheet: View {
   @State private var vm = NewPostViewModel()
   @Environment(\.dismiss) private var dismiss
-  
-  var onSuccess: (() -> Void)? = nil
 
   let categoryId: UUID
   let categoryName: String
@@ -46,7 +44,6 @@ struct NewPostSheet: View {
           Task {
             do {
               try await vm.submit()
-              onSuccess?()
               dismiss()
             } catch {
               ErrorService.shared.show(error)

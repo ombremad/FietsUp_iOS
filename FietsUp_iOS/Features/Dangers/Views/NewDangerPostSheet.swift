@@ -11,8 +11,6 @@ struct NewDangerPostSheet: View {
   @State private var vm = NewDangerPostViewModel()
   @Environment(\.dismiss) private var dismiss
   
-  var onSuccess: (() -> Void)? = nil
-  
   var body: some View {
     Form {
       AppFormSection {
@@ -53,7 +51,6 @@ struct NewDangerPostSheet: View {
           Task {
             do {
               try await vm.submit()
-              onSuccess?()
               dismiss()
             } catch {
               ErrorService.shared.show(error)

@@ -21,6 +21,16 @@ final class DangersViewModel {
   var locationStatus: CLAuthorizationStatus { locationService.authorizationStatus }
   
   var isNewDangerPostSheetPresented = false
+  
+  private var observationTask: Task<Void, Never>?
+  init() {
+    observationTask = Task { @MainActor [weak self] in
+      for await _ in EventService.stream(for: DangersRefresh.refreshDangersView) {
+        await self?.load()
+      }
+    }
+  }
+  deinit { observationTask?.cancel() }
 
   func load() async {
     isLoading = true

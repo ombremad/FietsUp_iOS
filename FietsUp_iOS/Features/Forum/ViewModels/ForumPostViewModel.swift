@@ -18,6 +18,16 @@ final class ForumPostViewModel {
   
   var reportTarget: ReportTarget? = nil
   
+  private var observationTask: Task<Void, Never>?
+  init() {
+    observationTask = Task { @MainActor [weak self] in
+      for await _ in EventService.stream(for: ForumRefresh.refreshPostView) {
+        if let id = self?.id { await self?.load(id: id) }
+      }
+    }
+  }
+  deinit { observationTask?.cancel() }
+  
   func load(id: UUID) async {
     isLoading = true
     defer { isLoading = false }
@@ -60,5 +70,5 @@ final class ForumPostViewModel {
       requiresAuth: true
     )
     post = response
-  }
+  }  
 }

@@ -31,9 +31,7 @@ struct DangerPostView: View {
     
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack {
-        NewDangerCommentSheet(onSuccess: {
-          Task { await vm.load(id: id) }
-        }, postId: id, postName: vm.post?.title ?? "")
+        NewDangerCommentSheet(postId: id, postName: vm.post?.title ?? "")
       }
     }
     
@@ -47,6 +45,7 @@ struct DangerPostView: View {
       await vm.load(id: id)
     }
     .task {
+      guard vm.post == nil else { return }
       await vm.load(id: id)
     }
   }

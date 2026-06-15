@@ -33,16 +33,14 @@ final class NewPostViewModel {
   
   private func performNewPostRequest() async throws {
     if let categoryId {
-      do {
         let body = ForumPostRequest(from: newPostForm)
         let _: ForumPostResponse = try await NetworkService.shared.post(
           endpoint: "/forum/posts/category/\(categoryId)",
           body: body,
           requiresAuth: true
         )
-      } catch {
-        ErrorService.shared.show(error)
-      }
+      EventService.post(ForumRefresh.refreshCategoryView)
+      EventService.post(ForumRefresh.refreshForumView)
     }
   }
 }
