@@ -129,9 +129,6 @@
         }
       }
     },
-    "BIKE placeholder" : {
-      "shouldTranslate" : false
-    },
     "changePassword.message" : {
       "localizations" : {
         "en" : {

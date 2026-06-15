@@ -11,11 +11,11 @@ import Foundation
 final class CycleDecoration {
   var id: UUID
   var name: String
-  var fileLink: String
+  var fileLink: URL
   
-  init(with dto: CycleDecorationResponse) {
+  init(from dto: CycleDecorationResponse) {
     self.id = dto.id
     self.name = dto.name
-    self.fileLink = dto.fileLink
+    self.fileLink = URL(string: dto.fileLink)!
   }
 }

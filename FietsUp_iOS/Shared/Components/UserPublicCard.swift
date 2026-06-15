@@ -50,7 +50,7 @@ struct UserPublicCard: View {
   }
   
   private var avatarSection: some View {
-    BikeAvatar()
+    BikeAvatar(Cycle(from: user))
       .frame(
         width: size == .big ? 46 : 25,
         height: size == .big ? 30 : 16,

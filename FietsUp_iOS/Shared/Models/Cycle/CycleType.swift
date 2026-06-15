@@ -11,12 +11,12 @@ import Foundation
 final class CycleType {
   var id: UUID
   var name: String
-  var fileLink: String
+  var fileLink: URL
   
-  init(with dto: CycleType) {
+  init(from dto: CycleTypeResponse) {
     self.id = dto.id
     self.name = dto.name
-    self.fileLink = dto.fileLink
+    self.fileLink = URL(string: dto.fileLink)!
   }
 }
 

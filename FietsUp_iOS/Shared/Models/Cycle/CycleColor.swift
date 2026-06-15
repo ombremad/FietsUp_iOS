@@ -12,11 +12,11 @@ import SwiftUI
 final class CycleColor {
   var id: UUID
   var name: String
-  var color: Color
+  var color: String
   
   init(from dto: CycleColorResponse) {
     self.id = dto.id
     self.name = dto.name
-    self.color = Color(hex: dto.color)
+    self.color = dto.color
   }
 }

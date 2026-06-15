@@ -14,7 +14,7 @@ struct UserResponse: Decodable {
   let streak: Int
   let daysSinceSignup: Int
   let totalElapsedDistance: Int
-  let cycleType: CycleTypeResponse
-  let cycleColor: CycleColorResponse
-  let cycleDecoration: CycleDecorationResponse
+  let cycleType: CycleTypeResponse?
+  let cycleColor: CycleColorResponse?
+  let cycleDecoration: CycleDecorationResponse?
 }
