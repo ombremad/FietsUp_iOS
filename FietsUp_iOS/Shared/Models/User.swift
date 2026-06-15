@@ -17,6 +17,9 @@ final class User {
   var streak: Int
   var daysSinceSignup: Int
   var totalElapsedDistance: Int
+  var cycleColor: CycleColor
+  var cycleType: CycleType
+  var cycleDecoration: CycleDecoration
 
   init(with dto: UserResponse) {
     self.firstName = dto.firstName
