@@ -10,6 +10,7 @@ import SVGView
 
 struct BikeAvatar: View {
   @State private var svgColoredCycle: Data?
+  @State private var svgDecoration: Data?
   private let aspectRatio: CGFloat = 121 / 81
 
   let cycle: Cycle
@@ -28,16 +29,16 @@ struct BikeAvatar: View {
   @ViewBuilder
   private var customBike: some View {
     ZStack {
-      if let coloredCycle = svgColoredCycle, let decoration = cycle.decoration?.fileLink {
+      if let coloredCycle = svgColoredCycle, let decoration = svgDecoration {
         SVGView(data: coloredCycle)
-        SVGView(contentsOf: decoration)
+        SVGView(data: decoration)
       } else {
         ProgressView()
       }
     }
     .aspectRatio(aspectRatio, contentMode: .fit)
     .clipped()
-    .task { await prepareSVG() }
+    .task { await prepareSVGs() }
   }
     
   private var placeholderBike: some View {
@@ -47,13 +48,14 @@ struct BikeAvatar: View {
       .foregroundStyle(Color.Text.tertiary)
   }
   
-  private func prepareSVG() async {
+  private func prepareSVGs() async {
     guard let color = cycle.color?.color,
-      let cycleUrl = cycle.type?.fileLink
+          let cycleUrl = cycle.type?.fileLink, let decorationUrl = cycle.decoration?.fileLink
     else { return }
     
     do {
       svgColoredCycle = try await loadColoredSVG(from: cycleUrl, colorHex: color)
+      svgDecoration = try await loadSVG(from: decorationUrl)
     } catch {
       print(error)
     }
