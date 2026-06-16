@@ -10,6 +10,7 @@ import SVGView
 
 struct BikeAvatar: View {
   @State private var svgColoredCycle: Data?
+  private let aspectRatio: CGFloat = 121 / 81
 
   let cycle: Cycle
   init(_ cycle: Cycle) {
@@ -34,6 +35,8 @@ struct BikeAvatar: View {
         ProgressView()
       }
     }
+    .aspectRatio(aspectRatio, contentMode: .fit)
+    .clipped()
     .task { await prepareSVG() }
   }
     
