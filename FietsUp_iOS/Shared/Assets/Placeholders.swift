@@ -61,6 +61,22 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
     static let iconName = "screwdriver"
   }
   
+  enum CycleType {
+    static let name = "omafiets"
+    static let fileLink = "https://anneferret.eu/media/files/fietsup_bike07.svg"
+  }
+  
+  enum CycleColor {
+    static let name = "rusty orange"
+    static let color = "7a4b00"
+  }
+  
+  enum CycleDecoration {
+    // TODO: replace
+    static let name = "fietsen en stroopwafels"
+    static let fileLink = "https://anneferret.eu/media/files/fietsup_bikedecoration09.svg"
+  }
+  
   enum Dates {
     static let recent = Date(timeIntervalSinceNow: -12000)
   }
@@ -85,7 +101,10 @@ extension UserResponse {
     bio: Placeholder.User.bio,
     streak: Placeholder.User.streak,
     daysSinceSignup: Placeholder.User.daysSinceSignup,
-    totalElapsedDistance: Placeholder.User.totalElapsedDistance
+    totalElapsedDistance: Placeholder.User.totalElapsedDistance,
+    cycleType: CycleTypeResponse.placeholder,
+    cycleColor: CycleColorResponse.placeholder,
+    cycleDecoration: CycleDecorationResponse.placeholder
   )
 }
 
@@ -96,12 +115,51 @@ extension UserPublicResponse {
     streak: Placeholder.User.streak,
     daysSinceSignup: Placeholder.User.daysSinceSignup,
     totalElapsedDistance: Placeholder.User.totalElapsedDistance,
-    bio: Placeholder.User.bio
+    bio: Placeholder.User.bio,
+    cycleType: CycleTypeResponse.placeholder,
+    cycleColor: CycleColorResponse.placeholder,
+    cycleDecoration: CycleDecorationResponse.placeholder
   )
 }
 
 extension User {
   static let placeholder = User(with: .placeholder)
+}
+
+extension CycleTypeResponse {
+  static let placeholder = CycleTypeResponse(
+    id: UUID(),
+    name: Placeholder.CycleType.name,
+    fileLink: Placeholder.CycleType.fileLink
+  )
+}
+
+extension CycleType {
+  static let placeholder = CycleType(from: CycleTypeResponse.placeholder)
+}
+
+extension CycleColorResponse {
+  static let placeholder = CycleColorResponse(
+    id: UUID(),
+    name: Placeholder.CycleColor.name,
+    color: Placeholder.CycleColor.color
+  )
+}
+
+extension CycleColor {
+  static let placeholder = CycleColor(from: CycleColorResponse.placeholder)
+}
+
+extension CycleDecorationResponse {
+  static let placeholder = CycleDecorationResponse(
+    id: UUID(),
+    name: Placeholder.CycleDecoration.name,
+    fileLink: Placeholder.CycleDecoration.fileLink
+  )
+}
+
+extension CycleDecoration {
+  static let placeholder = CycleDecoration(from: CycleDecorationResponse.placeholder)
 }
 
 extension ForumPostResponse {

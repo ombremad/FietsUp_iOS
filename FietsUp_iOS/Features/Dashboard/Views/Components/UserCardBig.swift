@@ -29,7 +29,7 @@ struct UserCardBig: View {
           }
         }
         Spacer()
-        BikeAvatar()
+        BikeAvatar(user.cycle)
           .frame(width: 100, height: 60)
       }
       

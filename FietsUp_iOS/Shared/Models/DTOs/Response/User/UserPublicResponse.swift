@@ -14,5 +14,7 @@ struct UserPublicResponse: Decodable {
   let daysSinceSignup: Int
   let totalElapsedDistance: Int
   let bio: String?
-  // TODO: add cycle info
+  let cycleType: CycleTypeResponse?
+  let cycleColor: CycleColorResponse?
+  let cycleDecoration: CycleDecorationResponse?
 }

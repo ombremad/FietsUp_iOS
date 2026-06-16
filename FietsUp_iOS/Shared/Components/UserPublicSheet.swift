@@ -40,8 +40,12 @@ struct UserPublicSheet: View {
   }
     
   private var avatar: some View {
-    BikeAvatar()
-      .frame(height: 200)
+    HStack {
+      Spacer()
+      BikeAvatar(Cycle(from: user))
+        .frame(height: 200)
+      Spacer()
+    }
   }
   
   private var stats: some View {
