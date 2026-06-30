@@ -593,8 +593,14 @@
         }
       }
     },
+    "editProfile.title" : {
+
+    },
     "FietsUp" : {
       "shouldTranslate" : false
+    },
+    "form.bio" : {
+
     },
     "form.email" : {
       "localizations" : {
@@ -1696,6 +1702,9 @@
         }
       }
     },
+    "settings.title" : {
+
+    },
     "streakSheet.streakImproved.description" : {
       "localizations" : {
         "en" : {
@@ -1903,6 +1912,9 @@
           }
         }
       }
+    },
+    "validation.field.bio" : {
+
     },
     "validation.field.category" : {
       "localizations" : {
@@ -2343,6 +2355,9 @@
           }
         }
       }
+    },
+    "Vélo 1" : {
+
     }
   },
   "version" : "1.2"

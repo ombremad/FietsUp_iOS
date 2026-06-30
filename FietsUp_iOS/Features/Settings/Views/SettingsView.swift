@@ -57,7 +57,7 @@ struct SettingsView: View {
       }
     }
     .background { Color.Surface.background.ignoresSafeArea() }
-    .navigationTitle("settings")
+    .navigationTitle("settings.title")
     .toolbarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
     .scrollDismissesKeyboard(.interactively)
