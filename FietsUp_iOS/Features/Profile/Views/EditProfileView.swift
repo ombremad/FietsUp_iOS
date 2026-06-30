@@ -11,62 +11,19 @@ struct EditProfileView: View {
   @State private var vm = ProfileViewModel()
   private let auth = AuthService.shared
   
+  @Environment(\.dismiss) private var dismiss
+  
   @State private var selectedTab: Tab = .type
   enum Tab: String, CaseIterable {
     case type = "cycle.type"
     case color = "cycle.color"
     case decoration = "cycle.decoration"
   }
-  
-  @Environment(\.dismiss) private var dismiss
-  
+    
   var body: some View {
-    Form {
-      AppFormSection {
-        Group {
-          TextField("form.nickname", text: $vm.profileForm.nickname)
-            .textContentType(.nickname)
-            .autocorrectionDisabled()
-            .submitLabel(.done)
-          
-          TextField("form.bio", text: $vm.profileForm.bio, axis: .vertical)
-            .lineLimit(3)
-            .frame(height: 50)
-            .submitLabel(.done)
-        }
-      }
-      
-      AppFormSection {
-        VStack {
-          BikeAvatar(Cycle(
-            color: vm.profileForm.cycleColor,
-            type: vm.profileForm.cycleType,
-            decoration: vm.profileForm.cycleDecoration
-          ))
-          .frame(height: 200)
-          
-          Picker("", selection: $selectedTab) {
-            ForEach(Tab.allCases, id: \.self) { tab in
-              Text(tab.rawValue).tag(tab)
-            }
-          }
-          .pickerStyle(.segmented)
-
-          TabView(selection: $selectedTab) {
-            Text("Type")
-              .tag(Tab.type)
-            Text("Color")
-              .tag(Tab.color)
-            Text("Decoration")
-              .tag(Tab.decoration)
-          }
-          .tabViewStyle(.page(indexDisplayMode: .never))
-          .frame(height: 200)
-
-        }
-        .listRowBackground(Color.clear)
-
-      }
+    VStack {
+      profileInfo
+      cycleSelector
     }
     .foregroundStyle(Color.Text.secondary)
     .background { Color.Surface.background.ignoresSafeArea() }
@@ -89,6 +46,130 @@ struct EditProfileView: View {
       }
     }
   }
+  
+  private var profileInfo: some View {
+    Form {
+      AppFormSection {
+        Group {
+          TextField("form.nickname", text: $vm.profileForm.nickname)
+            .textContentType(.nickname)
+            .autocorrectionDisabled()
+            .submitLabel(.done)
+          
+          TextField("form.bio", text: $vm.profileForm.bio, axis: .vertical)
+            .lineLimit(3)
+            .frame(height: 60)
+            .submitLabel(.done)
+        }
+      }
+    }
+    .scrollDisabled(true)
+    .frame(height: 200)
+  }
+  
+  private var cycleSelector: some View {
+    VStack(spacing: 24) {
+      BikeAvatar(Cycle(
+        color: vm.profileForm.cycleColor,
+        type: vm.profileForm.cycleType,
+        decoration: vm.profileForm.cycleDecoration
+      ))
+      .frame(height: 200)
+      
+      Picker("cycle.selector.title", selection: $selectedTab) {
+        ForEach(Tab.allCases, id: \.self) { tab in
+          Text(tab.rawValue).tag(tab)
+        }
+      }
+      .pickerStyle(.segmented)
+      .padding(.horizontal)
+      
+      TabView(selection: $selectedTab) {
+        typeSelector.tag(Tab.type)
+        colorSelector.tag(Tab.color)
+        decorationSelector.tag(Tab.decoration)
+      }
+      .tabViewStyle(.page(indexDisplayMode: .never))
+    }
+  }
+  
+  private var typeSelector: some View {
+    ScrollView(.horizontal) {
+      LazyHStack(spacing: 12) {
+        ForEach(vm.cycleTypes, id: \.id) { cycleType in
+          ZStack {
+            Rectangle().stroke(
+              vm.profileForm.cycleType?.id == cycleType.id
+              ? Color.accentColor
+              : Color.clear,
+              lineWidth: 4
+            )
+            CycleSVGThumbnail(urlString: cycleType.fileLink)
+          }
+          .frame(height: 120)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            vm.profileForm.cycleType = CycleType(from: cycleType)
+          }
+        }
+      }
+    }
+    .safeAreaPadding(.horizontal)
+    .scrollIndicators(.hidden)
+  }
+  
+  private var colorSelector: some View {
+    ScrollView(.horizontal) {
+      LazyHStack(spacing: 12) {
+        ForEach(vm.cycleColors, id: \.id) { cycleColor in
+          ZStack {
+            Circle()
+              .foregroundStyle(Color(hex: cycleColor.color))
+            Circle().stroke(
+              vm.profileForm.cycleColor?.id == cycleColor.id
+              ? Color.accentColor
+              : Color.clear,
+              lineWidth: 4
+            )
+          }
+          .frame(height: 42)
+          .contentShape(Circle())
+          .onTapGesture {
+            vm.profileForm.cycleColor = CycleColor(from: cycleColor)
+          }
+        }
+      }
+    }
+    .safeAreaPadding(.horizontal)
+    .scrollIndicators(.hidden)
+  }
+  
+  private var decorationSelector: some View {
+    ScrollView(.horizontal) {
+      LazyHStack(spacing: 12) {
+        ForEach(vm.cycleDecorations, id: \.id) { cycleDecoration in
+          ZStack {
+            Rectangle().stroke(
+              vm.profileForm.cycleDecoration?.id == cycleDecoration.id
+              ? Color.accentColor
+              : Color.Surface.tertiary,
+              lineWidth: vm.profileForm.cycleDecoration?.id == cycleDecoration.id
+              ? 4 : 2
+            )
+            CycleSVGThumbnail(urlString: cycleDecoration.fileLink)
+          }
+          .frame(height: 120)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            vm.profileForm.cycleDecoration = CycleDecoration(from: cycleDecoration)
+          }
+        }
+      }
+    }
+    .safeAreaPadding(.horizontal)
+    .scrollIndicators(.hidden)
+  }
+  
 }
 
 #Preview {

@@ -38,7 +38,11 @@ struct BikeAvatar: View {
     }
     .aspectRatio(aspectRatio, contentMode: .fit)
     .clipped()
-    .task { await prepareSVGs() }
+    
+    // below: trigger refresh on any type/color/decoration change
+    .task(id: "\(cycle.color?.id.uuidString ?? "")-\(cycle.type?.id.uuidString ?? "")-\(cycle.decoration?.id.uuidString ?? "")") {
+      await prepareSVGs()
+    }
   }
     
   private var placeholderBike: some View {

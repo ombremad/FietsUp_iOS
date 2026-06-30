@@ -353,6 +353,22 @@
         }
       }
     },
+    "cycle.selector.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cycle selector"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélecteur de vélo"
+          }
+        }
+      }
+    },
     "danger.category" : {
       "localizations" : {
         "en" : {
@@ -594,13 +610,39 @@
       }
     },
     "editProfile.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Édition du profil"
+          }
+        }
+      }
     },
     "FietsUp" : {
       "shouldTranslate" : false
     },
     "form.bio" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Public biography"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biographie publique"
+          }
+        }
+      }
     },
     "form.email" : {
       "localizations" : {
@@ -1703,7 +1745,20 @@
       }
     },
     "settings.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        }
+      }
     },
     "streakSheet.streakImproved.description" : {
       "localizations" : {
@@ -1914,7 +1969,20 @@
       }
     },
     "validation.field.bio" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biography"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La biographie"
+          }
+        }
+      }
     },
     "validation.field.category" : {
       "localizations" : {
@@ -2355,9 +2423,6 @@
           }
         }
       }
-    },
-    "Vélo 1" : {
-
     }
   },
   "version" : "1.2"

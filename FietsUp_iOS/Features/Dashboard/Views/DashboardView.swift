@@ -17,6 +17,9 @@ struct DashboardView: View {
       VStack(spacing: 42) {
         if let user = auth.currentUser {
           UserCardBig(user)
+            .onTapGesture {
+              router.push(DashboardDestination.editProfile)
+            }
         } else {
           UserCardBig(.placeholder)
             .redacted(reason: .placeholder)
@@ -53,6 +56,7 @@ struct DashboardView: View {
       switch destination {
         case .settings: SettingsView()
         case .activities: ActivitiesView()
+        case .editProfile: EditProfileView()
       }
     }
     

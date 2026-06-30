@@ -50,7 +50,8 @@ final class ProfileViewModel {
       ErrorService.shared.show(error)
     }
     
-    if let user = auth.currentUser, let cycleType = profileForm.cycleType, let cycleColor = profileForm.cycleColor, let cycleDecoration = profileForm.cycleDecoration {
+    if let user = auth.currentUser {
+      // check if any change actually happened
       do {
         try await performUpdateUser(user)
         await auth.forceRefresh()
