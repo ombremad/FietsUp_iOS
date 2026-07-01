@@ -74,28 +74,30 @@ struct EditProfileView: View {
         type: vm.profileForm.cycleType,
         decoration: vm.profileForm.cycleDecoration
       ))
-      .frame(height: 200)
       
-      Picker("cycle.selector.title", selection: $selectedTab) {
-        ForEach(Tab.allCases, id: \.self) { tab in
-          Text(tab.rawValue).tag(tab)
+      VStack(spacing: 0) {
+        Picker("cycle.selector.title", selection: $selectedTab) {
+          ForEach(Tab.allCases, id: \.self) { tab in
+            Text(LocalizedStringKey(tab.rawValue)).tag(tab)
+          }
         }
+        .pickerStyle(.segmented)
+        .padding(.horizontal)
+        
+        TabView(selection: $selectedTab) {
+          typeSelector.tag(Tab.type)
+          colorSelector.tag(Tab.color)
+          decorationSelector.tag(Tab.decoration)
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
       }
-      .pickerStyle(.segmented)
-      .padding(.horizontal)
-      
-      TabView(selection: $selectedTab) {
-        typeSelector.tag(Tab.type)
-        colorSelector.tag(Tab.color)
-        decorationSelector.tag(Tab.decoration)
-      }
-      .tabViewStyle(.page(indexDisplayMode: .never))
+      .frame(height: 200)
     }
   }
   
   private var typeSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 12) {
+      LazyHStack(spacing: 24) {
         ForEach(vm.cycleTypes, id: \.id) { cycleType in
           ZStack {
             Rectangle().stroke(
@@ -120,7 +122,7 @@ struct EditProfileView: View {
   
   private var colorSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 12) {
+      LazyHStack(spacing: 24) {
         ForEach(vm.cycleColors, id: \.id) { cycleColor in
           ZStack {
             Circle()
@@ -146,7 +148,7 @@ struct EditProfileView: View {
   
   private var decorationSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 12) {
+      LazyHStack(spacing: 24) {
         ForEach(vm.cycleDecorations, id: \.id) { cycleDecoration in
           ZStack {
             Rectangle().stroke(
