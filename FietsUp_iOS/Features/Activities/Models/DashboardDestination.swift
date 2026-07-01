@@ -6,5 +6,5 @@
 //
 
 enum DashboardDestination: Hashable {
-  case settings, activities
+  case settings, activities, editProfile
 }
