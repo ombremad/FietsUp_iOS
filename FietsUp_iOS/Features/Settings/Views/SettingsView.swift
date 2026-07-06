@@ -69,8 +69,7 @@ struct SettingsView: View {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "checkmark", role: .confirm) {
           Task {
-            await vm.submit()
-            dismiss()
+            if await vm.submit() { dismiss() }
           }
         }.disabled(vm.isLoading)
       }

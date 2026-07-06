@@ -39,7 +39,7 @@ final class SettingsViewModel {
     settingsForm.theme = ThemeService.shared.setting
   }
   
-  func submit() async {
+  func submit() async -> Bool {
     isLoading = true
     defer { isLoading = false }
     
@@ -49,6 +49,7 @@ final class SettingsViewModel {
       try ValidationService.email(settingsForm.email)
     } catch {
       ErrorService.shared.show(error)
+      return false
     }
     
     if let user = auth.currentUser {
@@ -62,6 +63,7 @@ final class SettingsViewModel {
       }
     }
     ThemeService.shared.setting = settingsForm.theme
+    return true
   }
   
   private func performUpdateUser(_ user: User) async throws {
