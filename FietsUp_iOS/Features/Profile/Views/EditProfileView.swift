@@ -39,7 +39,12 @@ struct EditProfileView: View {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "checkmark", role: .confirm) {
           Task {
-            if await vm.submit() { dismiss() }
+            do {
+              try await vm.submit()
+              dismiss()
+            } catch {
+              ErrorService.shared.show(error)
+            }
           }
         }.disabled(vm.isLoading)
       }

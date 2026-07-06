@@ -69,7 +69,12 @@ struct SettingsView: View {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "checkmark", role: .confirm) {
           Task {
-            if await vm.submit() { dismiss() }
+            do {
+              try await vm.submit()
+              dismiss()
+            } catch {
+              ErrorService.shared.show(error)
+            }
           }
         }.disabled(vm.isLoading)
       }
@@ -89,7 +94,9 @@ struct SettingsView: View {
       SecureField("form.newPassword", text: $vm.changePasswordForm.newPassword)
       SecureField("form.newPasswordConfirmation", text: $vm.changePasswordForm.newPasswordConfirmation)
       Button("changePassword.update", role: .destructive) {
-        Task { await vm.changePassword() }
+        Task {
+          do { try await vm.changePassword() }
+        }
       }.disabled(vm.isLoading)
       Button("common.cancel", role: .cancel) {}
     } message: {

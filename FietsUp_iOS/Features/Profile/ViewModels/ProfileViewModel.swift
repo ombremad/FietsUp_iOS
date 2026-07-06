@@ -39,28 +39,17 @@ final class ProfileViewModel {
     await performFetchCycleData()
   }
   
-  func submit() async -> Bool {
+  func submit() async throws {
     isLoading = true
     defer { isLoading = false }
     
-    do {
-      try ValidationService.nickname(profileForm.nickname)
-      try ValidationService.bio(profileForm.bio)
-    } catch {
-      ErrorService.shared.show(error)
-      return false
-    }
+    try ValidationService.nickname(profileForm.nickname)
+    try ValidationService.bio(profileForm.bio)
     
     if let user = auth.currentUser {
-      do {
         try await performUpdateUser(user)
         await auth.forceRefresh()
-      } catch {
-        ErrorService.shared.show(error)
-        return false
-      }
     }
-    return true
   }
   
   private func performFetchCycleData() async {

@@ -39,31 +39,21 @@ final class SettingsViewModel {
     settingsForm.theme = ThemeService.shared.setting
   }
   
-  func submit() async -> Bool {
+  func submit() async throws {
     isLoading = true
     defer { isLoading = false }
     
-    do {
-      try ValidationService.firstName(settingsForm.firstName)
-      try ValidationService.lastName(settingsForm.lastName)
-      try ValidationService.email(settingsForm.email)
-    } catch {
-      ErrorService.shared.show(error)
-      return false
-    }
+    try ValidationService.firstName(settingsForm.firstName)
+    try ValidationService.lastName(settingsForm.lastName)
+    try ValidationService.email(settingsForm.email)
     
     if let user = auth.currentUser {
       if settingsForm.firstName != user.firstName || settingsForm.lastName != user.lastName || settingsForm.email != user.email {
-        do {
-          try await performUpdateUser(user)
-          await auth.forceRefresh()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+        try await performUpdateUser(user)
+        await auth.forceRefresh()
       }
     }
     ThemeService.shared.setting = settingsForm.theme
-    return true
   }
   
   private func performUpdateUser(_ user: User) async throws {
@@ -75,22 +65,18 @@ final class SettingsViewModel {
     )
   }
   
-  func changePassword() async {
+  func changePassword() async throws {
     isLoading = true
     defer { isLoading = false }
     
-    do {
-      try ValidationService.password(changePasswordForm.oldPassword)
-      try ValidationService.password(changePasswordForm.newPassword)
-      try ValidationService.passwordConfirmation(
-        password: changePasswordForm.newPassword,
-        confirmation: changePasswordForm.newPasswordConfirmation
-      )
-      try await performUpdateUserPassword()
-      try auth.logout()
-    } catch {
-      ErrorService.shared.show(error)
-    }
+    try ValidationService.password(changePasswordForm.oldPassword)
+    try ValidationService.password(changePasswordForm.newPassword)
+    try ValidationService.passwordConfirmation(
+      password: changePasswordForm.newPassword,
+      confirmation: changePasswordForm.newPasswordConfirmation
+    )
+    try await performUpdateUserPassword()
+    try auth.logout()
   }
   
   private func performUpdateUserPassword() async throws {
