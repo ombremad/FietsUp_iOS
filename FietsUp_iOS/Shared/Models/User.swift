@@ -18,6 +18,7 @@ final class User {
   var daysSinceSignup: Int
   var totalElapsedDistance: Int
   var cycle: Cycle
+  var adminRights: Int
   
   init(with dto: UserResponse) {
     self.firstName = dto.firstName
@@ -29,5 +30,6 @@ final class User {
     self.daysSinceSignup = dto.daysSinceSignup
     self.totalElapsedDistance = dto.totalElapsedDistance
     self.cycle = Cycle(from: dto)
+    self.adminRights = dto.adminRights
   }
 }

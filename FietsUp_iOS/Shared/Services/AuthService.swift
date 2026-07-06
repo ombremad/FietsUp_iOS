@@ -14,6 +14,9 @@ final class AuthService {
   private(set) var isAuthenticated: Bool
   private(set) var currentUser: User?
   
+  var isAdmin: Bool { (currentUser?.adminRights ?? 0) >= 2 }
+  var isMod: Bool { (currentUser?.adminRights ?? 0) >= 1 }
+  
   var lastKnownStreak: Int {
     get { UserDefaults.standard.integer(forKey: "lastKnownStreak") }
     set { UserDefaults.standard.set(newValue, forKey: "lastKnownStreak") }

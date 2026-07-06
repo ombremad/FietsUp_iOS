@@ -17,4 +17,5 @@ struct UserResponse: Decodable {
   let cycleType: CycleTypeResponse?
   let cycleColor: CycleColorResponse?
   let cycleDecoration: CycleDecorationResponse?
+  let adminRights: Int
 }

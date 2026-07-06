@@ -73,6 +73,8 @@ enum ValidationService {
   }
   
   static func activityDates(start: Date, end: Date) throws {
+    try validatePastDate(start, field: .startDate)
+    try validatePastDate(end, field: .endDate)
     if start > end {
       throw ValidationError.startMustBeBeforeEnd
     }
@@ -94,7 +96,7 @@ enum ValidationService {
     if latitude > 90 || latitude < -90 {
       throw ValidationError.fieldInvalidFormat(.latitude)
     }
-    if longitude > 180 || latitude < -180 {
+    if longitude > 180 || longitude < -180 {
       throw ValidationError.fieldInvalidFormat(.longitude)
     }
   }
@@ -113,11 +115,29 @@ enum ValidationService {
       throw ValidationError.fieldMustBeReasonable(.distance)
     }
   }
+  
+  static func reportDetails(_ details: String) throws {
+    try validateLength(details, field: .reportDetails, min: 1, max: 10000)
+  }
+  
+  static func banDate(_ date: Date) throws {
+    try validateFutureDate(date, field: .banEndDate)
+  }
       
   static func passwordConfirmation(password: String, confirmation: String) throws {
     guard password == confirmation else {
       throw ValidationError.fieldConfirmationMustBeIdentical(.password)
     }
+  }
+  
+  private static func validatePastDate(_ date: Date, field: ValidationError.Field) throws {
+    let now = Date.now
+    if date > now { throw ValidationError.fieldCannotBeInTheFuture(field) }
+  }
+  
+  private static func validateFutureDate(_ date: Date, field: ValidationError.Field) throws {
+    let now = Date.now
+    if date <= now { throw ValidationError.fieldCannotBeInThePast(field) }
   }
   
   private static func validateLength(
@@ -137,7 +157,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, bio, title, content, length, distance, latitude, longitude, category
+    case password, email, firstName, lastName, nickname, bio, title, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate
     
     var localized: String {
       switch self {
@@ -154,6 +174,10 @@ enum ValidationError: Error, LocalizedError {
         case .latitude: return String(localized: "validation.field.latitude")
         case .longitude: return String(localized: "validation.field.longitude")
         case .category: return String(localized: "validation.field.category")
+        case .reportDetails: return String(localized: "validation.field.reportDetails")
+        case .startDate: return String(localized: "validation.field.startDate")
+        case .endDate: return String(localized: "validation.field.endDate")
+        case .banEndDate: return String(localized: "validation.field.banEndDate")
       }
     }
   }
@@ -170,6 +194,8 @@ enum ValidationError: Error, LocalizedError {
   case fieldInvalidFormat(Field)
   case fieldConfirmationMustBeIdentical(Field)
   case fieldMustBeReasonable(Field)
+  case fieldCannotBeInTheFuture(Field)
+  case fieldCannotBeInThePast(Field)
   case startMustBeBeforeEnd
   case locationFailed
   
@@ -201,6 +227,10 @@ enum ValidationError: Error, LocalizedError {
         return "\(field.localized) \(String(localized: "validation.rule.confirmationMustBeIdentical"))"
       case .fieldMustBeReasonable(let field):
         return "\(field.localized) \(String(localized: "validation.rule.mustBeReasonable"))"
+      case .fieldCannotBeInTheFuture(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.cannotBeInTheFuture"))"
+      case .fieldCannotBeInThePast(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.cannotBeInThePast"))"
       case .startMustBeBeforeEnd:
         return String(localized: "validation.rule.startMustBeBeforeEnd")
       case .locationFailed:
