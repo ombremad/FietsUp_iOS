@@ -25,9 +25,7 @@ struct AdminReportsView: View {
           } else {
             ForEach(vm.reports, id: \.id) { report in
               ReportRowCard(report)
-                .onTapGesture {
-                  vm.open(report)
-                }
+                .onTapGesture { vm.open(report) }
             }
           }
         }

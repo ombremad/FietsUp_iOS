@@ -162,27 +162,36 @@
       }
     },
     "admin.forumPanel.forumCategories" : {
-
-    },
-    "admin.forumPanel.openReports" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open reports"
+            "value" : "Forum categories"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir les signalements"
+            "value" : "Catégories de forum"
           }
         }
       }
     },
     "admin.forumPanel.pendingReports" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending reports"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reports en cours"
+          }
+        }
+      }
     },
     "admin.noPendingReports.title" : {
       "localizations" : {
@@ -441,7 +450,20 @@
       }
     },
     "admin.report.editedTitle" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edited title"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titre édité"
+          }
+        }
+      }
     },
     "admin.report.editSection" : {
       "localizations" : {
@@ -636,7 +658,20 @@
       }
     },
     "adminPanel" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admin panel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panneau d’administration"
+          }
+        }
+      }
     },
     "changePassword.message" : {
       "localizations" : {
@@ -2012,6 +2047,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lieux à proximité"
+          }
+        }
+      }
+    },
+    "places.placesNearby.empty.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’re sorry, we couldn’t find places of interest near your location. But we’re working hard to improve our database; try again later!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désolé, nous n’avons pas trouvé de lieu intéressant à proximité. Mais on travaille dur pour améliorer notre base de données ; réessayez plus tard !"
+          }
+        }
+      }
+    },
+    "places.placesNearby.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No places found nearby"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun lieu trouvé à proximité"
           }
         }
       }

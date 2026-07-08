@@ -33,6 +33,7 @@ struct ReportRowCard: View {
         .font(.body)
         .lineLimit(2)
     }
+    .contentShape(Rectangle())
   }
 }
 
