@@ -1,5 +1,5 @@
 //
-//  AdminForumPanelView.swift
+//  AdminPanelView.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AdminForumPanelView: View {
+struct AdminPanelView: View {
   private let auth = AuthService.shared
 
   var body: some View {
@@ -32,7 +32,7 @@ struct AdminForumPanelView: View {
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.forumPanel.title")
+    .navigationTitle("admin.panel.title")
     .toolbarTitleDisplayMode(.inline)
   }
   
@@ -51,6 +51,6 @@ struct AdminForumPanelView: View {
 
 #Preview {
   NavigationStack {
-    AdminForumPanelView()
+    AdminPanelView()
   }
 }

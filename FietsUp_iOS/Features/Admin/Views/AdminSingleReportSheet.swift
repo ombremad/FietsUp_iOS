@@ -73,6 +73,10 @@ struct AdminSingleReportSheet: View {
       }
       if vm.reportActionForm.action == .edit {
         AppFormSection("admin.report.editSection") {
+          if vm.report?.reportedTitle != nil {
+            TextField("admin.report.editedTitle", text: $vm.reportActionForm.editedTitle)
+              .lineLimit(1)
+          }
           TextField("admin.report.editedContent", text: $vm.reportActionForm.editedContent, axis: .vertical)
             .lineLimit(12)
         }

@@ -28,6 +28,8 @@ struct BikeAvatar: View {
   
   @ViewBuilder
   private var customBike: some View {
+    // TODO: it should show up even if not all 3 parameters are defined
+    
     ZStack {
       if let coloredCycle = svgColoredCycle, let decoration = svgDecoration {
         SVGView(data: coloredCycle)

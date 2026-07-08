@@ -19,7 +19,9 @@ struct ForumCommentReportResponse: AdminReportResponse {
 
 // computed properties
 extension ForumCommentReportResponse {
+  var reportedId: UUID? { forumComment?.id }
   var reportedTitle: String? { nil }
   var reportedContent: String { forumComment?.content ?? "" }
   var reportedUser: String { forumComment?.user.nickname ?? "" }
+  var reportedUserId: UUID? { forumComment?.user.id }
 }

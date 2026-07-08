@@ -53,21 +53,10 @@ struct ForumView: View {
     .navigationTitle("forum.title")
     .navigationBarTitleDisplayMode(.large)
     
-    .toolbar {
-      if auth.isAdmin || auth.isMod {
-        ToolbarItem {
-          Button("admin.forumPanel.title", systemImage: "a.square.fill", role: .cancel) {
-            router.push(ForumDestination.adminPanel)
-          }
-        }
-      }
-    }
-    
     .navigationDestination(for: ForumDestination.self) { destination in
       switch destination {
         case .category(let id): ForumCategoryView(id: id)
         case .post(let id): ForumPostView(id: id)
-        case .adminPanel: AdminForumPanelView()
       }
     }
     

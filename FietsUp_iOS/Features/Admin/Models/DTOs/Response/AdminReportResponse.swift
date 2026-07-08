@@ -14,7 +14,9 @@ protocol AdminReportResponse: Decodable {
   var processDate: Date? { get }
   var user: UserPublicResponse { get }
   var category: ModerationCategoryResponse { get }
+  var reportedId: UUID? { get }
   var reportedTitle: String? { get }
   var reportedContent: String { get }
   var reportedUser: String { get }
+  var reportedUserId: UUID? { get }
 }

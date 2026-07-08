@@ -262,6 +262,16 @@ extension DangerPostResponse {
   )
 }
 
+extension ForumCategoryResponse {
+  static let placeholder = ForumCategoryResponse(
+    id: UUID(),
+    name: Placeholder.ForumCategory.name,
+    details: Placeholder.ForumCategory.content,
+    totalPosts: Placeholder.Numbers.count,
+    lastActivityDate: Placeholder.Dates.recent
+  )
+}
+
 extension ForumPostReportResponse {
   static let placeholder = ForumPostReportResponse(
     id: UUID(),
@@ -294,6 +304,10 @@ extension ModerationCategoryResponse {
 
 extension ReportRowCard {
   static let placeholder = ReportRowCard(ForumCommentReportResponse.placeholder)
+}
+
+extension ForumCategoryRowCard {
+  static let placeholder = ForumCategoryRowCard(ForumCategoryResponse.placeholder)
 }
 
 extension ButtonBar {

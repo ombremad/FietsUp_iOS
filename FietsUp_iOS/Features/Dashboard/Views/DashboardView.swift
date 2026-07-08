@@ -57,6 +57,7 @@ struct DashboardView: View {
         case .settings: SettingsView()
         case .activities: ActivitiesView()
         case .editProfile: EditProfileView()
+        case .adminPanel: AdminPanelView()
       }
     }
     
@@ -74,6 +75,15 @@ struct DashboardView: View {
           router.push(DashboardDestination.settings)
         } label: {
           Label("settings", systemImage: "gear")
+        }
+      }
+      if auth.isAdmin || auth.isMod {
+        ToolbarItem(placement: .primaryAction) {
+          Button {
+            router.push(DashboardDestination.adminPanel)
+          } label: {
+            Label("adminPanel", systemImage: "key.shield")
+          }
         }
       }
     }

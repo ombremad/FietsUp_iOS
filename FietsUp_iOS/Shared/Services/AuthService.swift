@@ -17,6 +17,7 @@ final class AuthService {
   var isAdmin: Bool { (currentUser?.adminRights ?? 0) >= 2 }
   var isMod: Bool { (currentUser?.adminRights ?? 0) >= 1 }
   
+  // TODO: handle streak reset on logout / new login
   var lastKnownStreak: Int {
     get { UserDefaults.standard.integer(forKey: "lastKnownStreak") }
     set { UserDefaults.standard.set(newValue, forKey: "lastKnownStreak") }

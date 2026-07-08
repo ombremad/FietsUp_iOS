@@ -36,7 +36,7 @@ struct AdminReportsView: View {
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.forumPanel.openReports")
+    .navigationTitle("admin.forumPanel.pendingReports")
     .toolbarTitleDisplayMode(.inline)
 
     .appSheet(isPresented: $vm.isSingleReportSheetPresented) {

@@ -20,8 +20,19 @@ final class AdminReportsViewModel {
     var action: ModerationAction = .close
     var banAction: Bool = false
     var details: String = ""
+    var editedTitle: String = ""
     var editedContent: String = ""
     var banDate: Date = .now.addingTimeInterval(60 * 60 * 24 * 7) // default ban duration: one week
+  }
+  
+  var contentType: ReportContentType? {
+    switch report {
+      case is ForumPostReportResponse: return .forumPost
+      case is ForumCommentReportResponse: return .forumComment
+      case is DangerPostReportResponse: return .dangersPost
+      case is DangerCommentReportResponse: return .dangersComment
+      default: return nil
+    }
   }
   
   func load() async {
@@ -38,6 +49,7 @@ final class AdminReportsViewModel {
   
   func open(_ report: AdminReportResponse) {
     reportActionForm = ReportActionForm()
+    reportActionForm.editedTitle = report.reportedTitle ?? ""
     reportActionForm.editedContent = report.reportedContent
     self.report = report
     isSingleReportSheetPresented = true
@@ -53,19 +65,23 @@ final class AdminReportsViewModel {
     isLoading = true
     defer { isLoading = false }
     
+    // TODO: do a single transaction route that handles everything at once from the backend
+    
     try ValidationService.reportDetails(reportActionForm.details)
     
-    // TODO: finish this
     if reportActionForm.action == .edit {
+      if contentType == .forumPost || contentType == .dangersPost {
+        try ValidationService.title(reportActionForm.editedTitle)
+      }
       try ValidationService.content(reportActionForm.editedContent)
-      // try await performPostEdit()
+      try await performContentEdit()
     }
     if reportActionForm.action == .delete {
-      // try await performPostDelete()
+      try await performContentDelete()
     }
     if reportActionForm.banAction {
       try ValidationService.banDate(reportActionForm.banDate)
-      // try await performUserBan()
+      try await performUserBan()
     }
     
     try await performReportProcessRequest()
@@ -80,25 +96,49 @@ final class AdminReportsViewModel {
   }
     
   private func performFetchPendingReports() async throws -> PendingReportsResponse {
-    let response: PendingReportsResponse = try await NetworkService.shared.get(
+    return try await NetworkService.shared.get(
       endpoint: "/reports/pending",
       requiresAuth: true
     )
-    return response
   }
   
   private func performReportProcessRequest() async throws {
-    var contentType: ReportContentType?
-    if report is ForumPostReportResponse { contentType = .forumPost }
-    if report is ForumCommentReportResponse { contentType = .forumComment }
-    if report is DangerPostReportResponse { contentType = .dangersPost }
-    if report is DangerCommentReportResponse { contentType = .dangersComment }
-
     guard let id = report?.id, let contentType else { return }
 
     let body = ReportProcessRequest(from: reportActionForm)
     let _: ReportResponse = try await NetworkService.shared.patch(
       endpoint: "/reports/\(contentType.rawValue)/process/\(id)",
+      body: body,
+      requiresAuth: true
+    )
+  }
+  
+  private func performContentEdit() async throws {
+    guard let id = report?.reportedId, let contentType else { return }
+    
+    let body = PatchContentRequest(title: reportActionForm.editedTitle.isEmpty ? nil : reportActionForm.editedTitle, content: reportActionForm.editedContent)
+    let _: PatchContentResponse = try await NetworkService.shared.patch(
+      endpoint: "/\(contentType.rawValue)/\(id)",
+      body: body,
+      requiresAuth: true
+    )
+  }
+  
+  private func performContentDelete() async throws {
+    guard let id = report?.reportedId, let contentType else { return }
+    
+    try await NetworkService.shared.delete(
+      endpoint: "/\(contentType.rawValue)/\(id)",
+      requiresAuth: true
+    )
+  }
+  
+  private func performUserBan() async throws {
+    guard let id = report?.reportedUserId else { return }
+    let body = BanUserRequest(until: reportActionForm.banDate)
+    
+    let _: UserResponse = try await NetworkService.shared.patch(
+      endpoint: "/users/\(id)/ban",
       body: body,
       requiresAuth: true
     )

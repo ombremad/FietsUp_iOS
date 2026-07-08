@@ -19,7 +19,9 @@ struct DangerCommentReportResponse: AdminReportResponse {
 
   // computed properties
 extension DangerCommentReportResponse {
+  var reportedId: UUID? { dangerComment?.id }
   var reportedTitle: String? { nil }
   var reportedContent: String { dangerComment?.content ?? "" }
   var reportedUser: String { dangerComment?.user.nickname ?? "" }
+  var reportedUserId: UUID? { dangerComment?.user.id }
 }

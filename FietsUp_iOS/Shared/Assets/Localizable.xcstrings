@@ -161,7 +161,11 @@
         }
       }
     },
+    "admin.forumPanel.forumCategories" : {
+
+    },
     "admin.forumPanel.openReports" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -177,21 +181,8 @@
         }
       }
     },
-    "admin.forumPanel.title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forum panel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Panel du forum"
-          }
-        }
-      }
+    "admin.forumPanel.pendingReports" : {
+
     },
     "admin.noPendingReports.title" : {
       "localizations" : {
@@ -205,6 +196,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas de report en cours"
+          }
+        }
+      }
+    },
+    "admin.panel.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admin panel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panneau d’administration"
           }
         }
       }
@@ -433,6 +440,9 @@
         }
       }
     },
+    "admin.report.editedTitle" : {
+
+    },
     "admin.report.editSection" : {
       "localizations" : {
         "en" : {
@@ -624,6 +634,9 @@
           }
         }
       }
+    },
+    "adminPanel" : {
+
     },
     "changePassword.message" : {
       "localizations" : {
@@ -1474,9 +1487,6 @@
           }
         }
       }
-    },
-    "ForumAdminCategoriesView" : {
-      "shouldTranslate" : false
     },
     "loginForm.alreadyHaveAnAccount" : {
       "localizations" : {
