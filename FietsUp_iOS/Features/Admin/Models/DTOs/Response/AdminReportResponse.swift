@@ -1,5 +1,5 @@
 //
-//  ForumReportResponse.swift
+//  AdminReportResponse.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ForumReportResponse: Decodable {
+protocol AdminReportResponse: Decodable {
   var id: UUID { get }
   var details: String? { get }
   var creationDate: Date { get }

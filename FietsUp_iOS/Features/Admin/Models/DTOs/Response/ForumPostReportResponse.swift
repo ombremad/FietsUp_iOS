@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ForumPostReportResponse: ForumReportResponse {
+struct ForumPostReportResponse: AdminReportResponse {
   let id: UUID
   let details: String?
   let creationDate: Date

@@ -67,7 +67,7 @@ struct ForumView: View {
       switch destination {
         case .category(let id): ForumCategoryView(id: id)
         case .post(let id): ForumPostView(id: id)
-        case .adminPanel: ForumAdminView()
+        case .adminPanel: AdminForumPanelView()
       }
     }
     

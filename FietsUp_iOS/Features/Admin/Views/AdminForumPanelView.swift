@@ -1,5 +1,5 @@
 //
-//  ForumAdminPanelView.swift
+//  AdminForumPanelView.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ForumAdminView: View {
+struct AdminForumPanelView: View {
   private let auth = AuthService.shared
 
   var body: some View {
@@ -17,19 +17,21 @@ struct ForumAdminView: View {
           adminNavRowView(
             title: "admin.forumCategories.title",
             description: "admin.forumCategories.description",
-            destination: ForumAdminCategoriesView(),
+            destination: AdminForumCategoriesView(),
           )
         }
         if auth.isMod {
           adminNavRowView(
             title: "admin.reports.title",
             description: "admin.reports.description",
-            destination: ForumAdminReportsView(),
+            destination: AdminReportsView(),
           )
         }
       }
     }
+    .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumPanel.title")
     .toolbarTitleDisplayMode(.inline)
   }
@@ -49,6 +51,6 @@ struct ForumAdminView: View {
 
 #Preview {
   NavigationStack {
-    ForumAdminView()
+    AdminForumPanelView()
   }
 }

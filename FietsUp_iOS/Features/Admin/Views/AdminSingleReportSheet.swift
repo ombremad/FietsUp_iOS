@@ -1,5 +1,5 @@
 //
-//  ForumAdminSingleReportSheet.swift
+//  AdminSingleReportSheet.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ForumAdminSingleReportSheet: View {
-  @Environment(ForumAdminReportsViewModel.self) var vm
+struct AdminSingleReportSheet: View {
+  @Environment(AdminReportsViewModel.self) var vm
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
@@ -20,8 +20,10 @@ struct ForumAdminSingleReportSheet: View {
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .scrollContentBackground(.hidden)
     .navigationTitle("admin.report.title")
     .navigationBarTitleDisplayMode(.inline)
+    .presentationDetents([.large])
 
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
@@ -51,17 +53,20 @@ struct ForumAdminSingleReportSheet: View {
     }
   }
   
-  private func reportActions(vm: ForumAdminReportsViewModel) -> some View {
+  private func reportActions(vm: AdminReportsViewModel) -> some View {
     @Bindable var vm = vm
     return Group {
       AppFormSection("admin.report.actionsSection") {
-        VStack {
+        VStack(alignment: .leading) {
           Picker("admin.report.action", selection: $vm.reportActionForm.action) {
             ForEach(ModerationAction.allCases, id: \.self) { action in
               Text(action.localizedTitle).tag(action)
             }
           }
           Text(vm.reportActionForm.action.localizedDescription)
+            .font(.callout)
+            .contentTransition(.interpolate)
+            .animation(.snappy, value: vm.reportActionForm.action)
         }
         TextField("admin.report.details", text: $vm.reportActionForm.details, axis: .vertical)
           .lineLimit(2)
@@ -86,6 +91,6 @@ struct ForumAdminSingleReportSheet: View {
 
 #Preview {
   NavigationStack {
-    ForumAdminSingleReportSheet().environment(ForumAdminReportsViewModel())
+    AdminSingleReportSheet().environment(AdminReportsViewModel())
   }
 }

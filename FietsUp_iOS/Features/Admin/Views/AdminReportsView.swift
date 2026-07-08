@@ -1,5 +1,5 @@
 //
-//  ForumAdminReportsView.swift
+//  AdminReportsView.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ForumAdminReportsView: View {
-  @State private var vm = ForumAdminReportsViewModel()
+struct AdminReportsView: View {
+  @State private var vm = AdminReportsViewModel()
   
   var body: some View {
     Form {
@@ -20,10 +20,10 @@ struct ForumAdminReportsView: View {
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
-          if vm.forumReports.isEmpty {
+          if vm.reports.isEmpty {
             ContentUnavailableView("admin.noPendingReports.title", systemImage: "checkmark.circle")
           } else {
-            ForEach(vm.forumReports, id: \.id) { report in
+            ForEach(vm.reports, id: \.id) { report in
               ReportRowCard(report)
                 .onTapGesture {
                   vm.open(report)
@@ -33,15 +33,18 @@ struct ForumAdminReportsView: View {
         }
       }
     }
+    .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumPanel.openReports")
     .toolbarTitleDisplayMode(.inline)
 
     .appSheet(isPresented: $vm.isSingleReportSheetPresented) {
       NavigationStack {
-        ForumAdminSingleReportSheet().environment(vm)
+        AdminSingleReportSheet().environment(vm)
       }
     }
+    
     .task {
       await vm.load()
     }
@@ -52,5 +55,5 @@ struct ForumAdminReportsView: View {
 }
 
 #Preview {
-  ForumAdminReportsView()
+  AdminReportsView()
 }

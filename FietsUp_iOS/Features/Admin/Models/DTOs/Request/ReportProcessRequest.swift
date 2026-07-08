@@ -10,7 +10,7 @@ import Foundation
 struct ReportProcessRequest: Encodable {
   let details: String
   
-  init(from form: ForumAdminReportsViewModel.ReportActionForm) {
+  init(from form: AdminReportsViewModel.ReportActionForm) {
     self.details = form.details
   }
 }

@@ -241,6 +241,22 @@
         }
       }
     },
+    "admin.report.author" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Author"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auteur·ice"
+          }
+        }
+      }
+    },
     "admin.report.banSection" : {
       "localizations" : {
         "en" : {
@@ -269,6 +285,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Catégorie"
+          }
+        }
+      }
+    },
+    "admin.report.contentType" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content type"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type de contenu"
+          }
+        }
+      }
+    },
+    "admin.report.contentType.dangerComment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "danger comment"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "commentaire de danger"
+          }
+        }
+      }
+    },
+    "admin.report.contentType.dangerPost" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "danger post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "post de danger"
+          }
+        }
+      }
+    },
+    "admin.report.contentType.forumComment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "forum comment"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "commentaire de forum"
+          }
+        }
+      }
+    },
+    "admin.report.contentType.forumPost" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "forum post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "post de forum"
+          }
+        }
+      }
+    },
+    "admin.report.contentType.unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unknown"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "inconnu"
           }
         }
       }

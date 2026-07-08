@@ -1,5 +1,5 @@
 //
-//  ForumAdminReportsViewModel.swift
+//  AdminReportsViewModel.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 06/07/2026.
@@ -8,13 +8,13 @@
 import Foundation
 
 @Observable
-final class ForumAdminReportsViewModel {
+final class AdminReportsViewModel {
   var isLoading: Bool = false
   var isSingleReportSheetPresented: Bool = false
   
-  var forumReports: [ForumReportResponse] = []
+  var reports: [AdminReportResponse] = []
   
-  var report: ForumReportResponse? = nil
+  var report: AdminReportResponse? = nil
   var reportActionForm = ReportActionForm()
   struct ReportActionForm {
     var action: ModerationAction = .close
@@ -28,7 +28,7 @@ final class ForumAdminReportsViewModel {
     isLoading = true
     defer { isLoading = false }
     
-    guard forumReports.isEmpty else { return }
+    guard reports.isEmpty else { return }
     do {
       try await refreshReports()
     } catch {
@@ -36,7 +36,7 @@ final class ForumAdminReportsViewModel {
     }
   }
   
-  func open(_ report: ForumReportResponse) {
+  func open(_ report: AdminReportResponse) {
     reportActionForm = ReportActionForm()
     reportActionForm.editedContent = report.reportedContent
     self.report = report
@@ -74,22 +74,14 @@ final class ForumAdminReportsViewModel {
   }
   
   func refreshReports() async throws {
-    let postReports: [ForumPostReportResponse] = try await performFetchForumPostReports()
-    let commentReports: [ForumCommentReportResponse] = try await performFetchForumCommentReports()
-    forumReports = (postReports + commentReports).sorted { $0.creationDate > $1.creationDate }
+    let fetched = try await performFetchPendingReports()
+    reports = (fetched.forumPosts + fetched.forumComments + fetched.dangerPosts + fetched.dangerComments)
+      .sorted { $0.creationDate > $1.creationDate }
   }
-  
-  private func performFetchForumPostReports() async throws -> [ForumPostReportResponse] {
-    let response: [ForumPostReportResponse] = try await NetworkService.shared.get(
-      endpoint: "/reports/forum/posts/pending",
-      requiresAuth: true
-    )
-    return response
-  }
-  
-  private func performFetchForumCommentReports() async throws -> [ForumCommentReportResponse] {
-    let response: [ForumCommentReportResponse] = try await NetworkService.shared.get(
-      endpoint: "/reports/forum/comments/pending",
+    
+  private func performFetchPendingReports() async throws -> PendingReportsResponse {
+    let response: PendingReportsResponse = try await NetworkService.shared.get(
+      endpoint: "/reports/pending",
       requiresAuth: true
     )
     return response
@@ -99,6 +91,8 @@ final class ForumAdminReportsViewModel {
     var contentType: ReportContentType?
     if report is ForumPostReportResponse { contentType = .forumPost }
     if report is ForumCommentReportResponse { contentType = .forumComment }
+    if report is DangerPostReportResponse { contentType = .dangersPost }
+    if report is DangerCommentReportResponse { contentType = .dangersComment }
 
     guard let id = report?.id, let contentType else { return }
 

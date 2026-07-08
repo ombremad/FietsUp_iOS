@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ReportRowCard: View {
-  let report: ForumReportResponse
-  init(_ report: ForumReportResponse) {
+  let report: AdminReportResponse
+  init(_ report: AdminReportResponse) {
     self.report = report
   }
   
