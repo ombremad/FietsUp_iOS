@@ -14,18 +14,20 @@ struct AdminPanelView: View {
     Form {
       AppFormSection {
         if auth.isAdmin {
-          adminNavRowView(
-            title: "admin.forumCategories.title",
-            description: "admin.forumCategories.description",
-            destination: AdminForumCategoriesView(),
-          )
+          NavigationLink { AdminForumCategoriesView() } label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.forumCategories.title",
+              descriptionLocalized: "admin.forumCategories.description",
+            )
+          }
         }
         if auth.isMod {
-          adminNavRowView(
-            title: "admin.reports.title",
-            description: "admin.reports.description",
-            destination: AdminReportsView(),
-          )
+          NavigationLink { AdminReportsView() } label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.reports.title",
+              descriptionLocalized: "admin.reports.description",
+            )
+          }
         }
       }
     }
@@ -34,18 +36,6 @@ struct AdminPanelView: View {
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.panel.title")
     .toolbarTitleDisplayMode(.inline)
-  }
-  
-  @ViewBuilder
-  private func adminNavRowView<Destination: View>(title: LocalizedStringKey, description: LocalizedStringKey, destination: Destination) -> some View {
-    NavigationLink(destination: destination, label: {
-      VStack(alignment: .leading) {
-        Text(title)
-          .font(.body).bold()
-        Text(description)
-          .font(.caption2)
-      }
-    })
   }
 }
 

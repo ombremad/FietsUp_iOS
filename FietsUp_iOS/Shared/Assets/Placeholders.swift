@@ -306,10 +306,6 @@ extension ReportRowCard {
   static let placeholder = ReportRowCard(ForumCommentReportResponse.placeholder)
 }
 
-extension ForumCategoryRowCard {
-  static let placeholder = ForumCategoryRowCard(ForumCategoryResponse.placeholder)
-}
-
 extension ButtonBar {
   static let placeholder = ButtonBar(
     likeCount: Placeholder.Numbers.like,

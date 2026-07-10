@@ -15,14 +15,19 @@ struct AdminForumCategoriesView: View {
       AppFormSection {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in
-            ForumCategoryRowCard.placeholder
+            SimpleAdminPanelRow(
+              title: Placeholder.ForumCategory.name,
+              description: Placeholder.ForumCategory.content,
+            )
           }
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
           ForEach(vm.categories, id: \.id) { category in
-            ForumCategoryRowCard(category)
-              .onTapGesture { vm.edit(category) }
+            SimpleAdminPanelRow(
+              title: category.name,
+              description: category.details
+            ).onTapGesture { vm.edit(category) }
             }
             .onDelete { offsets in
               Task { await vm.delete(at: offsets) }
