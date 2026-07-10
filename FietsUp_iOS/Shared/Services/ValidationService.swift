@@ -44,6 +44,14 @@ enum ValidationService {
     try validateLength(title, field: .title, min: 1, max: 100)
   }
   
+  static func name(_ name: String) throws {
+    try validateLength(name, field: .name, min: 1, max: 50)
+  }
+  
+  static func details(_ details: String) throws {
+    try validateLength(details, field: .details, min: 1, max: 10000)
+  }
+  
   static func content(_ content: String) throws {
     try validateLength(content, field: .content, min: 1, max: 20000)
   }
@@ -157,7 +165,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, bio, title, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate
+    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate
     
     var localized: String {
       switch self {
@@ -168,6 +176,8 @@ enum ValidationError: Error, LocalizedError {
         case .nickname: return String(localized: "validation.field.nickname")
         case .bio: return String(localized: "validation.field.bio")
         case .title: return String(localized: "validation.field.title")
+        case .name: return String(localized: "validation.field.name")
+        case .details: return String(localized: "validation.field.details")
         case .content: return String(localized: "validation.field.content")
         case .length: return String(localized: "validation.field.length")
         case .distance: return String(localized: "validation.field.distance")

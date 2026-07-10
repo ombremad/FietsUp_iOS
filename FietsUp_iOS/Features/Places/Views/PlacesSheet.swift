@@ -56,7 +56,7 @@ struct PlacesSheet: View {
       } else if vm.placesNearby.isEmpty {
         ContentUnavailableView(
           "places.placesNearby.empty.title",
-          systemImage: "mappin.slash",
+          systemImage: "mappin.slash.circle",
           description: Text("places.placesNearby.empty.description")
         )
       } else {

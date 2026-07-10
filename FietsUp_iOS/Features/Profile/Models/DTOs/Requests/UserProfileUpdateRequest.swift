@@ -14,9 +14,9 @@ struct UserProfileUpdateRequest: Encodable {
   let cycleColorId: UUID?
   let cycleDecorationId: UUID?
   
-  init(from form: ProfileViewModel.ProfileForm, compareTo user: User) {
-    self.nickname = form.nickname != user.nickname ? form.nickname : nil
-    self.bio = form.bio != user.bio ? form.bio : nil
+  init(from form: ProfileViewModel.ProfileForm, compareTo old: User) {
+    self.nickname = form.nickname != old.nickname ? form.nickname : nil
+    self.bio = form.bio != old.bio ? form.bio : nil
     self.cycleTypeId = form.cycleType?.id
     self.cycleColorId = form.cycleColor?.id
     self.cycleDecorationId = form.cycleDecoration?.id

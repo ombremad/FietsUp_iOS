@@ -161,6 +161,15 @@
         }
       }
     },
+    "admin.forumCategory.details" : {
+
+    },
+    "admin.forumCategory.name" : {
+
+    },
+    "admin.forumCategory.title" : {
+
+    },
     "admin.forumPanel.forumCategories" : {
       "localizations" : {
         "en" : {
@@ -176,6 +185,9 @@
           }
         }
       }
+    },
+    "admin.forumPanel.forumCategories.create" : {
+
     },
     "admin.forumPanel.pendingReports" : {
       "localizations" : {
@@ -2755,6 +2767,9 @@
         }
       }
     },
+    "validation.field.details" : {
+
+    },
     "validation.field.distance" : {
       "localizations" : {
         "en" : {
@@ -2882,6 +2897,9 @@
           }
         }
       }
+    },
+    "validation.field.name" : {
+
     },
     "validation.field.nickname" : {
       "localizations" : {
