@@ -237,6 +237,24 @@
         }
       }
     },
+    "admin.placeCategories" : {
+
+    },
+    "admin.placeCategories.create" : {
+
+    },
+    "admin.placeCategories.description" : {
+
+    },
+    "admin.placeCategories.title" : {
+
+    },
+    "admin.placeCategory.iconName" : {
+
+    },
+    "admin.placeCategory.name" : {
+
+    },
     "admin.report.action" : {
       "localizations" : {
         "en" : {
@@ -2834,6 +2852,9 @@
         }
       }
     },
+    "validation.field.iconName" : {
+
+    },
     "validation.field.lastName" : {
       "localizations" : {
         "en" : {
@@ -3076,6 +3097,9 @@
           }
         }
       }
+    },
+    "validation.rule.isNotASFSymbol" : {
+
     },
     "validation.rule.locationFailed" : {
       "localizations" : {

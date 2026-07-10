@@ -1,5 +1,5 @@
 //
-//  AdminSingleCategorySheet.swift
+//  AdminPlaceCategorySheet.swift
 //  FietsUp_iOS
 //
 //  Created by Anne Ferret on 10/07/2026.
@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct AdminSingleCategorySheet: View {
-  @Environment(AdminForumCategoriesViewModel.self) var vm
+struct AdminPlaceCategorySheet: View {
+  @Environment(AdminPlaceCategoriesViewModel.self) var vm
   @Environment(\.dismiss) private var dismiss
   
   var body: some View {
     @Bindable var vm = vm
     Form {
       AppFormSection {
-        TextField("admin.forumCategory.name", text: $vm.categoryForm.name)
-        TextField("admin.forumCategory.details", text: $vm.categoryForm.details)
+        TextField("admin.placeCategory.name", text: $vm.categoryForm.name)
+        TextField("admin.placeCategory.iconName", text: $vm.categoryForm.iconName)
+          .autocorrectionDisabled()
+          .textInputAutocapitalization(.never)
       }
     }
     .foregroundStyle(Color.Text.primary)
@@ -25,7 +27,7 @@ struct AdminSingleCategorySheet: View {
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)
     .presentationDetents([.medium])
-
+    
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "arrow.up", role: .confirm) {
@@ -43,11 +45,5 @@ struct AdminSingleCategorySheet: View {
         Button("common.cancel", systemImage: "xmark", role: .cancel) { dismiss() }
       }
     }
-  }
-}
-
-#Preview {
-  NavigationStack {
-    AdminSingleCategorySheet().environment(AdminForumCategoriesViewModel())
   }
 }

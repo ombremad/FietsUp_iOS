@@ -40,22 +40,6 @@ enum ValidationService {
     try validateLength(bio, field: .bio, max: 500)
   }
   
-  static func title(_ title: String) throws {
-    try validateLength(title, field: .title, min: 1, max: 100)
-  }
-  
-  static func name(_ name: String) throws {
-    try validateLength(name, field: .name, min: 1, max: 50)
-  }
-  
-  static func details(_ details: String) throws {
-    try validateLength(details, field: .details, min: 1, max: 10000)
-  }
-  
-  static func content(_ content: String) throws {
-    try validateLength(content, field: .content, min: 1, max: 20000)
-  }
-
   static func password(_ password: String) throws {
     var failures: [ValidationError] = []
     
@@ -80,6 +64,28 @@ enum ValidationService {
     }
   }
   
+  static func passwordConfirmation(password: String, confirmation: String) throws {
+    guard password == confirmation else {
+      throw ValidationError.fieldConfirmationMustBeIdentical(.password)
+    }
+  }
+  
+  static func title(_ title: String) throws {
+    try validateLength(title, field: .title, min: 1, max: 100)
+  }
+  
+  static func name(_ name: String) throws {
+    try validateLength(name, field: .name, min: 1, max: 50)
+  }
+  
+  static func details(_ details: String) throws {
+    try validateLength(details, field: .details, min: 1, max: 10000)
+  }
+  
+  static func content(_ content: String) throws {
+    try validateLength(content, field: .content, min: 1, max: 20000)
+  }
+    
   static func activityDates(start: Date, end: Date) throws {
     try validatePastDate(start, field: .startDate)
     try validatePastDate(end, field: .endDate)
@@ -132,9 +138,9 @@ enum ValidationService {
     try validateFutureDate(date, field: .banEndDate)
   }
       
-  static func passwordConfirmation(password: String, confirmation: String) throws {
-    guard password == confirmation else {
-      throw ValidationError.fieldConfirmationMustBeIdentical(.password)
+  static func iconName(_ iconName: String) throws {
+    guard SFSymbolCatalog.shared.contains(iconName) else {
+      throw ValidationError.fieldIsNotASFSymbol(.iconName)
     }
   }
   
@@ -165,7 +171,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate
+    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate, iconName
     
     var localized: String {
       switch self {
@@ -188,6 +194,7 @@ enum ValidationError: Error, LocalizedError {
         case .startDate: return String(localized: "validation.field.startDate")
         case .endDate: return String(localized: "validation.field.endDate")
         case .banEndDate: return String(localized: "validation.field.banEndDate")
+        case .iconName: return String(localized: "validation.field.iconName")
       }
     }
   }
@@ -206,6 +213,7 @@ enum ValidationError: Error, LocalizedError {
   case fieldMustBeReasonable(Field)
   case fieldCannotBeInTheFuture(Field)
   case fieldCannotBeInThePast(Field)
+  case fieldIsNotASFSymbol(Field)
   case startMustBeBeforeEnd
   case locationFailed
   
@@ -241,6 +249,8 @@ enum ValidationError: Error, LocalizedError {
         return "\(field.localized) \(String(localized: "validation.rule.cannotBeInTheFuture"))"
       case .fieldCannotBeInThePast(let field):
         return "\(field.localized) \(String(localized: "validation.rule.cannotBeInThePast"))"
+      case .fieldIsNotASFSymbol(let field):
+        return "\(field.localized) \(String(localized: "validation.rule.isNotASFSymbol"))"
       case .startMustBeBeforeEnd:
         return String(localized: "validation.rule.startMustBeBeforeEnd")
       case .locationFailed:

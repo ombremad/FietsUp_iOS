@@ -14,15 +14,26 @@ struct AdminPanelView: View {
     Form {
       AppFormSection {
         if auth.isAdmin {
-          NavigationLink { AdminForumCategoriesView() } label: {
+          NavigationLink { AdminForumCategoriesView()
+          } label: {
             SimpleAdminPanelRow(
               titleLocalized: "admin.forumCategories.title",
               descriptionLocalized: "admin.forumCategories.description",
             )
           }
         }
+        if auth.isAdmin {
+          NavigationLink { AdminPlaceCategoriesView()
+          } label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.placeCategories.title",
+              descriptionLocalized: "admin.placeCategories.description",
+            )
+          }
+        }
         if auth.isMod {
-          NavigationLink { AdminReportsView() } label: {
+          NavigationLink { AdminReportsView()
+          } label: {
             SimpleAdminPanelRow(
               titleLocalized: "admin.reports.title",
               descriptionLocalized: "admin.reports.description",

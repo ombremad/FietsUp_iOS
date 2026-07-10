@@ -1,25 +1,25 @@
 //
-//  AdminForumCategoriesViewModel.swift
+//  AdminPlaceCategoriesViewModel.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 08/07/2026.
+//  Created by Anne Ferret on 10/07/2026.
 //
 
 import Foundation
 import SwiftUI
 
 @Observable
-final class AdminForumCategoriesViewModel {
+final class AdminPlaceCategoriesViewModel {
   var isLoading: Bool = false
   var isSingleCategorySheetPresented: Bool = false
   
-  var categories: [ForumCategoryResponse] = []
+  var categories: [PlaceCategoryResponse] = []
   
-  var category: ForumCategoryResponse? = nil
+  var category: PlaceCategoryResponse? = nil
   var categoryForm = CategoryForm()
   struct CategoryForm {
     var name: String = ""
-    var details: String = ""
+    var iconName: String = ""
   }
   
   func load() async {
@@ -47,19 +47,20 @@ final class AdminForumCategoriesViewModel {
     isSingleCategorySheetPresented = true
   }
   
-  func edit(_ category: ForumCategoryResponse) {
+  func edit(_ category: PlaceCategoryResponse) {
     self.category = category
-    categoryForm = .init(name: category.name, details: category.details)
+    categoryForm = .init(name: category.name, iconName: category.iconName)
     isSingleCategorySheetPresented = true
   }
   
   func submit() async throws {
     isLoading = true
     defer { isLoading = false }
-        
+    
+    categoryForm.iconName = categoryForm.iconName.lowercased()
     try ValidationService.name(categoryForm.name)
-    try ValidationService.details(categoryForm.details)
-
+    try ValidationService.iconName(categoryForm.iconName)
+    
     if category != nil {
       try await performPatchCategory()
     } else {
@@ -82,37 +83,38 @@ final class AdminForumCategoriesViewModel {
   }
   
   private func performCreateCategory() async throws {
-    let body = CreateForumCategoryRequest(from: categoryForm)
+    let body = CreatePlaceCategoryRequest(from: categoryForm)
     
-    let _: ForumCategoryShortResponse = try await NetworkService.shared.post(
-      endpoint: "/forum/categories/admin",
+    let _: PlaceCategoryResponse = try await NetworkService.shared.post(
+      endpoint: "/places/categories/",
       body: body,
       requiresAuth: true
     )
   }
-
+  
   private func performPatchCategory() async throws {
     guard let oldCategory = category else { return }
-    let body = PatchForumCategoryRequest(from: categoryForm, compareTo: oldCategory)
+    let body = PatchPlaceCategoryRequest(from: categoryForm, compareTo: oldCategory)
     
-    let _: ForumCategoryShortResponse = try await NetworkService.shared.patch(
-      endpoint: "/forum/categories/admin/\(oldCategory.id)",
+    let _: PlaceCategoryResponse = try await NetworkService.shared.patch(
+      endpoint: "/places/categories/\(oldCategory.id)",
       body: body,
       requiresAuth: true
     )
   }
-    
+  
   private func performDeleteCategory(id: UUID) async throws {
     return try await NetworkService.shared.delete(
-      endpoint: "/forum/categories/admin/\(id)",
+      endpoint: "/places/categories/\(id)",
+      requiresAuth: true
+    )
+  }
+  
+  private func performFetchCategories() async throws -> [PlaceCategoryResponse] {
+    return try await NetworkService.shared.get(
+      endpoint: "/places/categories",
       requiresAuth: true
     )
   }
 
-  private func performFetchCategories() async throws -> [ForumCategoryResponse] {
-    return try await NetworkService.shared.get(
-      endpoint: "/forum/categories",
-      requiresAuth: true
-    )
-  }
 }

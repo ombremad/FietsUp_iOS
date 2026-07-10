@@ -1,14 +1,14 @@
 //
-//  AdminForumCategoriesView.swift
+//  AdminPlaceCategoriesView.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 06/07/2026.
+//  Created by Anne Ferret on 10/07/2026.
 //
 
 import SwiftUI
 
-struct AdminForumCategoriesView: View {
-  @State private var vm = AdminForumCategoriesViewModel()
+struct AdminPlaceCategoriesView: View {
+  @State private var vm = AdminPlaceCategoriesViewModel()
   
   var body: some View {
     Form {
@@ -16,8 +16,8 @@ struct AdminForumCategoriesView: View {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in
             SimpleAdminPanelRow(
-              title: Placeholder.ForumCategory.name,
-              description: Placeholder.ForumCategory.content,
+              title: Placeholder.PlaceCategory.name,
+              iconName: Placeholder.PlaceCategory.iconName
             )
           }
           .redacted(reason: .placeholder)
@@ -26,29 +26,30 @@ struct AdminForumCategoriesView: View {
           ForEach(vm.categories, id: \.id) { category in
             SimpleAdminPanelRow(
               title: category.name,
-              description: category.details
+              iconName: category.iconName
             ).onTapGesture { vm.edit(category) }
-            }
-            .onDelete { offsets in
-              Task { await vm.delete(at: offsets) }
+          }
+          .onDelete { offsets in
+            Task { await vm.delete(at: offsets) }
           }
         }
       }
     }
+    
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.forumPanel.forumCategories")
+    .navigationTitle("admin.placeCategories")
     .toolbarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
-      NavigationStack { AdminForumCategorySheet().environment(vm) }
+      NavigationStack { AdminPlaceCategorySheet().environment(vm) }
     }
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {
-          Label("admin.forumPanel.forumCategories.create", systemImage: "plus")
+          Label("admin.placeCategories.create", systemImage: "plus")
         }
       }
     }
@@ -58,8 +59,4 @@ struct AdminForumCategoriesView: View {
       Task { try await vm.refreshCategories() }
     }
   }
-}
-
-#Preview {
-  AdminForumCategoriesView()
 }

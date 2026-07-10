@@ -21,18 +21,18 @@ struct SimpleAdminPanelRow: View {
   }
 
   let title: Label
-  let description: Label
+  let description: Label?
   let iconName: String?
   
-  init(titleLocalized title: LocalizedStringKey, descriptionLocalized description: LocalizedStringKey, iconName: String? = nil) {
+  init(titleLocalized title: LocalizedStringKey, descriptionLocalized description: LocalizedStringKey? = nil, iconName: String? = nil) {
     self.title = .localized(title)
-    self.description = .localized(description)
+    self.description = description.map { .localized($0) }
     self.iconName = iconName
   }
   
-  init(title: String, description: String, iconName: String? = nil) {
+  init(title: String, description: String? = nil, iconName: String? = nil) {
     self.title = .verbatim(title)
-    self.description = .verbatim(description)
+    self.description = description.map { .verbatim($0) }
     self.iconName = iconName
   }
 
@@ -46,7 +46,9 @@ struct SimpleAdminPanelRow: View {
       
       VStack(alignment: .leading) {
         title.text.font(.body).bold()
-        description.text.font(.caption2)
+        if let description {
+          description.text.font(.caption2)
+        }
       }
       
       Spacer()
