@@ -38,7 +38,7 @@ struct AdminForumCategoriesView: View {
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.forumPanel.forumCategories")
+    .navigationTitle("admin.forumCategories.title")
     .toolbarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
@@ -48,7 +48,7 @@ struct AdminForumCategoriesView: View {
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {
-          Label("admin.forumPanel.forumCategories.create", systemImage: "plus")
+          Label("common.create", systemImage: "plus")
         }
       }
     }

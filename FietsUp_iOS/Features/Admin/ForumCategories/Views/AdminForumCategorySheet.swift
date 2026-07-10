@@ -16,7 +16,8 @@ struct AdminForumCategorySheet: View {
     Form {
       AppFormSection {
         TextField("admin.forumCategory.name", text: $vm.categoryForm.name)
-        TextField("admin.forumCategory.details", text: $vm.categoryForm.details)
+        TextField("admin.forumCategory.details", text: $vm.categoryForm.details, axis: .vertical)
+          .lineLimit(3)
       }
     }
     .foregroundStyle(Color.Text.primary)
@@ -24,7 +25,7 @@ struct AdminForumCategorySheet: View {
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.medium])
+    .presentationDetents([.fraction(0.4)])
 
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

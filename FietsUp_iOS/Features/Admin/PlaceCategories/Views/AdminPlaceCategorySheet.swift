@@ -26,7 +26,7 @@ struct AdminPlaceCategorySheet: View {
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.medium])
+    .presentationDetents([.fraction(0.4)])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

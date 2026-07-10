@@ -129,18 +129,34 @@
         }
       }
     },
-    "admin.forumCategories.description" : {
+    "admin.adminToolsSection.title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage forum categories, where all users can post."
+            "value" : "Admin tools"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les catégories du forum, où tous les utilisateurs peuvent poster."
+            "value" : "Outils d’administration"
+          }
+        }
+      }
+    },
+    "admin.forumCategories.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See and manage forum categories. That’s the main sections where all users can post."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir et gérer les catégories du forum. Ce sont les sections principales, où tous les utilisateurs peuvent poster."
           }
         }
       }
@@ -162,32 +178,52 @@
       }
     },
     "admin.forumCategory.details" : {
-
-    },
-    "admin.forumCategory.name" : {
-
-    },
-    "admin.forumCategory.title" : {
-
-    },
-    "admin.forumPanel.forumCategories" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forum categories"
+            "value" : "Details"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Catégories de forum"
+            "value" : "Détails"
           }
         }
       }
     },
-    "admin.forumPanel.forumCategories.create" : {
-
+    "admin.forumCategory.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
+    },
+    "admin.forumCategory.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forum category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégorie de forum"
+          }
+        }
+      }
     },
     "admin.forumPanel.pendingReports" : {
       "localizations" : {
@@ -201,6 +237,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reports en cours"
+          }
+        }
+      }
+    },
+    "admin.modToolsSection.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moderation tools"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outils de modération"
           }
         }
       }
@@ -237,23 +289,85 @@
         }
       }
     },
-    "admin.placeCategories" : {
-
-    },
     "admin.placeCategories.create" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer"
+          }
+        }
+      }
     },
     "admin.placeCategories.description" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See and manage place categories. They indicate the general purpose(s) of a place."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir et gérer les catégories de lieux. Elles servent à indiquer l’utilité, ou les différentes utilités, d’un lieu."
+          }
+        }
+      }
     },
     "admin.placeCategories.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place categories"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégories de lieux"
+          }
+        }
+      }
     },
     "admin.placeCategory.iconName" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom de l’icône"
+          }
+        }
+      }
     },
     "admin.placeCategory.name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
     },
     "admin.report.action" : {
       "localizations" : {
@@ -843,6 +957,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirmer"
+          }
+        }
+      }
+    },
+    "common.create" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer"
           }
         }
       }
@@ -2786,7 +2916,20 @@
       }
     },
     "validation.field.details" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détails"
+          }
+        }
+      }
     },
     "validation.field.distance" : {
       "localizations" : {
@@ -2853,7 +2996,20 @@
       }
     },
     "validation.field.iconName" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le nom de l’icône"
+          }
+        }
+      }
     },
     "validation.field.lastName" : {
       "localizations" : {
@@ -2920,7 +3076,20 @@
       }
     },
     "validation.field.name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
     },
     "validation.field.nickname" : {
       "localizations" : {
@@ -3099,7 +3268,20 @@
       }
     },
     "validation.rule.isNotASFSymbol" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is not a SF Symbol."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "n’est pas un SF Symbol."
+          }
+        }
+      }
     },
     "validation.rule.locationFailed" : {
       "localizations" : {

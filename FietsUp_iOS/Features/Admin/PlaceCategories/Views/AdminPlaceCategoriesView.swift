@@ -39,7 +39,7 @@ struct AdminPlaceCategoriesView: View {
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.placeCategories")
+    .navigationTitle("admin.placeCategories.title")
     .toolbarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
