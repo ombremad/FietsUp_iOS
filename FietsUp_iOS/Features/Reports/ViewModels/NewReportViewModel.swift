@@ -21,7 +21,7 @@ final class NewReportViewModel {
   
   var id: UUID?
   var contentType: ReportContentType?
-  var availableCategories: [ReportCategoryResponse] = []
+  var availableCategories: [ModerationCategoryResponse] = []
     
   func load(id: UUID, contentType: ReportContentType) async {
     isLoading = true
@@ -48,7 +48,7 @@ final class NewReportViewModel {
   }
   
   private func performFetchCategories() async throws {
-    let response: [ReportCategoryResponse] = try await NetworkService.shared.get(
+    let response: [ModerationCategoryResponse] = try await NetworkService.shared.get(
       endpoint: "/moderation/categories",
       requiresAuth: true
     )

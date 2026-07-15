@@ -12,7 +12,7 @@ struct ReportRequest: Encodable {
   let categoryId: UUID
   
   init(from form: NewReportViewModel.NewReportForm) {
-    self.details = form.hasDetails ? nil : form.details
+    self.details = form.hasDetails ? form.details : nil
     self.categoryId = form.categoryId!
   }
 }

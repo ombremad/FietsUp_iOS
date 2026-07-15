@@ -47,7 +47,7 @@ final class PlacesViewModel {
     
     Task {
       try? await Task.sleep(for: .seconds(0.5))
-      isPlacesSheetPresented = true
+      if AppRouter.shared.selectedTab == .places { showPlacesSheet() }
     }
   }
   

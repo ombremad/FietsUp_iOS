@@ -10,6 +10,7 @@ import SwiftUI
 struct ForumView: View {
   @State private var vm = ForumViewModel()
   private let router = AppRouter.shared
+  private let auth = AuthService.shared
   
   var body: some View {
     ScrollView {

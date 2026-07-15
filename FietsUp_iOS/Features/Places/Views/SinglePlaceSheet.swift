@@ -20,7 +20,7 @@ struct SinglePlaceSheet: View {
       }
     }
     .listStyle(.inset)
-    .labeledContentStyle(DetailRowStyle())
+    .labeledContentStyle(AppLabeledContent())
     .foregroundStyle(Color.Text.primary)
     .scrollContentBackground(.hidden)
     
@@ -119,21 +119,27 @@ struct SinglePlaceSheet: View {
           LabeledContent("place.label.details", value: details)
         }
         if let phone = place.phoneNumber,
-           let url = URL(string: "tel://\(phone)") {
+           let url = URL(string: "tel://\(phone)")
+        {
           Button { openURL(url) } label: {
             LabeledContent("place.label.phone", value: phone)
           }
         }
         if let email = place.email,
-           let url = URL(string: "mailto:\(email)") {
+           let url = URL(string: "mailto:\(email)")
+        {
           Button { openURL(url) } label: {
             LabeledContent("place.label.email", value: email)
           }
         }
         if let website = place.website,
-           let url = URL(string: website) ?? URL(string: "https://\(website)") {
+           let url = URL(string: website) ?? URL(string: "https://\(website)")
+        {
           Button { openURL(url) } label: {
-            LabeledContent("place.label.website", value: website)
+            LabeledContent("place.label.website", value: website
+              .replacingOccurrences(of: "https://", with: "")
+              .replacingOccurrences(of: "http://", with: "")
+            )
           }
         }
         if let date = place.lastUpdateDate ?? place.creationDate {
@@ -142,19 +148,5 @@ struct SinglePlaceSheet: View {
       }
       .buttonStyle(.plain)
     }
-  }
-  
-  struct DetailRowStyle: LabeledContentStyle {
-    func makeBody(configuration: Configuration) -> some View {
-      HStack(alignment: .top) {
-        configuration.label
-          .foregroundStyle(Color.Text.secondary)
-        Spacer()
-        configuration.content
-          .foregroundStyle(Color.Text.primary)
-          .multilineTextAlignment(.trailing)
-      }
-      .font(.body)
-    }
-  }
+  }  
 }

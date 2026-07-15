@@ -51,6 +51,10 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
     static let iconName = "car.top.radiowaves.rear.left.car.top.front"
   }
   
+  enum ForumReport {
+    static let details = "Je n'aime pas ce contenu"
+  }
+  
   enum Place {
     static let name = "VélÔToulouse"
     static let content = "En plein air, accessible 24h/24"
@@ -61,8 +65,13 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
     static let iconName = "screwdriver"
   }
   
+  enum ModerationCategory {
+    static let name = "Propos injurieux"
+  }
+  
   enum Dates {
     static let recent = Date(timeIntervalSinceNow: -12000)
+    static let future = Date(timeIntervalSinceNow: +12000)
   }
   
   enum Numbers {
@@ -78,6 +87,7 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
 
 extension UserResponse {
   static let placeholder = UserResponse(
+    id: UUID(),
     firstName: Placeholder.User.firstName,
     lastName: Placeholder.User.lastName,
     nickname: Placeholder.User.nickname,
@@ -88,7 +98,9 @@ extension UserResponse {
     totalElapsedDistance: Placeholder.User.totalElapsedDistance,
     cycleType: nil,
     cycleColor: nil,
-    cycleDecoration: nil
+    cycleDecoration: nil,
+    adminRights: 0,
+    banEndDate: nil
   )
 }
 
@@ -124,6 +136,17 @@ extension ForumPostResponse {
     comments: [ForumCommentResponse.placeholder, ForumCommentResponse.placeholder])
 }
 
+extension ForumPostShortResponse {
+  static let placeholder = ForumPostShortResponse(
+    id: UUID(),
+    title: Placeholder.ForumPost.title,
+    content: Placeholder.ForumPost.content,
+    user: UserPublicResponse.placeholder,
+    creationDate: Placeholder.Dates.recent,
+    lastActivityDate: nil
+  )
+}
+
 extension ForumCommentResponse {
   static let placeholder = ForumCommentResponse(
     id: UUID(),
@@ -133,6 +156,15 @@ extension ForumCommentResponse {
     likeCount: Placeholder.Numbers.like,
     likedByUser: false,
     favedByUser: true
+  )
+}
+
+extension ForumCommentShortResponse {
+  static let placeholder = ForumCommentShortResponse(
+    id: UUID(),
+    content: Placeholder.ForumComment.content,
+    user: UserPublicResponse.placeholder,
+    creationDate: Placeholder.Dates.recent,
   )
 }
 
@@ -231,6 +263,50 @@ extension DangerPostResponse {
     favedByUser: false,
     comments: []
   )
+}
+
+extension ForumCategoryResponse {
+  static let placeholder = ForumCategoryResponse(
+    id: UUID(),
+    name: Placeholder.ForumCategory.name,
+    details: Placeholder.ForumCategory.content,
+    totalPosts: Placeholder.Numbers.count,
+    lastActivityDate: Placeholder.Dates.recent
+  )
+}
+
+extension ForumPostReportResponse {
+  static let placeholder = ForumPostReportResponse(
+    id: UUID(),
+    details: Placeholder.ForumReport.details,
+    creationDate: Placeholder.Dates.recent,
+    processDate: nil,
+    user: UserPublicResponse.placeholder,
+    category: ModerationCategoryResponse.placeholder,
+    forumPost: ForumPostShortResponse.placeholder
+  )
+}
+
+extension ForumCommentReportResponse {
+  static let placeholder = ForumCommentReportResponse(
+    id: UUID(),
+    details: Placeholder.ForumReport.details,
+    creationDate: Placeholder.Dates.recent,
+    processDate: nil,
+    user: UserPublicResponse.placeholder,
+    category: ModerationCategoryResponse.placeholder,
+    forumComment: ForumCommentShortResponse.placeholder
+  )
+}
+extension ModerationCategoryResponse {
+  static let placeholder = ModerationCategoryResponse(
+    id: UUID(),
+    name: Placeholder.ModerationCategory.name
+  )
+}
+
+extension ReportRowCard {
+  static let placeholder = ReportRowCard(ForumCommentReportResponse.placeholder)
 }
 
 extension ButtonBar {

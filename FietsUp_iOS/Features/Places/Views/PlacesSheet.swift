@@ -47,12 +47,18 @@ struct PlacesSheet: View {
   
   private var placesList: some View {
     VStack(spacing: 16) {
-      if vm.placesNearby.isEmpty {
+      if vm.isLoading {
         ForEach(0..<3, id: \.self) { _ in
           ContentCard.placePlaceholder
             .redacted(reason: .placeholder)
             .shimmering()
         }
+      } else if vm.placesNearby.isEmpty {
+        ContentUnavailableView(
+          "places.placesNearby.empty.title",
+          systemImage: "mappin.slash.circle",
+          description: Text("places.placesNearby.empty.description")
+        )
       } else {
         ForEach(vm.placesNearby) { place in
           ContentCard(

@@ -10,6 +10,6 @@ import Foundation
 struct ReportResponse: Decodable {
   let id: UUID
   let details: String?
-  let category: ReportCategoryResponse
+  let category: ModerationCategoryResponse
   let creationDate: Date
 }
