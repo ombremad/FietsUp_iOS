@@ -38,6 +38,13 @@ struct AdminPanelView: View {
         }
         if auth.isMod {
           AppFormSection("admin.modToolsSection.title") {
+            NavigationLink { AdminUsersView() }
+            label: {
+              SimpleAdminPanelRow(
+                titleLocalized: "admin.users.title",
+                descriptionLocalized: "admin.users.description",
+              )
+            }
             NavigationLink { AdminReportsView() }
             label: {
               SimpleAdminPanelRow(

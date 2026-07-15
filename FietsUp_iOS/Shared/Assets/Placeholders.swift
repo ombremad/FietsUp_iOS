@@ -71,6 +71,7 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
   
   enum Dates {
     static let recent = Date(timeIntervalSinceNow: -12000)
+    static let future = Date(timeIntervalSinceNow: +12000)
   }
   
   enum Numbers {
@@ -86,6 +87,7 @@ Le chauffeur au téléphone s’est arrêté portière ouverte sans même regard
 
 extension UserResponse {
   static let placeholder = UserResponse(
+    id: UUID(),
     firstName: Placeholder.User.firstName,
     lastName: Placeholder.User.lastName,
     nickname: Placeholder.User.nickname,
@@ -97,7 +99,8 @@ extension UserResponse {
     cycleType: nil,
     cycleColor: nil,
     cycleDecoration: nil,
-    adminRights: 0
+    adminRights: 0,
+    banEndDate: nil
   )
 }
 

@@ -5,7 +5,10 @@
 //  Created by Anne Ferret on 12/05/2026.
 //
 
+import Foundation
+
 struct UserResponse: Decodable {
+  let id: UUID
   let firstName: String
   let lastName: String
   let nickname: String
@@ -18,4 +21,5 @@ struct UserResponse: Decodable {
   let cycleColor: CycleColorResponse?
   let cycleDecoration: CycleDecorationResponse?
   let adminRights: Int
+  let banEndDate: Date?
 }
