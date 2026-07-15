@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ModerationCategoryResponse: Decodable {
+struct ModerationCategoryResponse: Decodable, Identifiable {
   let id: UUID
   let name: String
 }

@@ -1,49 +1,43 @@
 //
-//  AdminPlaceCategoriesView.swift
+//  AdminModerationCategoriesView.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 10/07/2026.
+//  Created by Anne Ferret on 15/07/2026.
 //
 
 import SwiftUI
 
-struct AdminPlaceCategoriesView: View {
-  @State private var vm = AdminPlaceCategoriesViewModel()
+struct AdminModerationCategoriesView: View {
+  @State private var vm = AdminModerationCategoriesViewModel()
   
   var body: some View {
     Form {
       AppFormSection {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in
-            SimpleAdminPanelRow(
-              title: Placeholder.PlaceCategory.name,
-              iconName: Placeholder.PlaceCategory.iconName
-            )
+            Text(Placeholder.ModerationCategory.name)
+              .font(.body)
           }
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
           ForEach(vm.categories, id: \.id) { category in
-            SimpleAdminPanelRow(
-              title: category.name,
-              iconName: category.iconName
-            ).onTapGesture { vm.edit(category) }
-          }
-          .onDelete { offsets in
-            Task { await vm.delete(at: offsets) }
+            Text(category.name)
+              .onTapGesture { vm.edit(category) }
           }
         }
       }
     }
     
+    .font(.body)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.placeCategories.title")
+    .navigationTitle("admin.moderationCategories.title")
     .toolbarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
-      NavigationStack { AdminPlaceCategorySheet().environment(vm) }
+      NavigationStack { AdminModerationCategorySheet().environment(vm) }
     }
     
     .toolbar {

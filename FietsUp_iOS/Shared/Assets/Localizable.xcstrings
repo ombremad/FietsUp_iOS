@@ -241,6 +241,18 @@
         }
       }
     },
+    "admin.moderationCategories.description" : {
+
+    },
+    "admin.moderationCategories.title" : {
+
+    },
+    "admin.moderationCategory.name" : {
+
+    },
+    "admin.moderationCategory.title" : {
+
+    },
     "admin.modToolsSection.title" : {
       "localizations" : {
         "en" : {
@@ -290,6 +302,7 @@
       }
     },
     "admin.placeCategories.create" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
