@@ -22,7 +22,7 @@ final class AdminReportsViewModel {
     var details: String = ""
     var editedTitle: String = ""
     var editedContent: String = ""
-    var banDate: Date = .now.addingTimeInterval(60 * 60 * 24 * 7) // default ban duration: one week
+    var banDate: Date = Defaults.banEndDate
   }
   
   var contentType: ReportContentType? {

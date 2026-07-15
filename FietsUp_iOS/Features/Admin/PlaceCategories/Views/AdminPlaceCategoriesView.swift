@@ -11,7 +11,7 @@ struct AdminPlaceCategoriesView: View {
   @State private var vm = AdminPlaceCategoriesViewModel()
   
   var body: some View {
-    Form {
+    List {
       AppFormSection {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in

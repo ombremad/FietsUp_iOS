@@ -11,7 +11,7 @@ struct AdminForumCategoriesView: View {
   @State private var vm = AdminForumCategoriesViewModel()
   
   var body: some View {
-    Form {
+    List {
       AppFormSection {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in

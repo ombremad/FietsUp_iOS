@@ -11,7 +11,7 @@ struct AdminPanelView: View {
   private let auth = AuthService.shared
 
   var body: some View {
-    Form {
+    List {
       if auth.isAdmin {
         AppFormSection("admin.adminToolsSection.title") {
           NavigationLink { AdminForumCategoriesView() }

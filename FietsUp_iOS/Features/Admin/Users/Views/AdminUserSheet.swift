@@ -32,12 +32,15 @@ struct AdminUserSheet: View {
             Text(right.name).tag(right)
           }
         }
-        Toggle("admin.user.isBanned", isOn: $vm.userForm.isBanned)
+        Toggle("admin.user.isBanned", isOn: Binding(
+          get: { vm.userForm.isBanned },
+          set: { vm.setBanDefaults($0) }
+        ))
         if vm.userForm.isBanned {
           DatePicker(
             "admin.user.banEndDate",
             selection: Binding(
-              get: { vm.userForm.banEndDate ?? .now.addingTimeInterval(60 * 60 * 24 * 7) }, // default ban date: 1 week
+              get: { vm.userForm.banEndDate ?? Defaults.banEndDate },
               set: { vm.userForm.banEndDate = $0 }
             ),
             displayedComponents: .date
