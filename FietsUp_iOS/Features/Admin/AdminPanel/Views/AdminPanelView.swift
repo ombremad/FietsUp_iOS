@@ -14,6 +14,20 @@ struct AdminPanelView: View {
     List {
       if auth.isAdmin {
         AppFormSection("admin.adminToolsSection.title") {
+          NavigationLink { AdminUsersView() }
+          label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.users.title",
+              descriptionLocalized: "admin.users.description",
+            )
+          }
+          NavigationLink { AdminPlacesView() }
+          label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.places.title",
+              descriptionLocalized: "admin.places.description",
+            )
+          }
           NavigationLink { AdminForumCategoriesView() }
           label: {
             SimpleAdminPanelRow(
@@ -38,13 +52,6 @@ struct AdminPanelView: View {
         }
         if auth.isMod {
           AppFormSection("admin.modToolsSection.title") {
-            NavigationLink { AdminUsersView() }
-            label: {
-              SimpleAdminPanelRow(
-                titleLocalized: "admin.users.title",
-                descriptionLocalized: "admin.users.description",
-              )
-            }
             NavigationLink { AdminReportsView() }
             label: {
               SimpleAdminPanelRow(

@@ -144,6 +144,51 @@ enum ValidationService {
     }
   }
   
+  static func placeCategories(_ categories: [PlaceCategoryResponse]) throws {
+    guard !categories.isEmpty else {
+      throw ValidationError.fieldCannotBeEmpty(.placeCategories)
+    }
+  }
+  
+  static func address(_ address: String) throws {
+    try validateLength(address, field: .address, min: 1, max: 100)
+  }
+  
+  static func zipCode(_ zipCode: String) throws {
+    try validateLength(zipCode, field: .zipCode, min: 1, max: 6)
+  }
+  
+  static func city(_ city: String) throws {
+    try validateLength(city, field: .city, min: 1, max: 50)
+  }
+  
+  static func country(_ country: String) throws {
+    try validateLength(country, field: .country, min: 1, max: 50)
+  }
+  
+  static func phoneNumber(_ phoneNumber: String) throws {
+    try validateLength(phoneNumber, field: .phoneNumber, min: 4, max: 16)
+    
+    guard phoneNumber.range(of: #"^\+?[0-9]+$"#, options: .regularExpression) != nil else {
+      throw ValidationError.fieldInvalidFormat(.phoneNumber)
+    }
+  }
+  
+  static func website(_ website: String) throws {
+    try validateLength(website, field: .website, min: 1, max: 100)
+    
+    guard
+      let url = URL(string: website),
+      url.isFileURL || (url.host != nil && url.scheme != nil)
+    else {
+      throw ValidationError.fieldInvalidFormat(.website)
+    }
+  }
+  
+  static func otherDetails(_ otherDetails: String) throws {
+    try validateLength(otherDetails, field: .otherDetails, min: 1, max: 10000)
+  }
+  
   private static func validatePastDate(_ date: Date, field: ValidationError.Field) throws {
     let now = Date.now
     if date > now { throw ValidationError.fieldCannotBeInTheFuture(field) }
@@ -171,7 +216,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate, iconName
+    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate, iconName, placeCategories, address, zipCode, city, country, phoneNumber, website, otherDetails
     
     var localized: String {
       switch self {
@@ -195,6 +240,14 @@ enum ValidationError: Error, LocalizedError {
         case .endDate: return String(localized: "validation.field.endDate")
         case .banEndDate: return String(localized: "validation.field.banEndDate")
         case .iconName: return String(localized: "validation.field.iconName")
+        case .placeCategories: return String(localized: "validation.field.placeCategories")
+        case .address: return String(localized: "validation.field.address")
+        case .zipCode: return String(localized: "validation.field.zipCode")
+        case .city: return String(localized: "validation.field.city")
+        case .country: return String(localized: "validation.field.country")
+        case .phoneNumber: return String(localized: "validation.field.phoneNumber")
+        case .website: return String(localized: "validation.field.website")
+        case .otherDetails: return String(localized: "validation.field.otherDetails")
       }
     }
   }

@@ -17,6 +17,7 @@ struct AdminUserSheet: View {
       AppFormSection {
         LabeledContent("admin.user.email") {
           TextField("", text: $vm.userForm.email)
+            .keyboardType(.emailAddress)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
         }

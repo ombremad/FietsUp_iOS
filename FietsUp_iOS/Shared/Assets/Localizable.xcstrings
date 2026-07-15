@@ -2,7 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "shouldTranslate" : false
     },
     "activities.empty.description" : {
       "localizations" : {
@@ -356,6 +356,278 @@
         }
       }
     },
+    "admin.place.address" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse"
+          }
+        }
+      }
+    },
+    "admin.place.categories" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categories"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégories"
+          }
+        }
+      }
+    },
+    "admin.place.city" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "City"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ville"
+          }
+        }
+      }
+    },
+    "admin.place.country" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pays"
+          }
+        }
+      }
+    },
+    "admin.place.email" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "admin.place.latitude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latitude"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latitude"
+          }
+        }
+      }
+    },
+    "admin.place.longitude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longitude"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longitude"
+          }
+        }
+      }
+    },
+    "admin.place.mandatorySection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mandatory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obligatoire"
+          }
+        }
+      }
+    },
+    "admin.place.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
+    },
+    "admin.place.negativeButton" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toggle positive/negative value"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer valeur positive/négative"
+          }
+        }
+      }
+    },
+    "admin.place.optionalSection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif"
+          }
+        }
+      }
+    },
+    "admin.place.otherDetails" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other details"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autres détails"
+          }
+        }
+      }
+    },
+    "admin.place.phoneNumber" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone number"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numéro de téléphone"
+          }
+        }
+      }
+    },
+    "admin.place.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lieu"
+          }
+        }
+      }
+    },
+    "admin.place.useCurrentLocation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use current location"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser l’emplacement actuel"
+          }
+        }
+      }
+    },
+    "admin.place.website" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site web"
+          }
+        }
+      }
+    },
+    "admin.place.zipCode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zip code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code postal"
+          }
+        }
+      }
+    },
     "admin.placeCategories.description" : {
       "localizations" : {
         "en" : {
@@ -416,6 +688,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nom"
+          }
+        }
+      }
+    },
+    "admin.places.categories" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categories"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégories"
+          }
+        }
+      }
+    },
+    "admin.places.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See and manage places. They are the whole database of places shown to the users in the Place tab."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir et gérer les lieux. Ils constituent toute la base de données montrée aux utilisateurs dans l’onglet Lieux."
+          }
+        }
+      }
+    },
+    "admin.places.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Places"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lieux"
           }
         }
       }
@@ -3126,6 +3446,22 @@
         }
       }
     },
+    "validation.field.address" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'adresse"
+          }
+        }
+      }
+    },
     "validation.field.banEndDate" : {
       "localizations" : {
         "en" : {
@@ -3169,7 +3505,23 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Catégorie"
+            "value" : "La catégorie"
+          }
+        }
+      }
+    },
+    "validation.field.city" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "City"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ville"
           }
         }
       }
@@ -3190,6 +3542,22 @@
         }
       }
     },
+    "validation.field.country" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le pays"
+          }
+        }
+      }
+    },
     "validation.field.details" : {
       "localizations" : {
         "en" : {
@@ -3201,7 +3569,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Détails"
+            "value" : "Les détails"
           }
         }
       }
@@ -3361,7 +3729,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nom"
+            "value" : "Le nom"
           }
         }
       }
@@ -3382,6 +3750,22 @@
         }
       }
     },
+    "validation.field.otherDetails" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other details"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les autres détails"
+          }
+        }
+      }
+    },
     "validation.field.password" : {
       "localizations" : {
         "en" : {
@@ -3394,6 +3778,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le mot de passe"
+          }
+        }
+      }
+    },
+    "validation.field.phoneNumber" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone number"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le numéro de téléphone"
+          }
+        }
+      }
+    },
+    "validation.field.placeCategories" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place categories"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les catégories de lieux"
           }
         }
       }
@@ -3442,6 +3858,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le titre"
+          }
+        }
+      }
+    },
+    "validation.field.website" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le site web"
+          }
+        }
+      }
+    },
+    "validation.field.zipCode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zip code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le code postal"
           }
         }
       }
