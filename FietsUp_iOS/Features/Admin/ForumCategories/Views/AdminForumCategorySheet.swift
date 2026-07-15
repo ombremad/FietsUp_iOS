@@ -15,13 +15,18 @@ struct AdminForumCategorySheet: View {
     @Bindable var vm = vm
     Form {
       AppFormSection {
-        TextField("admin.forumCategory.name", text: $vm.categoryForm.name)
-        TextField("admin.forumCategory.details", text: $vm.categoryForm.details, axis: .vertical)
-          .lineLimit(3)
+        LabeledContent("admin.forumCategory.name") {
+          TextField("", text: $vm.categoryForm.name)
+        }
+        LabeledContent("admin.forumCategory.details") {
+          TextField("", text: $vm.categoryForm.details, axis: .vertical)
+            .lineLimit(3)
+        }
       }
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)

@@ -20,7 +20,7 @@ struct SinglePlaceSheet: View {
       }
     }
     .listStyle(.inset)
-    .labeledContentStyle(DetailRowStyle())
+    .labeledContentStyle(AppLabeledContent())
     .foregroundStyle(Color.Text.primary)
     .scrollContentBackground(.hidden)
     
@@ -148,19 +148,5 @@ struct SinglePlaceSheet: View {
       }
       .buttonStyle(.plain)
     }
-  }
-  
-  struct DetailRowStyle: LabeledContentStyle {
-    func makeBody(configuration: Configuration) -> some View {
-      HStack(alignment: .top) {
-        configuration.label
-          .foregroundStyle(Color.Text.secondary)
-        Spacer()
-        configuration.content
-          .foregroundStyle(Color.Text.primary)
-          .multilineTextAlignment(.trailing)
-      }
-      .font(.body)
-    }
-  }
+  }  
 }

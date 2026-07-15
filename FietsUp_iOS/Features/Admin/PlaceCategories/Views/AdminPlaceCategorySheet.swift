@@ -15,14 +15,19 @@ struct AdminPlaceCategorySheet: View {
     @Bindable var vm = vm
     Form {
       AppFormSection {
-        TextField("admin.placeCategory.name", text: $vm.categoryForm.name)
-        TextField("admin.placeCategory.iconName", text: $vm.categoryForm.iconName)
-          .autocorrectionDisabled()
-          .textInputAutocapitalization(.never)
+        LabeledContent("admin.placeCategory.name") {
+          TextField("", text: $vm.categoryForm.name)
+        }
+        LabeledContent("admin.placeCategory.iconName") {
+          TextField("", text: $vm.categoryForm.iconName)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+        }
       }
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)

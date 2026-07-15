@@ -22,9 +22,13 @@ struct AdminModerationCategoriesView: View {
           .shimmering()
         } else {
           ForEach(vm.categories, id: \.id) { category in
-            Text(category.name)
-              .onTapGesture { vm.edit(category) }
-          }
+            Button { vm.edit(category) }
+            label: {
+              Text(category.name)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+          }.buttonStyle(.plain)
         }
       }
     }

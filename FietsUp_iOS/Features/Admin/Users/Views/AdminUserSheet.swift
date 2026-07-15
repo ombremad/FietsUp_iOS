@@ -15,18 +15,28 @@ struct AdminUserSheet: View {
     @Bindable var vm = vm
     Form {
       AppFormSection {
-        TextField("admin.user.email", text: $vm.userForm.email)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-        TextField("admin.user.nickname", text: $vm.userForm.nickname)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-        TextField("admin.user.firstName", text: $vm.userForm.firstName)
-          .autocorrectionDisabled()
-        TextField("admin.user.lastName", text: $vm.userForm.lastName)
-          .autocorrectionDisabled()
-        TextField("admin.user.bio", text: $vm.userForm.bio, axis: .vertical)
-          .lineLimit(3)
+        LabeledContent("admin.user.email") {
+          TextField("", text: $vm.userForm.email)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
+        }
+        LabeledContent("admin.user.nickname") {
+          TextField("", text: $vm.userForm.nickname)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
+        }
+        LabeledContent("admin.user.firstName") {
+          TextField("", text: $vm.userForm.firstName)
+            .autocorrectionDisabled()
+        }
+        LabeledContent("admin.user.lastName") {
+          TextField("admin.user.lastName", text: $vm.userForm.lastName)
+            .autocorrectionDisabled()
+        }
+        LabeledContent("admin.user.bio") {
+          TextField("admin.user.bio", text: $vm.userForm.bio, axis: .vertical)
+            .lineLimit(3)
+        }
         Picker("admin.user.rights", selection: $vm.userForm.rights) {
           ForEach(UserRights.allCases, id: \.self) { right in
             Text(right.name).tag(right)
@@ -50,6 +60,7 @@ struct AdminUserSheet: View {
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.user.title")
     .navigationBarTitleDisplayMode(.inline)

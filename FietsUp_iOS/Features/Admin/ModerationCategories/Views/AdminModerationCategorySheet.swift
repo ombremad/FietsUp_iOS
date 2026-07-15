@@ -15,11 +15,14 @@ struct AdminModerationCategorySheet: View {
     @Bindable var vm = vm
     Form {
       AppFormSection {
-        TextField("admin.moderationCategory.name", text: $vm.categoryForm.name)
+        LabeledContent("admin.moderationCategory.name") {
+          TextField("", text: $vm.categoryForm.name)
+        }
       }
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.moderationCategory.title")
     .navigationBarTitleDisplayMode(.inline)

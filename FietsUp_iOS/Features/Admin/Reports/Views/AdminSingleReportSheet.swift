@@ -20,6 +20,7 @@ struct AdminSingleReportSheet: View {
     }
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
+    .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.report.title")
     .navigationBarTitleDisplayMode(.inline)
@@ -68,17 +69,23 @@ struct AdminSingleReportSheet: View {
             .contentTransition(.interpolate)
             .animation(.snappy, value: vm.reportActionForm.action)
         }
-        TextField("admin.report.details", text: $vm.reportActionForm.details, axis: .vertical)
-          .lineLimit(2)
+        LabeledContent("admin.report.details") {
+          TextField("", text: $vm.reportActionForm.details, axis: .vertical)
+            .lineLimit(2)
+        }
       }
       if vm.reportActionForm.action == .edit {
         AppFormSection("admin.report.editSection") {
           if vm.report?.reportedTitle != nil {
-            TextField("admin.report.editedTitle", text: $vm.reportActionForm.editedTitle)
-              .lineLimit(1)
+            LabeledContent("admin.report.editedTitle") {
+              TextField("", text: $vm.reportActionForm.editedTitle)
+                .lineLimit(1)
+            }
           }
-          TextField("admin.report.editedContent", text: $vm.reportActionForm.editedContent, axis: .vertical)
-            .lineLimit(12)
+          LabeledContent("admin.report.editedContent") {
+            TextField("", text: $vm.reportActionForm.editedContent, axis: .vertical)
+              .lineLimit(12)
+          }
         }
       }
       if vm.reportActionForm.action == .edit || vm.reportActionForm.action == .delete {
