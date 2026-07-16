@@ -13,10 +13,10 @@ struct PlacesSheet: View {
 
   var body: some View {
     ScrollView {
-      VStack(spacing: 24) {
+      VStack(spacing: Defaults.spacing.vertical.large) {
         placesList
       }
-      .padding(.vertical, 24)
+      .padding(.vertical, Defaults.padding.medium)
       .padding(.horizontal)
     }
     .foregroundStyle(Color.Text.primary)
@@ -46,7 +46,7 @@ struct PlacesSheet: View {
   }
   
   private var placesList: some View {
-    VStack(spacing: 16) {
+    VStack(spacing: Defaults.spacing.vertical.medium) {
       if vm.isLoading {
         ForEach(0..<3, id: \.self) { _ in
           ContentCard.placePlaceholder

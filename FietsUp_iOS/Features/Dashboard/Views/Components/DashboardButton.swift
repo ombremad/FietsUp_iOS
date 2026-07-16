@@ -47,7 +47,7 @@ struct DashboardButton: View {
       .frame(maxWidth: .infinity)
       .foregroundStyle(foregroundColor)
       .background(backgroundColor)
-      .clipShape(RoundedRectangle(cornerRadius: 18))
+      .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
     }
   }
 }

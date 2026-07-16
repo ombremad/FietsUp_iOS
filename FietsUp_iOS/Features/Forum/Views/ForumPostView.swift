@@ -15,12 +15,12 @@ struct ForumPostView: View {
     @Bindable var vm = vm
 
     ScrollView {
-      VStack(spacing: 42) {
+      VStack(spacing: Defaults.spacing.vertical.xlarge) {
         postDetails
         postComments
       }
       .padding()
-      .padding(.bottom, 42)
+      .padding(.bottom, Defaults.padding.xlarge)
       .frame(maxWidth: .infinity)
       
     }
@@ -43,7 +43,7 @@ struct ForumPostView: View {
   
   @ViewBuilder
   private var postDetails: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: Defaults.spacing.vertical.large) {
       if vm.isLoading {
         Group {
           ContentComponent.bigPlaceholder
@@ -77,7 +77,7 @@ struct ForumPostView: View {
   
   @ViewBuilder
   private var postComments: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: Defaults.spacing.vertical.large) {
       if vm.isLoading {
         Group {
           ForEach(0..<5, id: \.self) { _ in

@@ -11,14 +11,12 @@ import SVGView
 struct CycleSVGThumbnail: View {
   let urlString: String
   @State private var svgData: Data?
-  
-  private let aspectRatio: CGFloat = 121 / 81
 
   var body: some View {
     Group {
       if let svgData {
         SVGView(data: svgData)
-          .aspectRatio(aspectRatio, contentMode: .fit)
+          .aspectRatio(Defaults.bikeAvatar.aspect.ratio, contentMode: .fit)
           .clipped()
       } else {
         ProgressView()

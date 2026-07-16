@@ -134,7 +134,7 @@ final class AdminUsersViewModel {
   func setBanDefaults(_ isBanned: Bool) {
     userForm.isBanned = isBanned
     if isBanned && userForm.banEndDate == nil {
-      userForm.banEndDate = Defaults.banEndDate
+      userForm.banEndDate = Defaults.values.banEndDate
     }
   }
 }

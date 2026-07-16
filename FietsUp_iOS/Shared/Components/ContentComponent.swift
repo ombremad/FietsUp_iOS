@@ -23,7 +23,7 @@ struct ContentComponent: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 24) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.large) {
       authorSection
       contentSection
     }
@@ -40,7 +40,7 @@ struct ContentComponent: View {
   }
   
   private var contentSection: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
       if let title {
         Text(title)
           .font(.title2)

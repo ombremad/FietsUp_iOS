@@ -70,8 +70,8 @@ struct SinglePlaceSheet: View {
               Image(systemName: category.iconName)
               Text(category.name)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.horizontal, Defaults.padding.medium)
+            .padding(.vertical, Defaults.padding.xsmall)
             .foregroundStyle(Color.Text.Contrasted.primary)
             .background(Color.Button.primary)
             .clipShape(Capsule())
@@ -80,8 +80,8 @@ struct SinglePlaceSheet: View {
             Image(systemName: "signpost.right")
             Text("place.distanceInMeters **\(distance)**")
           }
-          .padding(.horizontal, 12)
-          .padding(.vertical, 6)
+          .padding(.horizontal, Defaults.padding.medium)
+          .padding(.vertical, Defaults.padding.xsmall)
           .foregroundStyle(Color.Text.secondary)
           .background(Color.Surface.secondary)
           .clipShape(Capsule())

@@ -50,8 +50,8 @@ struct AppButton: ButtonStyle {
       .lineLimit(1)
       .font(.caption)
       .foregroundStyle(foregroundColor)
-      .padding(.horizontal, width == .full ? 0 : 16)
-      .padding(.vertical, width == .full ? 18 : 12)
+      .padding(.horizontal, width == .full ? 0 : Defaults.padding.medium)
+      .padding(.vertical, width == .full ? Defaults.padding.medium : Defaults.padding.xsmall)
       .background(backgroundColor)
       .contentShape(Capsule())
       .clipShape(Capsule())
@@ -62,7 +62,7 @@ struct AppButton: ButtonStyle {
   ZStack {
     Color.gray.ignoresSafeArea()
     
-    VStack(spacing: 12) {
+    VStack(spacing: Defaults.spacing.vertical.medium) {
       Button("Test"){}
         .buttonStyle(AppButton(role: .primary))
       Button("Test"){}

@@ -15,7 +15,7 @@ struct ForumCategoryView: View {
     @Bindable var vm = vm
 
     ScrollView {
-      VStack(spacing: 24) {
+      VStack(spacing: Defaults.spacing.vertical.large) {
         if vm.isLoading {
           ForEach(0..<5, id: \.self) { _ in
             ContentCard.forumPostPlaceholder

@@ -26,12 +26,12 @@ struct DashboardView: View {
             .shimmering()
         }
         
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Defaults.spacing.vertical.large) {
           Text("dashboard.myActivities")
             .font(.title3)
             .foregroundStyle(Color.Text.tertiary)
           
-          HStack(spacing: 24) {
+          HStack(spacing: Defaults.spacing.horizontal.large) {
             DashboardButton(
               label: String(localized: "dashboard.activities.overview"),
               iconName: "chart.bar.xaxis.ascending.badge.clock",

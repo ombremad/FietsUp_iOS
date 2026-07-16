@@ -13,12 +13,12 @@ struct UserPublicSheet: View {
   
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: 36) {
+      VStack(alignment: .leading, spacing: Defaults.spacing.vertical.xlarge) {
         userHeader
         avatar
         stats
       }
-      .padding(.top, 32)
+      .padding(.top, Defaults.padding.large)
       .padding(.horizontal)
       .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -28,7 +28,7 @@ struct UserPublicSheet: View {
   }
   
   private var userHeader: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
       HStack {
         Text(user.nickname)
           .font(.title)
@@ -49,7 +49,7 @@ struct UserPublicSheet: View {
   }
   
   private var stats: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
       statsComponent(
         name: "user.sheet.totalElapsedDistance",
         icon: "point.topleft.down.to.point.bottomright.curvepath",
@@ -82,8 +82,8 @@ struct UserPublicSheet: View {
         .font(.data2).bold()
     }
     .font(.body)
-    .padding(.horizontal, 16)
-    .padding(.vertical, 6)
+    .padding(.horizontal, Defaults.padding.medium)
+    .padding(.vertical, Defaults.padding.xsmall)
     .foregroundStyle(.white)
     .background(Color.Button.primary)
     .clipShape(Capsule())
@@ -103,7 +103,7 @@ struct UserPublicSheet: View {
       VStack(alignment: .leading) {
         Text(name)
           .font(.body)
-        HStack(spacing: 6) {
+        HStack(spacing: Defaults.spacing.horizontal.small) {
           Text(value.description)
             .font(.data2)
             .bold()

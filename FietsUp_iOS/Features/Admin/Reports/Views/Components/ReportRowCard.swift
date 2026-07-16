@@ -14,7 +14,7 @@ struct ReportRowCard: View {
   }
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 4) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.xsmall) {
       HStack {
         Text(report.category.name)
           .foregroundStyle(Color.Text.tertiary)

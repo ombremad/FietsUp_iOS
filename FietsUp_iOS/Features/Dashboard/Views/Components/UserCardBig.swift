@@ -15,10 +15,10 @@ struct UserCardBig: View {
   }
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
       
       HStack {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Defaults.spacing.vertical.small) {
           Text(user.nickname)
             .font(.title3)
             .foregroundStyle(Color.Text.primary)
@@ -39,7 +39,7 @@ struct UserCardBig: View {
       
       HStack {
         
-        HStack(spacing: 3) {
+        HStack(spacing: Defaults.spacing.horizontal.xsmall) {
           Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
           Text(metersToFormattedKilometers(user.totalElapsedDistance))
             .bold()
@@ -48,14 +48,14 @@ struct UserCardBig: View {
           Text("common.unit.km")
         }
         Spacer()
-        HStack(spacing: 3) {
+        HStack(spacing: Defaults.spacing.horizontal.xsmall) {
           Image(systemName: "calendar")
           Text(user.daysSinceSignup.description)
             .bold()
           Text(user.daysSinceSignup <= 1 ? "user.card.day" : "user.card.days")
         }
         Spacer()
-        HStack(spacing: 3) {
+        HStack(spacing: Defaults.spacing.horizontal.xsmall) {
           Text("user.card.streak").textCase(.uppercase)
           Image(systemName: "bolt.fill")
           Text(user.streak.description)
@@ -63,19 +63,19 @@ struct UserCardBig: View {
             .contentTransition(.numericText())
             .animation(.interactiveSpring(), value: user.streak)
         }
-        .padding(.horizontal, 6)
+        .padding(.horizontal, Defaults.padding.xsmall)
         .foregroundStyle(Color.Text.Contrasted.primary)
         .background(Color.Button.primary)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.regular))
         
       }
       .font(.caption2)
       
     }
     .foregroundStyle(Color.Text.secondary)
-    .padding(24)
+    .padding(Defaults.padding.medium)
     .background(Color.Surface.primary)
-    .clipShape(RoundedRectangle(cornerRadius: 18))
+    .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
   }
 }
 

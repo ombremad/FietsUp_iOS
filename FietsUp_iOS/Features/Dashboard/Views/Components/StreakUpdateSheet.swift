@@ -21,9 +21,9 @@ struct StreakUpdateSheet: View {
   
   var body: some View {
     VStack {
-      VStack(spacing: 24) {
+      VStack(spacing: Defaults.spacing.vertical.large) {
         Spacer()
-        HStack(spacing: 24) {
+        HStack(spacing: Defaults.spacing.horizontal.large) {
           Image(systemName: "bolt.fill")
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -55,7 +55,7 @@ struct StreakUpdateSheet: View {
       .overlay(alignment: .bottom) {
         Button("common.ok") { dismiss() }
           .buttonStyle(AppButton(width: .full))
-          .padding(.bottom, 24)
+          .padding(.bottom, Defaults.padding.medium)
       }
       .padding()
       .multilineTextAlignment(.center)
