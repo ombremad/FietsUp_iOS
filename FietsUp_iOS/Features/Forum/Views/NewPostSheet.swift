@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct NewPostSheet: View {
-  @State private var vm = NewPostViewModel()
+  @Environment(ForumViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
 
-  let categoryId: UUID
-  let categoryName: String
-
   var body: some View {
+    @Bindable var vm = vm
+
     Form {
       AppFormSection {
         VStack(alignment: .leading) {
           Text("post.inCategory")
             .font(.caption2)
-          Text(categoryName)
+          Text(vm.category?.name ?? "")
         }
         .listRowBackground(Color.clear)
       }
@@ -41,32 +40,18 @@ struct NewPostSheet: View {
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "arrow.up", role: .confirm) {
-          Task {
-            do {
-              try await vm.submit()
-              dismiss()
-            } catch {
-              ErrorService.shared.show(error)
-            }
-          }
+          Task { await vm.submitPost() }
         }.disabled(vm.isLoading)
       }
       ToolbarItem(placement: .cancellationAction) {
         Button("common.cancel", systemImage: "xmark", role: .cancel) { dismiss() }
       }
     }
-    
-    .task {
-      vm.load(categoryId: categoryId)
-    }
   }
 }
 
 #Preview {
   NavigationStack {
-    NewPostSheet(
-      categoryId: UUID(),
-      categoryName: Placeholder.ForumCategory.name
-    )
+    NewPostSheet()
   }
 }

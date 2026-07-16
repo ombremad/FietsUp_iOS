@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ForumPostView: View {
-  @State private var vm = ForumPostViewModel()
+  @Environment(ForumViewModel.self) private var vm
   let id: UUID
 
   var body: some View {
+    @Bindable var vm = vm
+
     ScrollView {
       VStack(spacing: 42) {
         postDetails
@@ -26,22 +28,17 @@ struct ForumPostView: View {
     .background { Color.Surface.background.ignoresSafeArea() }
         
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
-      NavigationStack {
-        NewCommentSheet(postId: id, postName: vm.post?.title ?? "")
-      }
+      NavigationStack { NewCommentSheet().environment(vm) }
     }
     
-    .appSheet(item: $vm.reportTarget) { target in
+    .appSheet(item: $vm.newReportTarget) { target in
       NavigationStack {
         NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
       }
     }
 
-    .refreshable { await vm.load(id: id) }
-    .task {
-      guard vm.post == nil else { return }
-      await vm.load(id: id)
-    }
+    .task { await vm.loadPost(id: id) }
+    .refreshable { await vm.refreshPost() }
   }
   
   @ViewBuilder
@@ -67,10 +64,10 @@ struct ForumPostView: View {
             likeCount: post.likeCount,
             isLiked: post.likedByUser,
             isFaved: post.favedByUser,
-            onLike: { Task { await vm.feedback(feedback: .like, content: .post, id: post.id) } },
-            onFav: { Task { await vm.feedback(feedback: .fav, content: .post, id: post.id) } },
-            onReport: { vm.report(contentType: .forumPost, content: post.content, id: post.id) },
-            onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+            onLike: { Task { await vm.newFeedback(id: post.id, feedback: .like, content: .post) } },
+            onFav: { Task { await vm.newFeedback(id: post.id, feedback: .fav, content: .post) } },
+            onReport: { vm.newReport(id: post.id, contentType: .forumPost, content: post.content) },
+            onAnswer: { vm.newComment() },
             isLoading: vm.isFeedbackLoading
           )
         }
@@ -113,10 +110,10 @@ struct ForumPostView: View {
                 likeCount: comment.likeCount,
                 isLiked: comment.likedByUser,
                 isFaved: comment.favedByUser,
-                onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) } },
-                onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) } },
-                onReport: { vm.report(contentType: .forumComment, content: comment.content, id: comment.id) },
-                onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+                onLike: { Task { await vm.newFeedback(id: comment.id, feedback: .like, content: .comment) } },
+                onFav: { Task { await vm.newFeedback(id: comment.id, feedback: .fav, content: .comment) } },
+                onReport: { vm.newReport(id: comment.id, contentType: .forumComment, content: comment.content) },
+                onAnswer: { vm.newComment() },
                 isLoading: vm.isFeedbackLoading
               )
             }

@@ -11,7 +11,7 @@ struct ForumPostRequest: Encodable {
   let title: String
   let content: String
   
-  init (from form: NewPostViewModel.NewPostForm) {
+  init (from form: ForumViewModel.NewPostForm) {
     self.title = form.title
     self.content = form.content
   }

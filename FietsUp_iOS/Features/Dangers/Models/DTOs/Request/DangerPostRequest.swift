@@ -13,7 +13,7 @@ struct DangerPostRequest: Encodable {
   let latitude: Double
   let longitude: Double
   
-  init(from form: NewDangerPostViewModel.NewDangerPostForm, latitude: Double, longitude: Double) {
+  init(from form: DangersViewModel.NewPostForm, latitude: Double, longitude: Double) {
     self.title = form.title
     self.content = form.content
     self.latitude = latitude

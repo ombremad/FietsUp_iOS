@@ -9,12 +9,13 @@ import SwiftUI
 import MapKit
 
 struct DangerPostView: View {
-  @State private var vm = DangerPostViewModel()
+  @Environment(DangersViewModel.self) private var vm
   @Environment(\.openURL) private var openURL
-
   let id: UUID
   
   var body: some View {
+    @Bindable var vm = vm
+
     ScrollView {
       VStack(spacing: 42) {
         mapSnippet
@@ -31,23 +32,18 @@ struct DangerPostView: View {
     
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack {
-        NewDangerCommentSheet(postId: id, postName: vm.post?.title ?? "")
+        NewDangerCommentSheet().environment(vm)
       }
     }
     
-    .appSheet(item: $vm.reportTarget) { target in
+    .appSheet(item: $vm.newReportTarget) { target in
       NavigationStack {
         NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
       }
     }
     
-    .refreshable {
-      await vm.load(id: id)
-    }
-    .task {
-      guard vm.post == nil else { return }
-      await vm.load(id: id)
-    }
+    .task { await vm.loadPost(id: id) }
+    .refreshable { await vm.refreshPost() }
   }
   
   @ViewBuilder
@@ -79,7 +75,7 @@ struct DangerPostView: View {
           }
           .allowsHitTesting(false)
           
-          Text("common.map.around \(vm.approximateLocation ?? "")")
+          Text("common.map.around \(vm.postApproximateLocation ?? "")")
             .font(.caption2)
             .foregroundStyle(Color.Text.secondary)
             .lineLimit(1)
@@ -119,10 +115,10 @@ struct DangerPostView: View {
             likeCount: post.likeCount,
             isLiked: post.likedByUser,
             isFaved: post.favedByUser,
-            onLike: { Task { await vm.feedback(feedback: .like, content: .post, id: post.id) } },
-            onFav: { Task { await vm.feedback(feedback: .fav, content: .post, id: post.id) } },
-            onReport: { vm.report(contentType: .dangersPost, content: post.content, id: post.id) },
-            onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+            onLike: { Task { await vm.newFeedback(id: post.id, feedback: .like, content: .post) } },
+            onFav: { Task { await vm.newFeedback(id: post.id, feedback: .fav, content: .post) } },
+            onReport: { vm.newReport(id: post.id, contentType: .dangersPost, content: post.content) },
+            onAnswer: { vm.newComment() },
             isLoading: vm.isFeedbackLoading
           )
         }
@@ -165,10 +161,10 @@ struct DangerPostView: View {
                 likeCount: comment.likeCount,
                 isLiked: comment.likedByUser,
                 isFaved: comment.favedByUser,
-                onLike: { Task { await vm.feedback(feedback: .like, content: .comment, id: comment.id) } },
-                onFav: { Task { await vm.feedback(feedback: .fav, content: .comment, id: comment.id) } },
-                onReport: { vm.report(contentType: .dangersComment, content: comment.content, id: comment.id) },
-                onAnswer: { vm.isNewCommentSheetPresented.toggle() },
+                onLike: { Task { await vm.newFeedback(id: comment.id, feedback: .like, content: .comment) } },
+                onFav: { Task { await vm.newFeedback(id: comment.id, feedback: .fav, content: .comment) } },
+                onReport: { vm.newReport(id: comment.id, contentType: .dangersComment, content: comment.content) },
+                onAnswer: { vm.newComment() },
                 isLoading: vm.isFeedbackLoading
               )
             }

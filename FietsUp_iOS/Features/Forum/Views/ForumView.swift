@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ForumView: View {
   @State private var vm = ForumViewModel()
-  private let router = AppRouter.shared
   private let auth = AuthService.shared
   
   var body: some View {
@@ -29,17 +28,16 @@ struct ForumView: View {
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
-          ForEach(vm.categories) { category in
-            ContentCard(
-              contentType: .forumCategory,
-              title: category.name,
-              content: category.details,
-              footerData: category.totalPosts,
-              date: category.lastActivityDate
-            )
-            .onTapGesture {
-              router.push(ForumDestination.category(id: category.id))
-            }
+            ForEach(vm.categories) { category in
+              NavigationLink { ForumCategoryView(id: category.id).environment(vm) } label: {
+                ContentCard(
+                  contentType: .forumCategory,
+                  title: category.name,
+                  content: category.details,
+                  footerData: category.totalPosts,
+                  date: category.lastActivityDate
+                )
+              }
           }
         }
       }
@@ -53,18 +51,8 @@ struct ForumView: View {
     .navigationTitle("forum.title")
     .navigationBarTitleDisplayMode(.large)
     
-    .navigationDestination(for: ForumDestination.self) { destination in
-      switch destination {
-        case .category(let id): ForumCategoryView(id: id)
-        case .post(let id): ForumPostView(id: id)
-      }
-    }
-    
-    .refreshable { await vm.load() }
-    .task {
-      guard vm.categories.isEmpty else { return }
-      await vm.load()
-    }
+    .refreshable { await vm.loadCategories() }
+    .task { await vm.refreshCategories() }
   }
 }
 

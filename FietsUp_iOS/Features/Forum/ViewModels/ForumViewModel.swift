@@ -2,43 +2,36 @@
 //  ForumViewModel.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 15/05/2026.
+//  Created by Anne Ferret on 16/07/2026.
 //
 
 import Foundation
 
 @Observable
 final class ForumViewModel {
+  // state
   var isLoading: Bool = false
+  var isFeedbackLoading: Bool = false
+  var isNewPostSheetPresented: Bool = false
+  var isNewCommentSheetPresented: Bool = false
+  var isNewReportSheetPresented: Bool = false
   
+  // fetched data
   var categories: [ForumCategoryResponse] = []
+  var category: ForumCategoryDetailedResponse? = nil
+  var post: ForumPostResponse? = nil
   
-  private var observationTask: Task<Void, Never>?
-  init() {
-    observationTask = Task { @MainActor [weak self] in
-      for await _ in EventService.stream(for: ForumRefresh.refreshForumView) {
-        await self?.load()
-      }
-    }
+  // user created data
+  var newPostForm = NewPostForm()
+  struct NewPostForm {
+    var title: String = ""
+    var content: String = ""
   }
-  deinit { observationTask?.cancel() }
-  
-  func load() async {
-    isLoading = true
-    defer { isLoading = false }
-    
-    do {
-      try await performFetchCategories()
-    } catch {
-      ErrorService.shared.show(error)
-    }
+
+  var newCommentForm = NewCommentForm()
+  struct NewCommentForm {
+    var content: String = ""
   }
   
-  private func performFetchCategories() async throws {
-    let response: [ForumCategoryResponse] = try await NetworkService.shared.get(
-      endpoint: "/forum/categories",
-      requiresAuth: true
-    )
-    categories = response
-  }  
+  var newReportTarget: ReportTarget? = nil  
 }
