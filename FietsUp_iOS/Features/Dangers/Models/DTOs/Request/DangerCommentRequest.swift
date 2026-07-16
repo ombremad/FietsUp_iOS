@@ -10,7 +10,7 @@ import Foundation
 struct DangerCommentRequest: Encodable {
   let content: String
   
-  init(from form: NewDangerCommentViewModel.NewDangerCommentForm) {
+  init(from form: DangersViewModel.NewCommentForm) {
     self.content = form.content
   }
 }

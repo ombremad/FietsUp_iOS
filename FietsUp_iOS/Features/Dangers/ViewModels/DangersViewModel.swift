@@ -10,52 +10,38 @@ import CoreLocation
 
 @Observable
 final class DangersViewModel {
+  // state
   var isLoading: Bool = false
-  var dangerPosts: [DangerPostShortResponse] = []
+  var isFeedbackLoading: Bool = false
+  var isNewPostSheetPresented: Bool = false
+  var isNewCommentSheetPresented: Bool = false
   
-  // location related values
-  private let locationService = LocationService.shared
+  // location
+  let locationService = LocationService.shared
   var hasLocation: Bool { latitude != nil && longitude != nil }
   var latitude: Double? { locationService.latitude }
   var longitude: Double? { locationService.longitude }
   var locationStatus: CLAuthorizationStatus { locationService.authorizationStatus }
+  var postApproximateLocation: String? = nil
   
-  var isNewDangerPostSheetPresented = false
-  
-  private var observationTask: Task<Void, Never>?
-  init() {
-    observationTask = Task { @MainActor [weak self] in
-      for await _ in EventService.stream(for: DangersRefresh.refreshDangersView) {
-        await self?.load()
-      }
-    }
-  }
-  deinit { observationTask?.cancel() }
+  // fetched data
+  var posts: [DangerPostShortResponse] = []
+  var post: DangerPostResponse? = nil
+  var availableCategories: [DangerCategoryResponse] = []
 
-  func load() async {
-    isLoading = true
-    defer { isLoading = false }
-    
-    locationService.requestLocation()
-    
-    do {
-      try await performFetchDangerPosts()
-    } catch {
-      ErrorService.shared.show(error)
-    }
+  // user created data
+  var newPostForm = NewPostForm()
+  struct NewPostForm {
+    var title: String = ""
+    var content: String = ""
+    var categoryId: UUID?
+    var approximateLocation: String?
   }
   
-  private func performFetchDangerPosts() async throws {
-    if let latitude, let longitude {
-      do {
-        let response: [DangerPostShortResponse] = try await NetworkService.shared.get(
-          endpoint: "/dangers/posts/near/?latitude=\(latitude)&longitude=\(longitude)",
-          requiresAuth: true
-        )
-        dangerPosts = response
-      } catch {
-        ErrorService.shared.show(error)
-      }
-    }
+  var newCommentForm = NewCommentForm()
+  struct NewCommentForm {
+    var content: String = ""
   }
+
+  var newReportTarget: ReportTarget? = nil
 }

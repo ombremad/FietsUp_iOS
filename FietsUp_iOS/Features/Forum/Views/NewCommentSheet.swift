@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct NewCommentSheet: View {
-  @State private var vm = NewCommentViewModel()
+  @Environment(ForumViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
   
-  let postId: UUID
-  let postName: String
-  
   var body: some View {
+    @Bindable var vm = vm
+    
     Form {
       AppFormSection {
         VStack(alignment: .leading) {
           Text("comment.inThread")
             .font(.caption2)
-          Text(postName)
+          Text(vm.post?.title ?? "")
         }
         .listRowBackground(Color.clear)
       }
@@ -40,32 +39,18 @@ struct NewCommentSheet: View {
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "arrow.up", role: .confirm) {
-          Task {
-            do {
-              try await vm.submit()
-              dismiss()
-            } catch {
-              ErrorService.shared.show(error)
-            }
-          }
+          Task { await vm.submitComment() }
         }.disabled(vm.isLoading)
       }
       ToolbarItem(placement: .cancellationAction) {
         Button("common.cancel", systemImage: "xmark", role: .cancel) { dismiss() }
       }
     }
-    
-    .task {
-      vm.load(postId: postId)
-    }
   }
 }
 
 #Preview {
   NavigationStack {
-    NewCommentSheet(
-      postId: UUID(),
-      postName: Placeholder.ForumPost.title
-    )
+    NewCommentSheet()
   }
 }

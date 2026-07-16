@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DangersView: View {
   @State private var vm = DangersViewModel()
-  private let router = AppRouter.shared
 
   var body: some View {
     ScrollView {
@@ -27,32 +26,31 @@ struct DangersView: View {
           }
           .redacted(reason: .placeholder)
           .shimmering()
-        } else if vm.dangerPosts.isEmpty {
+        } else if vm.posts.isEmpty {
           ContentUnavailableView(
             "dangers.empty.title",
             systemImage: "bubble.left.and.exclamationmark.bubble.right",
             description: Text("dangers.empty.description")
           )
         } else {
-          ForEach(vm.dangerPosts) { danger in
-            ContentCard(
-              contentType: .dangerPost,
-              flairs: [CardFlair(
-                name: danger.dangerCategory.name,
-                iconName: danger.dangerCategory.iconName
-              )],
-              title: danger.title,
-              content: danger.content,
-              footerData: distanceBetweenTwoPoints(
-                lat1: vm.latitude ?? 0,
-                lon1: vm.longitude ?? 0,
-                lat2: danger.latitude,
-                lon2: danger.longitude
-              ),
-              date: danger.creationDate
-            )
-            .onTapGesture {
-              router.push(DangersDestination.post(id: danger.id))
+          ForEach(vm.posts) { post in
+            NavigationLink { DangerPostView(id: post.id).environment(vm) } label: {
+              ContentCard(
+                contentType: .dangerPost,
+                flairs: [CardFlair(
+                  name: post.dangerCategory.name,
+                  iconName: post.dangerCategory.iconName
+                )],
+                title: post.title,
+                content: post.content,
+                footerData: distanceBetweenTwoPoints(
+                  lat1: vm.latitude ?? 0,
+                  lon1: vm.longitude ?? 0,
+                  lat2: post.latitude,
+                  lon2: post.longitude
+                ),
+                date: post.creationDate
+              )
             }
           }
         }
@@ -69,33 +67,23 @@ struct DangersView: View {
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
-        Button {
-          vm.isNewDangerPostSheetPresented.toggle()
-        } label: {
+        Button { vm.newPost() } label: {
           Label("dangers.action.newPost", systemImage: "plus")
         }
       }
     }
     
-    .appSheet(isPresented: $vm.isNewDangerPostSheetPresented) {
+    .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack {
-        NewDangerPostSheet()
+        NewDangerPostSheet().environment(vm)
       }
     }
     
-    .navigationDestination(for: DangersDestination.self) { destination in
-      switch destination {
-        case .post(let id): DangerPostView(id: id)
-      }
-    }
-
-    .refreshable {
-      await vm.load()
-    }
     .task {
-      guard vm.dangerPosts.isEmpty else { return }
-      await vm.load()
+      await vm.loadPosts()
+      await vm.loadCategories()
     }
+    .refreshable { await vm.refreshPosts() }
   }
 }
 

@@ -8,22 +8,24 @@
 import SwiftUI
 
 struct NewDangerPostSheet: View {
-  @State private var vm = NewDangerPostViewModel()
+  @Environment(DangersViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
   
   var body: some View {
+    @Bindable var vm = vm
+
     Form {
       AppFormSection {
         VStack(alignment: .leading) {
           Text("dangers.postWillBeGeolocated")
             .font(.caption2).bold()
-          Text("common.map.around \(vm.approximateLocationName ?? "location.unknownLocation")")
+          Text("common.map.around \(vm.newPostForm.approximateLocation ?? "location.unknownLocation")")
         }
         .listRowBackground(Color.clear)
       }
       
       AppFormSection {
-        Picker("danger.category", selection: $vm.newDangerPostForm.categoryId) {
+        Picker("danger.category", selection: $vm.newPostForm.categoryId) {
           Text("danger.selectCategory").tag(UUID?.none)
           ForEach(vm.availableCategories) { category in
             Label(category.name, systemImage: category.iconName)
@@ -33,8 +35,8 @@ struct NewDangerPostSheet: View {
       }
       
       AppFormSection {
-        TextField("danger.title", text: $vm.newDangerPostForm.title)
-        TextField("danger.content", text: $vm.newDangerPostForm.content, axis: .vertical)
+        TextField("danger.title", text: $vm.newPostForm.title)
+        TextField("danger.content", text: $vm.newPostForm.content, axis: .vertical)
           .lineLimit(12)
       }
     }
@@ -48,14 +50,7 @@ struct NewDangerPostSheet: View {
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button("common.confirm", systemImage: "arrow.up", role: .confirm) {
-          Task {
-            do {
-              try await vm.submit()
-              dismiss()
-            } catch {
-              ErrorService.shared.show(error)
-            }
-          }
+          Task { await vm.submitPost() }
         }.disabled(vm.isLoading)
       }
       ToolbarItem(placement: .cancellationAction) {
@@ -64,7 +59,7 @@ struct NewDangerPostSheet: View {
     }
     
     .task {
-      await vm.load()
+      await vm.getNewPostApproximateLocation()
     }
   }
 }
