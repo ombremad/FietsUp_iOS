@@ -14,10 +14,10 @@ struct TitleLabel: View {
       Text("FietsUp")
         .font(.title)
         .foregroundStyle(Color.Surface.Login.primary)
-        .padding(.horizontal, 28)
-        .padding(.vertical, 8)
+        .padding(.horizontal, Defaults.padding.large)
+        .padding(.vertical, Defaults.padding.xsmall)
         .background(Color.Surface.field)
-        .cornerRadius(20)
+        .cornerRadius(Defaults.radius.large)
       Spacer()
     }
     .listRowBackground(Color.clear)    

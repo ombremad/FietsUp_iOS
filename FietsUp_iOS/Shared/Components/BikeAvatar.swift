@@ -11,7 +11,6 @@ import SVGView
 struct BikeAvatar: View {
   @State private var svgColoredCycle: Data?
   @State private var svgDecoration: Data?
-  private let aspectRatio: CGFloat = 121 / 81
 
   let cycle: Cycle
   init(_ cycle: Cycle) {
@@ -38,7 +37,7 @@ struct BikeAvatar: View {
         ProgressView()
       }
     }
-    .aspectRatio(aspectRatio, contentMode: .fit)
+    .aspectRatio(Defaults.bikeAvatar.aspect.ratio, contentMode: .fit)
     .clipped()
     
     // below: trigger refresh on any type/color/decoration change

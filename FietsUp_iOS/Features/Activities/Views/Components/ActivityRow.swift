@@ -16,7 +16,7 @@ struct ActivityRow: View {
   
   var body: some View {
     HStack {
-      HStack(spacing: 4) {
+      HStack(spacing: Defaults.spacing.horizontal.xsmall) {
         Text((Double(activity.distance) / 1000).formatted(.number.precision(.fractionLength(0...2))))
           .bold()
         Text("common.unit.km")

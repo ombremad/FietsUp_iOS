@@ -23,7 +23,7 @@ struct ErrorOverlay: View {
   
   @ViewBuilder
   private func bannerContent(for error: any Error) -> some View {
-    HStack(alignment: .top, spacing: 12) {
+    HStack(alignment: .top, spacing: Defaults.spacing.horizontal.medium) {
       Image(systemName: "exclamationmark.triangle.fill")
         .foregroundStyle(.white).opacity(0.9)
       
@@ -41,10 +41,10 @@ struct ErrorOverlay: View {
     }
     .padding()
     .background(Color.Surface.Error.primary)
-    .cornerRadius(24)
+    .cornerRadius(Defaults.radius.large)
     .padding(.horizontal)
-    .padding(.bottom, 8)
-    .shadow(radius: 8)
+    .padding(.bottom, Defaults.padding.xsmall)
+    .shadow(radius: Defaults.radius.regular)
   }
 }
 

@@ -12,7 +12,7 @@ struct DangersView: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: 24) {
+      VStack(alignment: .leading, spacing: Defaults.spacing.vertical.large) {
         HStack {
           Text("dangers.dangersNearby")
             .font(.title2)

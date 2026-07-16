@@ -17,12 +17,12 @@ struct DangerPostView: View {
     @Bindable var vm = vm
 
     ScrollView {
-      VStack(spacing: 42) {
+      VStack(spacing: Defaults.spacing.vertical.xlarge) {
         mapSnippet
         dangerDetails.padding(.horizontal)
         dangerComments.padding(.horizontal)
       }
-      .padding(.bottom, 42)
+      .padding(.bottom, Defaults.padding.xlarge)
       .frame(maxWidth: .infinity)
 
     }
@@ -94,7 +94,7 @@ struct DangerPostView: View {
   
   @ViewBuilder
   private var dangerDetails: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: Defaults.spacing.vertical.large) {
       if vm.isLoading {
         Group {
           ContentComponent.bigPlaceholder
@@ -128,7 +128,7 @@ struct DangerPostView: View {
   
   @ViewBuilder
   private var dangerComments: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: Defaults.spacing.vertical.large) {
       if vm.isLoading {
         Group {
           ForEach(0..<5, id: \.self) { _ in

@@ -18,7 +18,7 @@ struct ButtonBar: View {
   let isLoading: Bool
 
   var body: some View {
-    HStack(spacing: 12) {
+    HStack(spacing: Defaults.spacing.horizontal.medium) {
       likeButton
       favButton
       reportButton

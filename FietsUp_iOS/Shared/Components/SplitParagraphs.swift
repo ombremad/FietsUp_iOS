@@ -14,7 +14,7 @@ func splitParagraphs(_ content: String) -> some View {
     .filter { !$0.isEmpty }
   }
   
-  return VStack(alignment: .leading, spacing: 12) {
+  return VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
     ForEach(Array(paragraphs.enumerated()), id: \.offset) { _, paragraph in
       Text(paragraph)
     }

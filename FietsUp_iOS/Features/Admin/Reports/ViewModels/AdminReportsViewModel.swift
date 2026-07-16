@@ -22,7 +22,7 @@ final class AdminReportsViewModel {
     var details: String = ""
     var editedTitle: String = ""
     var editedContent: String = ""
-    var banDate: Date = Defaults.banEndDate
+    var banDate: Date = Defaults.values.banEndDate
   }
   
   var contentType: ReportContentType? {

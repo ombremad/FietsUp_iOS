@@ -33,13 +33,13 @@ struct UserPublicCard: View {
       }
       
     }
-    .padding(.vertical, size == .big ? 16 : 10)
-    .padding(.horizontal, 16)
+    .padding(.vertical, size == .big ? Defaults.padding.small : Defaults.padding.xsmall)
+    .padding(.horizontal, Defaults.padding.medium)
     .font(.body)
     .foregroundStyle(Color.Text.primary)
     .background(Color.Surface.primary)
     .frame(maxWidth: .infinity)
-    .clipShape(RoundedRectangle(cornerRadius: 18))
+    .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
     .onTapGesture {
       isUserSheetPresented.toggle()
     }
@@ -52,8 +52,8 @@ struct UserPublicCard: View {
   private var avatarSection: some View {
     BikeAvatar(Cycle(from: user))
       .frame(
-        width: size == .big ? 46 : 25,
-        height: size == .big ? 30 : 16,
+        width: size == .big ? Defaults.bikeAvatar.big.width : Defaults.bikeAvatar.small.width,
+        height: size == .big ? Defaults.bikeAvatar.big.height : Defaults.bikeAvatar.small.height,
       )
   }
   
@@ -72,22 +72,21 @@ struct UserPublicCard: View {
   }
   
   private var streakPill: some View {
-    HStack(spacing: 4) {
+    HStack(spacing: Defaults.spacing.horizontal.xsmall) {
       Image(systemName: "bolt.fill")
       Text(user.streak.description)
     }
-    .padding(.leading, 8)
-    .padding(.trailing, 10)
-    .padding(.vertical, 1)
+    .padding(.horizontal, Defaults.padding.xsmall)
+    .padding(.vertical, Defaults.padding.xxsmall)
     .font(.caption)
     .foregroundStyle(Color.white)
     .background(Color.accent)
-    .clipShape(RoundedRectangle(cornerRadius: 10))
+    .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
   }
 }
 
 #Preview {
-  VStack(spacing: 12) {
+  VStack(spacing: Defaults.spacing.vertical.medium) {
     UserPublicCard.bigPlaceholder
     UserPublicCard.smallPlaceholder
   }

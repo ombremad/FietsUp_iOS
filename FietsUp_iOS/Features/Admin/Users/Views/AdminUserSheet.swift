@@ -51,7 +51,7 @@ struct AdminUserSheet: View {
           DatePicker(
             "admin.user.banEndDate",
             selection: Binding(
-              get: { vm.userForm.banEndDate ?? Defaults.banEndDate },
+              get: { vm.userForm.banEndDate ?? Defaults.values.banEndDate },
               set: { vm.userForm.banEndDate = $0 }
             ),
             displayedComponents: .date

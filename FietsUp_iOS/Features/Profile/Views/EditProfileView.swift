@@ -72,7 +72,7 @@ struct EditProfileView: View {
   }
   
   private var cycleSelector: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: Defaults.spacing.vertical.large) {
       BikeAvatar(Cycle(
         color: vm.profileForm.cycleColor,
         type: vm.profileForm.cycleType,
@@ -101,7 +101,7 @@ struct EditProfileView: View {
   
   private var typeSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 24) {
+      LazyHStack(spacing: Defaults.spacing.horizontal.large) {
         ForEach(vm.cycleTypes, id: \.id) { cycleType in
           ZStack {
             Rectangle().stroke(
@@ -112,7 +112,7 @@ struct EditProfileView: View {
             )
             CycleSVGThumbnail(urlString: cycleType.fileLink)
           }
-          .frame(height: 120)
+          .frame(width: Defaults.bikeAvatar.customization.width, height: Defaults.bikeAvatar.customization.height)
           .contentShape(Rectangle())
           .onTapGesture {
             vm.profileForm.cycleType = CycleType(from: cycleType)
@@ -126,7 +126,7 @@ struct EditProfileView: View {
   
   private var colorSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 24) {
+      LazyHStack(spacing: Defaults.spacing.horizontal.large) {
         ForEach(vm.cycleColors, id: \.id) { cycleColor in
           ZStack {
             Circle()
@@ -152,7 +152,7 @@ struct EditProfileView: View {
   
   private var decorationSelector: some View {
     ScrollView(.horizontal) {
-      LazyHStack(spacing: 24) {
+      LazyHStack(spacing: Defaults.spacing.horizontal.large) {
         ForEach(vm.cycleDecorations, id: \.id) { cycleDecoration in
           ZStack {
             Rectangle().stroke(
@@ -164,7 +164,7 @@ struct EditProfileView: View {
             )
             CycleSVGThumbnail(urlString: cycleDecoration.fileLink)
           }
-          .frame(height: 120)
+          .frame(width: Defaults.bikeAvatar.customization.width, height: Defaults.bikeAvatar.customization.height)
           .contentShape(Rectangle())
           .onTapGesture {
             vm.profileForm.cycleDecoration = CycleDecoration(from: cycleDecoration)

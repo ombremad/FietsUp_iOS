@@ -36,23 +36,22 @@ struct ContentCard: View {
   }
   
   var body: some View {
-    VStack(spacing: 12) {
+    VStack(spacing: Defaults.spacing.vertical.medium) {
       topSection
       divider
       footer
     }
-    .padding(.horizontal, 24)
-    .padding(.vertical, 20)
+    .padding(Defaults.padding.medium)
     .font(.body)
     .background(Color.Surface.primary)
     .foregroundStyle(Color.Text.primary)
     .frame(maxWidth: .infinity)
-    .clipShape(RoundedRectangle(cornerRadius: 18))
+    .clipShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
   }
   
   private var topSection: some View {
-    HStack(spacing: 12) {
-      VStack(alignment: .leading, spacing: 12) {
+    HStack(spacing: Defaults.spacing.horizontal.medium) {
+      VStack(alignment: .leading, spacing: Defaults.spacing.vertical.medium) {
         flairRows
         titleAndContent
       }
@@ -67,9 +66,9 @@ struct ContentCard: View {
   @ViewBuilder
   private var flairRows: some View {
     if !flairs.isEmpty {
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: Defaults.spacing.vertical.xsmall) {
         ForEach(flairs, id: \.self) { flair in
-          HStack(spacing: 4) {
+          HStack(spacing: Defaults.spacing.horizontal.xsmall) {
             Image(systemName: flair.iconName)
               .frame(width: 20)
             Text(flair.name)
@@ -84,7 +83,7 @@ struct ContentCard: View {
   
   @ViewBuilder
   private var titleAndContent: some View {
-    VStack(alignment: .leading, spacing: 6) {
+    VStack(alignment: .leading, spacing: Defaults.spacing.vertical.small) {
       if let title {
         Text(title)
           .font(.title3)
@@ -109,7 +108,7 @@ struct ContentCard: View {
   private var footer: some View {
     HStack {
       if let date {
-        HStack(spacing: 4) {
+        HStack(spacing: Defaults.spacing.horizontal.xsmall) {
           Image(systemName: "calendar")
           switch contentType {
             case .forumPost, .forumCategory:
@@ -124,7 +123,7 @@ struct ContentCard: View {
       
       Spacer()
       
-      HStack(spacing: 4) {
+      HStack(spacing: Defaults.spacing.horizontal.xsmall) {
         switch contentType {
           case .forumPost:
             Image(systemName: "bubble.right")
@@ -146,7 +145,7 @@ struct ContentCard: View {
 
 #Preview {
   ScrollView {
-    VStack(spacing: 16) {
+    VStack(spacing: Defaults.spacing.vertical.medium) {
       ContentCard.forumCategoryPlaceholder
       ContentCard.forumPostPlaceholder
       ContentCard.placePlaceholder

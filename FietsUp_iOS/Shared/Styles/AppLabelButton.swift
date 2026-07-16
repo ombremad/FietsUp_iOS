@@ -14,8 +14,7 @@ struct AppLabelButton: ButtonStyle {
       .lineLimit(1)
       .font(.caption)
       .foregroundStyle(Color.Text.Contrasted.primary)
-      .padding(.horizontal, 16)
-      .padding(.vertical, 16)
+      .padding(Defaults.padding.medium)
       .contentShape(Rectangle())
       .clipShape(Rectangle())
   }
@@ -25,7 +24,7 @@ struct AppLabelButton: ButtonStyle {
   ZStack {
     Color.gray.ignoresSafeArea()
     
-    VStack(spacing: 12) {
+    VStack(spacing: Defaults.spacing.vertical.medium) {
       Button("Test"){}
         .buttonStyle(AppLabelButton())
     }
