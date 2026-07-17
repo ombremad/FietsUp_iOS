@@ -35,7 +35,7 @@ extension ForumViewModel {
     guard let category else { return }
 
     let body = ForumPostRequest(from: newPostForm)
-    let _: ForumPostResponse = try await NetworkService.shared.post(
+    let _: ForumPostPaginatedResponse = try await NetworkService.shared.post(
       endpoint: "/forum/posts/category/\(category.id)",
         body: body,
         requiresAuth: true

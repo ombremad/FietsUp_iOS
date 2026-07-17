@@ -11,7 +11,7 @@ import SwiftUI
 final class AdminUsersViewModel {
   var isLoading: Bool = true
   var isSingleUserSheetPresented: Bool = false
-  var metadata: PageMetadata = Defaults.pagination.metadata
+  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
   var users: [UserResponse] = []
 
@@ -23,7 +23,7 @@ final class AdminUsersViewModel {
     var firstName: String = ""
     var lastName: String = ""
     var bio: String = ""
-    var rights = UserRights.user
+    var rights: UserRights = .user
     var isBanned: Bool = false
     var banEndDate: Date? = nil
   }

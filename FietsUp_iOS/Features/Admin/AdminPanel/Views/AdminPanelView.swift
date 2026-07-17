@@ -35,18 +35,25 @@ struct AdminPanelView: View {
               descriptionLocalized: "admin.forumCategories.description",
             )
           }
-          NavigationLink { AdminPlaceCategoriesView() }
-          label: {
-            SimpleAdminPanelRow(
-              titleLocalized: "admin.placeCategories.title",
-              descriptionLocalized: "admin.placeCategories.description",
-            )
-          }
           NavigationLink { AdminModerationCategoriesView() }
           label: {
             SimpleAdminPanelRow(
               titleLocalized: "admin.moderationCategories.title",
               descriptionLocalized: "admin.moderationCategories.description",
+            )
+          }
+          NavigationLink { AdminDangerCategoriesView() }
+          label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.dangerCategories.title",
+              descriptionLocalized: "admin.dangerCategories.description",
+            )
+          }
+          NavigationLink { AdminPlaceCategoriesView() }
+          label: {
+            SimpleAdminPanelRow(
+              titleLocalized: "admin.placeCategories.title",
+              descriptionLocalized: "admin.placeCategories.description",
             )
           }
         }

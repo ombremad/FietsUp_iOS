@@ -12,7 +12,7 @@ import SwiftUI
 final class AdminPlacesViewModel {
   var isLoading: Bool = false
   var isSinglePlaceSheetPresented: Bool = false
-  var metadata: PageMetadata = Defaults.pagination.metadata
+  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
   var places: [PlaceResponse] = []
   var categories: [PlaceCategoryResponse] = []

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ForumPostResponse: Decodable {
+struct ForumPostPaginatedResponse: Decodable {
   let id: UUID
   let title: String
   let content: String
@@ -16,5 +16,5 @@ struct ForumPostResponse: Decodable {
   let likeCount: Int
   let likedByUser: Bool
   let favedByUser: Bool
-  let comments: [ForumCommentResponse]
+  let comments: Page<ForumCommentResponse>
 }

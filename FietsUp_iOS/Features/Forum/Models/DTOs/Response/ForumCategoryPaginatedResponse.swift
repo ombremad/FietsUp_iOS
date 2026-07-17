@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ForumCategoryDetailedResponse: Decodable {
+struct ForumCategoryPaginatedResponse: Decodable {
   let id: UUID
   let name: String
   let details: String
-  let posts: [ForumPostWithCountsResponse]
+  let posts: Page<ForumPostWithCountsResponse>
 }

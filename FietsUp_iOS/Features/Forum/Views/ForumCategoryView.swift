@@ -22,19 +22,23 @@ struct ForumCategoryView: View {
           }
           .redacted(reason: .placeholder)
           .shimmering()
-        } else {
-          if let category = vm.category {
-              ForEach(category.posts) { post in
-                NavigationLink { ForumPostView(id: post.id).environment(vm) } label: {
-                ContentCard(
-                  contentType: .forumPost,
-                  flairs: [CardFlair(name: post.user.nickname, iconName: "person.fill")],
-                  title: post.title,
-                  content: post.content,
-                  footerData: post.totalComments,
-                  date: post.lastActivityDate,
-                )
-              }
+        } else if vm.categoryMetadata.total == 0 {
+          ContentUnavailableView(
+            "forumCategory.empty.title",
+            systemImage: "bubble.left.and.text.bubble.right",
+            description: Text("forumCategory.empty.description")
+          )
+        } else if let posts = vm.category?.posts {
+          ForEach(posts.items) { post in
+            NavigationLink { ForumPostView(id: post.id).environment(vm) } label: {
+              ContentCard(
+                contentType: .forumPost,
+                flairs: [CardFlair(name: post.user.nickname, iconName: "person.fill")],
+                title: post.title,
+                content: post.content,
+                footerData: post.totalComments,
+                date: post.lastActivityDate,
+              )
             }
           }
         }
@@ -49,6 +53,14 @@ struct ForumCategoryView: View {
     
     .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack { NewPostSheet().environment(vm) }
+    }
+    
+    .safeAreaInset(edge: .bottom) {
+      PaginationBar(
+        metadata: vm.categoryMetadata,
+        onPrevious: { Task { await vm.goToCategoryPreviousPage() } },
+        onNext: { Task { await vm.goToCategoryNextPage() } },
+      )
     }
     
     .toolbar {

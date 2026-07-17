@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SinglePlaceSheet: View {
-  @Environment(PlacesViewModel.self) var vm
+  @Environment(PlacesViewModel.self) private var vm
   @Environment(\.openURL) private var openURL
   @State private var selectedDetent: PresentationDetent = .medium
       

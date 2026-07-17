@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminModerationCategorySheet: View {
-  @Environment(AdminModerationCategoriesViewModel.self) var vm
+  @Environment(AdminModerationCategoriesViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
   
   var body: some View {

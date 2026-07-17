@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import SwiftUI
 
 @Observable
 final class AdminForumCategoriesViewModel {
   var isLoading: Bool = false
   var isSingleCategorySheetPresented: Bool = false
-  var metadata: PageMetadata = Defaults.pagination.metadata
+  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
   var categories: [ForumCategoryResponse] = []
   
