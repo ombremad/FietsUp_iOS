@@ -11,6 +11,17 @@ enum Defaults {
   enum values {
     static let banEndDate: Date = .now.addingTimeInterval(60 * 60 * 24 * 7) // one week
   }
+  
+  enum pagination {
+    enum forum {
+      static let maxItems: Int = 10
+      static let metadata: PageMetadata = .init(page: 1, per: maxItems, total: 0)
+    }
+    enum admin {
+      static let maxItems: Int = 25
+      static let metadata: PageMetadata = .init(page: 1, per: maxItems, total: 0)
+    }
+  }
 
   enum spacing {
     enum horizontal {

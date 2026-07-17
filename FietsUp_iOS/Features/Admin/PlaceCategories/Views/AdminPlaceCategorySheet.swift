@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminPlaceCategorySheet: View {
-  @Environment(AdminPlaceCategoriesViewModel.self) var vm
+  @Environment(AdminPlaceCategoriesViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
   
   var body: some View {

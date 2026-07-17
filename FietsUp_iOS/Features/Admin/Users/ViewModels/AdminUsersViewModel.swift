@@ -11,8 +11,9 @@ import SwiftUI
 final class AdminUsersViewModel {
   var isLoading: Bool = true
   var isSingleUserSheetPresented: Bool = false
+  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
-  var users: [(rights: UserRights, users: [UserResponse])] = []
+  var users: [UserResponse] = []
 
   var user: UserResponse? = nil
   var userForm = UserForm()
@@ -22,7 +23,7 @@ final class AdminUsersViewModel {
     var firstName: String = ""
     var lastName: String = ""
     var bio: String = ""
-    var rights = UserRights.user
+    var rights: UserRights = .user
     var isBanned: Bool = false
     var banEndDate: Date? = nil
   }
@@ -39,18 +40,35 @@ final class AdminUsersViewModel {
     }
   }
   
+  func goToPage(_ page: Int) async {
+    guard !isLoading, page <= metadata.pageCount, page > 0, page != metadata.page else { return }
+    
+    isLoading = true
+    defer { isLoading = false }
+    
+    let previousPage = metadata.page
+    metadata.page = page
+    
+    do {
+      try await refreshUsers()
+    } catch {
+      metadata.page = previousPage
+      ErrorService.shared.show(error)
+    }
+  }
+  
+  func goToNextPage() async {
+    await goToPage(metadata.page + 1)
+  }
+  
+  func goToPreviousPage() async {
+    await goToPage(metadata.page - 1)
+  }
+  
   func refreshUsers() async throws {
     let response = try await performFetchUsers()
-    let grouped = Dictionary(grouping: response) { $0.adminRights }
-    
-    users = UserRights.allCases
-      .sorted(by: >)
-      .compactMap { rights in
-        guard let matching = grouped[rights.rawValue]?.sorted(using: [
-          KeyPathComparator(\.email)
-        ]) else { return nil }
-        return (rights, matching)
-      }
+    metadata = response.metadata
+    users = response.items    
     user = nil
     userForm = .init()
   }
@@ -124,9 +142,9 @@ final class AdminUsersViewModel {
     )
   }
   
-  private func performFetchUsers() async throws -> [UserResponse] {
+  private func performFetchUsers() async throws -> Page<UserResponse> {
     return try await NetworkService.shared.get(
-      endpoint: "/users/",
+      endpoint: "/users?page=\(metadata.page)&per=\(metadata.per)",
       requiresAuth: true
     )
   }

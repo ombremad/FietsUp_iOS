@@ -19,6 +19,7 @@ extension ForumViewModel {
     do {
       let response = try await performContentFeedback(id: id, feedback: feedback, content: content)
       self.post = response
+      self.postMetadata = response.comments.metadata
     } catch {
       ErrorService.shared.show(error)
     }
@@ -28,7 +29,7 @@ extension ForumViewModel {
     id: UUID,
     feedback: FeedbackType,
     content: FeedbackContentType,
-  ) async throws -> ForumPostResponse {
+  ) async throws -> ForumPostPaginatedResponse {
     let endpoint: String = "/forum/\(content.rawValue)/\(id)/\(feedback.rawValue)"
     return try await NetworkService.shared.post(
       endpoint: endpoint,

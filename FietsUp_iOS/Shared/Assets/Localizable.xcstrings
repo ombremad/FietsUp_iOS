@@ -4,6 +4,17 @@
     "" : {
       "shouldTranslate" : false
     },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "activities.empty.description" : {
       "localizations" : {
         "en" : {
@@ -148,18 +159,98 @@
         }
       }
     },
-    "admin.forumCategories.description" : {
+    "admin.dangerCategories.description" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage forum categories. That’s the main sections where all users can post."
+            "value" : "Users have to pick one to describe the nature of the danger they’re reporting."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les catégories du forum. Ce sont les sections principales, où tous les utilisateurs peuvent poster."
+            "value" : "Les utilisateurs doivent en choisir une pour décrire la nature du danger qu’iels signalent."
+          }
+        }
+      }
+    },
+    "admin.dangerCategories.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger categories"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégories de danger"
+          }
+        }
+      }
+    },
+    "admin.dangerCategory.iconName" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom de l’icône"
+          }
+        }
+      }
+    },
+    "admin.dangerCategory.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
+    },
+    "admin.dangerCategory.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger category"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégorie de danger"
+          }
+        }
+      }
+    },
+    "admin.forumCategories.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That’s the main sections where all users can post."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce sont les sections principales, où tous les utilisateurs peuvent poster."
           }
         }
       }
@@ -249,13 +340,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage moderation categories. They can be picked by users to categorize the content they’re reporting to moderators."
+            "value" : "They can be picked by users to categorize the content they’re reporting to moderators."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les catégories de modération. Elles peuvent être sélectionnées par les utilisateurs pour catégoriser le contenu qu’iels signalent aux modérateurs."
+            "value" : "Elles peuvent être sélectionnées par les utilisateurs pour catégoriser le contenu qu’iels signalent aux modérateurs."
           }
         }
       }
@@ -633,13 +724,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage place categories. They indicate the general purpose(s) of a place."
+            "value" : "Admins and mods can pick one or several of them to indicate the general purposes of a place."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les catégories de lieux. Elles servent à indiquer l’utilité, ou les différentes utilités, d’un lieu."
+            "value" : "Les admins et modérateurs peuvent en choisir une, ou plusieurs, pour indiquer l’utilité globale d’un lieu."
           }
         }
       }
@@ -713,13 +804,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage places. They are the whole database of places shown to the users in the Place tab."
+            "value" : "The whole database of places shown to the users in the Place tab."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les lieux. Ils constituent toute la base de données montrée aux utilisateurs dans l’onglet Lieux."
+            "value" : "La base de données des lieux montrés aux utilisateurs dans l’onglet Lieux."
           }
         }
       }
@@ -1321,13 +1412,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See and manage users. Can be used to change their information, ban or unban them, or define their user rights status (moderator/admin)."
+            "value" : "Edit their information, ban or unban, change their user rights…"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir et gérer les utilisateurs. Peut être utilisé pour changer leurs informations, les bannir ou débannir, ou leur accorder des droits d’accès modérateur/admin."
+            "value" : "Éditer leurs informations, bannir ou débannir, changer leurs droits utilisateur…"
           }
         }
       }
@@ -2230,6 +2321,38 @@
         }
       }
     },
+    "forumCategory.empty.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No one has posted in here yet. Be the first!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personne n’a encore posté ici. Soyez le premier à le faire !"
+          }
+        }
+      }
+    },
+    "forumCategory.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No post yet"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun post"
+          }
+        }
+      }
+    },
     "loginForm.alreadyHaveAnAccount" : {
       "localizations" : {
         "en" : {
@@ -2610,6 +2733,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiants erronés ou session expirée."
+          }
+        }
+      }
+    },
+    "page.next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivant"
+          }
+        }
+      }
+    },
+    "page.previous" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Précédent"
           }
         }
       }

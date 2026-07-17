@@ -33,7 +33,7 @@ extension DangersViewModel {
     guard let post else { return }
     
     let body = DangerCommentRequest(from: newCommentForm)
-    let _: ForumPostResponse = try await NetworkService.shared.post(
+    let _: ForumPostPaginatedResponse = try await NetworkService.shared.post(
       endpoint: "/dangers/comments/post/\(post.id)",
       body: body,
       requiresAuth: true

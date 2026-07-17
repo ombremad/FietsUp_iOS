@@ -123,18 +123,18 @@ extension User {
 }
 
 
-extension ForumPostResponse {
-  static let placeholder = ForumPostResponse(
-    id: UUID(),
-    title: Placeholder.ForumPost.title,
-    content: Placeholder.ForumPost.content,
-    user: UserPublicResponse.placeholder,
-    creationDate: Placeholder.Dates.recent,
-    likeCount: Placeholder.Numbers.like,
-    likedByUser: false,
-    favedByUser: true,
-    comments: [ForumCommentResponse.placeholder, ForumCommentResponse.placeholder])
-}
+//extension ForumPostPaginatedResponse {
+//  static let placeholder = ForumPostPaginatedResponse(
+//    id: UUID(),
+//    title: Placeholder.ForumPost.title,
+//    content: Placeholder.ForumPost.content,
+//    user: UserPublicResponse.placeholder,
+//    creationDate: Placeholder.Dates.recent,
+//    likeCount: Placeholder.Numbers.like,
+//    likedByUser: false,
+//    favedByUser: true,
+//    comments: [ForumCommentResponse.placeholder, ForumCommentResponse.placeholder])
+//}
 
 extension ForumPostShortResponse {
   static let placeholder = ForumPostShortResponse(
@@ -143,7 +143,7 @@ extension ForumPostShortResponse {
     content: Placeholder.ForumPost.content,
     user: UserPublicResponse.placeholder,
     creationDate: Placeholder.Dates.recent,
-    lastActivityDate: nil
+    lastActivityDate: Placeholder.Dates.recent,
   )
 }
 

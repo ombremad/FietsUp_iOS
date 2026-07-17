@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminPlaceSheet: View {
-  @Environment(AdminPlacesViewModel.self) var vm
+  @Environment(AdminPlacesViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
   
   enum Field: Hashable {

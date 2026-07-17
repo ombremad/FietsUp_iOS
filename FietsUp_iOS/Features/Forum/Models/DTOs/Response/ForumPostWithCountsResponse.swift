@@ -13,5 +13,5 @@ struct ForumPostWithCountsResponse: Decodable, Identifiable {
   let title: String
   let content: String
   let totalComments: Int
-  let lastActivityDate: Date?
+  let lastActivityDate: Date
 }

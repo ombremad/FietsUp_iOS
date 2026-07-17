@@ -1,47 +1,46 @@
 //
-//  AdminModerationCategoriesView.swift
+//  AdminDangerCategoriesView.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 15/07/2026.
+//  Created by Anne Ferret on 17/07/2026.
 //
 
 import SwiftUI
 
-struct AdminModerationCategoriesView: View {
-  @State private var vm = AdminModerationCategoriesViewModel()
+struct AdminDangerCategoriesView: View {
+  @State private var vm = AdminDangerCategoriesViewModel()
   
   var body: some View {
     List {
       AppFormSection {
         if vm.isLoading {
           ForEach(0..<3, id: \.self) { _ in
-            Text(Placeholder.ModerationCategory.name)
-              .font(.body)
+            SimpleAdminPanelRow(
+              title: Placeholder.DangerCategory.name,
+              iconName: Placeholder.DangerCategory.iconName,
+            )
           }
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
-          ForEach(vm.categories, id: \.id) { category in
-            Button { vm.edit(category) }
-            label: {
-              Text(category.name)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-            }
-          }.buttonStyle(.plain)
+          ForEach(vm.categories, id: \.id) { place in
+            SimpleAdminPanelRow(
+              title: place.name,
+              iconName: place.iconName,
+            )
+            .onTapGesture { vm.edit(place) }
+          }
         }
       }
     }
-    
-    .font(.body)
     .foregroundStyle(Color.Text.primary)
     .background { Color.Surface.background.ignoresSafeArea() }
     .scrollContentBackground(.hidden)
-    .navigationTitle("admin.moderationCategories.title")
+    .navigationTitle("admin.dangerCategories.title")
     .toolbarTitleDisplayMode(.inline)
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
-      NavigationStack { AdminModerationCategorySheet().environment(vm) }
+      NavigationStack { AdminDangerCategorySheet().environment(vm) }
     }
     
     .safeAreaInset(edge: .bottom) {
@@ -51,7 +50,7 @@ struct AdminModerationCategoriesView: View {
         onNext: { Task { await vm.goToNextPage() } },
       )
     }
-
+    
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {

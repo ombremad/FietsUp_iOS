@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlacesSheet: View {
-  @Environment(PlacesViewModel.self) var vm
+  @Environment(PlacesViewModel.self) private var vm
   @State private var selectedDetent: PresentationDetent = .medium
 
   var body: some View {

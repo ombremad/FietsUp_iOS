@@ -45,6 +45,14 @@ struct AdminForumCategoriesView: View {
       NavigationStack { AdminForumCategorySheet().environment(vm) }
     }
     
+    .safeAreaInset(edge: .bottom) {
+      PaginationBar(
+        metadata: vm.metadata,
+        onPrevious: { Task { await vm.goToPreviousPage() } },
+        onNext: { Task { await vm.goToNextPage() } },
+      )
+    }
+    
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {

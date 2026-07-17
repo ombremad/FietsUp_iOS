@@ -36,6 +36,14 @@ struct ForumPostView: View {
         NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
       }
     }
+    
+    .safeAreaInset(edge: .bottom) {
+      PaginationBar(
+        metadata: vm.postMetadata,
+        onPrevious: { Task { await vm.goToPostPreviousPage() } },
+        onNext: { Task { await vm.goToPostNextPage() } },
+      )
+    }
 
     .task { await vm.loadPost(id: id) }
     .refreshable { await vm.refreshPost() }
@@ -88,36 +96,33 @@ struct ForumPostView: View {
         }
         .redacted(reason: .placeholder)
         .shimmering()
-      } else {
-        if let post = vm.post {
-          if post.comments.isEmpty {
-            Divider()
-            ContentUnavailableView(
-              "comments.empty.title",
-              systemImage: "bubble.left.and.text.bubble.right",
-              description: Text("comments.empty.description")
-            )
-          } else {
-            ForEach(post.comments) { comment in
-              Divider()
-              ContentComponent(
-                size: .small,
-                content: comment.content,
-                date: comment.creationDate,
-                user: comment.user
-              )
-              ButtonBar(
-                likeCount: comment.likeCount,
-                isLiked: comment.likedByUser,
-                isFaved: comment.favedByUser,
-                onLike: { Task { await vm.newFeedback(id: comment.id, feedback: .like, content: .comment) } },
-                onFav: { Task { await vm.newFeedback(id: comment.id, feedback: .fav, content: .comment) } },
-                onReport: { vm.newReport(id: comment.id, contentType: .forumComment, content: comment.content) },
-                onAnswer: { vm.newComment() },
-                isLoading: vm.isFeedbackLoading
-              )
-            }
-          }
+      } else if vm.postMetadata.total == 0 {
+        Divider()
+        ContentUnavailableView(
+          "comments.empty.title",
+          systemImage: "bubble.left.and.text.bubble.right",
+          description: Text("comments.empty.description")
+        )
+      }
+      else if let comments = vm.post?.comments {
+        ForEach(comments.items) { comment in
+          Divider()
+          ContentComponent(
+            size: .small,
+            content: comment.content,
+            date: comment.creationDate,
+            user: comment.user
+          )
+          ButtonBar(
+            likeCount: comment.likeCount,
+            isLiked: comment.likedByUser,
+            isFaved: comment.favedByUser,
+            onLike: { Task { await vm.newFeedback(id: comment.id, feedback: .like, content: .comment) } },
+            onFav: { Task { await vm.newFeedback(id: comment.id, feedback: .fav, content: .comment) } },
+            onReport: { vm.newReport(id: comment.id, contentType: .forumComment, content: comment.content) },
+            onAnswer: { vm.newComment() },
+            isLoading: vm.isFeedbackLoading
+          )
         }
       }
     }

@@ -12,6 +12,7 @@ import SwiftUI
 final class AdminPlaceCategoriesViewModel {
   var isLoading: Bool = false
   var isSingleCategorySheetPresented: Bool = false
+  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
   var categories: [PlaceCategoryResponse] = []
   
@@ -34,9 +35,35 @@ final class AdminPlaceCategoriesViewModel {
     }
   }
   
+  func goToPage(_ page: Int) async {
+    guard !isLoading, page <= metadata.pageCount, page > 0, page != metadata.page else { return }
+    
+    isLoading = true
+    defer { isLoading = false }
+    
+    let previousPage = metadata.page
+    metadata.page = page
+    
+    do {
+      try await refreshCategories()
+    } catch {
+      metadata.page = previousPage
+      ErrorService.shared.show(error)
+    }
+  }
+  
+  func goToNextPage() async {
+    await goToPage(metadata.page + 1)
+  }
+  
+  func goToPreviousPage() async {
+    await goToPage(metadata.page - 1)
+  }
+  
   func refreshCategories() async throws {
     let response = try await performFetchCategories()
-    categories = response
+    categories = response.items
+    metadata = response.metadata
     category = nil
     categoryForm = .init()
   }
@@ -76,7 +103,7 @@ final class AdminPlaceCategoriesViewModel {
       for category in toDelete {
         try await performDeleteCategory(id: category.id)
       }
-      categories.remove(atOffsets: offsets)
+      try await refreshCategories()
     } catch {
       ErrorService.shared.show(error)
     }
@@ -110,9 +137,9 @@ final class AdminPlaceCategoriesViewModel {
     )
   }
   
-  private func performFetchCategories() async throws -> [PlaceCategoryResponse] {
+  private func performFetchCategories() async throws -> Page<PlaceCategoryResponse> {
     return try await NetworkService.shared.get(
-      endpoint: "/places/categories",
+      endpoint: "/places/categories/admin?page=\(metadata.page)&per=\(metadata.per)",
       requiresAuth: true
     )
   }

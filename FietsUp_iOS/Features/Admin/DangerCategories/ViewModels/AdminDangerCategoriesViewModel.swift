@@ -1,24 +1,25 @@
 //
-//  AdminModerationCategoriesViewModel.swift
+//  AdminDangerCategoriesViewModel.swift
 //  FietsUp_iOS
 //
-//  Created by Anne Ferret on 15/07/2026.
+//  Created by Anne Ferret on 17/07/2026.
 //
 
 import Foundation
 
 @Observable
-final class AdminModerationCategoriesViewModel {
+final class AdminDangerCategoriesViewModel {
   var isLoading: Bool = false
   var isSingleCategorySheetPresented: Bool = false
   var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
-  var categories: [ModerationCategoryResponse] = []
+  var categories: [DangerCategoryResponse] = []
   
-  var category: ModerationCategoryResponse? = nil
+  var category: DangerCategoryResponse? = nil
   var categoryForm = CategoryForm()
   struct CategoryForm {
     var name: String = ""
+    var iconName: String = ""
   }
   
   func load() async {
@@ -62,8 +63,6 @@ final class AdminModerationCategoriesViewModel {
     let response = try await performFetchCategories()
     categories = response.items
     metadata = response.metadata
-    category = nil
-    categoryForm = .init()
   }
   
   func create() {
@@ -72,9 +71,9 @@ final class AdminModerationCategoriesViewModel {
     isSingleCategorySheetPresented = true
   }
   
-  func edit(_ category: ModerationCategoryResponse) {
+  func edit(_ category: DangerCategoryResponse) {
     self.category = category
-    categoryForm = .init(name: category.name)
+    categoryForm = .init(name: category.name, iconName: category.iconName)
     isSingleCategorySheetPresented = true
   }
   
@@ -83,6 +82,7 @@ final class AdminModerationCategoriesViewModel {
     defer { isLoading = false }
     
     try ValidationService.name(categoryForm.name)
+    try ValidationService.iconName(categoryForm.iconName)
     
     if category != nil {
       try await performPatchCategory()
@@ -94,10 +94,10 @@ final class AdminModerationCategoriesViewModel {
   }
   
   private func performCreateCategory() async throws {
-    let body = CreateModerationCategoryRequest(from: categoryForm)
+    let body = CreateDangerCategoryRequest(from: categoryForm)
     
-    let _: ModerationCategoryResponse = try await NetworkService.shared.post(
-      endpoint: "/moderation/categories/",
+    let _: DangerCategoryResponse = try await NetworkService.shared.post(
+      endpoint: "/dangers/categories/",
       body: body,
       requiresAuth: true
     )
@@ -105,18 +105,18 @@ final class AdminModerationCategoriesViewModel {
   
   private func performPatchCategory() async throws {
     guard let oldCategory = category else { return }
-    let body = PatchModerationCategoryRequest(from: categoryForm, compareTo: oldCategory)
+    let body = PatchDangerCategoryRequest(from: categoryForm, compareTo: oldCategory)
     
-    let _: ModerationCategoryResponse = try await NetworkService.shared.patch(
-      endpoint: "/moderation/categories/\(oldCategory.id)",
+    let _: DangerCategoryResponse = try await NetworkService.shared.patch(
+      endpoint: "/dangers/categories/\(oldCategory.id)",
       body: body,
       requiresAuth: true
     )
   }
   
-  private func performFetchCategories() async throws -> Page<ModerationCategoryResponse> {
+  private func performFetchCategories() async throws -> Page<DangerCategoryResponse> {
     return try await NetworkService.shared.get(
-      endpoint: "/moderation/categories?page=\(metadata.page)&per=\(metadata.per)",
+      endpoint: "/dangers/categories/admin?page=\(metadata.page)&per=\(metadata.per)",
       requiresAuth: true
     )
   }

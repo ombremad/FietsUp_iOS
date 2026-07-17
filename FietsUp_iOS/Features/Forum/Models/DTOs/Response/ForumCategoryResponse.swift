@@ -12,5 +12,5 @@ struct ForumCategoryResponse: Decodable, Identifiable {
   let name: String
   let details: String
   let totalPosts: Int
-  let lastActivityDate: Date?
+  let lastActivityDate: Date
 }

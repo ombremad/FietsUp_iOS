@@ -13,5 +13,5 @@ struct ForumPostShortResponse: Decodable {
   let content: String
   let user: UserPublicResponse
   let creationDate: Date
-  let lastActivityDate: Date?
+  let lastActivityDate: Date
 }

@@ -15,11 +15,13 @@ final class ForumViewModel {
   var isNewPostSheetPresented: Bool = false
   var isNewCommentSheetPresented: Bool = false
   var isNewReportSheetPresented: Bool = false
+  var categoryMetadata: PageMetadata = Defaults.pagination.forum.metadata
+  var postMetadata: PageMetadata = Defaults.pagination.forum.metadata
   
   // fetched data
   var categories: [ForumCategoryResponse] = []
-  var category: ForumCategoryDetailedResponse? = nil
-  var post: ForumPostResponse? = nil
+  var category: ForumCategoryPaginatedResponse? = nil
+  var post: ForumPostPaginatedResponse? = nil
   
   // user created data
   var newPostForm = NewPostForm()

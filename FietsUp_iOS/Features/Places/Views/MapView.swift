@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-  @Environment(PlacesViewModel.self) var vm
+  @Environment(PlacesViewModel.self) private var vm
 
   var body: some View {
     @Bindable var vm = vm

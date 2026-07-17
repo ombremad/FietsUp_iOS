@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminSingleReportSheet: View {
-  @Environment(AdminReportsViewModel.self) var vm
+  @Environment(AdminReportsViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
