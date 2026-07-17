@@ -24,15 +24,11 @@ struct AdminUsersView: View {
         .redacted(reason: .placeholder)
         .shimmering()
       } else {
-        ForEach(vm.users, id: \.rights) { group in
-          AppFormSection(LocalizedStringKey(group.rights.name)) {
-            ForEach(group.users, id: \.id) { user in
-              SimpleAdminPanelRow(
-                title: user.email,
-                description: user.nickname
-              ).onTapGesture { vm.edit(user) }
-            }
-          }
+        ForEach(vm.users) { user in
+          SimpleAdminPanelRow(
+            title: user.email,
+            description: user.nickname
+          ).onTapGesture { vm.edit(user) }
         }
       }
     }
@@ -45,6 +41,14 @@ struct AdminUsersView: View {
     
     .appSheet(isPresented: $vm.isSingleUserSheetPresented) {
       NavigationStack { AdminUserSheet().environment(vm) }
+    }
+    
+    .safeAreaInset(edge: .bottom) {
+      PaginationBar(
+        metadata: vm.metadata,
+        onPrevious: { Task { await vm.goToPreviousPage() } },
+        onNext: { Task { await vm.goToNextPage() } },
+      )
     }
         
     .task { await vm.load() }

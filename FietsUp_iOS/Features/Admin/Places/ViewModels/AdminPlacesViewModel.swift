@@ -12,6 +12,7 @@ import SwiftUI
 final class AdminPlacesViewModel {
   var isLoading: Bool = false
   var isSinglePlaceSheetPresented: Bool = false
+  var metadata: PageMetadata = Defaults.pagination.metadata
   
   var places: [PlaceResponse] = []
   var categories: [PlaceCategoryResponse] = []
@@ -62,6 +63,31 @@ final class AdminPlacesViewModel {
     }
   }
   
+  func goToPage(_ page: Int) async {
+    guard !isLoading, page <= metadata.pageCount, page > 0, page != metadata.page else { return }
+    
+    isLoading = true
+    defer { isLoading = false }
+    
+    let previousPage = metadata.page
+    metadata.page = page
+    
+    do {
+      try await refreshPlaces()
+    } catch {
+      metadata.page = previousPage
+      ErrorService.shared.show(error)
+    }
+  }
+  
+  func goToNextPage() async {
+    await goToPage(metadata.page + 1)
+  }
+  
+  func goToPreviousPage() async {
+    await goToPage(metadata.page - 1)
+  }
+  
   func refreshCategories() async throws {
     let response = try await performFetchCategories()
     categories = response
@@ -69,7 +95,8 @@ final class AdminPlacesViewModel {
   
   func refreshPlaces() async throws {
     let response = try await performFetchPlaces()
-    places = response
+    places = response.items
+    metadata = response.metadata
     place = nil
     placeForm = .init()
   }
@@ -152,7 +179,7 @@ final class AdminPlacesViewModel {
       for place in toDelete {
         try await performDeletePlace(id: place.id)
       }
-      places.remove(atOffsets: offsets)
+      try await refreshPlaces()
     } catch {
       ErrorService.shared.show(error)
     }
@@ -186,9 +213,9 @@ final class AdminPlacesViewModel {
     )
   }
   
-  private func performFetchPlaces() async throws -> [PlaceResponse] {
+  private func performFetchPlaces() async throws -> Page<PlaceResponse> {
     return try await NetworkService.shared.get(
-      endpoint: "/places",
+      endpoint: "/places?page=\(metadata.page)&per=\(metadata.per)",
       requiresAuth: true
     )
   }
