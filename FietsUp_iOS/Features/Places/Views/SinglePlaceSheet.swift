@@ -85,8 +85,12 @@ struct SinglePlaceSheet: View {
           .foregroundStyle(Color.Text.secondary)
           .background(Color.Surface.secondary)
           .clipShape(Capsule())
+          RatingStars(
+            type: .tag,
+            note: place.averageRating,
+          )
         }
-        .lineLimit(1)
+        .lineLimit(2)
         .font(.caption2).bold()
         .listRowSeparator(.hidden)
       }
