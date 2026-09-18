@@ -64,7 +64,13 @@ struct AdminPlaceCategoriesView: View {
     
     .task { await vm.load() }
     .refreshable {
-      Task { try await vm.refreshCategories() }
+      Task {
+        do {
+          try await vm.refreshCategories()
+        } catch {
+          ErrorService.shared.show(error)
+        }
+      }
     }
   }
 }

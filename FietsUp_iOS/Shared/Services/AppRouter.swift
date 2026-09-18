@@ -29,19 +29,6 @@ final class AppRouter {
     paths[target] = path
   }
   
-  func popToRoot(_ tab: AppTab? = nil) {
-    paths[tab ?? selectedTab] = NavigationPath()
-  }
-  
-  func navigate(to tab: AppTab) {
-    selectedTab = tab
-  }
-  
-  func navigate<V: Hashable>(to tab: AppTab, push value: V) {
-    selectedTab = tab
-    push(value, on: tab)
-  }
-  
   func reset() async {
     try? await Task.sleep(for: .seconds(1)) // prevent change during visual transition
     selectedTab = .dashboard

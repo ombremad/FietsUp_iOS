@@ -53,7 +53,13 @@ struct AdminUsersView: View {
         
     .task { await vm.load() }
     .refreshable {
-      Task { try await vm.refreshUsers() }
+      Task {
+        do {
+          try await vm.refreshUsers()
+        } catch {
+          ErrorService.shared.show(error)
+        }
+      }
     }
   }
 }

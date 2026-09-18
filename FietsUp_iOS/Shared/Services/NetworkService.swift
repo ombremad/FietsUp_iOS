@@ -25,7 +25,7 @@ final class NetworkService {
     var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.timeoutInterval = 6
+    request.timeoutInterval = 12
     
     if requiresAuth {
       if let token = try KeychainService.shared.getToken() {
@@ -54,7 +54,7 @@ final class NetworkService {
       case 200...299: return httpResponse
       case 400: throw NetworkError.badRequest
       case 401:
-        try AuthService.shared.logout()
+        AuthService.shared.logout()
         throw NetworkError.unauthorized
       case 403: throw NetworkError.forbidden
       case 404: throw NetworkError.notFound
