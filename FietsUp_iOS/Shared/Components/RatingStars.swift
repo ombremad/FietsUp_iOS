@@ -46,6 +46,8 @@ struct RatingStars: View {
   
   @ViewBuilder private var noteLabel: some View {
     Text(note.description)
+      .contentTransition(.numericText())
+      .animation(.interactiveSpring(), value: note)
   }
   
   var body: some View {

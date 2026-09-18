@@ -11,45 +11,50 @@ struct SinglePlaceSheet: View {
   @Environment(PlacesViewModel.self) private var vm
   @Environment(\.openURL) private var openURL
   @State private var selectedDetent: PresentationDetent = .medium
+  @State private var showNewRating = false
       
   var body: some View {
-    List {
-      if vm.selectedPlace != nil {
-        tagsSection
-        infoSection
-      }
-    }
-    .listStyle(.inset)
-    .labeledContentStyle(AppLabeledContent())
-    .foregroundStyle(Color.Text.primary)
-    .scrollContentBackground(.hidden)
-    
-    .presentationDetents([.fraction(0.10), .medium, .large], selection: $selectedDetent)
-    .presentationDragIndicator(.visible)
-    .interactiveDismissDisabled()
-    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.10)))
-    .presentationBackground {
-      if selectedDetent == .large {
-        Color.Surface.background
-      } else {
-        Color.clear
-      }
-    }
-    
-    .navigationTitle(vm.selectedPlace?.name ?? "common.loading")
-    .navigationBarTitleDisplayMode(.inline)
-    
-    .toolbar {
-      ToolbarItem(placement: .primaryAction) {
-        Button("common.cancel", systemImage: "xmark", role: .cancel) {
-          vm.closeAllSheets()
+    ZStack {
+      List {
+        if vm.selectedPlace != nil {
+          tagsSection
+          infoSection
         }
       }
-      ToolbarItem(placement: .navigation) {
-        Button("common.cancel", systemImage: "chevron.backward", role: .cancel) {
-          vm.showPlacesSheet()
+      .listStyle(.inset)
+      .labeledContentStyle(AppLabeledContent())
+      .foregroundStyle(Color.Text.primary)
+      .scrollContentBackground(.hidden)
+      
+      .presentationDetents([.fraction(0.10), .medium, .large], selection: $selectedDetent)
+      .presentationDragIndicator(.visible)
+      .interactiveDismissDisabled()
+      .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.10)))
+      .presentationBackground {
+        if selectedDetent == .large {
+          Color.Surface.background
+        } else {
+          Color.clear
         }
       }
+      
+      .navigationTitle(vm.selectedPlace?.name ?? "common.loading")
+      .navigationBarTitleDisplayMode(.inline)
+      
+      .toolbar {
+        ToolbarItem(placement: .primaryAction) {
+          Button("common.cancel", systemImage: "xmark", role: .cancel) {
+            vm.closeAllSheets()
+          }
+        }
+        ToolbarItem(placement: .navigation) {
+          Button("common.cancel", systemImage: "chevron.backward", role: .cancel) {
+            vm.showPlacesSheet()
+          }
+        }
+      }
+      
+      NewRatingPopup(isVisible: $showNewRating)
     }
   }
   
@@ -66,6 +71,7 @@ struct SinglePlaceSheet: View {
       Section {
         FlowLayout(spacing: 8) {
           ForEach(place.categories) { category in
+            
             HStack {
               Image(systemName: category.iconName)
               Text(category.name)
@@ -76,6 +82,7 @@ struct SinglePlaceSheet: View {
             .background(Color.Button.primary)
             .clipShape(Capsule())
           }
+          
           HStack {
             Image(systemName: "signpost.right")
             Text("place.distanceInMeters **\(distance)**")
@@ -85,16 +92,23 @@ struct SinglePlaceSheet: View {
           .foregroundStyle(Color.Text.secondary)
           .background(Color.Surface.secondary)
           .clipShape(Capsule())
-          RatingStars(
-            type: .tag,
-            note: place.averageRating,
-          )
+          
+          Button {
+            withAnimation(.easeInOut) { showNewRating = true }
+          } label: {
+            RatingStars(
+              type: .tag,
+              note: place.averageRating,
+            )
+          }
+          
         }
         .lineLimit(2)
         .font(.caption2).bold()
         .listRowSeparator(.hidden)
       }
       .listRowBackground(Color.clear)
+      
     }
   }
   

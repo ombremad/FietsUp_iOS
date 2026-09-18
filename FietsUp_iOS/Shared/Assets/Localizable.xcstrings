@@ -3905,6 +3905,9 @@
         }
       }
     },
+    "validation.field.note" : {
+
+    },
     "validation.field.otherDetails" : {
       "localizations" : {
         "en" : {
