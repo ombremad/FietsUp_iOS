@@ -11,7 +11,12 @@ extension ForumViewModel {
   func loadCategory(id: UUID) async {
     isLoading = true
     defer { isLoading = false }
-    
+
+    if category?.id != id {
+      category = nil
+      categoryMetadata = Defaults.pagination.forum.metadata
+    }
+
     do {
       let response = try await performFetchCategory(id: id)
       self.category = response
@@ -20,11 +25,8 @@ extension ForumViewModel {
       ErrorService.shared.show(error)
     }
   }
-  
+
   func refreshCategory() async {
-    isLoading = true
-    defer { isLoading = false }
-    
     guard let category else { return }
     await loadCategory(id: category.id)
   }

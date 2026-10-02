@@ -9,9 +9,6 @@ import Foundation
 
 extension ForumViewModel {
   func loadCategories() async {
-    isLoading = true
-    defer { isLoading = false }
-    
     if categories.isEmpty { await refreshCategories() }
   }
 
