@@ -55,6 +55,17 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    if let clError = error as? CLError {
+      switch clError.code {
+        case .locationUnknown:
+          return
+        case .denied:
+          authorizationStatus = manager.authorizationStatus
+          return
+        default:
+          break
+      }
+    }
     ErrorService.shared.show(error)
   }
   

@@ -21,6 +21,10 @@ enum Defaults {
       static let maxItems: Int = 25
       static let metadata: PageMetadata = .init(page: 1, per: maxItems, total: 0)
     }
+    enum activities {
+      static let maxItems: Int = 10
+      static let metadata: PageMetadata = .init(page: 1, per: maxItems, total: 0)
+    }
   }
 
   enum spacing {
