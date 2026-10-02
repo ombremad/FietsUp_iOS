@@ -189,6 +189,12 @@ enum ValidationService {
     try validateLength(otherDetails, field: .otherDetails, min: 1, max: 10000)
   }
   
+  static func note(_ note: Int) throws {
+    if note < 1 || note > 5 {
+      throw ValidationError.fieldInvalidFormat(.note)
+    }
+  }
+  
   private static func validatePastDate(_ date: Date, field: ValidationError.Field) throws {
     let now = Date.now
     if date > now { throw ValidationError.fieldCannotBeInTheFuture(field) }
@@ -216,7 +222,7 @@ enum ValidationService {
 
 enum ValidationError: Error, LocalizedError {
   enum Field {
-    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate, iconName, placeCategories, address, zipCode, city, country, phoneNumber, website, otherDetails
+    case password, email, firstName, lastName, nickname, bio, title, name, details, content, length, distance, latitude, longitude, category, reportDetails, startDate, endDate, banEndDate, iconName, placeCategories, address, zipCode, city, country, phoneNumber, website, otherDetails, note
     
     var localized: String {
       switch self {
@@ -248,6 +254,7 @@ enum ValidationError: Error, LocalizedError {
         case .phoneNumber: return String(localized: "validation.field.phoneNumber")
         case .website: return String(localized: "validation.field.website")
         case .otherDetails: return String(localized: "validation.field.otherDetails")
+        case .note: return String(localized: "validation.field.note")
       }
     }
   }

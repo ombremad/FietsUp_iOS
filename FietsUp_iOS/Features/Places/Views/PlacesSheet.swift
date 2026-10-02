@@ -70,6 +70,7 @@ struct PlacesSheet: View {
               )
             },
             title: place.name,
+            rating: place.averageRating,
             content: place.otherDetails,
             footerData: distanceBetweenTwoPoints(
               lat1: vm.latitude ?? 0,

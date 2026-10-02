@@ -76,7 +76,7 @@ final class SettingsViewModel {
       confirmation: changePasswordForm.newPasswordConfirmation
     )
     try await performUpdateUserPassword()
-    try auth.logout()
+    auth.logout()
   }
   
   private func performUpdateUserPassword() async throws {

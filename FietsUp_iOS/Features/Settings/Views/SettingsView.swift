@@ -82,7 +82,7 @@ struct SettingsView: View {
     
     .alert("settings.logout", isPresented: $vm.isLogoutAlertPresented) {
       Button("logoutAlert.logout", role: .destructive) {
-        Task { try auth.logout() }
+        auth.logout()
       }.disabled(vm.isLoading)
       Button("common.cancel", role: .cancel) {}
     } message: {
@@ -95,7 +95,11 @@ struct SettingsView: View {
       SecureField("form.newPasswordConfirmation", text: $vm.changePasswordForm.newPasswordConfirmation)
       Button("changePassword.update", role: .destructive) {
         Task {
-          do { try await vm.changePassword() }
+          do {
+            try await vm.changePassword()
+          } catch {
+            ErrorService.shared.show(error)
+          }
         }
       }.disabled(vm.isLoading)
       Button("common.cancel", role: .cancel) {}

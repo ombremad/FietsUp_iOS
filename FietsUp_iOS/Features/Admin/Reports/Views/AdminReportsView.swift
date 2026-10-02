@@ -47,7 +47,13 @@ struct AdminReportsView: View {
       await vm.load()
     }
     .refreshable {
-      Task { try await vm.refreshReports() }
+      Task {
+        do {
+          try await vm.refreshReports()
+        } catch {
+          ErrorService.shared.show(error)
+        }
+      }
     }
   }
 }

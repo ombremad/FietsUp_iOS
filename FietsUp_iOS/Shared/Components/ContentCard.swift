@@ -15,6 +15,7 @@ struct ContentCard: View {
   
   let flairs: [CardFlair]
   let title: String?
+  let rating: Double?
   let content: String?
   let footerData: Int
   let date: Date?
@@ -23,6 +24,7 @@ struct ContentCard: View {
     contentType: ContentType,
     flairs: [CardFlair] = [],
     title: String? = nil,
+    rating: Double? = nil,
     content: String? = nil,
     footerData: Int,
     date: Date? = nil
@@ -30,6 +32,7 @@ struct ContentCard: View {
     self.contentType = contentType
     self.flairs = flairs
     self.title = title
+    self.rating = rating
     self.content = content
     self.footerData = footerData
     self.date = date
@@ -107,6 +110,13 @@ struct ContentCard: View {
   
   private var footer: some View {
     HStack {
+      if contentType == .place {
+        RatingStars(
+          type: .small,
+          note: rating,
+        )
+      }
+      
       if let date {
         HStack(spacing: Defaults.spacing.horizontal.xsmall) {
           Image(systemName: "calendar")

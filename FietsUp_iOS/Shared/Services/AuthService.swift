@@ -34,10 +34,14 @@ final class AuthService {
     isAuthenticated = true
   }
   
-  func logout() throws {
-    try KeychainService.shared.deleteToken()
-    currentUser = nil
-    isAuthenticated = false
+  func logout() {
+    do {
+      try KeychainService.shared.deleteToken()
+      currentUser = nil
+      isAuthenticated = false
+    } catch {
+      ErrorService.shared.show(error)
+    }
   }
   
   func restoreSession() async {

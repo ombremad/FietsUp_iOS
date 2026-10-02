@@ -11,6 +11,7 @@ struct PlaceResponse: Decodable, Identifiable {
   let id: UUID
   let name: String
   let categories: [PlaceCategoryResponse]
+  let averageRating: Double?
   let address: String?
   let zipCode: String?
   let city: String?

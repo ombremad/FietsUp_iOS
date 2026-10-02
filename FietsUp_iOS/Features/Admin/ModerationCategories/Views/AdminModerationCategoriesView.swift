@@ -44,14 +44,6 @@ struct AdminModerationCategoriesView: View {
       NavigationStack { AdminModerationCategorySheet().environment(vm) }
     }
     
-    .safeAreaInset(edge: .bottom) {
-      PaginationBar(
-        metadata: vm.metadata,
-        onPrevious: { Task { await vm.goToPreviousPage() } },
-        onNext: { Task { await vm.goToNextPage() } },
-      )
-    }
-
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {
@@ -62,7 +54,13 @@ struct AdminModerationCategoriesView: View {
     
     .task { await vm.load() }
     .refreshable {
-      Task { try await vm.refreshCategories() }
+      Task {
+        do {
+          try await vm.refreshCategories()
+        } catch {
+          ErrorService.shared.show(error)
+        }
+      }
     }
   }
 }
