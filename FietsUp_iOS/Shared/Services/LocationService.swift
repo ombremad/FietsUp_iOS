@@ -20,7 +20,8 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   var authorizationStatus: CLAuthorizationStatus = .notDetermined
   
   private let locationManager = CLLocationManager()
-  
+  @ObservationIgnored private var geocodeTask: Task<Void, Never>?
+
   private override init() {
     super.init()
     locationManager.delegate = self
@@ -70,12 +71,17 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
   }
   
   private func reverseGeocode(_ location: CLLocation) {
-    Task {
+    geocodeTask?.cancel()
+    geocodeTask = Task {
       do {
-        locationName = try await ReverseGeocoder.resolve(
+        let name = try await ReverseGeocoder.resolve(
           latitude: location.coordinate.latitude,
           longitude: location.coordinate.longitude
         )
+        guard !Task.isCancelled else { return }
+        locationName = name
+      } catch is CancellationError {
+        return
       } catch {
         print("Reverse geocoding failed: \(error.localizedDescription)")
       }

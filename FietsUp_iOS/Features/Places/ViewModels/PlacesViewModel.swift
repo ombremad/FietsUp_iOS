@@ -44,11 +44,10 @@ final class PlacesViewModel {
     locationService.requestLocation()
     if categories.isEmpty { await performFetchCategories() }
     centerOnUser()
-    
-    Task {
-      try? await Task.sleep(for: .seconds(0.5))
-      if AppRouter.shared.selectedTab == .places { showPlacesSheet() }
-    }
+
+    try? await Task.sleep(for: .seconds(0.5))
+    guard !Task.isCancelled else { return }
+    if AppRouter.shared.selectedTab == .places { showPlacesSheet() }
   }
   
   func centerOnUser() {

@@ -47,6 +47,7 @@ struct PlacesView: View {
         await vm.load()
       }
       .task(id: vm.hasLocation) {
+        vm.centerOnUser()
         await vm.performFetchPlaces()
       }
   }
