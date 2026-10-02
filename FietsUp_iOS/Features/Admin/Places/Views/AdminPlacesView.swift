@@ -58,12 +58,10 @@ struct AdminPlacesView: View {
   
     .task { await vm.load() }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshPlaces()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshPlaces()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }

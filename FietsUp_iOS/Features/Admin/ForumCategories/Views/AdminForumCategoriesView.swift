@@ -63,12 +63,10 @@ struct AdminForumCategoriesView: View {
     
     .task { await vm.load() }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshCategories()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshCategories()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }
