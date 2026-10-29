@@ -46,14 +46,6 @@ struct AdminDangerCategoriesView: View {
         .presentationDetents([.fraction(0.4)])
     }
     
-    .safeAreaInset(edge: .bottom) {
-      PaginationBar(
-        metadata: vm.metadata,
-        onPrevious: { Task { await vm.goToPreviousPage() } },
-        onNext: { Task { await vm.goToNextPage() } },
-      )
-    }
-    
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
         Button { vm.create() } label: {

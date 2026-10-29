@@ -11,7 +11,6 @@ import Foundation
 final class AdminForumCategoriesViewModel {
   var isLoading: Bool = false
   var isSingleCategorySheetPresented: Bool = false
-  var metadata: PageMetadata = Defaults.pagination.admin.metadata
   
   var categories: [ForumCategoryResponse] = []
   
@@ -34,35 +33,8 @@ final class AdminForumCategoriesViewModel {
     }
   }
   
-  func goToPage(_ page: Int) async {
-    guard !isLoading, page <= metadata.pageCount, page > 0, page != metadata.page else { return }
-    
-    isLoading = true
-    defer { isLoading = false }
-    
-    let previousPage = metadata.page
-    metadata.page = page
-    
-    do {
-      try await refreshCategories()
-    } catch {
-      metadata.page = previousPage
-      ErrorService.shared.show(error)
-    }
-  }
-  
-  func goToNextPage() async {
-    await goToPage(metadata.page + 1)
-  }
-  
-  func goToPreviousPage() async {
-    await goToPage(metadata.page - 1)
-  }
-  
   func refreshCategories() async throws {
-    let response = try await performFetchCategories()
-    categories = response.items
-    metadata = response.metadata
+    categories = try await performFetchCategories()
     category = nil
     categoryForm = .init()
   }
@@ -135,10 +107,11 @@ final class AdminForumCategoriesViewModel {
     )
   }
 
-  private func performFetchCategories() async throws -> Page<ForumCategoryResponse> {
-    return try await NetworkService.shared.get(
-      endpoint: "/forum/categories/admin?page=\(metadata.page)&per=\(metadata.per)",
+  private func performFetchCategories() async throws -> [ForumCategoryResponse] {
+    let categories: [ForumCategoryResponse] = try await NetworkService.shared.get(
+      endpoint: "/forum/categories",
       requiresAuth: true
     )
+    return categories.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
   }
 }
