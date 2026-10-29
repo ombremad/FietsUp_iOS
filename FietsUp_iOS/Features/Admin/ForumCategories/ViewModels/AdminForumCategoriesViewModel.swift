@@ -83,7 +83,7 @@ final class AdminForumCategoriesViewModel {
     let body = CreateForumCategoryRequest(from: categoryForm)
     
     let _: ForumCategoryShortResponse = try await NetworkService.shared.post(
-      endpoint: "/forum/categories/admin",
+      endpoint: "/forum/categories/",
       body: body,
       requiresAuth: true
     )
@@ -94,7 +94,7 @@ final class AdminForumCategoriesViewModel {
     let body = PatchForumCategoryRequest(from: categoryForm, compareTo: oldCategory)
     
     let _: ForumCategoryShortResponse = try await NetworkService.shared.patch(
-      endpoint: "/forum/categories/admin/\(oldCategory.id)",
+      endpoint: "/forum/categories/\(oldCategory.id)",
       body: body,
       requiresAuth: true
     )
@@ -102,7 +102,7 @@ final class AdminForumCategoriesViewModel {
     
   private func performDeleteCategory(id: UUID) async throws {
     return try await NetworkService.shared.delete(
-      endpoint: "/forum/categories/admin/\(id)",
+      endpoint: "/forum/categories/\(id)",
       requiresAuth: true
     )
   }
