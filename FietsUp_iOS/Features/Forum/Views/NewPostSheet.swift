@@ -35,7 +35,6 @@ struct NewPostSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("post.newPost")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.medium, .large])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

@@ -29,12 +29,14 @@ struct ForumPostView: View {
         
     .appSheet(isPresented: $vm.isNewCommentSheetPresented) {
       NavigationStack { NewCommentSheet().environment(vm) }
+        .presentationDetents([.medium, .large])
     }
     
     .appSheet(item: $vm.newReportTarget) { target in
       NavigationStack {
         NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
       }
+      .presentationDetents([.medium, .large])
     }
     
     .safeAreaInset(edge: .bottom) {

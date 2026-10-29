@@ -10,6 +10,10 @@ import SwiftUI
 struct AdminSingleReportSheet: View {
   @Environment(AdminReportsViewModel.self) private var vm
   @Environment(\.dismiss) private var dismiss
+  enum Field: Hashable {
+    case details, editedTitle, editedContent
+  }
+  @FocusState private var focusedField: Field?
 
   var body: some View {
     @Bindable var vm = vm
@@ -22,6 +26,7 @@ struct AdminSingleReportSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.immediately)
     .navigationTitle("admin.report.title")
     .navigationBarTitleDisplayMode(.inline)
     .presentationDetents([.large])
@@ -72,7 +77,11 @@ struct AdminSingleReportSheet: View {
         LabeledContent("admin.report.details") {
           TextField("", text: $vm.reportActionForm.details, axis: .vertical)
             .lineLimit(2)
+            .focused($focusedField, equals: .details)
+            .frame(maxWidth: .infinity)
         }
+        .contentShape(Rectangle())
+        .onTapGesture { focusedField = .details }
       }
       if vm.reportActionForm.action == .edit {
         AppFormSection("admin.report.editSection") {
@@ -80,12 +89,21 @@ struct AdminSingleReportSheet: View {
             LabeledContent("admin.report.editedTitle") {
               TextField("", text: $vm.reportActionForm.editedTitle)
                 .lineLimit(1)
+                .submitLabel(.done)
+                .focused($focusedField, equals: .editedTitle)
+                .frame(maxWidth: .infinity)
             }
+            .contentShape(Rectangle())
+            .onTapGesture { focusedField = .editedTitle }
           }
           LabeledContent("admin.report.editedContent") {
             TextField("", text: $vm.reportActionForm.editedContent, axis: .vertical)
               .lineLimit(12)
+              .focused($focusedField, equals: .editedContent)
+              .frame(maxWidth: .infinity)
           }
+          .contentShape(Rectangle())
+          .onTapGesture { focusedField = .editedContent }
         }
       }
       if vm.reportActionForm.action == .edit || vm.reportActionForm.action == .delete {

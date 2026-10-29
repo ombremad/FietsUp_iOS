@@ -77,6 +77,7 @@ struct DangersView: View {
       NavigationStack {
         NewDangerPostSheet().environment(vm)
       }
+      .presentationDetents([.medium, .large])
     }
     
     .task {

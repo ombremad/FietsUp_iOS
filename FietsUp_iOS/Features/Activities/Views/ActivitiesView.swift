@@ -37,6 +37,14 @@ struct ActivitiesView: View {
     .navigationTitle("activities.title")
     .navigationBarTitleDisplayMode(.inline)
 
+    .safeAreaInset(edge: .bottom) {
+      PaginationBar(
+        metadata: vm.metadata,
+        onPrevious: { Task { await vm.goToPreviousPage() } },
+        onNext: { Task { await vm.goToNextPage() } },
+      )
+    }
+
     .task {
       await vm.load()
     }

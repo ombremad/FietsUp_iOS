@@ -110,7 +110,7 @@ struct ContentCard: View {
   
   private var footer: some View {
     HStack {
-      if contentType == .place {
+      if contentType == .place, rating != nil {
         RatingStars(
           type: .small,
           note: rating,

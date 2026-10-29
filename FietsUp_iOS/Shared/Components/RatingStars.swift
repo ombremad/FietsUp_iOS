@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RatingStars: View {
   let type: RatingStarsType
-  let note: Double
+  let note: Double?
   let maxNote: Int = 5
   
   enum RatingStarsType {
@@ -18,7 +18,7 @@ struct RatingStars: View {
   
   init(type: RatingStarsType, note: Double?) {
     self.type = type
-    self.note = note ?? 0
+    self.note = note
   }
     
   @ViewBuilder private var stars: some View {
@@ -36,7 +36,7 @@ struct RatingStars: View {
         }
         .mask(alignment: .leading) {
           Rectangle()
-            .frame(width: geo.size.width * CGFloat(note / Double(maxNote)), alignment: .leading)
+            .frame(width: geo.size.width * CGFloat((note ?? 0) / Double(maxNote)), alignment: .leading)
         }
       }
     }
@@ -45,9 +45,13 @@ struct RatingStars: View {
   }
   
   @ViewBuilder private var noteLabel: some View {
-    Text(note.description)
-      .contentTransition(.numericText())
-      .animation(.interactiveSpring(), value: note)
+    if let note {
+      Text(note.description)
+        .contentTransition(.numericText())
+        .animation(.interactiveSpring(), value: note)
+    } else {
+      Text("place.rating.beFirst")
+    }
   }
   
   var body: some View {

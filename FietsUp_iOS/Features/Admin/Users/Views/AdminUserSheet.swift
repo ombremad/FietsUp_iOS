@@ -17,21 +17,25 @@ struct AdminUserSheet: View {
       AppFormSection {
         LabeledContent("admin.user.email") {
           TextField("", text: $vm.userForm.email)
+            .submitLabel(.done)
             .keyboardType(.emailAddress)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
         }
         LabeledContent("admin.user.nickname") {
           TextField("", text: $vm.userForm.nickname)
+            .submitLabel(.done)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
         }
         LabeledContent("admin.user.firstName") {
           TextField("", text: $vm.userForm.firstName)
+            .submitLabel(.done)
             .autocorrectionDisabled()
         }
         LabeledContent("admin.user.lastName") {
           TextField("admin.user.lastName", text: $vm.userForm.lastName)
+            .submitLabel(.done)
             .autocorrectionDisabled()
         }
         LabeledContent("admin.user.bio") {
@@ -63,6 +67,7 @@ struct AdminUserSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.immediately)
     .navigationTitle("admin.user.title")
     .navigationBarTitleDisplayMode(.inline)
     .presentationDetents([.large])

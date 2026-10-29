@@ -21,8 +21,10 @@ struct AdminPlacesView: View {
           .shimmering()
         } else {
           ForEach(vm.places, id: \.id) { place in
-            SimpleAdminPanelRow(title: place.name)
-              .onTapGesture { vm.edit(place) }
+            Button { vm.edit(place) } label: {
+              SimpleAdminPanelRow(title: place.name)
+                .foregroundStyle(Color.Text.primary)
+            }
           }
           .onDelete { offsets in
             Task { await vm.delete(at: offsets) }
@@ -58,12 +60,10 @@ struct AdminPlacesView: View {
   
     .task { await vm.load() }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshPlaces()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshPlaces()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }

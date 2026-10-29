@@ -67,6 +67,7 @@ struct DashboardView: View {
     }
     .appSheet(isPresented: $vm.isStreakSheetPresented) {
       StreakUpdateSheet(streak: auth.currentUser?.streak ?? 0, lastKnownStreak: vm.lastKnownStreakForSheet)
+        .presentationDetents([.large])
     }
       
     .toolbar {

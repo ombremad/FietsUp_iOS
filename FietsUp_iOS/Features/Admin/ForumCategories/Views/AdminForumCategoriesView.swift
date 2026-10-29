@@ -24,13 +24,16 @@ struct AdminForumCategoriesView: View {
           .shimmering()
         } else {
           ForEach(vm.categories, id: \.id) { category in
-            SimpleAdminPanelRow(
-              title: category.name,
-              description: category.details
-            ).onTapGesture { vm.edit(category) }
+            Button { vm.edit(category) } label: {
+              SimpleAdminPanelRow(
+                title: category.name,
+                description: category.details
+              )
+              .foregroundStyle(Color.Text.primary)
             }
-            .onDelete { offsets in
-              Task { await vm.delete(at: offsets) }
+          }
+          .onDelete { offsets in
+            Task { await vm.delete(at: offsets) }
           }
         }
       }
@@ -43,14 +46,7 @@ struct AdminForumCategoriesView: View {
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
       NavigationStack { AdminForumCategorySheet().environment(vm) }
-    }
-    
-    .safeAreaInset(edge: .bottom) {
-      PaginationBar(
-        metadata: vm.metadata,
-        onPrevious: { Task { await vm.goToPreviousPage() } },
-        onNext: { Task { await vm.goToNextPage() } },
-      )
+        .presentationDetents([.fraction(0.4)])
     }
     
     .toolbar {
@@ -63,12 +59,10 @@ struct AdminForumCategoriesView: View {
     
     .task { await vm.load() }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshCategories()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshCategories()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }

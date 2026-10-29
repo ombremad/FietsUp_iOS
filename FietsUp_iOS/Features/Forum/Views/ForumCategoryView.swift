@@ -53,6 +53,7 @@ struct ForumCategoryView: View {
     
     .appSheet(isPresented: $vm.isNewPostSheetPresented) {
       NavigationStack { NewPostSheet().environment(vm) }
+        .presentationDetents([.medium, .large])
     }
     
     .safeAreaInset(edge: .bottom) {

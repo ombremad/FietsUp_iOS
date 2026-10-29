@@ -23,12 +23,14 @@ struct AdminDangerCategoriesView: View {
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
-          ForEach(vm.categories, id: \.id) { place in
-            SimpleAdminPanelRow(
-              title: place.name,
-              iconName: place.iconName,
-            )
-            .onTapGesture { vm.edit(place) }
+          ForEach(vm.categories, id: \.id) { category in
+            Button { vm.edit(category) } label: {
+              SimpleAdminPanelRow(
+                title: category.name,
+                iconName: category.iconName,
+              )
+              .foregroundStyle(Color.Text.primary)
+            }
           }
         }
       }
@@ -41,14 +43,7 @@ struct AdminDangerCategoriesView: View {
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
       NavigationStack { AdminDangerCategorySheet().environment(vm) }
-    }
-    
-    .safeAreaInset(edge: .bottom) {
-      PaginationBar(
-        metadata: vm.metadata,
-        onPrevious: { Task { await vm.goToPreviousPage() } },
-        onNext: { Task { await vm.goToNextPage() } },
-      )
+        .presentationDetents([.fraction(0.4)])
     }
     
     .toolbar {
@@ -61,12 +56,10 @@ struct AdminDangerCategoriesView: View {
     
     .task { await vm.load() }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshCategories()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshCategories()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }

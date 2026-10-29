@@ -7,9 +7,6 @@
 
 extension DangersViewModel {
   func loadPosts() async {
-    isLoading = true
-    defer { isLoading = false }
-    
     locationService.requestLocation()
     if posts.isEmpty { await refreshPosts() }
   }

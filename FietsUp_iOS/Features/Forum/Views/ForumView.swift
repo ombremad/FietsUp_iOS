@@ -51,7 +51,7 @@ struct ForumView: View {
     .navigationTitle("forum.title")
     .navigationBarTitleDisplayMode(.large)
     
-    .refreshable { await vm.loadCategories() }
+    .refreshable { await vm.refreshCategories() }
     .task { await vm.refreshCategories() }
   }
 }

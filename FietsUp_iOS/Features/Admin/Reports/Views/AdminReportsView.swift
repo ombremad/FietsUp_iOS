@@ -24,8 +24,10 @@ struct AdminReportsView: View {
             ContentUnavailableView("admin.noPendingReports.title", systemImage: "checkmark.circle")
           } else {
             ForEach(vm.reports, id: \.id) { report in
-              ReportRowCard(report)
-                .onTapGesture { vm.open(report) }
+              Button { vm.open(report) } label: {
+                ReportRowCard(report)
+                  .foregroundStyle(Color.Text.primary)
+              }
             }
           }
         }
@@ -47,12 +49,10 @@ struct AdminReportsView: View {
       await vm.load()
     }
     .refreshable {
-      Task {
-        do {
-          try await vm.refreshReports()
-        } catch {
-          ErrorService.shared.show(error)
-        }
+      do {
+        try await vm.refreshReports()
+      } catch {
+        ErrorService.shared.show(error)
       }
     }
   }
