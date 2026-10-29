@@ -46,6 +46,14 @@ struct NewActivitySheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("activity.newActivity")
     .navigationBarTitleDisplayMode(.inline)
+    .interactiveDismissDisabled(vm.hasChanges)
+    
+    .alert("discardAlert.title", isPresented: $vm.isDiscardAlertPresented) {
+      Button("discardAlert.discard", role: .destructive) { dismiss() }
+      Button("common.cancel", role: .cancel) {}
+    } message: {
+      Text("discardAlert.message")
+    }
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {
@@ -61,7 +69,9 @@ struct NewActivitySheet: View {
         }.disabled(vm.isLoading)
       }
       ToolbarItem(placement: .cancellationAction) {
-        Button("common.cancel", systemImage: "xmark", role: .cancel) { dismiss() }
+        Button("common.cancel", systemImage: "xmark", role: .cancel) {
+          if vm.requestCancel() { dismiss() }
+        }
       }
     }
   }

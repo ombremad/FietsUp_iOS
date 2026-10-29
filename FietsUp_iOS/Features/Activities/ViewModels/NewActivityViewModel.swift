@@ -10,13 +10,28 @@ import Foundation
 @Observable
 final class NewActivityViewModel {
   var isLoading: Bool = false
+  var isDiscardAlertPresented: Bool = false
   private let auth = AuthService.shared
   
-  var newActivityForm = NewActivityForm()
-  struct NewActivityForm {
+  private let initialForm: NewActivityForm
+  var newActivityForm: NewActivityForm
+  struct NewActivityForm: Equatable {
     var startDate: Date = Date.now
     var endDate: Date = Date.now
     var distance: Int = 0
+  }
+  
+  var hasChanges: Bool { newActivityForm != initialForm }
+  
+  init() {
+    let form = NewActivityForm()
+    initialForm = form
+    newActivityForm = form
+  }
+  
+  func requestCancel() -> Bool {
+    if hasChanges { isDiscardAlertPresented = true }
+    return !hasChanges
   }
   
   func submit() async throws {
