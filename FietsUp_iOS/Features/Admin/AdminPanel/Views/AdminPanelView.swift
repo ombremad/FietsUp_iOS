@@ -14,43 +14,37 @@ struct AdminPanelView: View {
     List {
       if auth.isAdmin {
         AppFormSection("admin.adminToolsSection.title") {
-          NavigationLink { AdminUsersView() }
-          label: {
+          NavigationLink(value: AdminDestination.users) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.users.title",
               descriptionLocalized: "admin.users.description",
             )
           }
-          NavigationLink { AdminPlacesView() }
-          label: {
+          NavigationLink(value: AdminDestination.places) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.places.title",
               descriptionLocalized: "admin.places.description",
             )
           }
-          NavigationLink { AdminForumCategoriesView() }
-          label: {
+          NavigationLink(value: AdminDestination.forumCategories) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.forumCategories.title",
               descriptionLocalized: "admin.forumCategories.description",
             )
           }
-          NavigationLink { AdminModerationCategoriesView() }
-          label: {
+          NavigationLink(value: AdminDestination.moderationCategories) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.moderationCategories.title",
               descriptionLocalized: "admin.moderationCategories.description",
             )
           }
-          NavigationLink { AdminDangerCategoriesView() }
-          label: {
+          NavigationLink(value: AdminDestination.dangerCategories) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.dangerCategories.title",
               descriptionLocalized: "admin.dangerCategories.description",
             )
           }
-          NavigationLink { AdminPlaceCategoriesView() }
-          label: {
+          NavigationLink(value: AdminDestination.placeCategories) {
             SimpleAdminPanelRow(
               titleLocalized: "admin.placeCategories.title",
               descriptionLocalized: "admin.placeCategories.description",
@@ -59,8 +53,7 @@ struct AdminPanelView: View {
         }
         if auth.isMod {
           AppFormSection("admin.modToolsSection.title") {
-            NavigationLink { AdminReportsView() }
-            label: {
+            NavigationLink(value: AdminDestination.reports) {
               SimpleAdminPanelRow(
                 titleLocalized: "admin.reports.title",
                 descriptionLocalized: "admin.reports.description",
@@ -75,6 +68,17 @@ struct AdminPanelView: View {
     .scrollContentBackground(.hidden)
     .navigationTitle("admin.panel.title")
     .toolbarTitleDisplayMode(.inline)
+    .navigationDestination(for: AdminDestination.self) { destination in
+      switch destination {
+        case .users: AdminUsersView()
+        case .places: AdminPlacesView()
+        case .forumCategories: AdminForumCategoriesView()
+        case .moderationCategories: AdminModerationCategoriesView()
+        case .dangerCategories: AdminDangerCategoriesView()
+        case .placeCategories: AdminPlaceCategoriesView()
+        case .reports: AdminReportsView()
+      }
+    }
   }
 }
 

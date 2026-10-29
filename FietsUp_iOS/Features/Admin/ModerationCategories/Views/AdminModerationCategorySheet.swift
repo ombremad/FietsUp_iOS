@@ -17,6 +17,7 @@ struct AdminModerationCategorySheet: View {
       AppFormSection {
         LabeledContent("admin.moderationCategory.name") {
           TextField("", text: $vm.categoryForm.name)
+            .submitLabel(.done)
         }
       }
     }
@@ -24,9 +25,9 @@ struct AdminModerationCategorySheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.immediately)
     .navigationTitle("admin.moderationCategory.title")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.fraction(0.3)])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

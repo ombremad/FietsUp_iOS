@@ -72,7 +72,6 @@ struct StreakUpdateSheet: View {
     
     .background(Color.Surface.Datasheet.primary).ignoresSafeArea()
     .foregroundStyle(Color.Text.Contrasted.primary)
-    .presentationDetents([.large])
     .presentationDragIndicator(.visible)
   }
 }

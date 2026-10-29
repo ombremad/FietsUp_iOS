@@ -22,6 +22,7 @@ struct AdminPlaceSheet: View {
       AppFormSection("admin.place.mandatorySection") {
         LabeledContent("admin.place.name") {
           TextField("", text: $vm.placeForm.name)
+            .submitLabel(.done)
         }
         LabeledContent("admin.place.categories") {
           NavigationLink {
@@ -56,17 +57,21 @@ struct AdminPlaceSheet: View {
       AppFormSection("admin.place.optionalSection") {
         LabeledContent("admin.place.address") {
           TextField("", text: $vm.placeForm.address)
+            .submitLabel(.done)
         }
         LabeledContent("admin.place.zipCode") {
           TextField("", text: $vm.placeForm.zipCode)
+            .submitLabel(.done)
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
         }
         LabeledContent("admin.place.city") {
           TextField("", text: $vm.placeForm.city)
+            .submitLabel(.done)
         }
         LabeledContent("admin.place.country") {
           TextField("", text: $vm.placeForm.country)
+            .submitLabel(.done)
         }
         LabeledContent("admin.place.phoneNumber") {
           TextField("", text: $vm.placeForm.phoneNumber)
@@ -74,18 +79,21 @@ struct AdminPlaceSheet: View {
         }
         LabeledContent("admin.place.email") {
           TextField("", text: $vm.placeForm.email)
+            .submitLabel(.done)
             .keyboardType(.emailAddress)
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
         }
         LabeledContent("admin.place.website") {
           TextField("", text: $vm.placeForm.website)
+            .submitLabel(.done)
             .keyboardType(.URL)
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
         }
         LabeledContent("admin.place.otherDetails") {
           TextField("", text: $vm.placeForm.otherDetails)
+            .submitLabel(.done)
         }
       }
     }
@@ -93,6 +101,7 @@ struct AdminPlaceSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.immediately)
     .navigationTitle("admin.place.title")
     .navigationBarTitleDisplayMode(.inline)
     .presentationDetents([.large])

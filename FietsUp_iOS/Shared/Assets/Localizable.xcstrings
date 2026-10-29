@@ -330,7 +330,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reports en cours"
+            "value" : "Signalements en cours"
           }
         }
       }
@@ -426,7 +426,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pas de report en cours"
+            "value" : "Pas de signalement en cours"
           }
         }
       }

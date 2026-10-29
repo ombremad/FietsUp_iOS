@@ -25,10 +25,13 @@ struct AdminUsersView: View {
         .shimmering()
       } else {
         ForEach(vm.users) { user in
-          SimpleAdminPanelRow(
-            title: user.email,
-            description: user.nickname
-          ).onTapGesture { vm.edit(user) }
+          Button { vm.edit(user) } label: {
+            SimpleAdminPanelRow(
+              title: user.email,
+              description: user.nickname
+            )
+            .foregroundStyle(Color.Text.primary)
+          }
         }
       }
     }

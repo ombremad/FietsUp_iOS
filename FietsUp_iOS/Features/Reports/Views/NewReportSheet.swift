@@ -48,7 +48,6 @@ struct NewReportSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("report.newReport")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.medium, .large])
     
     .alert("report.success.title", isPresented: $vm.isSuccessAlertPresented) {
       Button("common.ok") { dismiss() }

@@ -34,12 +34,14 @@ struct DangerPostView: View {
       NavigationStack {
         NewDangerCommentSheet().environment(vm)
       }
+      .presentationDetents([.medium, .large])
     }
     
     .appSheet(item: $vm.newReportTarget) { target in
       NavigationStack {
         NewReportSheet(id: target.id, contentType: target.contentType, content: target.content)
       }
+      .presentationDetents([.medium, .large])
     }
     
     .task { await vm.loadPost(id: id) }

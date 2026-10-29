@@ -17,9 +17,11 @@ struct AdminPlaceCategorySheet: View {
       AppFormSection {
         LabeledContent("admin.placeCategory.name") {
           TextField("", text: $vm.categoryForm.name)
+            .submitLabel(.done)
         }
         LabeledContent("admin.placeCategory.iconName") {
           TextField("", text: $vm.categoryForm.iconName)
+            .submitLabel(.done)
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
         }
@@ -29,9 +31,9 @@ struct AdminPlaceCategorySheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .labeledContentStyle(AppLabeledContent())
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.immediately)
     .navigationTitle("admin.forumCategory.title")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.fraction(0.4)])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

@@ -34,7 +34,6 @@ struct NewDangerCommentSheet: View {
     .background { Color.Surface.background.ignoresSafeArea() }
     .navigationTitle("comment.newComment")
     .navigationBarTitleDisplayMode(.inline)
-    .presentationDetents([.medium, .large])
     
     .toolbar {
       ToolbarItem(placement: .confirmationAction) {

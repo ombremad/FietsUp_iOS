@@ -24,10 +24,13 @@ struct AdminPlaceCategoriesView: View {
           .shimmering()
         } else {
           ForEach(vm.categories, id: \.id) { category in
-            SimpleAdminPanelRow(
-              title: category.name,
-              iconName: category.iconName
-            ).onTapGesture { vm.edit(category) }
+            Button { vm.edit(category) } label: {
+              SimpleAdminPanelRow(
+                title: category.name,
+                iconName: category.iconName
+              )
+              .foregroundStyle(Color.Text.primary)
+            }
           }
           .onDelete { offsets in
             Task { await vm.delete(at: offsets) }
@@ -44,6 +47,7 @@ struct AdminPlaceCategoriesView: View {
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
       NavigationStack { AdminPlaceCategorySheet().environment(vm) }
+        .presentationDetents([.fraction(0.4)])
     }
     
     .safeAreaInset(edge: .bottom) {

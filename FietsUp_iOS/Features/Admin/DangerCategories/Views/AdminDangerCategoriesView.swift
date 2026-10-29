@@ -23,12 +23,14 @@ struct AdminDangerCategoriesView: View {
           .redacted(reason: .placeholder)
           .shimmering()
         } else {
-          ForEach(vm.categories, id: \.id) { place in
-            SimpleAdminPanelRow(
-              title: place.name,
-              iconName: place.iconName,
-            )
-            .onTapGesture { vm.edit(place) }
+          ForEach(vm.categories, id: \.id) { category in
+            Button { vm.edit(category) } label: {
+              SimpleAdminPanelRow(
+                title: category.name,
+                iconName: category.iconName,
+              )
+              .foregroundStyle(Color.Text.primary)
+            }
           }
         }
       }
@@ -41,6 +43,7 @@ struct AdminDangerCategoriesView: View {
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
       NavigationStack { AdminDangerCategorySheet().environment(vm) }
+        .presentationDetents([.fraction(0.4)])
     }
     
     .safeAreaInset(edge: .bottom) {

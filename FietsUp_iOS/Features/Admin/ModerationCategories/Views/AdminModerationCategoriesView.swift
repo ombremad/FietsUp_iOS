@@ -25,10 +25,9 @@ struct AdminModerationCategoriesView: View {
             Button { vm.edit(category) }
             label: {
               Text(category.name)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
+                .foregroundStyle(Color.Text.primary)
             }
-          }.buttonStyle(.plain)
+          }
         }
       }
     }
@@ -42,6 +41,7 @@ struct AdminModerationCategoriesView: View {
     
     .appSheet(isPresented: $vm.isSingleCategorySheetPresented) {
       NavigationStack { AdminModerationCategorySheet().environment(vm) }
+        .presentationDetents([.fraction(0.3)])
     }
     
     .toolbar {

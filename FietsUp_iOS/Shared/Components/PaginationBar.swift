@@ -38,15 +38,16 @@ struct PaginationBar: View {
       .font(.callout)
       .foregroundStyle(Color.Text.primary)
       .buttonStyle(.glass)
+      .controlSize(.large)
       .labelStyle(.iconOnly)
       .padding()
       .background {
         RoundedRectangle(cornerRadius: Defaults.radius.large)
           .fill(.clear)
           .glassEffect()
+          .contentShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
+          .onTapGesture {}
       }
-      .contentShape(RoundedRectangle(cornerRadius: Defaults.radius.large))
-      .onTapGesture {}
       .padding()
     }
   }
