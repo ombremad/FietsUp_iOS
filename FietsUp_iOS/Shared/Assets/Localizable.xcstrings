@@ -1546,7 +1546,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personne n’a encore répondu à ce post. Soyez le premier à commenter maintenant !"
+            "value" : "Personne n’a encore répondu à ce post. Soyez premier·e à commenter maintenant !"
           }
         }
       }
@@ -2380,7 +2380,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personne n’a encore posté ici. Soyez le premier à le faire !"
+            "value" : "Personne n’a encore posté ici. Soyez premier·e à le faire !"
           }
         }
       }
@@ -2941,6 +2941,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "mis à jour il y a **%@**"
+          }
+        }
+      }
+    },
+    "place.rating.beFirst" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Be the first to rate"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soyez premier·e à noter"
           }
         }
       }
@@ -3954,7 +3970,14 @@
       }
     },
     "validation.field.note" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La note"
+          }
+        }
+      }
     },
     "validation.field.otherDetails" : {
       "localizations" : {
